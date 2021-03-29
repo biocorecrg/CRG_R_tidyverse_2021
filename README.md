@@ -10,7 +10,7 @@ The so-called [**tidyverse** set of packages](https://www.tidyverse.org/) is wid
 <br> 
 All **tidyverse** packages share a common vocabulary/grammar that makes code more intuitive and easier to read that the *base* R.
 <br>
-This 8-hour training aims at introducing some of the **tidyverse** packages for data manipulation, namely dplyr, tidyr, stringr and readr.<br>
+This 8-hour training aims at introducing some of the **tidyverse** packages for data wrangling and manipulation: dplyr, tidyr, stringr and readr.<br>
 
 
 ### Outline
