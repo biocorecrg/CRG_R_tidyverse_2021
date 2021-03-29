@@ -28,6 +28,21 @@ Familiarity with R scripting is required: syntax, installation of packages, obje
 * Time: 9:30-13:30.
 * Location: online via the *Zoom* platform.
 
-## Preliminary program
+## Very preliminary program
 
+* tibbles
+* tidy data
+* tidyr: 
+  * separate & unite
 
+* stringr:
+  * str_remove
+
+* dplyr:
+  * mutate, mutate_at, transmute
+  * select, select_if
+  * filter
+  * summarise, group_by
+  * arrange
+
+* "forward-pipe": %>%
