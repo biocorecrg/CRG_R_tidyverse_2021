@@ -6,8 +6,10 @@ Introduction to the "tidyverse" set of packages.
 
 ## About the course
 
-This 8-hour training aims at introducing some of the so-called [**tidyverse** set of packages](https://www.tidyverse.org/).<br>
 The tidyverse packages share a common and intuitive vocabulary/grammar for efficient data reading, tidying and manipulation. It is one of the most popular and up-to-date set of tools for data analysis and data science using the R language.
+<br>
+This 8-hour training aims at introducing some of the so-called [**tidyverse** set of packages](https://www.tidyverse.org/): dplyr, tidyr, stringr and readr.<br>
+
 
 ### Outline
 
