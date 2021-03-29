@@ -1,8 +1,8 @@
-# CRG R intermediate course: tidyverse2021
+# CRG R intermediate course: tidyverse 2021
 
 ## Title
 
-Introduction to the "tidyverse" set of packages.
+Intermediate R course: Introduction to data wrangling with the tidyverse
 
 ## About the course
 
