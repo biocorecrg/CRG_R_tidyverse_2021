@@ -6,7 +6,7 @@ Intermediate R course: Introduction to data wrangling with the tidyverse
 
 ## About the course
 
-The so-called [**tidyverse** set of packages](https://www.tidyverse.org/) is widely used in the R community for efficient data reading, tidying, manipulation and visualization. It is one of the most popular and up-to-date set of tools for data analysis and data science using the R language.
+The so-called [**tidyverse** set of packages](https://www.tidyverse.org/) is widely used in the R community for powerful and efficient data reading, tidying, manipulation and visualization. It is one of the most popular and up-to-date set of tools for data analysis and data science using the R language.
 <br> 
 All **tidyverse** packages share a common vocabulary/grammar that makes code more intuitive and easier to read that the *base* R.
 <br>
