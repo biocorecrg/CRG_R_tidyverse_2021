@@ -30,22 +30,28 @@ Familiarity with R scripting is required: syntax, installation of packages, obje
 
 ## Preliminary program
 
-* tibbles
-* tidy data
+* Data import & export: 
+ * read_csv
+* tibbles characteristics
+* tidy data definition
 * tidyr: 
   * separate & unite
-
+  * count
+  * pivot (long and wide formats): pivot_longer, pivot_wider
+  * complete (missing values)
+* "forward-pipe": %>% from the magrittr package
 * stringr:
   * str_remove
-
+  * str_length
+  * str_c (paste)
+  * str_sub
 * dplyr:
   * mutate, mutate_at, transmute
   * select, select_if
   * filter
   * summarise, group_by
   * arrange
-
-* "forward-pipe": %>%
+  * "join" functions 
 
 ## Resources
 
