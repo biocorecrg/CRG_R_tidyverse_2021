@@ -28,7 +28,7 @@ Familiarity with R scripting is required: syntax, installation of packages, obje
 * Time: 9:30-13:30.
 * Location: online via the *Zoom* platform.
 
-## Very preliminary program
+## Preliminary program
 
 * tibbles
 * tidy data
@@ -46,3 +46,9 @@ Familiarity with R scripting is required: syntax, installation of packages, obje
   * arrange
 
 * "forward-pipe": %>%
+
+## Resources
+
+* https://www.tidyverse.org/learn/
+* https://r4ds.had.co.nz/
+* https://www.rstudio.com/resources/cheatsheets/
