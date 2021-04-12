@@ -1,0 +1,96 @@
+# Tibbles
+
+## What are tibbles?
+
+* Modern re-thinking of data frame.
+* They leave behind some features (sometimes user-unfriendly) of classical data frames:
+  * No string to factor conversion (*NOTE*: since version 4.0 of R, this is <u>no longer the case for classical data frames</u>)
+  * No automatic creation of row names.
+  * Column names can be **non-valid R variable names** (for example, they can start with numbers).
+
+You can create a simple tibble as you create a data frame, but with the `tibble` function:
+
+```{r, eval=T}
+mytibble <- tibble(
+  letters = LETTERS,
+  numbers = 1:26
+)
+```
+
+```{echo=F, eval=F}
+mytibble
+```
+
+* Convert a data frame to a tibble:
+
+```{r}
+mydf <- data.frame(letters = LETTERS,
+  numbers = 1:26)
+as_tibble(mydf)
+```
+
+* Convert a tibble to a data frame (useful to interact with R code that doesn't support tibbles):
+
+```{r}
+as.data.frame(mytibble)
+```
+
+
+## Displaying tibbles
+
+The way it **prints** in the console is different that that of data frames:
+
+* Dimensions are shown.
+* Information about columns **data types** (no need for `mode()` or `typeof`).
+* Only the first 10 rows are displayed.
+* Only the columns that **fit the screen** are displayed.
+
+If you want to see more rows, set the `n` parameter in `print()`:
+
+* Print the first 15 rows:
+
+```{r}
+print(mytibble, n=15)
+```
+
+* Print all rows:
+
+```{r}
+print(mytibble, n=Inf)
+```
+
+## Subsetting / manipulating tibbles
+
+* Extract column by **name**:
+
+```{r}
+# with the $
+mytibble$letters
+
+# or the [[]]
+mytibble[["letters"]]
+
+# Note: with using simple square brackets, you extract a sub-tibble (2 dimensions)
+mytibble["letters"]
+```
+
+* Extract column by **position/index**:
+
+```{r}
+mytibble
+```
+
+
+**HANDS-ON**
+
+<details>
+<summary>
+*Answer*
+</summary>
+
+
+</details>
+
+
+
+

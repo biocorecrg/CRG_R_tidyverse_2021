@@ -1,0 +1,22 @@
+title: "Introduction to the tidyverse (2021)"
+author: "Sarah Bonnin"
+date: "`r Sys.Date()`"
+book_filename: "r-tidyverse-crg"
+language:
+  ui:
+    chapter_name: "Part "
+delete_merged_file: true
+rmd_files: ["index.Rmd", 
+            "intro.Rmd",
+            "tibbles.Rmd",
+            "tidyr.Rmd",
+            "pipe.Rmd",
+            "data_IO.Rmd"]
+output:
+  bookdown::gitbook:
+    theme: cosmo
+    highlight: tango
+output_dir: "docs"
+output_format: html
+
+

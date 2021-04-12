@@ -1,0 +1,116 @@
+# Tidy data with `tidyr`
+
+## What is "tidy" data?
+
+**Tidy** data is where:
+
+* Each **column** describes a **variable**.
+* Each **row** describes an **observation**.
+* Each **value** is a **cell**.
+
+Example of a tidy data:
+
+| day | month  | year  |  weight |  height |
+|---|---|---|---|---|
+| 12 | 4  | 2020  |  3.5 |  48 |
+| 23 |  8 | 2019  | 2.9  |  50 |
+| 9 |  11 | 2020  | 3.8  |  50 |
+
+Example of untidy data:
+
+| day | month,year  |  weight |  height |
+|---|---|---|---|
+| 12 | 4,2020  |  3.5kg |  48 |
+| 23 |  8,2019  | 2.9kg  |  50 |
+| 9 |  11,2020  | 3.8kg  |  50 |
+
+Here we introduce some useful functions from the `tidyr` package to clean up and organize data so that to obtain **tidy** data that can then be processed more easily:
+
+### Separate & Unite
+
+Let's work on this **untidy** tibble `table5` that is a built-in data set from the `tidyr` package *(table5 displays the number of tuberculosis cases documented by the WHO in selected countries)*:
+
+```{r}
+table5
+```
+
+#### Separate
+
+Function `separate` separates (indeed!) a column into 2 or more columns: `separate(data, col, into, sep)`
+
+```{r}
+# separate column "rate" into 2 columns that we name cases and population, based on the "/" separator.
+table5_1 <- separate(data=table5, 
+         col=rate, 
+         into=c("cases", "population"),
+         sep="/"
+         )
+
+table5_1
+```
+
+#### Unite
+
+Function `unite` does just the opposite: it will unite/stick together 2 or (more) columns: `unite(data, col, *column names*, sep)`.
+
+```{r}
+# unite columns "century" and "year"
+table5a_2 <- unite(data=table5_1,
+                col=year,
+                c("century", "year"), 
+                sep="")
+
+table5a_2
+```
+
+**HANDS-ON**
+
+Fix the following untidy `tibble`:
+
+```{r}
+patients <- tibble(
+  ID1=c("A", "A", "B", "B"),
+  ID2=c(12, 13, 14, 15),
+  age=c( 21,  32, 25, 43),
+  c("188_93", "167_55", "155_51", "175_72")
+)
+```
+
+* Separate the two variables that are found in the last column into columns **height** and **weight**.
+* Unite columns **ID1** and **ID2** so as to create a unique **ID** per patient.
+
+<details>
+<summary>
+*Answer*
+</summary>
+
+```{r}
+# Separate the two variables that are found in the last column.
+patients2 <- separate(data=patients, 
+         col=4,
+         into=c("height", "weight"),
+         sep="_")
+
+# Unite columns ID1 and ID2 so as to create a unique ID per patient.
+patients3 <- unite(data=patients2,
+      col="ID",
+      c("ID1", "ID2"),
+      sep="")
+```
+
+</details>
+
+* Is there a problem with `patients3`?
+
+Columns `height` and `weight` are **treated as characters** (because they contained characters "kg" and "cm").
+<br> 
+We can convert them into numbers with the `mutate_at` function from the `dplyr` package:
+
+```{r}
+# first argument: the tibble
+# second argument: a vector of column names to mutate
+# third argument: how to mutate those columns
+patients4 <- mutate_at(patients3, c("height", "weight"), as.numeric)
+```
+
+

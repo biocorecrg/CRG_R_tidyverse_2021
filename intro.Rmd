@@ -1,0 +1,90 @@
+# Introduction
+
+## What is the "tidyverse"
+
+* A set of packages designed for **data science**:
+
+  * Preparing / cleaning
+  * Wrangling
+  * Visualizing
+
+* All packages share **good practices** in terms of: 
+  * Philosophy
+  * Grammar
+  * Data structure
+  
+## Good reasons to learn (at least a bit) how to use it
+
+* More **intuitive programming**: the names of functions speak for themselves.
+* The code is **easier to read** than with R base: it facilitates code sharing.
+* More **efficient**: the functions are quite quick and you need to write less lines to get what you want.
+* Very good [**documentation and tutorials**](https://www.tidyverse.org/learn/).
+
+Here is a piece of **R base code**:
+
+```{r, eval=FALSE}
+diamonds2 <- diamonds[diamonds$cut == "Ideal", c("cut", "color", "carat", "price")]
+diamonds2[order(diamonds2$price, decreasing=TRUE),]
+```
+
+And its equivalent in the **tidyverse**:
+
+```{r, eval=FALSE}
+diamonds %>% 
+  select(cut, color, carat, price) %>%
+  filter(cut=="Ideal") %>%
+  arrange(desc(price))
+```
+
+
+## Tidyverse core packages
+
+The following 8 packages are included in the core **tidyverse version 1.3.0.9000** (current version in April 2021):
+
+* Data Wrangling and Transformation
+  * dplyr
+  * tidyr 
+  * stringr
+  * forcats
+* Data Import and Management
+  * tibble
+  * readr 
+* Functional Programming
+  * purrr
+* Data Visualization and Exploration
+  * ggplot2
+
+<br>
+
+```{r, echo=FALSE, eval=TRUE}
+
+tbl_logos <- data.frame(
+  logo = "",
+  name = c("dplyr", "tidyr", "stringr", "forcats", "readr", "tibble", "purrr", "ggplot2"),
+  description=c("Package for data manipulation and exploratory data analysis.", 
+                "Package that aims at creating tidy data. Tidy data describe a standard way of storing data.",
+                "Package that provides a set of functions for user-friendly string manipulation.",
+                "Package that helps you deal with factors", 
+                "Package for fast and efficient import and export of data.", 
+                "Tibbles are improved - easier to manage -  data frames.", 
+                "Package that aims at enhancing R's functional programming toolkit. It provides a set of tools for working with functions and vectors.", 
+                "Package for data vizualization of graphics based on Leland Wilkinson's' Grammar of Graphics: graphics are built one layer at a time.")
+)
+
+tbl_logos %>%
+  kbl(booktabs = T) %>%
+  kable_paper(full_width = T) %>%
+  column_spec(1, image = spec_image(
+    c("images/dplyr_logo.png", "images/tidyr_logo.png", "images/stringr_logo.png", "images/forcats_logo.png", "images/readr_logo.png", "images/tibble_logo.png", "images/purrr_logo.png", "images/ggplot2_logo.png"), width=380, height=250))
+    
+```
+
+
+## Load all tidyverse package
+
+```{r, eval=TRUE}
+library(tidyverse)
+```
+
+  
+  

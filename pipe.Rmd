@@ -1,0 +1,61 @@
+# The `%>%` forward-pipe operator
+
+Let's review the steps from the previous hands-on:
+
+```{r}
+patients2 <- separate(data=patients, 
+         col=4,
+         into=c("height", "weight"),
+         sep="_")
+patients3 <- unite(data=patients2,
+      col="ID",
+      c("ID1", "ID2"),
+      sep="")
+patients4 <- mutate_at(patients3, c("height", "weight"), as.numeric)
+```
+
+If we are only interested in the final **tidy** data frame, there is a **simpler** and **cleaner** way: the **%>%** (forward-pipe) operator from the `magritrrr` package (the `tidyverse` packages automatically load this operator).
+
+```{r, echo=FALSE, out.width="30%", fig.align="center"}
+knitr::include_graphics("https://magrittr.tidyverse.org/logo.png")
+```
+  
+Allows to process **the output of a function as the input of the following function**: it makes the code **easier to read and understand**:
+
+* It pipes the output of a function as **the first argument of the next function** (from left to right):
+  * `mytibble %>% function1` is equivalent to `function1(mytibble)`
+  * `mytibble %>% function2(y)` is equivalent to `function1(mytibble, y)`
+  * `mytibble %>% function1 %>% function2` is equivalent to `function2(function1(mytibble))`
+  
+If we go back to the previous exercise, we can simplify the code the following way:
+
+```{r}
+patients2 <- patients %>% 
+              separate(col=4, into=c("height", "weight"), sep="_") %>%
+              unite(col="ID", c("ID1", "ID2"), sep="") %>%
+              mutate_at(c("height", "weight"), as.numeric)
+```
+
+**HANDS-ON**
+
+Simplify the following piece of code using the `%>%` operator:
+
+```{r}
+table5_1 <- separate(data=table5, col=rate, into=c("cases", "population"), sep="/")
+table5_2 <- unite(data=table5_1, col=year, c("century", "year"), sep="")
+```
+
+<details>
+<summary>
+*Answer*
+</summary>
+
+```{r}
+table5_1 <- table5 %>% 
+        separate(col=rate, into=c("cases", "population"), sep="/") %>%
+        unite(col=year, c("century", "year"), sep="")
+```
+
+</details>
+
+

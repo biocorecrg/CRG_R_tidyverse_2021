@@ -1,0 +1,82 @@
+--- 
+title: "Intermediate R: introduction to data wrangling with the Tidyverse (2021)"
+author: "Sarah Bonnin"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+---
+
+# Welcome
+
+<h3> About the course </h3>
+
+The so-called [**tidyverse** set of packages](https://www.tidyverse.org/) is widely used in the R community for powerful and efficient data reading, tidying, manipulation and visualization. It is one of the most popular and up-to-date set of tools for data analysis and data science using the R language.
+<br> 
+All **tidyverse** packages share a common vocabulary/grammar that makes code more intuitive and easier to read that the *base* R.
+<br>
+This 8-hour training aims at introducing some of the **tidyverse** packages for data wrangling and manipulation: dplyr, tidyr, stringr and readr.<br>
+
+<h3> Dates, time & location </h3>
+
+* Dates (2021):
+  * April 19th + 21rst
+
+* Time:
+	* 9:30-13:30 <br>
+
+* Location:
+	* Online (Zoom: find details in the dedicated [Moodle page](https://moodle.crg.eu/))
+
+<h3> Instructors </h3>
+ 
+[Sarah Bonnin](mailto:sarah.bonnin@crg.eu)<br>
+[Julia Ponomarenko](mailto:julia.ponomarenko@crg.eu)<br>
+from the CRG [Bioinformatics core facility](https://biocore.crg.eu/) (office , 4th floor hospital side)
+
+<h3> Learning objectives </h3>
+
+<h3>Prerequisites</h3>
+
+This is an intermediate course. <br>
+Familiarity with R scripting is required: syntax, installation of packages, objects manipulation, data import/export.
+
+<h3>Material</h3>
+
+All material is available from this page (https://biocorecrg.github.io/CRG_R_tidyverse_2021) and will be regularly updated.
+<br>
+
+If you want to get the latest version locally, you can:
+
+* download and uncompress the [zip archive](https://github.com/biocorecrg/CRG_R_tidyverse_2021/archive/master.zip)
+* keep only the "docs" and " images" folders.
+* open the "index.html" file in a web browser.
+
+
+* Data import & export: 
+ * read_csv
+* tibbles characteristics
+* tidy data definition
+* tidyr: 
+  * separate & unite
+  * count
+  * pivot (long and wide formats): pivot_longer, pivot_wider
+  * complete (missing values)
+* "forward-pipe": %>% from the magrittr package
+* stringr:
+  * str_remove
+  * str_length
+  * str_c (paste)
+  * str_sub
+* dplyr:
+  * mutate, mutate_at, transmute
+  * select, select_if
+  * filter
+  * summarise, group_by
+  * arrange
+  * "join" functions 
+  
+  
