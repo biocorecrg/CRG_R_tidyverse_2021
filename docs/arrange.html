@@ -196,8 +196,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="arrange" class="section level2" number="7.5">
 <h2><span class="header-section-number">7.5</span> arrange</h2>
-<p>Order rows by increasing mandate duration with <strong>arrange()</strong></p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="arrange.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(presidential, duration_days)</span></code></pre></div>
+<p><code>arrange</code> orders the rows of a data frame by the values of selected columns.
+<br>
+Let’s order rows by increasing mandate duration:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="arrange.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(presidential, duration_days)</span></code></pre></div>
 <pre><code>## # A tibble: 11 x 5
 ##    name       start      end        party      duration_days
 ##    &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;drtn&gt;       
@@ -212,10 +214,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9 Clinton    1993-01-20 2001-01-20 Democratic 2922 days    
 ## 10 Bush       2001-01-20 2009-01-20 Republican 2922 days    
 ## 11 Obama      2009-01-20 2017-01-20 Democratic 2922 days</code></pre>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="arrange.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># decreasing order: arrange(presidential2, desc(duration_days))</span></span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="arrange.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># decreasing order: arrange(presidential2, desc(duration_days))</span></span></code></pre></div>
 <p>You can use several columns for the sorting</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="arrange.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(presidential, </span>
-<span id="cb66-2"><a href="arrange.html#cb66-2" aria-hidden="true" tabindex="-1"></a>        duration_days, name)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="arrange.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(presidential, </span>
+<span id="cb65-2"><a href="arrange.html#cb65-2" aria-hidden="true" tabindex="-1"></a>        duration_days, name)</span></code></pre></div>
 <pre><code>## # A tibble: 11 x 5
 ##    name       start      end        party      duration_days
 ##    &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;drtn&gt;       
@@ -230,7 +232,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9 Eisenhower 1953-01-20 1961-01-20 Republican 2922 days    
 ## 10 Obama      2009-01-20 2017-01-20 Democratic 2922 days    
 ## 11 Reagan     1981-01-20 1989-01-20 Republican 2922 days</code></pre>
-<p>Example:</p>
+<p>If a grouping was done before, you can arrange first by grouping and then by selected variable(s) setting the <code>.by_group=TRUE</code> parameter:</p>
+<pre><code>mutate(presidential, duration_days=end-start) %&gt;%
+    group_by(party) %&gt;% 
+    arrange(duration_days, .by_group=TRUE)</code></pre>
+<p><strong>HANDS ON</strong></p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="arrange.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(presidential, <span class="at">duration_days=</span>end<span class="sc">-</span>start) <span class="sc">%&gt;%</span></span>
 <span id="cb68-2"><a href="arrange.html#cb68-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(party <span class="sc">==</span> <span class="st">&quot;Democratic&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb68-3"><a href="arrange.html#cb68-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="fu">mean</span>(duration_days))</span></code></pre></div>
@@ -238,7 +244,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   `mean(duration_days)`
 ##   &lt;drtn&gt;               
 ## 1 2045.4 days</code></pre>
-<p>Example:</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="arrange.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(presidential, <span class="at">duration_days=</span>end<span class="sc">-</span>start) <span class="sc">%&gt;%</span></span>
 <span id="cb70-2"><a href="arrange.html#cb70-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(party) <span class="sc">%&gt;%</span></span>
 <span id="cb70-3"><a href="arrange.html#cb70-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="fu">mean</span>(duration_days))</span></code></pre></div>
@@ -247,7 +252,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## * &lt;chr&gt;      &lt;drtn&gt;               
 ## 1 Democratic 2045.4 days          
 ## 2 Republican 2191.5 days</code></pre>
-<p><strong>HANDS ON</strong></p>
 <p>We will work with the <strong>storms</strong> data set:
 * Positions and attributes of <strong>198 tropical storms</strong>, measured every 6 hours</p>
 <ol style="list-style-type: decimal">
@@ -344,6 +348,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9  2011              15
 ## 10  2008              14
 ## # … with 31 more rows</code></pre>
+<p>nth(): extract the nth value of a vector</p>
+<p>presidential %&gt;% nth(name, 4)</p>
+<p>extract a single column:</p>
+<p>presidential %&gt;% pull(name)
+presidential %&gt;% pull(duration_days, name=name)</p>
+<p>subset rows using their positions:</p>
+<p>presidential %&gt;% slice(4)</p>
 
 </div>
 <!-- </div> -->

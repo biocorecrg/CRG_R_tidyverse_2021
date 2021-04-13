@@ -214,8 +214,8 @@ We will introduce the <strong>5 intuitively-named key functions</strong> from <s
 <blockquote>
 <p><em>Note that {dplyr} never modifies the input: you need to</em> <strong><em>redirect the output</em></strong> <em>and save in a new - or the same - object.</em></p>
 </blockquote>
-<p>Let’s try!</p>
-<p>We will use the <strong>presidential</strong> data set.
+<p><br><br>
+We will use the <strong>presidential</strong> data set.
 <em>It contains data of the terms of</em> <strong><em>presidents of the USA</em></strong>, <em>from Eisenhower to Obama:</em></p>
 <ul>
 <li>Name</li>
@@ -224,15 +224,15 @@ We will introduce the <strong>5 intuitively-named key functions</strong> from <s
 <li>Political party</li>
 </ul>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="data-manipulation.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(presidential, <span class="at">n=</span><span class="dv">6</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 11 x 4
-##   name       start      end        party     
-##   &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;     
-## 1 Eisenhower 1953-01-20 1961-01-20 Republican
-## 2 Kennedy    1961-01-20 1963-11-22 Democratic
-## 3 Johnson    1963-11-22 1969-01-20 Democratic
-## 4 Nixon      1969-01-20 1974-08-09 Republican
-## 5 Ford       1974-08-09 1977-01-20 Republican
-## 6 Carter     1977-01-20 1981-01-20 Democratic
+<pre><code>## # A tibble: 11 x 5
+##   name       start      end        party      duration_days
+##   &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;drtn&gt;       
+## 1 Eisenhower 1953-01-20 1961-01-20 Republican 2922 days    
+## 2 Kennedy    1961-01-20 1963-11-22 Democratic 1036 days    
+## 3 Johnson    1963-11-22 1969-01-20 Democratic 1886 days    
+## 4 Nixon      1969-01-20 1974-08-09 Republican 2027 days    
+## 5 Ford       1974-08-09 1977-01-20 Republican  895 days    
+## 6 Carter     1977-01-20 1981-01-20 Democratic 1461 days    
 ## # … with 5 more rows</code></pre>
 </div>
             </section>

@@ -196,7 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="filter" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> filter</h2>
-<p><strong>filter()</strong> is used to filter rows in a data frame/tibble.</p>
+<p><code>filter()</code> is used to filter rows in a data frame / tibble.</p>
 <p>Keep rows if party is <strong>Democratic</strong>:</p>
 <table class="table table-striped" style="font-size: 14px; margin-left: auto; margin-right: auto;">
 <thead>
@@ -408,9 +408,8 @@ Democratic
 </tr>
 </tbody>
 </table>
-<p>Keep rows if party is <strong>Democratic</strong>:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="filter.html#cb54-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(presidential, </span>
-<span id="cb54-2"><a href="filter.html#cb54-2" aria-hidden="true" tabindex="-1"></a>        party<span class="sc">==</span><span class="st">&quot;Democratic&quot;</span>) <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="filter.html#cb51-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(presidential, </span>
+<span id="cb51-2"><a href="filter.html#cb51-2" aria-hidden="true" tabindex="-1"></a>        party<span class="sc">==</span><span class="st">&quot;Democratic&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 5
 ##   name    start      end        party      duration_days
 ##   &lt;chr&gt;   &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;drtn&gt;       
@@ -420,16 +419,16 @@ Democratic
 ## 4 Clinton 1993-01-20 2001-01-20 Democratic 2922 days    
 ## 5 Obama   2009-01-20 2017-01-20 Democratic 2922 days</code></pre>
 <p>You can filter using several variables/columns:</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="filter.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
-<span id="cb56-2"><a href="filter.html#cb56-2" aria-hidden="true" tabindex="-1"></a>       party<span class="sc">==</span><span class="st">&quot;Republican&quot;</span>, name<span class="sc">==</span><span class="st">&quot;Bush&quot;</span>) <span class="co">#&lt;&lt;</span></span>
-<span id="cb56-3"><a href="filter.html#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-4"><a href="filter.html#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co"># This implicity uses the &quot;&amp;&quot;, i.e. the fact that both conditions have to be TRUE</span></span>
-<span id="cb56-5"><a href="filter.html#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
-<span id="cb56-6"><a href="filter.html#cb56-6" aria-hidden="true" tabindex="-1"></a>       party<span class="sc">==</span><span class="st">&quot;Republican&quot;</span> <span class="sc">&amp;</span> name<span class="sc">==</span><span class="st">&quot;Bush&quot;</span>) <span class="co">#&lt;&lt;</span></span>
-<span id="cb56-7"><a href="filter.html#cb56-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-8"><a href="filter.html#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Any logical operators can be used</span></span>
-<span id="cb56-9"><a href="filter.html#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
-<span id="cb56-10"><a href="filter.html#cb56-10" aria-hidden="true" tabindex="-1"></a>       name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Bush&quot;</span>, <span class="st">&quot;Kennedy&quot;</span>)) <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="filter.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
+<span id="cb53-2"><a href="filter.html#cb53-2" aria-hidden="true" tabindex="-1"></a>       party<span class="sc">==</span><span class="st">&quot;Republican&quot;</span>, name<span class="sc">==</span><span class="st">&quot;Bush&quot;</span>)</span>
+<span id="cb53-3"><a href="filter.html#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="filter.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co"># This implicity uses the &quot;&amp;&quot;, i.e. the fact that both conditions have to be TRUE</span></span>
+<span id="cb53-5"><a href="filter.html#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
+<span id="cb53-6"><a href="filter.html#cb53-6" aria-hidden="true" tabindex="-1"></a>       party<span class="sc">==</span><span class="st">&quot;Republican&quot;</span> <span class="sc">&amp;</span> name<span class="sc">==</span><span class="st">&quot;Bush&quot;</span>)</span>
+<span id="cb53-7"><a href="filter.html#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-8"><a href="filter.html#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Any logical operators can be used</span></span>
+<span id="cb53-9"><a href="filter.html#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
+<span id="cb53-10"><a href="filter.html#cb53-10" aria-hidden="true" tabindex="-1"></a>       name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Bush&quot;</span>, <span class="st">&quot;Kennedy&quot;</span>))</span></code></pre></div>
 </div>
             </section>
 

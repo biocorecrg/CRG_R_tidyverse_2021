@@ -196,32 +196,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="summarise-group_by" class="section level2" number="7.4">
 <h2><span class="header-section-number">7.4</span> summarise &amp; group_by</h2>
-<p><strong>summarise()</strong> collapses a data frame to a single row (base R: <strong>aggregate()</strong>)</p>
+<p><code>summarise</code> collapses a data frame to a single row (base R: <strong>aggregate()</strong>)</p>
 <p>Get average length of terms:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="summarise-group-by.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential, </span>
-<span id="cb57-2"><a href="summarise-group-by.html#cb57-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mean</span>(duration_days)) <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="summarise-group-by.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential, </span>
+<span id="cb54-2"><a href="summarise-group-by.html#cb54-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mean</span>(duration_days))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   `mean(duration_days)`
 ##   &lt;drtn&gt;               
 ## 1 2125.091 days</code></pre>
-<p><strong>summarise()</strong> collapses a data frame to a single row (base R: <strong>aggregate()</strong>)</p>
-<p>Get average length of terms + count</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="summarise-group-by.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential,</span>
-<span id="cb59-2"><a href="summarise-group-by.html#cb59-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mean</span>(duration_days), </span>
-<span id="cb59-3"><a href="summarise-group-by.html#cb59-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">n</span>()) <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<p>Get average length of terms + count of the total of entries:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="summarise-group-by.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential,</span>
+<span id="cb56-2"><a href="summarise-group-by.html#cb56-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mean</span>(duration_days), </span>
+<span id="cb56-3"><a href="summarise-group-by.html#cb56-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##   `mean(duration_days)` `n()`
 ##   &lt;drtn&gt;                &lt;int&gt;
 ## 1 2125.091 days            11</code></pre>
-<p>You can combine <strong>summarise()</strong> with <strong>group_by()</strong> to get the average length of terms <strong>per political party</strong>:</p>
+<p>You can combine <code>summarise</code> with <code>group_by</code> to get the average length of terms <code>per political party</code>:</p>
 <ul>
-<li><strong>group_by()</strong> defines a grouping based on existing variables.</li>
-<li><strong>summarise()</strong> then processes the command based on the grouping</li>
+<li><code>group_by</code> defines a grouping based on existing variables.</li>
+<li><code>summarise</code> then processes the command based on the grouping</li>
 </ul>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="summarise-group-by.html#cb61-1" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">group_by</span>(presidential, <span class="co">#&lt;&lt;</span></span>
-<span id="cb61-2"><a href="summarise-group-by.html#cb61-2" aria-hidden="true" tabindex="-1"></a>                   party) <span class="co">#&lt;&lt;</span></span>
-<span id="cb61-3"><a href="summarise-group-by.html#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(groups, </span>
-<span id="cb61-4"><a href="summarise-group-by.html#cb61-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mean</span>(duration_days), <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="summarise-group-by.html#cb58-1" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">group_by</span>(presidential,</span>
+<span id="cb58-2"><a href="summarise-group-by.html#cb58-2" aria-hidden="true" tabindex="-1"></a>                   party)</span>
+<span id="cb58-3"><a href="summarise-group-by.html#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(groups, </span>
+<span id="cb58-4"><a href="summarise-group-by.html#cb58-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mean</span>(duration_days), <span class="fu">n</span>())</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+##   party      `mean(duration_days)` `n()`
+## * &lt;chr&gt;      &lt;drtn&gt;                &lt;int&gt;
+## 1 Democratic 2045.4 days               5
+## 2 Republican 2191.5 days               6</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="summarise-group-by.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One line, using the %&gt;% operator:</span></span>
+<span id="cb60-2"><a href="summarise-group-by.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(presidential, party) <span class="sc">%&gt;%</span> </span>
+<span id="cb60-3"><a href="summarise-group-by.html#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(duration_days), <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 3
 ##   party      `mean(duration_days)` `n()`
 ## * &lt;chr&gt;      &lt;drtn&gt;                &lt;int&gt;

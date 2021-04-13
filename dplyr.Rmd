@@ -1,5 +1,9 @@
 # Data manipulation
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
+```
+
 Package `dplyr` dntroduces a grammar of data manipulation. [Cheat sheet](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf)
 <br>
 We will introduce the **5 intuitively-named key functions** from **{dplyr}**:
@@ -18,9 +22,7 @@ All 5 functions work in a similar and consistent way:
  
 > *Note that {dplyr} never modifies the input: you need to* ***redirect the output*** *and save in a new - or the same - object.*
 
-
-Let's try!
- 
+<br><br> 
 We will use the **presidential** data set.
 *It contains data of the terms of* ***presidents of the USA***, *from Eisenhower to Obama:*
 
@@ -41,23 +43,23 @@ print(presidential, n=6)
 * Create a new column with the duration of each term:
 
 
-```{r}
+```{r, eval=FALSE}
 # Subtracting column start to colum end
 mutate(presidential, 
-    duration_days=end - start) #<<
+    duration_days=end - start)
 ```
 
-> Use **unquoted** column names
+Notes:
 
-> Note that columns are added at the end of the data frame.
+* Use **unquoted** column names.
+* Columns are added at the end of the data frame.
+* `mutate` keeps all columns. 
 
-> Note that **mutate** keeps all columns. 
+If you want to keep only the **newly created column(s)** (drop the remaining ones): use `transmute()` instead of `mutate()`:
 
-Keep only the **newly created column(s)** (drop the remaining ones) with `transmute()` instead of `mutate()`:
-
-```{r, eval=T}
+```{r, eval=F}
 transmute(presidential, 
-    duration_days=end - start) #<<
+    duration_days=end - start)
 ```
 
 Re-assign to a new - or the same - data frame/tibble using the R **assignment operator: <-**
@@ -69,7 +71,9 @@ presidential <- mutate(presidential,
  
 ## select
 
-Select column **name** only:
+`select` will select (and optionally rename) columns/variables in a data frame / tibble.
+
+Select column **name** only from the `presidential` data set:
 
 ```{r, highlight=c(1,3), echo=F, warning=F,message=F}
 library(kableExtra)
@@ -82,29 +86,29 @@ knitr::kable(presidential) %>%
 select(presidential, name)
 ```
 
-Select columns **party** and **name** (in that order):
+Select 2 columns: **party** and **name** (in that order):
 
-```{r, eval=T}
+```{r, eval=F}
 select(presidential, 
-       party, name) #<<
+       party, name)
 ```
 
 Rename a column as you select it:
 ```{r, eval=T}
 select(presidential, 
-       party, President=name) #<<
+       party, President=name)
 ```
 
-Select all columns **except** party:
+Select all columns **except** party with the **-** sign:
 ```{r, eval=T}
 select(presidential, 
-       -party) #<<
+       -party)
 ```
 
-Select all columns between **start** and **party** (inclusive)
+Select all columns between **start** and **party** (with both included)
 ```{r, eval=T}
  select(presidential, 
-        start:party) #<<
+        start:party)
 ```
 
 ### select_if
@@ -116,15 +120,16 @@ select_if(presidential,
     is.character) #<<
 ```
 
+Select only columns containing a **date**:
+
 ```{r, eval=F, echo =FALSE}
-#Select all columns that contain a date 
 select_if(presidential, 
           function(x)inherits(x, 'Date')) #<<
 ```
  
 ## filter
 
-**filter()** is used to filter rows in a data frame/tibble.
+`filter()` is used to filter rows in a data frame / tibble.
 
 Keep rows if party is **Democratic**:
 
@@ -134,62 +139,66 @@ knitr::kable(presidential) %>%
   row_spec(c(2:3, 6, 9, 11), background = "yellow")
 ```
 
-Keep rows if party is **Democratic**:
 ```{r, eval=T}
  filter(presidential, 
-        party=="Democratic") #<<
+        party=="Democratic")
 ```
 
 You can filter using several variables/columns:
 ```{r, eval=F}
 filter(presidential, 
-       party=="Republican", name=="Bush") #<<
+       party=="Republican", name=="Bush")
 
 # This implicity uses the "&", i.e. the fact that both conditions have to be TRUE
 filter(presidential, 
-       party=="Republican" & name=="Bush") #<<
+       party=="Republican" & name=="Bush")
 
 # Any logical operators can be used
 filter(presidential, 
-       name %in% c("Bush", "Kennedy")) #<<
+       name %in% c("Bush", "Kennedy"))
 ```
 
 ## summarise & group_by
  
-**summarise()** collapses a data frame to a single row (base R: **aggregate()**)
+`summarise` collapses a data frame to a single row (base R: **aggregate()**)
  
 Get average length of terms:
 
 ```{r, eval=T}
 summarise(presidential, 
-          mean(duration_days)) #<<
+          mean(duration_days))
 ```
- 
-**summarise()** collapses a data frame to a single row (base R: **aggregate()**)
 
-Get average length of terms + count
+Get average length of terms + count of the total of entries:
 
 ```{r, eval=T}
 summarise(presidential,
           mean(duration_days), 
-          n()) #<<
+          n())
 ```
  
-You can combine **summarise()** with **group_by()** to get the average length of terms **per political party**:
+You can combine `summarise` with `group_by` to get the average length of terms `per political party`:
 
-* **group_by()** defines a grouping based on existing variables.
-* **summarise()** then processes the command based on the grouping
+* `group_by` defines a grouping based on existing variables.
+* `summarise` then processes the command based on the grouping
 
 ```{r}
-groups <- group_by(presidential, #<<
-                   party) #<<
+groups <- group_by(presidential,
+                   party)
 summarise(groups, 
           mean(duration_days), n())
+
+# One line, using the %>% operator:
+group_by(presidential, party) %>% 
+  summarise(mean(duration_days), n())
+
 ```
 
 ## arrange
 
-Order rows by increasing mandate duration with **arrange()**
+`arrange` orders the rows of a data frame by the values of selected columns.
+<br>
+Let's order rows by increasing mandate duration:
 
 ```{r, eval=T}
 arrange(presidential, duration_days)
@@ -202,7 +211,16 @@ arrange(presidential,
         duration_days, name)
 ```
 
-Example:
+If a grouping was done before, you can arrange first by grouping and then by selected variable(s) setting the `.by_group=TRUE` parameter:
+
+```
+mutate(presidential, duration_days=end-start) %>%
+    group_by(party) %>% 
+    arrange(duration_days, .by_group=TRUE)
+```
+    
+
+**HANDS ON**
 
 ```{r}
 mutate(presidential, duration_days=end-start) %>%
@@ -210,15 +228,11 @@ mutate(presidential, duration_days=end-start) %>%
     summarise(mean(duration_days))
 ```
 
-Example:
-
 ```{r}
 mutate(presidential, duration_days=end-start) %>%
     group_by(party) %>%
     summarise(mean(duration_days))
 ```
-
-**HANDS ON**
 
 We will work with the **storms** data set:
 * Positions and attributes of **198 tropical storms**, measured every 6 hours
@@ -297,3 +311,16 @@ distinct(storms, name, year) %>%
   arrange(desc(storms_per_year))
 ```
 
+
+nth(): extract the nth value of a vector
+
+presidential %>% nth(name, 4)
+
+extract a single column:
+
+presidential %>% pull(name)
+presidential %>% pull(duration_days, name=name)
+
+subset rows using their positions:
+
+presidential %>% slice(4)

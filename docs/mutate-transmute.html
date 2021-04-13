@@ -202,50 +202,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="mutate-transmute.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subtracting column start to colum end</span></span>
 <span id="cb37-2"><a href="mutate-transmute.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(presidential, </span>
-<span id="cb37-3"><a href="mutate-transmute.html#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end <span class="sc">-</span> start) <span class="co">#&lt;&lt;</span></span></code></pre></div>
-<pre><code>## # A tibble: 11 x 5
-##    name       start      end        party      duration_days
-##    &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;drtn&gt;       
-##  1 Eisenhower 1953-01-20 1961-01-20 Republican 2922 days    
-##  2 Kennedy    1961-01-20 1963-11-22 Democratic 1036 days    
-##  3 Johnson    1963-11-22 1969-01-20 Democratic 1886 days    
-##  4 Nixon      1969-01-20 1974-08-09 Republican 2027 days    
-##  5 Ford       1974-08-09 1977-01-20 Republican  895 days    
-##  6 Carter     1977-01-20 1981-01-20 Democratic 1461 days    
-##  7 Reagan     1981-01-20 1989-01-20 Republican 2922 days    
-##  8 Bush       1989-01-20 1993-01-20 Republican 1461 days    
-##  9 Clinton    1993-01-20 2001-01-20 Democratic 2922 days    
-## 10 Bush       2001-01-20 2009-01-20 Republican 2922 days    
-## 11 Obama      2009-01-20 2017-01-20 Democratic 2922 days</code></pre>
-<blockquote>
-<p>Use <strong>unquoted</strong> column names</p>
-</blockquote>
-<blockquote>
-<p>Note that columns are added at the end of the data frame.</p>
-</blockquote>
-<blockquote>
-<p>Note that <strong>mutate</strong> keeps all columns.</p>
-</blockquote>
-<p>Keep only the <strong>newly created column(s)</strong> (drop the remaining ones) with <code>transmute()</code> instead of <code>mutate()</code>:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="mutate-transmute.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">transmute</span>(presidential, </span>
-<span id="cb39-2"><a href="mutate-transmute.html#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end <span class="sc">-</span> start) <span class="co">#&lt;&lt;</span></span></code></pre></div>
-<pre><code>## # A tibble: 11 x 1
-##    duration_days
-##    &lt;drtn&gt;       
-##  1 2922 days    
-##  2 1036 days    
-##  3 1886 days    
-##  4 2027 days    
-##  5  895 days    
-##  6 1461 days    
-##  7 2922 days    
-##  8 1461 days    
-##  9 2922 days    
-## 10 2922 days    
-## 11 2922 days</code></pre>
+<span id="cb37-3"><a href="mutate-transmute.html#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
+<p>Notes:</p>
+<ul>
+<li>Use <strong>unquoted</strong> column names.</li>
+<li>Columns are added at the end of the data frame.</li>
+<li><code>mutate</code> keeps all columns.</li>
+</ul>
+<p>If you want to keep only the <strong>newly created column(s)</strong> (drop the remaining ones): use <code>transmute()</code> instead of <code>mutate()</code>:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="mutate-transmute.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">transmute</span>(presidential, </span>
+<span id="cb38-2"><a href="mutate-transmute.html#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
 <p>Re-assign to a new - or the same - data frame/tibble using the R <strong>assignment operator: &lt;-</strong></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="mutate-transmute.html#cb41-1" aria-hidden="true" tabindex="-1"></a>presidential <span class="ot">&lt;-</span> <span class="fu">mutate</span>(presidential, </span>
-<span id="cb41-2"><a href="mutate-transmute.html#cb41-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="mutate-transmute.html#cb39-1" aria-hidden="true" tabindex="-1"></a>presidential <span class="ot">&lt;-</span> <span class="fu">mutate</span>(presidential, </span>
+<span id="cb39-2"><a href="mutate-transmute.html#cb39-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
 </div>
             </section>
 
