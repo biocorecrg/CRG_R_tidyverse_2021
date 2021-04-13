@@ -75,7 +75,7 @@ tbl_logos %>%
   kbl(booktabs = T) %>%
   kable_paper(full_width = T) %>%
   column_spec(1, image = spec_image(
-    c("images/dplyr_logo.png", "images/tidyr_logo.png", "images/stringr_logo.png", "images/forcats_logo.png", "images/readr_logo.png", "images/tibble_logo.png", "images/purrr_logo.png", "images/ggplot2_logo.png"), width=380, height=250))
+    c("images/dplyr_logo.png", "images/tidyr_logo.png", "images/stringr_logo.png", "images/forcats_logo.png", "images/readr_logo.png", "images/tibble_logo.png", "images/purrr_logo.png", "images/ggplot2_logo.png"), width=380, height=280))
     
 ```
 

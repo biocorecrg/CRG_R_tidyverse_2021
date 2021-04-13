@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
-  <meta name="description" content="Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <title>7.1 mutate &amp; transmute | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="7.1 mutate &amp; transmute | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:title" content="7.1 mutate &amp; transmute | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="twitter:title" content="7.1 mutate &amp; transmute | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="introduction.html"/>
+<link rel="prev" href="data-manipulation.html"/>
+<link rel="next" href="select.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -194,100 +194,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Intermediate R: introduction to data wrangling with the Tidyverse (2021)</h1>
-<p class="author"><em>Sarah Bonnin</em></p>
-<p class="date"><em>2021-04-13</em></p>
-</div>
-<div id="welcome" class="section level1" number="1">
-<h1><span class="header-section-number">Part 1</span> Welcome</h1>
-<h3>
-About the course
-</h3>
-<p>The so-called <a href="https://www.tidyverse.org/"><strong>tidyverse</strong> set of packages</a> is widely used in the R community for powerful and efficient data reading, tidying, manipulation and visualization. It is one of the most popular and up-to-date set of tools for data analysis and data science using the R language.
-<br>
-All <strong>tidyverse</strong> packages share a common vocabulary/grammar that makes code more intuitive and easier to read that the <em>base</em> R.
-<br>
-This 8-hour training aims at introducing some of the <strong>tidyverse</strong> packages for data wrangling and manipulation: dplyr, tidyr, stringr and readr.<br></p>
-<h3>
-Dates, time &amp; location
-</h3>
+<div id="mutate-transmute" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> mutate &amp; transmute</h2>
+<p><code>mutate</code> allows to create new columns that are functions of the existing ones.</p>
 <ul>
-<li>Dates (2021):
-<ul>
-<li>April 19th + 21rst</li>
-</ul></li>
-<li>Time:
-<ul>
-<li>9:30-13:30 <br></li>
-</ul></li>
-<li>Location:
-<ul>
-<li>Online (Zoom: find details in the dedicated <a href="https://moodle.crg.eu/">Moodle page</a>)</li>
-</ul></li>
+<li>Create a new column with the duration of each term:</li>
 </ul>
-<h3>
-Instructors
-</h3>
-<p><a href="mailto:sarah.bonnin@crg.eu">Sarah Bonnin</a><br>
-<a href="mailto:julia.ponomarenko@crg.eu">Julia Ponomarenko</a><br>
-from the CRG <a href="https://biocore.crg.eu/">Bioinformatics core facility</a> (office , 4th floor hospital side)</p>
-<h3>
-Learning objectives
-</h3>
-<h3>
-Prerequisites
-</h3>
-<p>This is an intermediate course. <br>
-Familiarity with R scripting is required: syntax, installation of packages, objects manipulation, data import/export.</p>
-<h3>
-Material
-</h3>
-<p>All material is available from this page (<a href="https://biocorecrg.github.io/CRG_R_tidyverse_2021" class="uri">https://biocorecrg.github.io/CRG_R_tidyverse_2021</a>) and will be regularly updated.
-<br></p>
-<p>If you want to get the latest version locally, you can:</p>
-<ul>
-<li><p>download and uncompress the <a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021/archive/master.zip">zip archive</a></p></li>
-<li><p>keep only the “docs” and " images" folders.</p></li>
-<li><p>open the “index.html” file in a web browser.</p></li>
-<li><p>Data import &amp; export:</p></li>
-<li><p>read_csv</p></li>
-<li><p>tibbles characteristics</p></li>
-<li><p>tidy data definition</p></li>
-<li><p>tidyr:</p>
-<ul>
-<li>separate &amp; unite</li>
-<li>count</li>
-<li>pivot (long and wide formats): pivot_longer, pivot_wider</li>
-<li>complete (missing values)</li>
-</ul></li>
-<li><p>“forward-pipe”: %&gt;% from the magrittr package</p></li>
-<li><p>stringr:</p>
-<ul>
-<li>str_remove</li>
-<li>str_length</li>
-<li>str_c (paste)</li>
-<li>str_sub</li>
-</ul></li>
-<li><p>dplyr:</p>
-<ul>
-<li>mutate, mutate_at, transmute</li>
-<li>select, select_if</li>
-<li>filter</li>
-<li>summarise, group_by</li>
-<li>arrange</li>
-<li>“join” functions</li>
-</ul></li>
-</ul>
-
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="mutate-transmute.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subtracting column start to colum end</span></span>
+<span id="cb37-2"><a href="mutate-transmute.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(presidential, </span>
+<span id="cb37-3"><a href="mutate-transmute.html#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end <span class="sc">-</span> start) <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<pre><code>## # A tibble: 11 x 5
+##    name       start      end        party      duration_days
+##    &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;drtn&gt;       
+##  1 Eisenhower 1953-01-20 1961-01-20 Republican 2922 days    
+##  2 Kennedy    1961-01-20 1963-11-22 Democratic 1036 days    
+##  3 Johnson    1963-11-22 1969-01-20 Democratic 1886 days    
+##  4 Nixon      1969-01-20 1974-08-09 Republican 2027 days    
+##  5 Ford       1974-08-09 1977-01-20 Republican  895 days    
+##  6 Carter     1977-01-20 1981-01-20 Democratic 1461 days    
+##  7 Reagan     1981-01-20 1989-01-20 Republican 2922 days    
+##  8 Bush       1989-01-20 1993-01-20 Republican 1461 days    
+##  9 Clinton    1993-01-20 2001-01-20 Democratic 2922 days    
+## 10 Bush       2001-01-20 2009-01-20 Republican 2922 days    
+## 11 Obama      2009-01-20 2017-01-20 Democratic 2922 days</code></pre>
+<blockquote>
+<p>Use <strong>unquoted</strong> column names</p>
+</blockquote>
+<blockquote>
+<p>Note that columns are added at the end of the data frame.</p>
+</blockquote>
+<blockquote>
+<p>Note that <strong>mutate</strong> keeps all columns.</p>
+</blockquote>
+<p>Keep only the <strong>newly created column(s)</strong> (drop the remaining ones) with <code>transmute()</code> instead of <code>mutate()</code>:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="mutate-transmute.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">transmute</span>(presidential, </span>
+<span id="cb39-2"><a href="mutate-transmute.html#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end <span class="sc">-</span> start) <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<pre><code>## # A tibble: 11 x 1
+##    duration_days
+##    &lt;drtn&gt;       
+##  1 2922 days    
+##  2 1036 days    
+##  3 1886 days    
+##  4 2027 days    
+##  5  895 days    
+##  6 1461 days    
+##  7 2922 days    
+##  8 1461 days    
+##  9 2922 days    
+## 10 2922 days    
+## 11 2922 days</code></pre>
+<p>Re-assign to a new - or the same - data frame/tibble using the R <strong>assignment operator: &lt;-</strong></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="mutate-transmute.html#cb41-1" aria-hidden="true" tabindex="-1"></a>presidential <span class="ot">&lt;-</span> <span class="fu">mutate</span>(presidential, </span>
+<span id="cb41-2"><a href="mutate-transmute.html#cb41-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-manipulation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="select.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

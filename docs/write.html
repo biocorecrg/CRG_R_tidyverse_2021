@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
-  <meta name="description" content="Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <title>6.2 Write | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="6.2 Write | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:title" content="6.2 Write | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="twitter:title" content="6.2 Write | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="introduction.html"/>
+<link rel="prev" href="read.html"/>
+<link rel="next" href="data-manipulation.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -194,100 +194,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Intermediate R: introduction to data wrangling with the Tidyverse (2021)</h1>
-<p class="author"><em>Sarah Bonnin</em></p>
-<p class="date"><em>2021-04-13</em></p>
-</div>
-<div id="welcome" class="section level1" number="1">
-<h1><span class="header-section-number">Part 1</span> Welcome</h1>
-<h3>
-About the course
-</h3>
-<p>The so-called <a href="https://www.tidyverse.org/"><strong>tidyverse</strong> set of packages</a> is widely used in the R community for powerful and efficient data reading, tidying, manipulation and visualization. It is one of the most popular and up-to-date set of tools for data analysis and data science using the R language.
-<br>
-All <strong>tidyverse</strong> packages share a common vocabulary/grammar that makes code more intuitive and easier to read that the <em>base</em> R.
-<br>
-This 8-hour training aims at introducing some of the <strong>tidyverse</strong> packages for data wrangling and manipulation: dplyr, tidyr, stringr and readr.<br></p>
-<h3>
-Dates, time &amp; location
-</h3>
-<ul>
-<li>Dates (2021):
-<ul>
-<li>April 19th + 21rst</li>
-</ul></li>
-<li>Time:
-<ul>
-<li>9:30-13:30 <br></li>
-</ul></li>
-<li>Location:
-<ul>
-<li>Online (Zoom: find details in the dedicated <a href="https://moodle.crg.eu/">Moodle page</a>)</li>
-</ul></li>
-</ul>
-<h3>
-Instructors
-</h3>
-<p><a href="mailto:sarah.bonnin@crg.eu">Sarah Bonnin</a><br>
-<a href="mailto:julia.ponomarenko@crg.eu">Julia Ponomarenko</a><br>
-from the CRG <a href="https://biocore.crg.eu/">Bioinformatics core facility</a> (office , 4th floor hospital side)</p>
-<h3>
-Learning objectives
-</h3>
-<h3>
-Prerequisites
-</h3>
-<p>This is an intermediate course. <br>
-Familiarity with R scripting is required: syntax, installation of packages, objects manipulation, data import/export.</p>
-<h3>
-Material
-</h3>
-<p>All material is available from this page (<a href="https://biocorecrg.github.io/CRG_R_tidyverse_2021" class="uri">https://biocorecrg.github.io/CRG_R_tidyverse_2021</a>) and will be regularly updated.
-<br></p>
-<p>If you want to get the latest version locally, you can:</p>
-<ul>
-<li><p>download and uncompress the <a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021/archive/master.zip">zip archive</a></p></li>
-<li><p>keep only the “docs” and " images" folders.</p></li>
-<li><p>open the “index.html” file in a web browser.</p></li>
-<li><p>Data import &amp; export:</p></li>
-<li><p>read_csv</p></li>
-<li><p>tibbles characteristics</p></li>
-<li><p>tidy data definition</p></li>
-<li><p>tidyr:</p>
-<ul>
-<li>separate &amp; unite</li>
-<li>count</li>
-<li>pivot (long and wide formats): pivot_longer, pivot_wider</li>
-<li>complete (missing values)</li>
-</ul></li>
-<li><p>“forward-pipe”: %&gt;% from the magrittr package</p></li>
-<li><p>stringr:</p>
-<ul>
-<li>str_remove</li>
-<li>str_length</li>
-<li>str_c (paste)</li>
-<li>str_sub</li>
-</ul></li>
-<li><p>dplyr:</p>
-<ul>
-<li>mutate, mutate_at, transmute</li>
-<li>select, select_if</li>
-<li>filter</li>
-<li>summarise, group_by</li>
-<li>arrange</li>
-<li>“join” functions</li>
-</ul></li>
-</ul>
+<div id="write" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Write</h2>
+<p>format_csv
+format_tsv</p>
+<p>write_delim
+write_csv
+write_tsv</p>
 
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="read.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-manipulation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,0 +1,299 @@
+# Data manipulation
+
+Package `dplyr` dntroduces a grammar of data manipulation. [Cheat sheet](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf)
+<br>
+We will introduce the **5 intuitively-named key functions** from **{dplyr}**:
+
+* **mutate()** adds new variables (columns) that are functions of existing variables
+* **select()** picks variables (columns) based on their names.
+* **filter()** picks observations (rows) based on their values.
+* **summarise()** collapses multiple values down to a single summary.
+* **arrange()** changes the ordering of the rows.
+ 
+
+All 5 functions work in a similar and consistent way:
+
+* The first argument is a **data frame** or a **tibble**.
+* The result is a new data frame.
+ 
+> *Note that {dplyr} never modifies the input: you need to* ***redirect the output*** *and save in a new - or the same - object.*
+
+
+Let's try!
+ 
+We will use the **presidential** data set.
+*It contains data of the terms of* ***presidents of the USA***, *from Eisenhower to Obama:*
+
+* Name
+* Term starting date
+* Term ending date of mandate
+* Political party
+ 
+```{r}
+print(presidential, n=6)
+```
+
+
+## mutate & transmute
+
+`mutate` allows to create new columns that are functions of the existing ones.
+
+* Create a new column with the duration of each term:
+
+
+```{r}
+# Subtracting column start to colum end
+mutate(presidential, 
+    duration_days=end - start) #<<
+```
+
+> Use **unquoted** column names
+
+> Note that columns are added at the end of the data frame.
+
+> Note that **mutate** keeps all columns. 
+
+Keep only the **newly created column(s)** (drop the remaining ones) with `transmute()` instead of `mutate()`:
+
+```{r, eval=T}
+transmute(presidential, 
+    duration_days=end - start) #<<
+```
+
+Re-assign to a new - or the same - data frame/tibble using the R **assignment operator: <-**
+
+```{r, eval=T}
+presidential <- mutate(presidential, 
+                duration_days=end - start)
+```
+ 
+## select
+
+Select column **name** only:
+
+```{r, highlight=c(1,3), echo=F, warning=F,message=F}
+library(kableExtra)
+knitr::kable(presidential) %>% 
+  kable_styling(bootstrap_options = "striped", font_size = 14) %>% 
+  column_spec(1, background = "yellow")
+```
+
+```{r, eval=T}
+select(presidential, name)
+```
+
+Select columns **party** and **name** (in that order):
+
+```{r, eval=T}
+select(presidential, 
+       party, name) #<<
+```
+
+Rename a column as you select it:
+```{r, eval=T}
+select(presidential, 
+       party, President=name) #<<
+```
+
+Select all columns **except** party:
+```{r, eval=T}
+select(presidential, 
+       -party) #<<
+```
+
+Select all columns between **start** and **party** (inclusive)
+```{r, eval=T}
+ select(presidential, 
+        start:party) #<<
+```
+
+### select_if
+
+Select only columns containing characters with **select_if()**:
+
+```{r, eval=T, echo =T}
+select_if(presidential, 
+    is.character) #<<
+```
+
+```{r, eval=F, echo =FALSE}
+#Select all columns that contain a date 
+select_if(presidential, 
+          function(x)inherits(x, 'Date')) #<<
+```
+ 
+## filter
+
+**filter()** is used to filter rows in a data frame/tibble.
+
+Keep rows if party is **Democratic**:
+
+```{r, highlight=c(1,3), echo=F, warning=F,message=F}
+knitr::kable(presidential) %>% 
+  kable_styling(bootstrap_options = "striped", font_size = 14) %>% 
+  row_spec(c(2:3, 6, 9, 11), background = "yellow")
+```
+
+Keep rows if party is **Democratic**:
+```{r, eval=T}
+ filter(presidential, 
+        party=="Democratic") #<<
+```
+
+You can filter using several variables/columns:
+```{r, eval=F}
+filter(presidential, 
+       party=="Republican", name=="Bush") #<<
+
+# This implicity uses the "&", i.e. the fact that both conditions have to be TRUE
+filter(presidential, 
+       party=="Republican" & name=="Bush") #<<
+
+# Any logical operators can be used
+filter(presidential, 
+       name %in% c("Bush", "Kennedy")) #<<
+```
+
+## summarise & group_by
+ 
+**summarise()** collapses a data frame to a single row (base R: **aggregate()**)
+ 
+Get average length of terms:
+
+```{r, eval=T}
+summarise(presidential, 
+          mean(duration_days)) #<<
+```
+ 
+**summarise()** collapses a data frame to a single row (base R: **aggregate()**)
+
+Get average length of terms + count
+
+```{r, eval=T}
+summarise(presidential,
+          mean(duration_days), 
+          n()) #<<
+```
+ 
+You can combine **summarise()** with **group_by()** to get the average length of terms **per political party**:
+
+* **group_by()** defines a grouping based on existing variables.
+* **summarise()** then processes the command based on the grouping
+
+```{r}
+groups <- group_by(presidential, #<<
+                   party) #<<
+summarise(groups, 
+          mean(duration_days), n())
+```
+
+## arrange
+
+Order rows by increasing mandate duration with **arrange()**
+
+```{r, eval=T}
+arrange(presidential, duration_days)
+# decreasing order: arrange(presidential2, desc(duration_days))
+```
+
+You can use several columns for the sorting
+```{r, eval=T}
+arrange(presidential, 
+        duration_days, name)
+```
+
+Example:
+
+```{r}
+mutate(presidential, duration_days=end-start) %>%
+    filter(party == "Democratic") %>%
+    summarise(mean(duration_days))
+```
+
+Example:
+
+```{r}
+mutate(presidential, duration_days=end-start) %>%
+    group_by(party) %>%
+    summarise(mean(duration_days))
+```
+
+**HANDS ON**
+
+We will work with the **storms** data set:
+* Positions and attributes of **198 tropical storms**, measured every 6 hours
+
+
+1. Remove columns **month**, **day**, **hour**, **lat**, **long**, **ts_diameter** and **hu_diameter**.
+  * Calculate the **median pressure for each storm status**.
+
+2. Calculate the **minimum wind speed for each storm (name)**.
+  * What storm has the minimum wind speed?
+
+3. Calculate **how many storms happened each year**.
+  * *TIP: find what* ***distinct()*** *from* ***{dplyr}*** can do...
+  * What are the years with the **maximum** number of storms?
+
+
+Remove columns **month**, **day**, **hour**, **lat**, **long**, **ts_diameter** and **hu_diameter**.
+  * Calculate the **median pressure for each storm status**.
+
+```{r, eval=F}
+# remove columns
+select(storms, -lat, -long, -ts_diameter, -hu_diameter)
+# same as:
+select(storms, -c(lat, long, ts_diameter, hu_diameter))
+```
+
+```{r}
+# group by status and calculate median pressure per storm status
+select(storms, -lat, -long, -ts_diameter, -hu_diameter) %>% 
+  group_by(status) %>%
+  summarise(median(pressure))
+```
+
+Calculate the **minimum wind speed for each storm (name)**.
+  * What storm has the **smallest minimum wind speed**?
+
+```{r, eval=F}
+# group storms by name and calculate minimum wind speed
+storms %>%
+  group_by(name) %>%
+  summarise(min_wind = min(wind))
+```
+
+Calculate the **minimum wind speed for each storm (name)**.
+  * What storm has the **smallest minimum wind speed**?
+
+```{r}
+# sort by increasing minimum wind speed
+storms %>%
+  group_by(name) %>%
+  summarise(min_wind = min(wind)) %>%
+  arrange(min_wind)
+```
+
+ 3. Calculate **how many storms happened each year**.
+  * *TIP: find what* ***distinct()*** *from* ***{dplyr}*** can do...
+  * What are the years with the **maximum** number of storms?
+
+```{r, eval=F}
+# get unique rows when considering both name and year columns
+distinct(storms, name, year)
+```
+
+```{r, eval=F}
+# group by year and count the number of storms
+distinct(storms, name, year) %>%
+  group_by(year) %>%
+  summarise(storms_per_year=n())
+```
+
+```{r}
+# sort by decreasing number of storms
+distinct(storms, name, year) %>%
+  group_by(year) %>%
+  summarise(storms_per_year=n()) %>%
+  arrange(desc(storms_per_year))
+```
+

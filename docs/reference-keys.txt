@@ -1,3 +1,4 @@
+tab:unnamed-chunk-23
 welcome
 introduction
 what-is-the-tidyverse
@@ -15,3 +16,12 @@ separate
 unite
 the-forward-pipe-operator
 input-output-with-readr
+read
+write
+data-manipulation
+mutate-transmute
+select
+select_if
+filter
+summarise-group_by
+arrange

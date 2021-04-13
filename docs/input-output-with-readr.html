@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Part 6 Input / output with *readr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
-  <meta name="description" content="Part 6 Input / output with *readr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <title>Part 6 Input / output with readr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="Part 6 Input / output with readr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Part 6 Input / output with *readr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:title" content="Part 6 Input / output with readr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Part 6 Input / output with *readr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="twitter:title" content="Part 6 Input / output with readr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   
   
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-12" />
+<meta name="date" content="2021-04-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="the-forward-pipe-operator.html"/>
-
+<link rel="next" href="read.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -158,7 +158,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="the-forward-pipe-operator.html"><a href="the-forward-pipe-operator.html"><i class="fa fa-check"></i><b>5</b> The <code>%&gt;%</code> forward-pipe operator</a></li>
-<li class="chapter" data-level="6" data-path="input-output-with-readr.html"><a href="input-output-with-readr.html"><i class="fa fa-check"></i><b>6</b> Input / output with *<code>readr</code></a></li>
+<li class="chapter" data-level="6" data-path="input-output-with-readr.html"><a href="input-output-with-readr.html"><i class="fa fa-check"></i><b>6</b> Input / output with <em><code>readr</code></em></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="read.html"><a href="read.html"><i class="fa fa-check"></i><b>6.1</b> Read</a></li>
+<li class="chapter" data-level="6.2" data-path="write.html"><a href="write.html"><i class="fa fa-check"></i><b>6.2</b> Write</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>7</b> Data manipulation</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mutate-transmute.html"><a href="mutate-transmute.html"><i class="fa fa-check"></i><b>7.1</b> mutate &amp; transmute</a></li>
+<li class="chapter" data-level="7.2" data-path="select.html"><a href="select.html"><i class="fa fa-check"></i><b>7.2</b> select</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="select.html"><a href="select.html#select_if"><i class="fa fa-check"></i><b>7.2.1</b> select_if</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
+<li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
+<li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
 
@@ -180,16 +195,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="input-output-with-readr" class="section level1" number="6">
-<h1><span class="header-section-number">Part 6</span> Input / output with *<code>readr</code></h1>
-
+<h1><span class="header-section-number">Part 6</span> Input / output with <em><code>readr</code></em></h1>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="the-forward-pipe-operator.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="the-forward-pipe-operator.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="read.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

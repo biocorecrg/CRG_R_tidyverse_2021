@@ -1,1 +1,27 @@
-# Input / output with *`readr`
+# Input / output with *`readr`*
+
+## Read
+
+* `read_delim`, `read_csv`, `read_tsv`: Read a delimited file into a `tibble`:
+
+```{r, echo=FALSE, eval=TRUE}
+knitr::kable(
+  data.frame(name=c("read_delim", "read_csv", "read_tsv"), 
+             delim=c("*needs to be set*", "`,`: comma-separated", "`\t`: tab-separated")), caption = 'read_delim and derived functions',
+  format = "html", table.attr = "style='width:60%;'"
+)
+```
+
+* `read_table`: Read whitespace-separated columns into a `tibble`
+
+* `read_file` (and `read_file_raw`): reads into a character vector of length one (or raw vector)
+
+## Write
+
+
+format_csv
+format_tsv
+
+write_delim
+write_csv
+write_tsv
