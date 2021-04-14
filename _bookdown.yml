@@ -12,7 +12,8 @@ rmd_files: ["index.Rmd",
             "tidyr.Rmd",
             "pipe.Rmd",
             "data_IO.Rmd",
-            "dplyr.Rmd"]
+            "dplyr.Rmd",
+            "missing_values.Rmd"]
 output:
   bookdown::gitbook:
     theme: cosmo

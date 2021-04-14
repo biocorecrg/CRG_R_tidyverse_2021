@@ -1,5 +1,9 @@
 # Tidy data with `tidyr`
 
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE)
+```
+
 ## What is "tidy" data?
 
 **Tidy** data is where:
@@ -7,6 +11,11 @@
 * Each **column** describes a **variable**.
 * Each **row** describes an **observation**.
 * Each **value** is a **cell**.
+
+```{r, echo=FALSE, out.width="100%", fig.cap="Tidy data"}
+knitr::include_graphics("images/tidy_data.png")
+```
+
 
 Example of a tidy data:
 
@@ -16,6 +25,7 @@ Example of a tidy data:
 | 23 |  8 | 2019  | 2.9  |  50 |
 | 9 |  11 | 2020  | 3.8  |  50 |
 
+<br>
 Example of untidy data:
 
 | day | month,year  |  weight |  height |
@@ -24,17 +34,21 @@ Example of untidy data:
 | 23 |  8,2019  | 2.9kg  |  50 |
 | 9 |  11,2020  | 3.8kg  |  50 |
 
-Here we introduce some useful functions from the `tidyr` package to clean up and organize data so that to obtain **tidy** data that can then be processed more easily:
+Here we introduce some useful functions from the `tidyr` package to clean up and organize data so as to obtain **tidy** data that can then be processed more easily.
+<br>
 
-### Separate & Unite
 
-Let's work on this **untidy** tibble `table5` that is a built-in data set from the `tidyr` package *(table5 displays the number of tuberculosis cases documented by the WHO in selected countries)*:
 
-```{r}
-table5
+## Separate & Unite
+
+Let's work on the **untidy** tibble **`table5`** that is a built-in data set from the `tidyr` package *(table5 displays the number of tuberculosis cases documented by the WHO in selected countries)*:
+
+
+```{r, echo=F}
+knitr::kable(table5, caption ="`table5`")
 ```
 
-#### Separate
+### Separate
 
 Function `separate` separates (indeed!) a column into 2 or more columns: `separate(data, col, into, sep)`
 
@@ -49,7 +63,7 @@ table5_1 <- separate(data=table5,
 table5_1
 ```
 
-#### Unite
+### Unite
 
 Function `unite` does just the opposite: it will unite/stick together 2 or (more) columns: `unite(data, col, *column names*, sep)`.
 
@@ -100,11 +114,16 @@ patients3 <- unite(data=patients2,
 
 </details>
 
-* Is there a problem with `patients3`?
+* Is there a problem with `patients3`? Display the tibble in the R console...
 
-Columns `height` and `weight` are **treated as characters** (because they contained characters "kg" and "cm").
+Columns `height` and `weight` are **treated as characters** (because they contained *underscores "_"*).
 <br> 
-We can convert them into numbers with the `mutate_at` function from the `dplyr` package:
+We can convert them into numbers with the `mutate_at` function from the `dplyr` package: try it!
+
+<details>
+<summary>
+*Answer*
+</summary>
 
 ```{r}
 # first argument: the tibble
@@ -113,4 +132,5 @@ We can convert them into numbers with the `mutate_at` function from the `dplyr` 
 patients4 <- mutate_at(patients3, c("height", "weight"), as.numeric)
 ```
 
+</details>
 

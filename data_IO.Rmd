@@ -1,8 +1,12 @@
 # Input / output with *`readr`*
 
+`readr` provides functions for reading in and writing out files.
+<br>
+Those functions are **up to 10 times faster** that the base R equivalent.
+
 ## Read
 
-* `read_delim`, `read_csv`, `read_tsv`: Read a delimited file into a `tibble`:
+`read_delim`, `read_csv`, `read_tsv`: Read a delimited file into a `tibble`:
 
 ```{r, echo=FALSE, eval=TRUE}
 knitr::kable(
@@ -11,10 +15,33 @@ knitr::kable(
   format = "html", table.attr = "style='width:60%;'"
 )
 ```
+<br>
 
-* `read_table`: Read whitespace-separated columns into a `tibble`
+Read in a file provided as an example with the `readr` package:
 
-* `read_file` (and `read_file_raw`): reads into a character vector of length one (or raw vector)
+```{r, message=TRUE}
+f1 <- read_csv(readr_example("mtcars.csv"))
+```
+
+As you can see, `readr` prints out the column specifications, so you can make sure the data is read the way it is meant to be.
+<br>
+
+Useful arguments to consider, as you read in the file:
+  
+* `n_max` : read in a subset.
+* col_names:
+  * col_names=FALSE : your data doesn't contain headers/column names.
+  * col_names=c("A", "B", "C") : you are providing a vector containing column names / header.
+* `skip` : skip rows.
+
+```{r, message=TRUE}
+f2 <- read_csv(readr_example("mtcars.csv"),
+                n_max=5,
+                skip=1,
+                col_names=LETTERS[1:11])
+
+f2
+```
 
 ## Write
 
@@ -25,3 +52,6 @@ format_tsv
 write_delim
 write_csv
 write_tsv
+
+**HANDS-ON**
+

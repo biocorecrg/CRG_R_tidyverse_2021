@@ -24,7 +24,7 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-13" />
+<meta name="date" content="2021-04-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -142,19 +142,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="what-is-the-tidyverse.html"><a href="what-is-the-tidyverse.html"><i class="fa fa-check"></i><b>2.1</b> What is the “tidyverse”</a></li>
 <li class="chapter" data-level="2.2" data-path="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html"><a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html"><i class="fa fa-check"></i><b>2.2</b> Good reasons to learn (at least a bit) how to use it</a></li>
 <li class="chapter" data-level="2.3" data-path="tidyverse-core-packages.html"><a href="tidyverse-core-packages.html"><i class="fa fa-check"></i><b>2.3</b> Tidyverse core packages</a></li>
-<li class="chapter" data-level="2.4" data-path="load-all-tidyverse-package.html"><a href="load-all-tidyverse-package.html"><i class="fa fa-check"></i><b>2.4</b> Load all tidyverse package</a></li>
+<li class="chapter" data-level="2.4" data-path="install-and-load-all-tidyverse-package.html"><a href="install-and-load-all-tidyverse-package.html"><i class="fa fa-check"></i><b>2.4</b> Install and load all tidyverse package</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="tibbles.html"><a href="tibbles.html"><i class="fa fa-check"></i><b>3</b> Tibbles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="what-are-tibbles.html"><a href="what-are-tibbles.html"><i class="fa fa-check"></i><b>3.1</b> What are tibbles?</a></li>
 <li class="chapter" data-level="3.2" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Displaying tibbles</a></li>
-<li class="chapter" data-level="3.3" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Subsetting / manipulating tibbles</a></li>
+<li class="chapter" data-level="3.3" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Data types in tibbles</a></li>
+<li class="chapter" data-level="3.4" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Subsetting / manipulating tibbles</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tidy-data-with-tidyr.html"><a href="tidy-data-with-tidyr.html"><i class="fa fa-check"></i><b>4</b> Tidy data with <code>tidyr</code></a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="what-is-tidy-data.html"><a href="what-is-tidy-data.html"><i class="fa fa-check"></i><b>4.1</b> What is “tidy” data?</a>
+<li class="chapter" data-level="4.1" data-path="what-is-tidy-data.html"><a href="what-is-tidy-data.html"><i class="fa fa-check"></i><b>4.1</b> What is “tidy” data?</a></li>
+<li class="chapter" data-level="4.2" data-path="separate-unite.html"><a href="separate-unite.html"><i class="fa fa-check"></i><b>4.2</b> Separate &amp; Unite</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="what-is-tidy-data.html"><a href="what-is-tidy-data.html#separate-unite"><i class="fa fa-check"></i><b>4.1.1</b> Separate &amp; Unite</a></li>
+<li class="chapter" data-level="4.2.1" data-path="separate-unite.html"><a href="separate-unite.html#separate"><i class="fa fa-check"></i><b>4.2.1</b> Separate</a></li>
+<li class="chapter" data-level="4.2.2" data-path="separate-unite.html"><a href="separate-unite.html#unite"><i class="fa fa-check"></i><b>4.2.2</b> Unite</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="the-forward-pipe-operator.html"><a href="the-forward-pipe-operator.html"><i class="fa fa-check"></i><b>5</b> The <code>%&gt;%</code> forward-pipe operator</a></li>
@@ -174,6 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
 
@@ -408,7 +412,7 @@ Democratic
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="select.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, name)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="select.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, name)</span></code></pre></div>
 <pre><code>## # A tibble: 11 x 1
 ##    name      
 ##    &lt;chr&gt;     
@@ -424,11 +428,11 @@ Democratic
 ## 10 Bush      
 ## 11 Obama</code></pre>
 <p>Select 2 columns: <strong>party</strong> and <strong>name</strong> (in that order):</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="select.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, </span>
-<span id="cb42-2"><a href="select.html#cb42-2" aria-hidden="true" tabindex="-1"></a>       party, name)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="select.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, </span>
+<span id="cb48-2"><a href="select.html#cb48-2" aria-hidden="true" tabindex="-1"></a>       party, name)</span></code></pre></div>
 <p>Rename a column as you select it:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="select.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, </span>
-<span id="cb43-2"><a href="select.html#cb43-2" aria-hidden="true" tabindex="-1"></a>       party, <span class="at">President=</span>name)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="select.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, </span>
+<span id="cb49-2"><a href="select.html#cb49-2" aria-hidden="true" tabindex="-1"></a>       party, <span class="at">President=</span>name)</span></code></pre></div>
 <pre><code>## # A tibble: 11 x 2
 ##    party      President 
 ##    &lt;chr&gt;      &lt;chr&gt;     
@@ -444,8 +448,8 @@ Democratic
 ## 10 Republican Bush      
 ## 11 Democratic Obama</code></pre>
 <p>Select all columns <strong>except</strong> party with the <strong>-</strong> sign:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="select.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, </span>
-<span id="cb45-2"><a href="select.html#cb45-2" aria-hidden="true" tabindex="-1"></a>       <span class="sc">-</span>party)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="select.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, </span>
+<span id="cb51-2"><a href="select.html#cb51-2" aria-hidden="true" tabindex="-1"></a>       <span class="sc">-</span>party)</span></code></pre></div>
 <pre><code>## # A tibble: 11 x 4
 ##    name       start      end        duration_days
 ##    &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;drtn&gt;       
@@ -461,8 +465,8 @@ Democratic
 ## 10 Bush       2001-01-20 2009-01-20 2922 days    
 ## 11 Obama      2009-01-20 2017-01-20 2922 days</code></pre>
 <p>Select all columns between <strong>start</strong> and <strong>party</strong> (with both included)</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="select.html#cb47-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">select</span>(presidential, </span>
-<span id="cb47-2"><a href="select.html#cb47-2" aria-hidden="true" tabindex="-1"></a>        start<span class="sc">:</span>party)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="select.html#cb53-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">select</span>(presidential, </span>
+<span id="cb53-2"><a href="select.html#cb53-2" aria-hidden="true" tabindex="-1"></a>        start<span class="sc">:</span>party)</span></code></pre></div>
 <pre><code>## # A tibble: 11 x 3
 ##    start      end        party     
 ##    &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;     
@@ -480,8 +484,8 @@ Democratic
 <div id="select_if" class="section level3" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> select_if</h3>
 <p>Select only columns containing characters with <strong>select_if()</strong>:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="select.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select_if</span>(presidential, </span>
-<span id="cb49-2"><a href="select.html#cb49-2" aria-hidden="true" tabindex="-1"></a>    is.character) <span class="co">#&lt;&lt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="select.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select_if</span>(presidential, </span>
+<span id="cb55-2"><a href="select.html#cb55-2" aria-hidden="true" tabindex="-1"></a>    is.character) <span class="co">#&lt;&lt;</span></span></code></pre></div>
 <pre><code>## # A tibble: 11 x 2
 ##    name       party     
 ##    &lt;chr&gt;      &lt;chr&gt;     

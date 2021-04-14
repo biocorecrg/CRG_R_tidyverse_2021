@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.3 Subsetting / manipulating tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
-  <meta name="description" content="3.3 Subsetting / manipulating tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <title>3.4 Subsetting / manipulating tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="3.4 Subsetting / manipulating tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.3 Subsetting / manipulating tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:title" content="3.4 Subsetting / manipulating tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.3 Subsetting / manipulating tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="twitter:title" content="3.4 Subsetting / manipulating tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   
   
   
@@ -24,14 +24,14 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-13" />
+<meta name="date" content="2021-04-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="displaying-tibbles.html"/>
+<link rel="prev" href="data-types-in-tibbles.html"/>
 <link rel="next" href="tidy-data-with-tidyr.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -142,19 +142,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="what-is-the-tidyverse.html"><a href="what-is-the-tidyverse.html"><i class="fa fa-check"></i><b>2.1</b> What is the “tidyverse”</a></li>
 <li class="chapter" data-level="2.2" data-path="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html"><a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html"><i class="fa fa-check"></i><b>2.2</b> Good reasons to learn (at least a bit) how to use it</a></li>
 <li class="chapter" data-level="2.3" data-path="tidyverse-core-packages.html"><a href="tidyverse-core-packages.html"><i class="fa fa-check"></i><b>2.3</b> Tidyverse core packages</a></li>
-<li class="chapter" data-level="2.4" data-path="load-all-tidyverse-package.html"><a href="load-all-tidyverse-package.html"><i class="fa fa-check"></i><b>2.4</b> Load all tidyverse package</a></li>
+<li class="chapter" data-level="2.4" data-path="install-and-load-all-tidyverse-package.html"><a href="install-and-load-all-tidyverse-package.html"><i class="fa fa-check"></i><b>2.4</b> Install and load all tidyverse package</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="tibbles.html"><a href="tibbles.html"><i class="fa fa-check"></i><b>3</b> Tibbles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="what-are-tibbles.html"><a href="what-are-tibbles.html"><i class="fa fa-check"></i><b>3.1</b> What are tibbles?</a></li>
 <li class="chapter" data-level="3.2" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Displaying tibbles</a></li>
-<li class="chapter" data-level="3.3" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Subsetting / manipulating tibbles</a></li>
+<li class="chapter" data-level="3.3" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Data types in tibbles</a></li>
+<li class="chapter" data-level="3.4" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Subsetting / manipulating tibbles</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tidy-data-with-tidyr.html"><a href="tidy-data-with-tidyr.html"><i class="fa fa-check"></i><b>4</b> Tidy data with <code>tidyr</code></a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="what-is-tidy-data.html"><a href="what-is-tidy-data.html"><i class="fa fa-check"></i><b>4.1</b> What is “tidy” data?</a>
+<li class="chapter" data-level="4.1" data-path="what-is-tidy-data.html"><a href="what-is-tidy-data.html"><i class="fa fa-check"></i><b>4.1</b> What is “tidy” data?</a></li>
+<li class="chapter" data-level="4.2" data-path="separate-unite.html"><a href="separate-unite.html"><i class="fa fa-check"></i><b>4.2</b> Separate &amp; Unite</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="what-is-tidy-data.html"><a href="what-is-tidy-data.html#separate-unite"><i class="fa fa-check"></i><b>4.1.1</b> Separate &amp; Unite</a></li>
+<li class="chapter" data-level="4.2.1" data-path="separate-unite.html"><a href="separate-unite.html#separate"><i class="fa fa-check"></i><b>4.2.1</b> Separate</a></li>
+<li class="chapter" data-level="4.2.2" data-path="separate-unite.html"><a href="separate-unite.html#unite"><i class="fa fa-check"></i><b>4.2.2</b> Unite</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="the-forward-pipe-operator.html"><a href="the-forward-pipe-operator.html"><i class="fa fa-check"></i><b>5</b> The <code>%&gt;%</code> forward-pipe operator</a></li>
@@ -174,6 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
 
@@ -194,21 +198,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="subsetting-manipulating-tibbles" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Subsetting / manipulating tibbles</h2>
+<div id="subsetting-manipulating-tibbles" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Subsetting / manipulating tibbles</h2>
 <ul>
 <li>Extract column by <strong>name</strong>:</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="subsetting-manipulating-tibbles.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># with the $</span></span>
-<span id="cb14-2"><a href="subsetting-manipulating-tibbles.html#cb14-2" aria-hidden="true" tabindex="-1"></a>mytibble<span class="sc">$</span>letters</span></code></pre></div>
-<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot;
-## [25] &quot;Y&quot; &quot;Z&quot;</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="subsetting-manipulating-tibbles.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or the [[]]</span></span>
-<span id="cb16-2"><a href="subsetting-manipulating-tibbles.html#cb16-2" aria-hidden="true" tabindex="-1"></a>mytibble[[<span class="st">&quot;letters&quot;</span>]]</span></code></pre></div>
-<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot;
-## [25] &quot;Y&quot; &quot;Z&quot;</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="subsetting-manipulating-tibbles.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: with using simple square brackets, you extract a sub-tibble (2 dimensions)</span></span>
-<span id="cb18-2"><a href="subsetting-manipulating-tibbles.html#cb18-2" aria-hidden="true" tabindex="-1"></a>mytibble[<span class="st">&quot;letters&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="subsetting-manipulating-tibbles.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># with the $</span></span>
+<span id="cb15-2"><a href="subsetting-manipulating-tibbles.html#cb15-2" aria-hidden="true" tabindex="-1"></a>mytibble<span class="sc">$</span>letters</span></code></pre></div>
+<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot;
+## [20] &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="subsetting-manipulating-tibbles.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or the [[]]</span></span>
+<span id="cb17-2"><a href="subsetting-manipulating-tibbles.html#cb17-2" aria-hidden="true" tabindex="-1"></a>mytibble[[<span class="st">&quot;letters&quot;</span>]]</span></code></pre></div>
+<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot;
+## [20] &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="subsetting-manipulating-tibbles.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: with using simple square brackets, you extract a sub-tibble (2 dimensions)</span></span>
+<span id="cb19-2"><a href="subsetting-manipulating-tibbles.html#cb19-2" aria-hidden="true" tabindex="-1"></a>mytibble[<span class="st">&quot;letters&quot;</span>]</span></code></pre></div>
 <pre><code>## # A tibble: 26 x 1
 ##    letters
 ##    &lt;chr&gt;  
@@ -226,26 +230,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Extract column by <strong>position/index</strong>:</li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="subsetting-manipulating-tibbles.html#cb20-1" aria-hidden="true" tabindex="-1"></a>mytibble</span></code></pre></div>
-<pre><code>## # A tibble: 26 x 2
-##    letters numbers
-##    &lt;chr&gt;     &lt;int&gt;
-##  1 A             1
-##  2 B             2
-##  3 C             3
-##  4 D             4
-##  5 E             5
-##  6 F             6
-##  7 G             7
-##  8 H             8
-##  9 I             9
-## 10 J            10
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="subsetting-manipulating-tibbles.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sub-tibble with one column</span></span>
+<span id="cb21-2"><a href="subsetting-manipulating-tibbles.html#cb21-2" aria-hidden="true" tabindex="-1"></a>mytibble[, <span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## # A tibble: 26 x 1
+##    letters
+##    &lt;chr&gt;  
+##  1 A      
+##  2 B      
+##  3 C      
+##  4 D      
+##  5 E      
+##  6 F      
+##  7 G      
+##  8 H      
+##  9 I      
+## 10 J      
 ## # … with 16 more rows</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="subsetting-manipulating-tibbles.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># corresponding vector</span></span>
+<span id="cb23-2"><a href="subsetting-manipulating-tibbles.html#cb23-2" aria-hidden="true" tabindex="-1"></a>mytibble[, <span class="dv">1</span>][[<span class="dv">1</span>]]</span></code></pre></div>
+<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot;
+## [20] &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
 <p><strong>HANDS-ON</strong></p>
+<p>We will work with the built-in dataset <code>iris</code>:</p>
+<ul>
+<li>Is <code>iris</code> a tibble? How can you tell? Try to run <code>is_tibble</code>.</li>
+<li>Convert <code>iris</code> to a tibble. Save in a new object <code>tbl_iris</code>.</li>
+<li>Show all rows from <code>tbl_iris</code>.</li>
+<li>Show the first 3 rows from <code>tbl_iris</code>.</li>
+<li>Extract column <code>Species</code>.</li>
+</ul>
 <details>
 <summary>
 <em>Answer</em>
 </summary>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="subsetting-manipulating-tibbles.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Is iris a tibble?</span></span>
+<span id="cb25-2"><a href="subsetting-manipulating-tibbles.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is_tibble</span>(iris)</span>
+<span id="cb25-3"><a href="subsetting-manipulating-tibbles.html#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="subsetting-manipulating-tibbles.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert iris to a tibble. Save in a new object tbl_iris.</span></span>
+<span id="cb25-5"><a href="subsetting-manipulating-tibbles.html#cb25-5" aria-hidden="true" tabindex="-1"></a>tbl_iris <span class="ot">&lt;-</span> <span class="fu">tibble</span>(iris)</span>
+<span id="cb25-6"><a href="subsetting-manipulating-tibbles.html#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="subsetting-manipulating-tibbles.html#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Show all rows from tbl_iris.</span></span>
+<span id="cb25-8"><a href="subsetting-manipulating-tibbles.html#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tbl_iris, <span class="at">n=</span><span class="cn">Inf</span>)</span>
+<span id="cb25-9"><a href="subsetting-manipulating-tibbles.html#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="subsetting-manipulating-tibbles.html#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the first 3 rows from tbl_iris.</span></span>
+<span id="cb25-11"><a href="subsetting-manipulating-tibbles.html#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tbl_iris, <span class="at">n=</span><span class="dv">3</span>)</span>
+<span id="cb25-12"><a href="subsetting-manipulating-tibbles.html#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="subsetting-manipulating-tibbles.html#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract column Species.</span></span>
+<span id="cb25-14"><a href="subsetting-manipulating-tibbles.html#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create a tibble with only one column:</span></span>
+<span id="cb25-15"><a href="subsetting-manipulating-tibbles.html#cb25-15" aria-hidden="true" tabindex="-1"></a>tbl_iris[<span class="st">&quot;Species&quot;</span>] </span>
+<span id="cb25-16"><a href="subsetting-manipulating-tibbles.html#cb25-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create a vector:</span></span>
+<span id="cb25-17"><a href="subsetting-manipulating-tibbles.html#cb25-17" aria-hidden="true" tabindex="-1"></a>tbl_iris[[<span class="st">&quot;Species&quot;</span>]] <span class="co"># same as tbl_iris$Species</span></span></code></pre></div>
 </details>
 
 </div>
@@ -255,7 +289,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="displaying-tibbles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-types-in-tibbles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="tidy-data-with-tidyr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

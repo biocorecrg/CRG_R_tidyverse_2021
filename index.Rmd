@@ -62,7 +62,6 @@ If you want to get the latest version locally, you can:
 * tidy data definition
 * tidyr: 
   * separate & unite
-  * count
   * pivot (long and wide formats): pivot_longer, pivot_wider
   * complete (missing values)
 * "forward-pipe": %>% from the magrittr package
@@ -77,6 +76,7 @@ If you want to get the latest version locally, you can:
   * filter
   * summarise, group_by
   * arrange
-  * "join" functions 
+  * "join" functions
+  * count
   
   

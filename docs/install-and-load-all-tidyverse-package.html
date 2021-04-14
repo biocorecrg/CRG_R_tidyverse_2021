@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.5 Tidyverse core packages | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
-  <meta name="description" content="2.5 Tidyverse core packages | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <title>2.4 Install and load all tidyverse package | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="2.4 Install and load all tidyverse package | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.5 Tidyverse core packages | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:title" content="2.4 Install and load all tidyverse package | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.5 Tidyverse core packages | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="twitter:title" content="2.4 Install and load all tidyverse package | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   
   
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-12" />
+<meta name="date" content="2021-04-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tidyverse-core-packages-1.html"/>
-<link rel="next" href="tidyverse-core-packages-3.html"/>
+<link rel="prev" href="tidyverse-core-packages.html"/>
+<link rel="next" href="tibbles.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -141,24 +141,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.1" data-path="what-is-the-tidyverse.html"><a href="what-is-the-tidyverse.html"><i class="fa fa-check"></i><b>2.1</b> What is the “tidyverse”</a></li>
 <li class="chapter" data-level="2.2" data-path="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html"><a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html"><i class="fa fa-check"></i><b>2.2</b> Good reasons to learn (at least a bit) how to use it</a></li>
-<li class="chapter" data-level="2.3" data-path="tidyverse-core-packages.html"><a href="tidyverse-core-packages.html"><i class="fa fa-check"></i><b>2.3</b> Tidyverse core packages</a>
+<li class="chapter" data-level="2.3" data-path="tidyverse-core-packages.html"><a href="tidyverse-core-packages.html"><i class="fa fa-check"></i><b>2.3</b> Tidyverse core packages</a></li>
+<li class="chapter" data-level="2.4" data-path="install-and-load-all-tidyverse-package.html"><a href="install-and-load-all-tidyverse-package.html"><i class="fa fa-check"></i><b>2.4</b> Install and load all tidyverse package</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tibbles.html"><a href="tibbles.html"><i class="fa fa-check"></i><b>3</b> Tibbles</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="tidyverse-core-packages.html"><a href="tidyverse-core-packages.html#data-wrangling-and-transformation"><i class="fa fa-check"></i><b>2.3.1</b> Data Wrangling and Transformation</a></li>
+<li class="chapter" data-level="3.1" data-path="what-are-tibbles.html"><a href="what-are-tibbles.html"><i class="fa fa-check"></i><b>3.1</b> What are tibbles?</a></li>
+<li class="chapter" data-level="3.2" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Displaying tibbles</a></li>
+<li class="chapter" data-level="3.3" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Data types in tibbles</a></li>
+<li class="chapter" data-level="3.4" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Subsetting / manipulating tibbles</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="tidyverse-core-packages-1.html"><a href="tidyverse-core-packages-1.html"><i class="fa fa-check"></i><b>2.4</b> Tidyverse core packages</a>
+<li class="chapter" data-level="4" data-path="tidy-data-with-tidyr.html"><a href="tidy-data-with-tidyr.html"><i class="fa fa-check"></i><b>4</b> Tidy data with <code>tidyr</code></a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="tidyverse-core-packages-1.html"><a href="tidyverse-core-packages-1.html#data-import-and-management"><i class="fa fa-check"></i><b>2.4.1</b> Data Import and Management</a></li>
-</ul></li>
-<li class="chapter" data-level="2.5" data-path="tidyverse-core-packages-2.html"><a href="tidyverse-core-packages-2.html"><i class="fa fa-check"></i><b>2.5</b> Tidyverse core packages</a>
+<li class="chapter" data-level="4.1" data-path="what-is-tidy-data.html"><a href="what-is-tidy-data.html"><i class="fa fa-check"></i><b>4.1</b> What is “tidy” data?</a></li>
+<li class="chapter" data-level="4.2" data-path="separate-unite.html"><a href="separate-unite.html"><i class="fa fa-check"></i><b>4.2</b> Separate &amp; Unite</a>
 <ul>
-<li class="chapter" data-level="2.5.1" data-path="tidyverse-core-packages-2.html"><a href="tidyverse-core-packages-2.html#functional-programming"><i class="fa fa-check"></i><b>2.5.1</b> Functional Programming</a></li>
+<li class="chapter" data-level="4.2.1" data-path="separate-unite.html"><a href="separate-unite.html#separate"><i class="fa fa-check"></i><b>4.2.1</b> Separate</a></li>
+<li class="chapter" data-level="4.2.2" data-path="separate-unite.html"><a href="separate-unite.html#unite"><i class="fa fa-check"></i><b>4.2.2</b> Unite</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="tidyverse-core-packages-3.html"><a href="tidyverse-core-packages-3.html"><i class="fa fa-check"></i><b>2.6</b> Tidyverse core packages</a>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-forward-pipe-operator.html"><a href="the-forward-pipe-operator.html"><i class="fa fa-check"></i><b>5</b> The <code>%&gt;%</code> forward-pipe operator</a></li>
+<li class="chapter" data-level="6" data-path="input-output-with-readr.html"><a href="input-output-with-readr.html"><i class="fa fa-check"></i><b>6</b> Input / output with <em><code>readr</code></em></a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="tidyverse-core-packages-3.html"><a href="tidyverse-core-packages-3.html#data-visualization-and-exploration"><i class="fa fa-check"></i><b>2.6.1</b> Data visualization and exploration</a></li>
+<li class="chapter" data-level="6.1" data-path="read.html"><a href="read.html"><i class="fa fa-check"></i><b>6.1</b> Read</a></li>
+<li class="chapter" data-level="6.2" data-path="write.html"><a href="write.html"><i class="fa fa-check"></i><b>6.2</b> Write</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="load-all-tidyverse-package.html"><a href="load-all-tidyverse-package.html"><i class="fa fa-check"></i><b>2.7</b> Load all tidyverse package</a></li>
+<li class="chapter" data-level="7" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>7</b> Data manipulation</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mutate-transmute.html"><a href="mutate-transmute.html"><i class="fa fa-check"></i><b>7.1</b> mutate &amp; transmute</a></li>
+<li class="chapter" data-level="7.2" data-path="select.html"><a href="select.html"><i class="fa fa-check"></i><b>7.2</b> select</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="select.html"><a href="select.html#select_if"><i class="fa fa-check"></i><b>7.2.1</b> select_if</a></li>
 </ul></li>
+<li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
+<li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
+<li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
 
@@ -179,32 +198,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="tidyverse-core-packages-2" class="section level2" number="2.5">
-<h2><span class="header-section-number">2.5</span> Tidyverse core packages</h2>
-<div id="functional-programming" class="section level3" number="2.5.1">
-<h3><span class="header-section-number">2.5.1</span> Functional Programming</h3>
-<table cellspacing="0" cellpadding="0" style="width:100%">
-<tr>
-<td>
-<p style="width: 50px;">
-<img src="https://purrr.tidyverse.org/logo.png">
-</p>
-</td>
-<td>
-<b>purrr</b>: Package that aims at enhancing R’s functional programming toolkit. It provides a set of tools for working with functions and vectors.
-</td>
-</tr>
-</table>
-<hr />
+<div id="install-and-load-all-tidyverse-package" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Install and load all tidyverse package</h2>
+<p>Install (should be done before the class, as it takes a while!):</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="install-and-load-all-tidyverse-package.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<p>Load:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="install-and-load-all-tidyverse-package.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+
 </div>
-</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="tidyverse-core-packages-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tidyverse-core-packages-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tidyverse-core-packages.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tibbles.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

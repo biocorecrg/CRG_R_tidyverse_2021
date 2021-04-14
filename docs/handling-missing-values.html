@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.1 What are tibbles? | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
-  <meta name="description" content="3.1 What are tibbles? | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <title>Part 8 Handling missing values | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="Part 8 Handling missing values | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.1 What are tibbles? | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:title" content="Part 8 Handling missing values | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.1 What are tibbles? | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="twitter:title" content="Part 8 Handling missing values | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tibbles.html"/>
-<link rel="next" href="displaying-tibbles.html"/>
+<link rel="prev" href="arrange.html"/>
+
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -198,82 +198,121 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="what-are-tibbles" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> What are tibbles?</h2>
+<div id="handling-missing-values" class="section level1" number="8">
+<h1><span class="header-section-number">Part 8</span> Handling missing values</h1>
 <ul>
-<li>Modern re-thinking of data frame.</li>
-<li>They leave behind some features (sometimes user-unfriendly) of classical data frames:
+<li><code>tidyr::drop_na</code>: drop rows containing missing values.</li>
+</ul>
+<p>Create a tibble that contains missing (NA) values:</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="handling-missing-values.html#cb89-1" aria-hidden="true" tabindex="-1"></a>dfwithNA <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">5</span>), </span>
+<span id="cb89-2"><a href="handling-missing-values.html#cb89-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="cn">NA</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>))</span>
+<span id="cb89-3"><a href="handling-missing-values.html#cb89-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-4"><a href="handling-missing-values.html#cb89-4" aria-hidden="true" tabindex="-1"></a>dfwithNA</span></code></pre></div>
+<pre><code>## # A tibble: 4 x 2
+##       x y    
+##   &lt;dbl&gt; &lt;chr&gt;
+## 1     1 a    
+## 2     2 &lt;NA&gt; 
+## 3    NA b    
+## 4     5 c</code></pre>
+<p>Remove rows that contain NA values with <code>drop_na</code>:</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="handling-missing-values.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop_na</span>(dfwithNA)</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##       x y    
+##   &lt;dbl&gt; &lt;chr&gt;
+## 1     1 a    
+## 2     5 c</code></pre>
 <ul>
-<li>No string to factor conversion (<em>NOTE</em>: since version 4.0 of R, this is <u>no longer the case for classical data frames</u>)</li>
-<li>No automatic creation of row names.</li>
-<li>Column names can be <strong>non-valid R variable names</strong> (for example, they can start with numbers).</li>
+<li><code>tidyr::replace_na</code>: change NA values to a selected value (one per column):</li>
+</ul>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="handling-missing-values.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace NAs by 0s in column &quot;x&quot;, and by &quot;k&quot; in column &quot;y&quot;</span></span>
+<span id="cb93-2"><a href="handling-missing-values.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">replace_na</span>(dfwithNA, </span>
+<span id="cb93-3"><a href="handling-missing-values.html#cb93-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">list</span>(<span class="at">x=</span><span class="dv">0</span>, <span class="at">y=</span><span class="st">&quot;k&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 4 x 2
+##       x y    
+##   &lt;dbl&gt; &lt;chr&gt;
+## 1     1 a    
+## 2     2 k    
+## 3     0 b    
+## 4     5 c</code></pre>
+<ul>
+<li><code>tidyr::complete</code>: turns implicit missing values into explicit missing values:</li>
+</ul>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="handling-missing-values.html#cb95-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb95-2"><a href="handling-missing-values.html#cb95-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">patient =</span> <span class="fu">c</span>(<span class="st">&quot;Patient1&quot;</span>, <span class="st">&quot;Patient1&quot;</span>, <span class="st">&quot;Patient2&quot;</span>, <span class="st">&quot;Patient3&quot;</span>, <span class="st">&quot;Patient3&quot;</span>),</span>
+<span id="cb95-3"><a href="handling-missing-values.html#cb95-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>),</span>
+<span id="cb95-4"><a href="handling-missing-values.html#cb95-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">value1 =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb95-5"><a href="handling-missing-values.html#cb95-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">value2 =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">8</span></span>
+<span id="cb95-6"><a href="handling-missing-values.html#cb95-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb95-7"><a href="handling-missing-values.html#cb95-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-8"><a href="handling-missing-values.html#cb95-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Missing a row for Patient2 / Treatment B: add it and fill in with NA values:</span></span>
+<span id="cb95-9"><a href="handling-missing-values.html#cb95-9" aria-hidden="true" tabindex="-1"></a><span class="fu">complete</span>(df, patient, treatment)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+##   patient  treatment value1 value2
+##   &lt;chr&gt;    &lt;chr&gt;      &lt;int&gt;  &lt;int&gt;
+## 1 Patient1 A              1      4
+## 2 Patient1 B              2      5
+## 3 Patient2 A              3      6
+## 4 Patient2 B             NA     NA
+## 5 Patient3 A              4      7
+## 6 Patient3 B              5      8</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="handling-missing-values.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to fill it missing other values that NA, you can use the fill parameter</span></span>
+<span id="cb97-2"><a href="handling-missing-values.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">complete</span>(df, patient, treatment, </span>
+<span id="cb97-3"><a href="handling-missing-values.html#cb97-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill=</span><span class="fu">list</span>(<span class="at">value1=</span><span class="dv">0</span>, <span class="at">value2=</span><span class="cn">NA</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+##   patient  treatment value1 value2
+##   &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt;  &lt;int&gt;
+## 1 Patient1 A              1      4
+## 2 Patient1 B              2      5
+## 3 Patient2 A              3      6
+## 4 Patient2 B              0     NA
+## 5 Patient3 A              4      7
+## 6 Patient3 B              5      8</code></pre>
+<ul>
+<li>In practice: what if you have <code>NA</code> values, along with empty cells and “customized” missing values?</li>
+</ul>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="handling-missing-values.html#cb99-1" aria-hidden="true" tabindex="-1"></a>dfwithNA2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">5</span>, <span class="st">&quot;&quot;</span>, <span class="dv">4</span>), </span>
+<span id="cb99-2"><a href="handling-missing-values.html#cb99-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="cn">NA</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;missing&quot;</span>))</span></code></pre></div>
+<p>Replace empty cells and “customized” missing values with <code>NA</code> with <code>na_if</code>:</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="handling-missing-values.html#cb100-1" aria-hidden="true" tabindex="-1"></a>dfwithNA2 <span class="sc">%&gt;%</span> <span class="fu">na_if</span>(<span class="st">&quot;missing&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">na_if</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 2
+##   x     y    
+##   &lt;chr&gt; &lt;chr&gt;
+## 1 1     a    
+## 2 2     &lt;NA&gt; 
+## 3 &lt;NA&gt;  b    
+## 4 5     c    
+## 5 &lt;NA&gt;  d    
+## 6 4     &lt;NA&gt;</code></pre>
+<p>More complex solution: with <code>mutate</code> and <code>across</code>:</p>
+<ul>
+<li><code>across</code>: apply the same transformation to multiple columns. It takes the following parameters:
+<ul>
+<li><code>.fns</code>: function to apply to each of the selected columns.</li>
+<li><code>.cols</code>: columns to transform: by default, all columns will be transformed.</li>
 </ul></li>
 </ul>
-<p>You can create a simple tibble as you create a data frame, but with the <code>tibble</code> function:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="what-are-tibbles.html#cb5-1" aria-hidden="true" tabindex="-1"></a>mytibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb5-2"><a href="what-are-tibbles.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">letters =</span> LETTERS,</span>
-<span id="cb5-3"><a href="what-are-tibbles.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">numbers =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">26</span></span>
-<span id="cb5-4"><a href="what-are-tibbles.html#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<pre echo="F," eval="F"><code>mytibble</code></pre>
-<ul>
-<li>Convert a data frame to a tibble:</li>
-</ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="what-are-tibbles.html#cb7-1" aria-hidden="true" tabindex="-1"></a>mydf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">letters =</span> LETTERS,</span>
-<span id="cb7-2"><a href="what-are-tibbles.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">numbers =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>)</span>
-<span id="cb7-3"><a href="what-are-tibbles.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(mydf)</span></code></pre></div>
-<pre><code>## # A tibble: 26 x 2
-##    letters numbers
-##    &lt;chr&gt;     &lt;int&gt;
-##  1 A             1
-##  2 B             2
-##  3 C             3
-##  4 D             4
-##  5 E             5
-##  6 F             6
-##  7 G             7
-##  8 H             8
-##  9 I             9
-## 10 J            10
-## # … with 16 more rows</code></pre>
-<ul>
-<li>Convert a tibble to a data frame (useful to interact with R code that doesn’t support tibbles):</li>
-</ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="what-are-tibbles.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(mytibble)</span></code></pre></div>
-<pre><code>##    letters numbers
-## 1        A       1
-## 2        B       2
-## 3        C       3
-## 4        D       4
-## 5        E       5
-## 6        F       6
-## 7        G       7
-## 8        H       8
-## 9        I       9
-## 10       J      10
-## 11       K      11
-## 12       L      12
-## 13       M      13
-## 14       N      14
-## 15       O      15
-## 16       P      16
-## 17       Q      17
-## 18       R      18
-## 19       S      19
-## 20       T      20
-## 21       U      21
-## 22       V      22
-## 23       W      23
-## 24       X      24
-## 25       Y      25
-## 26       Z      26</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="handling-missing-values.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># across: </span></span>
+<span id="cb102-2"><a href="handling-missing-values.html#cb102-2" aria-hidden="true" tabindex="-1"></a>dfwithNA2 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.fns =</span> <span class="sc">~</span><span class="fu">replace</span>(., . <span class="sc">==</span>  <span class="st">&quot;&quot;</span> <span class="sc">|</span> . <span class="sc">==</span> <span class="st">&quot;missing&quot;</span>, <span class="cn">NA</span>)))</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 2
+##   x     y    
+##   &lt;chr&gt; &lt;chr&gt;
+## 1 1     a    
+## 2 2     &lt;NA&gt; 
+## 3 &lt;NA&gt;  b    
+## 4 5     c    
+## 5 &lt;NA&gt;  d    
+## 6 4     &lt;NA&gt;</code></pre>
+<p><strong>HANDS-ON</strong></p>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="tibbles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="displaying-tibbles.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="arrange.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

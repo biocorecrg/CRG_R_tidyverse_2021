@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7.3 filter | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
-  <meta name="description" content="7.3 filter | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <title>4.2 Separate &amp; Unite | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="4.2 Separate &amp; Unite | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7.3 filter | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:title" content="4.2 Separate &amp; Unite | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7.3 filter | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="twitter:title" content="4.2 Separate &amp; Unite | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="select.html"/>
-<link rel="next" href="summarise-group-by.html"/>
+<link rel="prev" href="what-is-tidy-data.html"/>
+<link rel="next" href="the-forward-pipe-operator.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -198,249 +198,210 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="filter" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> filter</h2>
-<p><code>filter()</code> is used to filter rows in a data frame / tibble.</p>
-<p>Keep rows if party is <strong>Democratic</strong>:</p>
-<table class="table table-striped" style="font-size: 14px; margin-left: auto; margin-right: auto;">
+<div id="separate-unite" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Separate &amp; Unite</h2>
+<p>Let’s work on the <strong>untidy</strong> tibble <strong><code>table5</code></strong> that is a built-in data set from the <code>tidyr</code> package <em>(table5 displays the number of tuberculosis cases documented by the WHO in selected countries)</em>:</p>
+<table>
+<caption>
+<span id="tab:unnamed-chunk-17">Table 4.1: </span><code>table5</code>
+</caption>
 <thead>
 <tr>
 <th style="text-align:left;">
-name
+country
 </th>
 <th style="text-align:left;">
-start
+century
 </th>
 <th style="text-align:left;">
-end
+year
 </th>
 <th style="text-align:left;">
-party
-</th>
-<th style="text-align:left;">
-duration_days
+rate
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-Eisenhower
+Afghanistan
 </td>
 <td style="text-align:left;">
-1953-01-20
+19
 </td>
 <td style="text-align:left;">
-1961-01-20
+99
 </td>
 <td style="text-align:left;">
-Republican
-</td>
-<td style="text-align:left;">
-2922 days
-</td>
-</tr>
-<tr>
-<td style="text-align:left;background-color: yellow !important;">
-Kennedy
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-1961-01-20
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-1963-11-22
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-Democratic
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-1036 days
-</td>
-</tr>
-<tr>
-<td style="text-align:left;background-color: yellow !important;">
-Johnson
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-1963-11-22
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-1969-01-20
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-Democratic
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-1886 days
+745/19987071
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Nixon
+Afghanistan
 </td>
 <td style="text-align:left;">
-1969-01-20
+20
 </td>
 <td style="text-align:left;">
-1974-08-09
+00
 </td>
 <td style="text-align:left;">
-Republican
-</td>
-<td style="text-align:left;">
-2027 days
+2666/20595360
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Ford
+Brazil
 </td>
 <td style="text-align:left;">
-1974-08-09
+19
 </td>
 <td style="text-align:left;">
-1977-01-20
+99
 </td>
 <td style="text-align:left;">
-Republican
-</td>
-<td style="text-align:left;">
-895 days
-</td>
-</tr>
-<tr>
-<td style="text-align:left;background-color: yellow !important;">
-Carter
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-1977-01-20
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-1981-01-20
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-Democratic
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-1461 days
+37737/172006362
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Reagan
+Brazil
 </td>
 <td style="text-align:left;">
-1981-01-20
+20
 </td>
 <td style="text-align:left;">
-1989-01-20
+00
 </td>
 <td style="text-align:left;">
-Republican
-</td>
-<td style="text-align:left;">
-2922 days
+80488/174504898
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Bush
+China
 </td>
 <td style="text-align:left;">
-1989-01-20
+19
 </td>
 <td style="text-align:left;">
-1993-01-20
+99
 </td>
 <td style="text-align:left;">
-Republican
-</td>
-<td style="text-align:left;">
-1461 days
-</td>
-</tr>
-<tr>
-<td style="text-align:left;background-color: yellow !important;">
-Clinton
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-1993-01-20
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-2001-01-20
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-Democratic
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-2922 days
+212258/1272915272
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Bush
+China
 </td>
 <td style="text-align:left;">
-2001-01-20
+20
 </td>
 <td style="text-align:left;">
-2009-01-20
+00
 </td>
 <td style="text-align:left;">
-Republican
-</td>
-<td style="text-align:left;">
-2922 days
-</td>
-</tr>
-<tr>
-<td style="text-align:left;background-color: yellow !important;">
-Obama
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-2009-01-20
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-2017-01-20
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-Democratic
-</td>
-<td style="text-align:left;background-color: yellow !important;">
-2922 days
+213766/1280428583
 </td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="filter.html#cb57-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(presidential, </span>
-<span id="cb57-2"><a href="filter.html#cb57-2" aria-hidden="true" tabindex="-1"></a>        party<span class="sc">==</span><span class="st">&quot;Democratic&quot;</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 5 x 5
-##   name    start      end        party      duration_days
-##   &lt;chr&gt;   &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;drtn&gt;       
-## 1 Kennedy 1961-01-20 1963-11-22 Democratic 1036 days    
-## 2 Johnson 1963-11-22 1969-01-20 Democratic 1886 days    
-## 3 Carter  1977-01-20 1981-01-20 Democratic 1461 days    
-## 4 Clinton 1993-01-20 2001-01-20 Democratic 2922 days    
-## 5 Obama   2009-01-20 2017-01-20 Democratic 2922 days</code></pre>
-<p>You can filter using several variables/columns:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="filter.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
-<span id="cb59-2"><a href="filter.html#cb59-2" aria-hidden="true" tabindex="-1"></a>       party<span class="sc">==</span><span class="st">&quot;Republican&quot;</span>, name<span class="sc">==</span><span class="st">&quot;Bush&quot;</span>)</span>
-<span id="cb59-3"><a href="filter.html#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-4"><a href="filter.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># This implicity uses the &quot;&amp;&quot;, i.e. the fact that both conditions have to be TRUE</span></span>
-<span id="cb59-5"><a href="filter.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
-<span id="cb59-6"><a href="filter.html#cb59-6" aria-hidden="true" tabindex="-1"></a>       party<span class="sc">==</span><span class="st">&quot;Republican&quot;</span> <span class="sc">&amp;</span> name<span class="sc">==</span><span class="st">&quot;Bush&quot;</span>)</span>
-<span id="cb59-7"><a href="filter.html#cb59-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-8"><a href="filter.html#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Any logical operators can be used</span></span>
-<span id="cb59-9"><a href="filter.html#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
-<span id="cb59-10"><a href="filter.html#cb59-10" aria-hidden="true" tabindex="-1"></a>       name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Bush&quot;</span>, <span class="st">&quot;Kennedy&quot;</span>))</span></code></pre></div>
+<div id="separate" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Separate</h3>
+<p>Function <code>separate</code> separates (indeed!) a column into 2 or more columns: <code>separate(data, col, into, sep)</code></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="separate-unite.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># separate column &quot;rate&quot; into 2 columns that we name cases and population, based on the &quot;/&quot; separator.</span></span>
+<span id="cb26-2"><a href="separate-unite.html#cb26-2" aria-hidden="true" tabindex="-1"></a>table5_1 <span class="ot">&lt;-</span> <span class="fu">separate</span>(<span class="at">data=</span>table5, </span>
+<span id="cb26-3"><a href="separate-unite.html#cb26-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">col=</span>rate, </span>
+<span id="cb26-4"><a href="separate-unite.html#cb26-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>),</span>
+<span id="cb26-5"><a href="separate-unite.html#cb26-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">sep=</span><span class="st">&quot;/&quot;</span></span>
+<span id="cb26-6"><a href="separate-unite.html#cb26-6" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb26-7"><a href="separate-unite.html#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="separate-unite.html#cb26-8" aria-hidden="true" tabindex="-1"></a>table5_1</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 5
+##   country     century year  cases  population
+##   &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     
+## 1 Afghanistan 19      99    745    19987071  
+## 2 Afghanistan 20      00    2666   20595360  
+## 3 Brazil      19      99    37737  172006362 
+## 4 Brazil      20      00    80488  174504898 
+## 5 China       19      99    212258 1272915272
+## 6 China       20      00    213766 1280428583</code></pre>
 </div>
+<div id="unite" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Unite</h3>
+<p>Function <code>unite</code> does just the opposite: it will unite/stick together 2 or (more) columns: <code>unite(data, col, *column names*, sep)</code>.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="separate-unite.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unite columns &quot;century&quot; and &quot;year&quot;</span></span>
+<span id="cb28-2"><a href="separate-unite.html#cb28-2" aria-hidden="true" tabindex="-1"></a>table5a_2 <span class="ot">&lt;-</span> <span class="fu">unite</span>(<span class="at">data=</span>table5_1,</span>
+<span id="cb28-3"><a href="separate-unite.html#cb28-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">col=</span>year,</span>
+<span id="cb28-4"><a href="separate-unite.html#cb28-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(<span class="st">&quot;century&quot;</span>, <span class="st">&quot;year&quot;</span>), </span>
+<span id="cb28-5"><a href="separate-unite.html#cb28-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb28-6"><a href="separate-unite.html#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="separate-unite.html#cb28-7" aria-hidden="true" tabindex="-1"></a>table5a_2</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+##   country     year  cases  population
+##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     
+## 1 Afghanistan 1999  745    19987071  
+## 2 Afghanistan 2000  2666   20595360  
+## 3 Brazil      1999  37737  172006362 
+## 4 Brazil      2000  80488  174504898 
+## 5 China       1999  212258 1272915272
+## 6 China       2000  213766 1280428583</code></pre>
+<p><strong>HANDS-ON</strong></p>
+<p>Fix the following untidy <code>tibble</code>:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="separate-unite.html#cb30-1" aria-hidden="true" tabindex="-1"></a>patients <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb30-2"><a href="separate-unite.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ID1=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>),</span>
+<span id="cb30-3"><a href="separate-unite.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ID2=</span><span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>),</span>
+<span id="cb30-4"><a href="separate-unite.html#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">age=</span><span class="fu">c</span>( <span class="dv">21</span>,  <span class="dv">32</span>, <span class="dv">25</span>, <span class="dv">43</span>),</span>
+<span id="cb30-5"><a href="separate-unite.html#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;188_93&quot;</span>, <span class="st">&quot;167_55&quot;</span>, <span class="st">&quot;155_51&quot;</span>, <span class="st">&quot;175_72&quot;</span>)</span>
+<span id="cb30-6"><a href="separate-unite.html#cb30-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<ul>
+<li>Separate the two variables that are found in the last column into columns <strong>height</strong> and <strong>weight</strong>.</li>
+<li>Unite columns <strong>ID1</strong> and <strong>ID2</strong> so as to create a unique <strong>ID</strong> per patient.</li>
+</ul>
+<details>
+<summary>
+<em>Answer</em>
+</summary>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="separate-unite.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate the two variables that are found in the last column.</span></span>
+<span id="cb31-2"><a href="separate-unite.html#cb31-2" aria-hidden="true" tabindex="-1"></a>patients2 <span class="ot">&lt;-</span> <span class="fu">separate</span>(<span class="at">data=</span>patients, </span>
+<span id="cb31-3"><a href="separate-unite.html#cb31-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">col=</span><span class="dv">4</span>,</span>
+<span id="cb31-4"><a href="separate-unite.html#cb31-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>),</span>
+<span id="cb31-5"><a href="separate-unite.html#cb31-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">sep=</span><span class="st">&quot;_&quot;</span>)</span>
+<span id="cb31-6"><a href="separate-unite.html#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="separate-unite.html#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Unite columns ID1 and ID2 so as to create a unique ID per patient.</span></span>
+<span id="cb31-8"><a href="separate-unite.html#cb31-8" aria-hidden="true" tabindex="-1"></a>patients3 <span class="ot">&lt;-</span> <span class="fu">unite</span>(<span class="at">data=</span>patients2,</span>
+<span id="cb31-9"><a href="separate-unite.html#cb31-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">col=</span><span class="st">&quot;ID&quot;</span>,</span>
+<span id="cb31-10"><a href="separate-unite.html#cb31-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">&quot;ID1&quot;</span>, <span class="st">&quot;ID2&quot;</span>),</span>
+<span id="cb31-11"><a href="separate-unite.html#cb31-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
+</details>
+<ul>
+<li>Is there a problem with <code>patients3</code>? Display the tibble in the R console…</li>
+</ul>
+<p>Columns <code>height</code> and <code>weight</code> are <strong>treated as characters</strong> (because they contained *underscores "_"*).
+<br>
+We can convert them into numbers with the <code>mutate_at</code> function from the <code>dplyr</code> package: try it!</p>
+<details>
+<summary>
+<em>Answer</em>
+</summary>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="separate-unite.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first argument: the tibble</span></span>
+<span id="cb32-2"><a href="separate-unite.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># second argument: a vector of column names to mutate</span></span>
+<span id="cb32-3"><a href="separate-unite.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># third argument: how to mutate those columns</span></span>
+<span id="cb32-4"><a href="separate-unite.html#cb32-4" aria-hidden="true" tabindex="-1"></a>patients4 <span class="ot">&lt;-</span> <span class="fu">mutate_at</span>(patients3, <span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>), as.numeric)</span></code></pre></div>
+</details>
+
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="select.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="summarise-group-by.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="what-is-tidy-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-forward-pipe-operator.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

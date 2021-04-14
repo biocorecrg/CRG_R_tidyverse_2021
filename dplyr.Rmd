@@ -31,8 +31,9 @@ We will use the **presidential** data set.
 * Term ending date of mandate
 * Political party
  
-```{r}
-print(presidential, n=6)
+```{r, echo=F, warning=F, message=F}
+library(kableExtra)
+knitr::kable(presidential, caption="`presidential` data set")
 ```
 
 
@@ -176,8 +177,18 @@ summarise(presidential,
           mean(duration_days), 
           n())
 ```
- 
-You can combine `summarise` with `group_by` to get the average length of terms `per political party`:
+
+You can also give a name to each of the calculations you produce with `summarise` (and add more calculations!):
+
+```{r, eval=T}
+summarise(presidential,
+          mean_term=mean(duration_days), 
+          min_term=min(duration_days),
+          max_term=max(duration_days),
+          count_presidents=n())
+```
+
+You can combine `summarise` with `group_by` to get, for example, the number of presidents per political party:
 
 * `group_by` defines a grouping based on existing variables.
 * `summarise` then processes the command based on the grouping
@@ -186,13 +197,27 @@ You can combine `summarise` with `group_by` to get the average length of terms `
 groups <- group_by(presidential,
                    party)
 summarise(groups, 
-          mean(duration_days), n())
+          n())
 
 # One line, using the %>% operator:
 group_by(presidential, party) %>% 
-  summarise(mean(duration_days), n())
-
+  summarise(n())
 ```
+
+> Note: the row above is equivalent to using `count` (a wrapper): `count(presidential, party)`
+
+```{r}
+count(presidential, party)
+```
+
+You can use the same structure to calculate **the average length of terms per political party**:
+
+```{r}
+group_by(presidential, party) %>% 
+  summarise(mean(duration_days))
+```
+
+starwars %>% group_by(gender, eye_color) %>% summarise(mycounts=n()) %>% arrange(desc(mycounts))
 
 ## arrange
 
@@ -234,82 +259,67 @@ mutate(presidential, duration_days=end-start) %>%
     summarise(mean(duration_days))
 ```
 
-We will work with the **storms** data set:
-* Positions and attributes of **198 tropical storms**, measured every 6 hours
+**HANDS ON**
 
+We will work with the **storms** data set: positions and attributes of **198 tropical storms**, measured every 6 hours.
 
 1. Remove columns **month**, **day**, **hour**, **lat**, **long**, **ts_diameter** and **hu_diameter**.
-  * Calculate the **median pressure for each storm status**.
-
-2. Calculate the **minimum wind speed for each storm (name)**.
+2. Calculate the **median pressure for each storm status**.
+3. Calculate the **minimum wind speed for each storm (name)**.
   * What storm has the minimum wind speed?
-
-3. Calculate **how many storms happened each year**.
-  * *TIP: find what* ***distinct()*** *from* ***{dplyr}*** can do...
+4. Calculate **how many storms happened each year**.
+  * *TIP: find what* `distinct()` *from* the `dplyr` package can do...
   * What are the years with the **maximum** number of storms?
 
 
-Remove columns **month**, **day**, **hour**, **lat**, **long**, **ts_diameter** and **hu_diameter**.
-  * Calculate the **median pressure for each storm status**.
-
 ```{r, eval=F}
-# remove columns
-select(storms, -lat, -long, -ts_diameter, -hu_diameter)
-# same as:
-select(storms, -c(lat, long, ts_diameter, hu_diameter))
+# 1. Remove columns month, day, hour, lat, long, ts_diameter and hu_diameter.
+  # remove columns
+  select(storms, -lat, -long, -ts_diameter, -hu_diameter)
+  # same as:
+  select(storms, -c(lat, long, ts_diameter, hu_diameter))
 ```
 
+
 ```{r}
-# group by status and calculate median pressure per storm status
+# 2. Calculate the median pressure for each storm status.
+  # group by status and calculate median pressure per storm status
 select(storms, -lat, -long, -ts_diameter, -hu_diameter) %>% 
   group_by(status) %>%
   summarise(median(pressure))
 ```
 
-Calculate the **minimum wind speed for each storm (name)**.
-  * What storm has the **smallest minimum wind speed**?
 
 ```{r, eval=F}
-# group storms by name and calculate minimum wind speed
+# 3. Calculate the minimum wind speed for each storm (name).  
+  # group storms by name and calculate minimum wind speed
 storms %>%
   group_by(name) %>%
   summarise(min_wind = min(wind))
-```
-
-Calculate the **minimum wind speed for each storm (name)**.
-  * What storm has the **smallest minimum wind speed**?
-
-```{r}
-# sort by increasing minimum wind speed
+  # what storm(s) has/have the smallest minimum wind speed?
 storms %>%
   group_by(name) %>%
-  summarise(min_wind = min(wind)) %>%
-  arrange(min_wind)
+  summarise(min_wind = min(wind)) %>% 
+  slice_min(min_wind)
 ```
 
- 3. Calculate **how many storms happened each year**.
-  * *TIP: find what* ***distinct()*** *from* ***{dplyr}*** can do...
-  * What are the years with the **maximum** number of storms?
-
 ```{r, eval=F}
-# get unique rows when considering both name and year columns
+# 4. Calculate how many storms happened each year.
+  # get unique rows when considering both name and year columns
 distinct(storms, name, year)
-```
-
-```{r, eval=F}
-# group by year and count the number of storms
+  # group by year and count the number of storms
 distinct(storms, name, year) %>%
   group_by(year) %>%
   summarise(storms_per_year=n())
-```
-
-```{r}
-# sort by decreasing number of storms
+    # What are the years with the **maximum** number of storms?
 distinct(storms, name, year) %>%
   group_by(year) %>%
   summarise(storms_per_year=n()) %>%
-  arrange(desc(storms_per_year))
+  arrange(desc(storms_per_year)) %>% 
+  head()
 ```
+
+
 
 
 nth(): extract the nth value of a vector
@@ -324,3 +334,11 @@ presidential %>% pull(duration_days, name=name)
 subset rows using their positions:
 
 presidential %>% slice(4)
+
+join (left, right etc.) functions
+
+count(presidential, party) 
+
+tbl_iris %>% rename(species=1)
+tbl_iris %>% rename(species=Species)
+

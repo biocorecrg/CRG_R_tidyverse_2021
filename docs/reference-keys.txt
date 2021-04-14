@@ -1,13 +1,17 @@
-tab:unnamed-chunk-23
+fig:unnamed-chunk-16
+tab:unnamed-chunk-17
+tab:unnamed-chunk-28
+tab:unnamed-chunk-31
 welcome
 introduction
 what-is-the-tidyverse
 good-reasons-to-learn-at-least-a-bit-how-to-use-it
 tidyverse-core-packages
-load-all-tidyverse-package
+install-and-load-all-tidyverse-package
 tibbles
 what-are-tibbles
 displaying-tibbles
+data-types-in-tibbles
 subsetting-manipulating-tibbles
 tidy-data-with-tidyr
 what-is-tidy-data
@@ -25,3 +29,4 @@ select_if
 filter
 summarise-group_by
 arrange
+handling-missing-values

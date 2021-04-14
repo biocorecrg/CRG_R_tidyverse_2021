@@ -59,6 +59,19 @@ print(mytibble, n=15)
 print(mytibble, n=Inf)
 ```
 
+## Data types in tibbles
+
+When you display a tibble, mote that there is a 3 or 4-letter abbreviation under each column nam: these describe the type of each variable:
+
+```{r, echo=F, eval=T}
+tbl_dtypes <-tibble(Abbreviation=c("int", "dbl", "chr", "lgl", "fctr", "date", "dttm"), 
+                         Description=c("integers", "doubles (or real numbers)", "character vectors (or strings)", "logicals (TRUE or FALSE)", "factors (categorical variables)", "dates", "date-time (a date + a time)"))
+
+tbl_dtypes %>%
+  kbl(booktabs = T, align="l") %>%
+  kable_paper(full_width = F)
+```
+
 ## Subsetting / manipulating tibbles
 
 * Extract column by **name**:
@@ -77,17 +90,48 @@ mytibble["letters"]
 * Extract column by **position/index**:
 
 ```{r}
-mytibble
+# sub-tibble with one column
+mytibble[, 1]
+
+# corresponding vector
+mytibble[, 1][[1]]
 ```
 
 
 **HANDS-ON**
+
+We will work with the built-in dataset `iris`:
+
+* Is `iris` a tibble? How can you tell? Try to run `is_tibble`.
+* Convert `iris` to a tibble. Save in a new object `tbl_iris`.
+* Show all rows from `tbl_iris`.
+* Show the first 3 rows from `tbl_iris`.
+* Extract column `Species`.
 
 <details>
 <summary>
 *Answer*
 </summary>
 
+```{r, eval=F}
+# Is iris a tibble?
+is_tibble(iris)
+
+# Convert iris to a tibble. Save in a new object tbl_iris.
+tbl_iris <- tibble(iris)
+
+# Show all rows from tbl_iris.
+print(tbl_iris, n=Inf)
+
+# Show the first 3 rows from tbl_iris.
+print(tbl_iris, n=3)
+
+# Extract column Species.
+  # create a tibble with only one column:
+tbl_iris["Species"] 
+  # create a vector:
+tbl_iris[["Species"]] # same as tbl_iris$Species
+```
 
 </details>
 
