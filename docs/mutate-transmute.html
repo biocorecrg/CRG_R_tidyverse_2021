@@ -176,6 +176,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
 <li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
+<li class="chapter" data-level="7.6" data-path="more-useful-functions-from-dplyr.html"><a href="more-useful-functions-from-dplyr.html"><i class="fa fa-check"></i><b>7.6</b> More useful functions from <code>dplyr</code></a></li>
+<li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="divider"></li>
@@ -204,9 +206,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Create a new column with the duration of each term:</li>
 </ul>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="mutate-transmute.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subtracting column start to colum end</span></span>
-<span id="cb43-2"><a href="mutate-transmute.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(presidential, </span>
-<span id="cb43-3"><a href="mutate-transmute.html#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="mutate-transmute.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subtracting column start to colum end</span></span>
+<span id="cb45-2"><a href="mutate-transmute.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(presidential, </span>
+<span id="cb45-3"><a href="mutate-transmute.html#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
 <p>Notes:</p>
 <ul>
 <li>Use <strong>unquoted</strong> column names.</li>
@@ -214,11 +216,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>mutate</code> keeps all columns.</li>
 </ul>
 <p>If you want to keep only the <strong>newly created column(s)</strong> (drop the remaining ones): use <code>transmute()</code> instead of <code>mutate()</code>:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="mutate-transmute.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">transmute</span>(presidential, </span>
-<span id="cb44-2"><a href="mutate-transmute.html#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="mutate-transmute.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">transmute</span>(presidential, </span>
+<span id="cb46-2"><a href="mutate-transmute.html#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
 <p>Re-assign to a new - or the same - data frame/tibble using the R <strong>assignment operator: &lt;-</strong></p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="mutate-transmute.html#cb45-1" aria-hidden="true" tabindex="-1"></a>presidential <span class="ot">&lt;-</span> <span class="fu">mutate</span>(presidential, </span>
-<span id="cb45-2"><a href="mutate-transmute.html#cb45-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="mutate-transmute.html#cb47-1" aria-hidden="true" tabindex="-1"></a>presidential <span class="ot">&lt;-</span> <span class="fu">mutate</span>(presidential, </span>
+<span id="cb47-2"><a href="mutate-transmute.html#cb47-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
+<ul>
+<li>If you want to change the name of a column, you can use the function <code>rename</code>:</li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="mutate-transmute.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># by the name</span></span>
+<span id="cb48-2"><a href="mutate-transmute.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(presidential, <span class="at">President=</span>name)</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 5
+##    President  start      end        party      duration_days
+##    &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;drtn&gt;       
+##  1 Eisenhower 1953-01-20 1961-01-20 Republican 2922 days    
+##  2 Kennedy    1961-01-20 1963-11-22 Democratic 1036 days    
+##  3 Johnson    1963-11-22 1969-01-20 Democratic 1886 days    
+##  4 Nixon      1969-01-20 1974-08-09 Republican 2027 days    
+##  5 Ford       1974-08-09 1977-01-20 Republican  895 days    
+##  6 Carter     1977-01-20 1981-01-20 Democratic 1461 days    
+##  7 Reagan     1981-01-20 1989-01-20 Republican 2922 days    
+##  8 Bush       1989-01-20 1993-01-20 Republican 1461 days    
+##  9 Clinton    1993-01-20 2001-01-20 Democratic 2922 days    
+## 10 Bush       2001-01-20 2009-01-20 Republican 2922 days    
+## 11 Obama      2009-01-20 2017-01-20 Democratic 2922 days</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="mutate-transmute.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or the index</span></span>
+<span id="cb50-2"><a href="mutate-transmute.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(presidential, <span class="at">President=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 5
+##    President  start      end        party      duration_days
+##    &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;drtn&gt;       
+##  1 Eisenhower 1953-01-20 1961-01-20 Republican 2922 days    
+##  2 Kennedy    1961-01-20 1963-11-22 Democratic 1036 days    
+##  3 Johnson    1963-11-22 1969-01-20 Democratic 1886 days    
+##  4 Nixon      1969-01-20 1974-08-09 Republican 2027 days    
+##  5 Ford       1974-08-09 1977-01-20 Republican  895 days    
+##  6 Carter     1977-01-20 1981-01-20 Democratic 1461 days    
+##  7 Reagan     1981-01-20 1989-01-20 Republican 2922 days    
+##  8 Bush       1989-01-20 1993-01-20 Republican 1461 days    
+##  9 Clinton    1993-01-20 2001-01-20 Democratic 2922 days    
+## 10 Bush       2001-01-20 2009-01-20 Republican 2922 days    
+## 11 Obama      2009-01-20 2017-01-20 Democratic 2922 days</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="mutate-transmute.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you can rename several columns</span></span>
+<span id="cb52-2"><a href="mutate-transmute.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(presidential, <span class="at">President=</span>name, <span class="at">Political_party=</span>party)</span></code></pre></div>
+<pre><code>## # A tibble: 11 x 5
+##    President  start      end        Political_party duration_days
+##    &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;           &lt;drtn&gt;       
+##  1 Eisenhower 1953-01-20 1961-01-20 Republican      2922 days    
+##  2 Kennedy    1961-01-20 1963-11-22 Democratic      1036 days    
+##  3 Johnson    1963-11-22 1969-01-20 Democratic      1886 days    
+##  4 Nixon      1969-01-20 1974-08-09 Republican      2027 days    
+##  5 Ford       1974-08-09 1977-01-20 Republican       895 days    
+##  6 Carter     1977-01-20 1981-01-20 Democratic      1461 days    
+##  7 Reagan     1981-01-20 1989-01-20 Republican      2922 days    
+##  8 Bush       1989-01-20 1993-01-20 Republican      1461 days    
+##  9 Clinton    1993-01-20 2001-01-20 Democratic      2922 days    
+## 10 Bush       2001-01-20 2009-01-20 Republican      2922 days    
+## 11 Obama      2009-01-20 2017-01-20 Democratic      2922 days</code></pre>
 </div>
             </section>
 

@@ -1,7 +1,7 @@
 # Tidy data with `tidyr`
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE)
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
 ```
 
 ## What is "tidy" data?
@@ -77,7 +77,7 @@ table5a_2 <- unite(data=table5_1,
 table5a_2
 ```
 
-**HANDS-ON**
+<center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
 
 Fix the following untidy `tibble`:
 
@@ -95,7 +95,7 @@ patients <- tibble(
 
 <details>
 <summary>
-*Answer*
+<h5 style="background-color: #a4edff; display: inline-block;">*Answer*</h5>
 </summary>
 
 ```{r}
@@ -122,7 +122,7 @@ We can convert them into numbers with the `mutate_at` function from the `dplyr` 
 
 <details>
 <summary>
-*Answer*
+<h5 style="background-color: #a4edff; display: inline-block;">*Answer*</h5>
 </summary>
 
 ```{r}

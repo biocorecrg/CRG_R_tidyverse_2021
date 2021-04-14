@@ -176,6 +176,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
 <li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
+<li class="chapter" data-level="7.6" data-path="more-useful-functions-from-dplyr.html"><a href="more-useful-functions-from-dplyr.html"><i class="fa fa-check"></i><b>7.6</b> More useful functions from <code>dplyr</code></a></li>
+<li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="divider"></li>
@@ -210,17 +212,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 <p>You can create a simple tibble as you create a data frame, but with the <code>tibble</code> function:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="what-are-tibbles.html#cb5-1" aria-hidden="true" tabindex="-1"></a>mytibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb5-2"><a href="what-are-tibbles.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">letters =</span> LETTERS,</span>
-<span id="cb5-3"><a href="what-are-tibbles.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">numbers =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">26</span></span>
-<span id="cb5-4"><a href="what-are-tibbles.html#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="what-are-tibbles.html#cb7-1" aria-hidden="true" tabindex="-1"></a>mytibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb7-2"><a href="what-are-tibbles.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">letters =</span> LETTERS,</span>
+<span id="cb7-3"><a href="what-are-tibbles.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">numbers =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">26</span></span>
+<span id="cb7-4"><a href="what-are-tibbles.html#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre echo="F," eval="F"><code>mytibble</code></pre>
 <ul>
 <li>Convert a data frame to a tibble:</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="what-are-tibbles.html#cb7-1" aria-hidden="true" tabindex="-1"></a>mydf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">letters =</span> LETTERS,</span>
-<span id="cb7-2"><a href="what-are-tibbles.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">numbers =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>)</span>
-<span id="cb7-3"><a href="what-are-tibbles.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(mydf)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="what-are-tibbles.html#cb9-1" aria-hidden="true" tabindex="-1"></a>mydf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">letters =</span> LETTERS,</span>
+<span id="cb9-2"><a href="what-are-tibbles.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">numbers =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>)</span>
+<span id="cb9-3"><a href="what-are-tibbles.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(mydf)</span></code></pre></div>
 <pre><code>## # A tibble: 26 x 2
 ##    letters numbers
 ##    &lt;chr&gt;     &lt;int&gt;
@@ -238,7 +240,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Convert a tibble to a data frame (useful to interact with R code that doesn’t support tibbles):</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="what-are-tibbles.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(mytibble)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="what-are-tibbles.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(mytibble)</span></code></pre></div>
 <pre><code>##    letters numbers
 ## 1        A       1
 ## 2        B       2

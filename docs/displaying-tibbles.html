@@ -176,6 +176,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
 <li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
+<li class="chapter" data-level="7.6" data-path="more-useful-functions-from-dplyr.html"><a href="more-useful-functions-from-dplyr.html"><i class="fa fa-check"></i><b>7.6</b> More useful functions from <code>dplyr</code></a></li>
+<li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="divider"></li>
@@ -211,7 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Print the first 15 rows:</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="displaying-tibbles.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mytibble, <span class="at">n=</span><span class="dv">15</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="displaying-tibbles.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mytibble, <span class="at">n=</span><span class="dv">15</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 26 x 2
 ##    letters numbers
 ##    &lt;chr&gt;     &lt;int&gt;
@@ -234,7 +236,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Print all rows:</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="displaying-tibbles.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mytibble, <span class="at">n=</span><span class="cn">Inf</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="displaying-tibbles.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mytibble, <span class="at">n=</span><span class="cn">Inf</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 26 x 2
 ##    letters numbers
 ##    &lt;chr&gt;     &lt;int&gt;

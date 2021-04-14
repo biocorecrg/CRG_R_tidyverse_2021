@@ -1,7 +1,7 @@
-fig:unnamed-chunk-16
-tab:unnamed-chunk-17
+fig:unnamed-chunk-15
+tab:unnamed-chunk-16
 tab:unnamed-chunk-28
-tab:unnamed-chunk-31
+tab:unnamed-chunk-32
 welcome
 introduction
 what-is-the-tidyverse
@@ -29,4 +29,6 @@ select_if
 filter
 summarise-group_by
 arrange
+more-useful-functions-from-dplyr
+exercise
 handling-missing-values

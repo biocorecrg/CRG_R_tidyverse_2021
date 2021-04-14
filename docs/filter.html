@@ -176,6 +176,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
 <li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
+<li class="chapter" data-level="7.6" data-path="more-useful-functions-from-dplyr.html"><a href="more-useful-functions-from-dplyr.html"><i class="fa fa-check"></i><b>7.6</b> More useful functions from <code>dplyr</code></a></li>
+<li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="divider"></li>
@@ -412,8 +414,8 @@ Democratic
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="filter.html#cb57-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(presidential, </span>
-<span id="cb57-2"><a href="filter.html#cb57-2" aria-hidden="true" tabindex="-1"></a>        party<span class="sc">==</span><span class="st">&quot;Democratic&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="filter.html#cb66-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(presidential, </span>
+<span id="cb66-2"><a href="filter.html#cb66-2" aria-hidden="true" tabindex="-1"></a>        party<span class="sc">==</span><span class="st">&quot;Democratic&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 5
 ##   name    start      end        party      duration_days
 ##   &lt;chr&gt;   &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;drtn&gt;       
@@ -423,16 +425,21 @@ Democratic
 ## 4 Clinton 1993-01-20 2001-01-20 Democratic 2922 days    
 ## 5 Obama   2009-01-20 2017-01-20 Democratic 2922 days</code></pre>
 <p>You can filter using several variables/columns:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="filter.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
-<span id="cb59-2"><a href="filter.html#cb59-2" aria-hidden="true" tabindex="-1"></a>       party<span class="sc">==</span><span class="st">&quot;Republican&quot;</span>, name<span class="sc">==</span><span class="st">&quot;Bush&quot;</span>)</span>
-<span id="cb59-3"><a href="filter.html#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-4"><a href="filter.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># This implicity uses the &quot;&amp;&quot;, i.e. the fact that both conditions have to be TRUE</span></span>
-<span id="cb59-5"><a href="filter.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
-<span id="cb59-6"><a href="filter.html#cb59-6" aria-hidden="true" tabindex="-1"></a>       party<span class="sc">==</span><span class="st">&quot;Republican&quot;</span> <span class="sc">&amp;</span> name<span class="sc">==</span><span class="st">&quot;Bush&quot;</span>)</span>
-<span id="cb59-7"><a href="filter.html#cb59-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-8"><a href="filter.html#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Any logical operators can be used</span></span>
-<span id="cb59-9"><a href="filter.html#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
-<span id="cb59-10"><a href="filter.html#cb59-10" aria-hidden="true" tabindex="-1"></a>       name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Bush&quot;</span>, <span class="st">&quot;Kennedy&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="filter.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
+<span id="cb68-2"><a href="filter.html#cb68-2" aria-hidden="true" tabindex="-1"></a>       party<span class="sc">==</span><span class="st">&quot;Republican&quot;</span>, name<span class="sc">==</span><span class="st">&quot;Bush&quot;</span>)</span>
+<span id="cb68-3"><a href="filter.html#cb68-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-4"><a href="filter.html#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="co"># This implicity uses the &quot;&amp;&quot;, i.e. the fact that both conditions have to be TRUE</span></span>
+<span id="cb68-5"><a href="filter.html#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
+<span id="cb68-6"><a href="filter.html#cb68-6" aria-hidden="true" tabindex="-1"></a>       party<span class="sc">==</span><span class="st">&quot;Republican&quot;</span> <span class="sc">&amp;</span> name<span class="sc">==</span><span class="st">&quot;Bush&quot;</span>)</span>
+<span id="cb68-7"><a href="filter.html#cb68-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-8"><a href="filter.html#cb68-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Any logical operators can be used</span></span>
+<span id="cb68-9"><a href="filter.html#cb68-9" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
+<span id="cb68-10"><a href="filter.html#cb68-10" aria-hidden="true" tabindex="-1"></a>       name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Bush&quot;</span>, <span class="st">&quot;Kennedy&quot;</span>))</span></code></pre></div>
+<center>
+<h4 style="background-color: #a4edff; display: inline-block;">
+<strong>HANDS-ON</strong>
+</h4>
+</center>
 </div>
             </section>
 

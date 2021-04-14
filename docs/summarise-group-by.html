@@ -176,6 +176,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
 <li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
+<li class="chapter" data-level="7.6" data-path="more-useful-functions-from-dplyr.html"><a href="more-useful-functions-from-dplyr.html"><i class="fa fa-check"></i><b>7.6</b> More useful functions from <code>dplyr</code></a></li>
+<li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="divider"></li>
@@ -202,26 +204,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.4</span> summarise &amp; group_by</h2>
 <p><code>summarise</code> collapses a data frame to a single row (base R: <strong>aggregate()</strong>)</p>
 <p>Get average length of terms:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="summarise-group-by.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential, </span>
-<span id="cb60-2"><a href="summarise-group-by.html#cb60-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mean</span>(duration_days))</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="summarise-group-by.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential, </span>
+<span id="cb69-2"><a href="summarise-group-by.html#cb69-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mean</span>(duration_days))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   `mean(duration_days)`
 ##   &lt;drtn&gt;               
 ## 1 2125.091 days</code></pre>
 <p>Get average length of terms + count of the total of entries:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="summarise-group-by.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential,</span>
-<span id="cb62-2"><a href="summarise-group-by.html#cb62-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mean</span>(duration_days), </span>
-<span id="cb62-3"><a href="summarise-group-by.html#cb62-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="summarise-group-by.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential,</span>
+<span id="cb71-2"><a href="summarise-group-by.html#cb71-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mean</span>(duration_days), </span>
+<span id="cb71-3"><a href="summarise-group-by.html#cb71-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##   `mean(duration_days)` `n()`
 ##   &lt;drtn&gt;                &lt;int&gt;
 ## 1 2125.091 days            11</code></pre>
 <p>You can also give a name to each of the calculations you produce with <code>summarise</code> (and add more calculations!):</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="summarise-group-by.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential,</span>
-<span id="cb64-2"><a href="summarise-group-by.html#cb64-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">mean_term=</span><span class="fu">mean</span>(duration_days), </span>
-<span id="cb64-3"><a href="summarise-group-by.html#cb64-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">min_term=</span><span class="fu">min</span>(duration_days),</span>
-<span id="cb64-4"><a href="summarise-group-by.html#cb64-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">max_term=</span><span class="fu">max</span>(duration_days),</span>
-<span id="cb64-5"><a href="summarise-group-by.html#cb64-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">count_presidents=</span><span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="summarise-group-by.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential,</span>
+<span id="cb73-2"><a href="summarise-group-by.html#cb73-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">mean_term=</span><span class="fu">mean</span>(duration_days), </span>
+<span id="cb73-3"><a href="summarise-group-by.html#cb73-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">min_term=</span><span class="fu">min</span>(duration_days),</span>
+<span id="cb73-4"><a href="summarise-group-by.html#cb73-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">max_term=</span><span class="fu">max</span>(duration_days),</span>
+<span id="cb73-5"><a href="summarise-group-by.html#cb73-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">count_presidents=</span><span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 4
 ##   mean_term     min_term max_term  count_presidents
 ##   &lt;drtn&gt;        &lt;drtn&gt;   &lt;drtn&gt;               &lt;int&gt;
@@ -231,18 +233,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>group_by</code> defines a grouping based on existing variables.</li>
 <li><code>summarise</code> then processes the command based on the grouping</li>
 </ul>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="summarise-group-by.html#cb66-1" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">group_by</span>(presidential,</span>
-<span id="cb66-2"><a href="summarise-group-by.html#cb66-2" aria-hidden="true" tabindex="-1"></a>                   party)</span>
-<span id="cb66-3"><a href="summarise-group-by.html#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(groups, </span>
-<span id="cb66-4"><a href="summarise-group-by.html#cb66-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="summarise-group-by.html#cb75-1" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">group_by</span>(presidential,</span>
+<span id="cb75-2"><a href="summarise-group-by.html#cb75-2" aria-hidden="true" tabindex="-1"></a>                   party)</span>
+<span id="cb75-3"><a href="summarise-group-by.html#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(groups, </span>
+<span id="cb75-4"><a href="summarise-group-by.html#cb75-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   party      `n()`
 ## * &lt;chr&gt;      &lt;int&gt;
 ## 1 Democratic     5
 ## 2 Republican     6</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="summarise-group-by.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One line, using the %&gt;% operator:</span></span>
-<span id="cb68-2"><a href="summarise-group-by.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(presidential, party) <span class="sc">%&gt;%</span> </span>
-<span id="cb68-3"><a href="summarise-group-by.html#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="summarise-group-by.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One line, using the %&gt;% operator:</span></span>
+<span id="cb77-2"><a href="summarise-group-by.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(presidential, party) <span class="sc">%&gt;%</span> </span>
+<span id="cb77-3"><a href="summarise-group-by.html#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   party      `n()`
 ## * &lt;chr&gt;      &lt;int&gt;
@@ -251,20 +253,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>Note: the row above is equivalent to using <code>count</code> (a wrapper): <code>count(presidential, party)</code></p>
 </blockquote>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="summarise-group-by.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(presidential, party)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="summarise-group-by.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(presidential, party)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   party          n
 ## * &lt;chr&gt;      &lt;int&gt;
 ## 1 Democratic     5
 ## 2 Republican     6</code></pre>
 <p>You can use the same structure to calculate <strong>the average length of terms per political party</strong>:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="summarise-group-by.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(presidential, party) <span class="sc">%&gt;%</span> </span>
-<span id="cb72-2"><a href="summarise-group-by.html#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(duration_days))</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="summarise-group-by.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(presidential, party) <span class="sc">%&gt;%</span> </span>
+<span id="cb81-2"><a href="summarise-group-by.html#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(duration_days))</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   party      `mean(duration_days)`
 ## * &lt;chr&gt;      &lt;drtn&gt;               
 ## 1 Democratic 2045.4 days          
 ## 2 Republican 2191.5 days</code></pre>
+<center>
+<h4 style="background-color: #a4edff; display: inline-block;">
+<strong>HANDS-ON</strong>
+</h4>
+</center>
 <p>starwars %&gt;% group_by(gender, eye_color) %&gt;% summarise(mycounts=n()) %&gt;% arrange(desc(mycounts))</p>
 </div>
             </section>

@@ -1,5 +1,10 @@
 # The `%>%` forward-pipe operator
 
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
+```
+
 Let's review the steps from the previous hands-on:
 
 ```{r}
@@ -14,13 +19,14 @@ patients3 <- unite(data=patients2,
 patients4 <- mutate_at(patients3, c("height", "weight"), as.numeric)
 ```
 
-If we are only interested in the final **tidy** data frame, there is a **simpler** and **cleaner** way: the **%>%** (forward-pipe) operator from the `magritrrr` package (the `tidyverse` packages automatically load this operator).
+If we are only interested in the final **tidy** data frame (and not in the intermediate objects `patients2` and `patients3`), there is a **simpler** and **cleaner** way: <br>
+The **%>%** (forward-pipe) operator from the `magritrrr` package (the `tidyverse` packages automatically load this operator).
 
 ```{r, echo=FALSE, out.width="30%", fig.align="center"}
 knitr::include_graphics("https://magrittr.tidyverse.org/logo.png")
 ```
   
-Allows to process **the output of a function as the input of the following function**: it makes the code **easier to read and understand**:
+The pipe allows to process **the output of a function as the input of the following function**: it makes the code **easier to read and understand**:
 
 * It pipes the output of a function as **the first argument of the next function** (from left to right):
   * `mytibble %>% function1` is equivalent to `function1(mytibble)`
@@ -30,13 +36,18 @@ Allows to process **the output of a function as the input of the following funct
 If we go back to the previous exercise, we can simplify the code the following way:
 
 ```{r}
+patients2 <- separate(patients, col=4, into=c("height", "weight"), sep="_") %>%
+              unite(col="ID", c("ID1", "ID2"), sep="") %>%
+              mutate_at(c("height", "weight"), as.numeric)
+
+# This is equivalent to:
 patients2 <- patients %>% 
               separate(col=4, into=c("height", "weight"), sep="_") %>%
               unite(col="ID", c("ID1", "ID2"), sep="") %>%
               mutate_at(c("height", "weight"), as.numeric)
 ```
 
-**HANDS-ON**
+<center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
 
 Simplify the following piece of code using the `%>%` operator:
 
@@ -47,7 +58,7 @@ table5_2 <- unite(data=table5_1, col=year, c("century", "year"), sep="")
 
 <details>
 <summary>
-*Answer*
+<h5 style="background-color: #a4edff; display: inline-block;">*Answer*</h5>
 </summary>
 
 ```{r}

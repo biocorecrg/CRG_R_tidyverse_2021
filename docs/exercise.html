@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Part 5 The %&gt;% forward-pipe operator | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
-  <meta name="description" content="Part 5 The %&gt;% forward-pipe operator | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <title>7.7 Exercise | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="7.7 Exercise | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Part 5 The %&gt;% forward-pipe operator | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:title" content="7.7 Exercise | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Part 5 The %&gt;% forward-pipe operator | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="twitter:title" content="7.7 Exercise | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="separate-unite.html"/>
-<link rel="next" href="input-output-with-readr.html"/>
+<link rel="prev" href="more-useful-functions-from-dplyr.html"/>
+<link rel="next" href="handling-missing-values.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -200,67 +200,79 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-forward-pipe-operator" class="section level1" number="5">
-<h1><span class="header-section-number">Part 5</span> The <code>%&gt;%</code> forward-pipe operator</h1>
-<p>Let’s review the steps from the previous hands-on:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="the-forward-pipe-operator.html#cb35-1" aria-hidden="true" tabindex="-1"></a>patients2 <span class="ot">&lt;-</span> <span class="fu">separate</span>(<span class="at">data=</span>patients, </span>
-<span id="cb35-2"><a href="the-forward-pipe-operator.html#cb35-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">col=</span><span class="dv">4</span>,</span>
-<span id="cb35-3"><a href="the-forward-pipe-operator.html#cb35-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>),</span>
-<span id="cb35-4"><a href="the-forward-pipe-operator.html#cb35-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">sep=</span><span class="st">&quot;_&quot;</span>)</span>
-<span id="cb35-5"><a href="the-forward-pipe-operator.html#cb35-5" aria-hidden="true" tabindex="-1"></a>patients3 <span class="ot">&lt;-</span> <span class="fu">unite</span>(<span class="at">data=</span>patients2,</span>
-<span id="cb35-6"><a href="the-forward-pipe-operator.html#cb35-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">col=</span><span class="st">&quot;ID&quot;</span>,</span>
-<span id="cb35-7"><a href="the-forward-pipe-operator.html#cb35-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">&quot;ID1&quot;</span>, <span class="st">&quot;ID2&quot;</span>),</span>
-<span id="cb35-8"><a href="the-forward-pipe-operator.html#cb35-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb35-9"><a href="the-forward-pipe-operator.html#cb35-9" aria-hidden="true" tabindex="-1"></a>patients4 <span class="ot">&lt;-</span> <span class="fu">mutate_at</span>(patients3, <span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>), as.numeric)</span></code></pre></div>
-<p>If we are only interested in the final <strong>tidy</strong> data frame (and not in the intermediate objects <code>patients2</code> and <code>patients3</code>), there is a <strong>simpler</strong> and <strong>cleaner</strong> way: <br>
-The <strong>%&gt;%</strong> (forward-pipe) operator from the <code>magritrrr</code> package (the <code>tidyverse</code> packages automatically load this operator).</p>
-<p><img src="https://magrittr.tidyverse.org/logo.png" width="30%" style="display: block; margin: auto;" /></p>
-<p>The pipe allows to process <strong>the output of a function as the input of the following function</strong>: it makes the code <strong>easier to read and understand</strong>:</p>
+<div id="exercise" class="section level2" number="7.7">
+<h2><span class="header-section-number">7.7</span> Exercise</h2>
+<p>We will work with the <strong>storms</strong> data set: positions and attributes of <strong>198 tropical storms</strong>, measured every 6 hours.</p>
+<ol style="list-style-type: decimal">
+<li>Remove columns <strong>month</strong>, <strong>day</strong>, <strong>hour</strong>, <strong>lat</strong>, <strong>long</strong>, <strong>ts_diameter</strong> and <strong>hu_diameter</strong>.</li>
+<li>Calculate the <strong>median pressure for each storm status</strong>.</li>
+<li>Calculate the <strong>minimum wind speed for each storm (name)</strong>.</li>
+</ol>
 <ul>
-<li>It pipes the output of a function as <strong>the first argument of the next function</strong> (from left to right):
-<ul>
-<li><code>mytibble %&gt;% function1</code> is equivalent to <code>function1(mytibble)</code></li>
-<li><code>mytibble %&gt;% function2(y)</code> is equivalent to <code>function1(mytibble, y)</code></li>
-<li><code>mytibble %&gt;% function1 %&gt;% function2</code> is equivalent to <code>function2(function1(mytibble))</code></li>
-</ul></li>
+<li>What storm has the minimum wind speed?</li>
 </ul>
-<p>If we go back to the previous exercise, we can simplify the code the following way:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="the-forward-pipe-operator.html#cb36-1" aria-hidden="true" tabindex="-1"></a>patients2 <span class="ot">&lt;-</span> <span class="fu">separate</span>(patients, <span class="at">col=</span><span class="dv">4</span>, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>), <span class="at">sep=</span><span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb36-2"><a href="the-forward-pipe-operator.html#cb36-2" aria-hidden="true" tabindex="-1"></a>              <span class="fu">unite</span>(<span class="at">col=</span><span class="st">&quot;ID&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;ID1&quot;</span>, <span class="st">&quot;ID2&quot;</span>), <span class="at">sep=</span><span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb36-3"><a href="the-forward-pipe-operator.html#cb36-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">mutate_at</span>(<span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>), as.numeric)</span>
-<span id="cb36-4"><a href="the-forward-pipe-operator.html#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-5"><a href="the-forward-pipe-operator.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># This is equivalent to:</span></span>
-<span id="cb36-6"><a href="the-forward-pipe-operator.html#cb36-6" aria-hidden="true" tabindex="-1"></a>patients2 <span class="ot">&lt;-</span> patients <span class="sc">%&gt;%</span> </span>
-<span id="cb36-7"><a href="the-forward-pipe-operator.html#cb36-7" aria-hidden="true" tabindex="-1"></a>              <span class="fu">separate</span>(<span class="at">col=</span><span class="dv">4</span>, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>), <span class="at">sep=</span><span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb36-8"><a href="the-forward-pipe-operator.html#cb36-8" aria-hidden="true" tabindex="-1"></a>              <span class="fu">unite</span>(<span class="at">col=</span><span class="st">&quot;ID&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;ID1&quot;</span>, <span class="st">&quot;ID2&quot;</span>), <span class="at">sep=</span><span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb36-9"><a href="the-forward-pipe-operator.html#cb36-9" aria-hidden="true" tabindex="-1"></a>              <span class="fu">mutate_at</span>(<span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>), as.numeric)</span></code></pre></div>
-<center>
-<h4 style="background-color: #a4edff; display: inline-block;">
-<strong>HANDS-ON</strong>
-</h4>
-</center>
-<p>Simplify the following piece of code using the <code>%&gt;%</code> operator:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="the-forward-pipe-operator.html#cb37-1" aria-hidden="true" tabindex="-1"></a>table5_1 <span class="ot">&lt;-</span> <span class="fu">separate</span>(<span class="at">data=</span>table5, <span class="at">col=</span>rate, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>), <span class="at">sep=</span><span class="st">&quot;/&quot;</span>)</span>
-<span id="cb37-2"><a href="the-forward-pipe-operator.html#cb37-2" aria-hidden="true" tabindex="-1"></a>table5_2 <span class="ot">&lt;-</span> <span class="fu">unite</span>(<span class="at">data=</span>table5_1, <span class="at">col=</span>year, <span class="fu">c</span>(<span class="st">&quot;century&quot;</span>, <span class="st">&quot;year&quot;</span>), <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Calculate <strong>how many storms happened each year</strong>.</li>
+</ol>
+<ul>
+<li><em>TIP: find what</em> <code>distinct()</code> <em>from</em> the <code>dplyr</code> package can do…</li>
+<li>What are the years with the <strong>maximum</strong> number of storms?</li>
+</ul>
 <details>
 <summary>
 <h5 style="background-color: #a4edff; display: inline-block;">
 <em>Answer</em>
 </h5>
 </summary>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="the-forward-pipe-operator.html#cb38-1" aria-hidden="true" tabindex="-1"></a>table5_1 <span class="ot">&lt;-</span> table5 <span class="sc">%&gt;%</span> </span>
-<span id="cb38-2"><a href="the-forward-pipe-operator.html#cb38-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">separate</span>(<span class="at">col=</span>rate, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>), <span class="at">sep=</span><span class="st">&quot;/&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb38-3"><a href="the-forward-pipe-operator.html#cb38-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">unite</span>(<span class="at">col=</span>year, <span class="fu">c</span>(<span class="st">&quot;century&quot;</span>, <span class="st">&quot;year&quot;</span>), <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
-</details>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="exercise.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Remove columns month, day, hour, lat, long, ts_diameter and hu_diameter.</span></span>
+<span id="cb89-2"><a href="exercise.html#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove columns</span></span>
+<span id="cb89-3"><a href="exercise.html#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(storms, <span class="sc">-</span>lat, <span class="sc">-</span>long, <span class="sc">-</span>ts_diameter, <span class="sc">-</span>hu_diameter)</span>
+<span id="cb89-4"><a href="exercise.html#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># same as:</span></span>
+<span id="cb89-5"><a href="exercise.html#cb89-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(storms, <span class="sc">-</span><span class="fu">c</span>(lat, long, ts_diameter, hu_diameter))</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="exercise.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Calculate the median pressure for each storm status.</span></span>
+<span id="cb90-2"><a href="exercise.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group by status and calculate median pressure per storm status</span></span>
+<span id="cb90-3"><a href="exercise.html#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(storms, <span class="sc">-</span>lat, <span class="sc">-</span>long, <span class="sc">-</span>ts_diameter, <span class="sc">-</span>hu_diameter) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-4"><a href="exercise.html#cb90-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(status) <span class="sc">%&gt;%</span></span>
+<span id="cb90-5"><a href="exercise.html#cb90-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">median</span>(pressure))</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 2
+##   status              `median(pressure)`
+## * &lt;chr&gt;                            &lt;dbl&gt;
+## 1 hurricane                          973
+## 2 tropical depression               1008
+## 3 tropical storm                    1000</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="exercise.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Calculate the minimum wind speed for each storm (name).  </span></span>
+<span id="cb92-2"><a href="exercise.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group storms by name and calculate minimum wind speed</span></span>
+<span id="cb92-3"><a href="exercise.html#cb92-3" aria-hidden="true" tabindex="-1"></a>storms <span class="sc">%&gt;%</span></span>
+<span id="cb92-4"><a href="exercise.html#cb92-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span></span>
+<span id="cb92-5"><a href="exercise.html#cb92-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">min_wind =</span> <span class="fu">min</span>(wind))</span>
+<span id="cb92-6"><a href="exercise.html#cb92-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># what storm(s) has/have the smallest minimum wind speed?</span></span>
+<span id="cb92-7"><a href="exercise.html#cb92-7" aria-hidden="true" tabindex="-1"></a>storms <span class="sc">%&gt;%</span></span>
+<span id="cb92-8"><a href="exercise.html#cb92-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span></span>
+<span id="cb92-9"><a href="exercise.html#cb92-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">min_wind =</span> <span class="fu">min</span>(wind)) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-10"><a href="exercise.html#cb92-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(min_wind)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="exercise.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Calculate how many storms happened each year.</span></span>
+<span id="cb93-2"><a href="exercise.html#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get unique rows when considering both name and year columns</span></span>
+<span id="cb93-3"><a href="exercise.html#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">distinct</span>(storms, name, year)</span>
+<span id="cb93-4"><a href="exercise.html#cb93-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group by year and count the number of storms</span></span>
+<span id="cb93-5"><a href="exercise.html#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="fu">distinct</span>(storms, name, year) <span class="sc">%&gt;%</span></span>
+<span id="cb93-6"><a href="exercise.html#cb93-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb93-7"><a href="exercise.html#cb93-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">storms_per_year=</span><span class="fu">n</span>())</span>
+<span id="cb93-8"><a href="exercise.html#cb93-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># What are the years with the **maximum** number of storms?</span></span>
+<span id="cb93-9"><a href="exercise.html#cb93-9" aria-hidden="true" tabindex="-1"></a><span class="fu">distinct</span>(storms, name, year) <span class="sc">%&gt;%</span></span>
+<span id="cb93-10"><a href="exercise.html#cb93-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb93-11"><a href="exercise.html#cb93-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">storms_per_year=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb93-12"><a href="exercise.html#cb93-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(storms_per_year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-13"><a href="exercise.html#cb93-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
 
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="separate-unite.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="input-output-with-readr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="more-useful-functions-from-dplyr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="handling-missing-values.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

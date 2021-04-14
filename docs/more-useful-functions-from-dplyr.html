@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Part 5 The %&gt;% forward-pipe operator | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
-  <meta name="description" content="Part 5 The %&gt;% forward-pipe operator | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <title>7.6 More useful functions from dplyr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="7.6 More useful functions from dplyr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Part 5 The %&gt;% forward-pipe operator | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:title" content="7.6 More useful functions from dplyr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Part 5 The %&gt;% forward-pipe operator | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="twitter:title" content="7.6 More useful functions from dplyr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="separate-unite.html"/>
-<link rel="next" href="input-output-with-readr.html"/>
+<link rel="prev" href="arrange.html"/>
+<link rel="next" href="exercise.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -200,67 +200,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-forward-pipe-operator" class="section level1" number="5">
-<h1><span class="header-section-number">Part 5</span> The <code>%&gt;%</code> forward-pipe operator</h1>
-<p>Let’s review the steps from the previous hands-on:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="the-forward-pipe-operator.html#cb35-1" aria-hidden="true" tabindex="-1"></a>patients2 <span class="ot">&lt;-</span> <span class="fu">separate</span>(<span class="at">data=</span>patients, </span>
-<span id="cb35-2"><a href="the-forward-pipe-operator.html#cb35-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">col=</span><span class="dv">4</span>,</span>
-<span id="cb35-3"><a href="the-forward-pipe-operator.html#cb35-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>),</span>
-<span id="cb35-4"><a href="the-forward-pipe-operator.html#cb35-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">sep=</span><span class="st">&quot;_&quot;</span>)</span>
-<span id="cb35-5"><a href="the-forward-pipe-operator.html#cb35-5" aria-hidden="true" tabindex="-1"></a>patients3 <span class="ot">&lt;-</span> <span class="fu">unite</span>(<span class="at">data=</span>patients2,</span>
-<span id="cb35-6"><a href="the-forward-pipe-operator.html#cb35-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">col=</span><span class="st">&quot;ID&quot;</span>,</span>
-<span id="cb35-7"><a href="the-forward-pipe-operator.html#cb35-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">&quot;ID1&quot;</span>, <span class="st">&quot;ID2&quot;</span>),</span>
-<span id="cb35-8"><a href="the-forward-pipe-operator.html#cb35-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb35-9"><a href="the-forward-pipe-operator.html#cb35-9" aria-hidden="true" tabindex="-1"></a>patients4 <span class="ot">&lt;-</span> <span class="fu">mutate_at</span>(patients3, <span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>), as.numeric)</span></code></pre></div>
-<p>If we are only interested in the final <strong>tidy</strong> data frame (and not in the intermediate objects <code>patients2</code> and <code>patients3</code>), there is a <strong>simpler</strong> and <strong>cleaner</strong> way: <br>
-The <strong>%&gt;%</strong> (forward-pipe) operator from the <code>magritrrr</code> package (the <code>tidyverse</code> packages automatically load this operator).</p>
-<p><img src="https://magrittr.tidyverse.org/logo.png" width="30%" style="display: block; margin: auto;" /></p>
-<p>The pipe allows to process <strong>the output of a function as the input of the following function</strong>: it makes the code <strong>easier to read and understand</strong>:</p>
-<ul>
-<li>It pipes the output of a function as <strong>the first argument of the next function</strong> (from left to right):
-<ul>
-<li><code>mytibble %&gt;% function1</code> is equivalent to <code>function1(mytibble)</code></li>
-<li><code>mytibble %&gt;% function2(y)</code> is equivalent to <code>function1(mytibble, y)</code></li>
-<li><code>mytibble %&gt;% function1 %&gt;% function2</code> is equivalent to <code>function2(function1(mytibble))</code></li>
-</ul></li>
-</ul>
-<p>If we go back to the previous exercise, we can simplify the code the following way:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="the-forward-pipe-operator.html#cb36-1" aria-hidden="true" tabindex="-1"></a>patients2 <span class="ot">&lt;-</span> <span class="fu">separate</span>(patients, <span class="at">col=</span><span class="dv">4</span>, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>), <span class="at">sep=</span><span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb36-2"><a href="the-forward-pipe-operator.html#cb36-2" aria-hidden="true" tabindex="-1"></a>              <span class="fu">unite</span>(<span class="at">col=</span><span class="st">&quot;ID&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;ID1&quot;</span>, <span class="st">&quot;ID2&quot;</span>), <span class="at">sep=</span><span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb36-3"><a href="the-forward-pipe-operator.html#cb36-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">mutate_at</span>(<span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>), as.numeric)</span>
-<span id="cb36-4"><a href="the-forward-pipe-operator.html#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-5"><a href="the-forward-pipe-operator.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># This is equivalent to:</span></span>
-<span id="cb36-6"><a href="the-forward-pipe-operator.html#cb36-6" aria-hidden="true" tabindex="-1"></a>patients2 <span class="ot">&lt;-</span> patients <span class="sc">%&gt;%</span> </span>
-<span id="cb36-7"><a href="the-forward-pipe-operator.html#cb36-7" aria-hidden="true" tabindex="-1"></a>              <span class="fu">separate</span>(<span class="at">col=</span><span class="dv">4</span>, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>), <span class="at">sep=</span><span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb36-8"><a href="the-forward-pipe-operator.html#cb36-8" aria-hidden="true" tabindex="-1"></a>              <span class="fu">unite</span>(<span class="at">col=</span><span class="st">&quot;ID&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;ID1&quot;</span>, <span class="st">&quot;ID2&quot;</span>), <span class="at">sep=</span><span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb36-9"><a href="the-forward-pipe-operator.html#cb36-9" aria-hidden="true" tabindex="-1"></a>              <span class="fu">mutate_at</span>(<span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>), as.numeric)</span></code></pre></div>
-<center>
-<h4 style="background-color: #a4edff; display: inline-block;">
-<strong>HANDS-ON</strong>
-</h4>
-</center>
-<p>Simplify the following piece of code using the <code>%&gt;%</code> operator:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="the-forward-pipe-operator.html#cb37-1" aria-hidden="true" tabindex="-1"></a>table5_1 <span class="ot">&lt;-</span> <span class="fu">separate</span>(<span class="at">data=</span>table5, <span class="at">col=</span>rate, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>), <span class="at">sep=</span><span class="st">&quot;/&quot;</span>)</span>
-<span id="cb37-2"><a href="the-forward-pipe-operator.html#cb37-2" aria-hidden="true" tabindex="-1"></a>table5_2 <span class="ot">&lt;-</span> <span class="fu">unite</span>(<span class="at">data=</span>table5_1, <span class="at">col=</span>year, <span class="fu">c</span>(<span class="st">&quot;century&quot;</span>, <span class="st">&quot;year&quot;</span>), <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<details>
-<summary>
-<h5 style="background-color: #a4edff; display: inline-block;">
-<em>Answer</em>
-</h5>
-</summary>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="the-forward-pipe-operator.html#cb38-1" aria-hidden="true" tabindex="-1"></a>table5_1 <span class="ot">&lt;-</span> table5 <span class="sc">%&gt;%</span> </span>
-<span id="cb38-2"><a href="the-forward-pipe-operator.html#cb38-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">separate</span>(<span class="at">col=</span>rate, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>), <span class="at">sep=</span><span class="st">&quot;/&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb38-3"><a href="the-forward-pipe-operator.html#cb38-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">unite</span>(<span class="at">col=</span>year, <span class="fu">c</span>(<span class="st">&quot;century&quot;</span>, <span class="st">&quot;year&quot;</span>), <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
-</details>
-
+<div id="more-useful-functions-from-dplyr" class="section level2" number="7.6">
+<h2><span class="header-section-number">7.6</span> More useful functions from <code>dplyr</code></h2>
+<p>nth(): extract the nth value of a vector</p>
+<p>presidential %&gt;% nth(name, 4)</p>
+<p>extract a single column:</p>
+<p>presidential %&gt;% pull(name)
+presidential %&gt;% pull(duration_days, name=name)</p>
+<p>subset rows using their positions:</p>
+<p>presidential %&gt;% slice(4)</p>
+<p>join (left, right etc.) functions</p>
+<p>count(presidential, party)</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="separate-unite.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="input-output-with-readr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="arrange.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercise.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,5 +1,9 @@
 # Handling missing values
 
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
+```
+
 * `tidyr::drop_na`: drop rows containing missing values.
 
 Create a tibble that contains missing (NA) values:
@@ -67,6 +71,6 @@ More complex solution: with `mutate` and `across`:
 dfwithNA2 %>% mutate(across(.fns = ~replace(., . ==  "" | . == "missing", NA)))
 ```
 
-**HANDS-ON**
+<center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
 
 

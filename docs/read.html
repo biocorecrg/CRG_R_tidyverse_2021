@@ -176,6 +176,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
 <li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
+<li class="chapter" data-level="7.6" data-path="more-useful-functions-from-dplyr.html"><a href="more-useful-functions-from-dplyr.html"><i class="fa fa-check"></i><b>7.6</b> More useful functions from <code>dplyr</code></a></li>
+<li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="divider"></li>
@@ -244,9 +246,9 @@ read_tsv
 </table>
 <p><br></p>
 <p>Read in a file provided as an example with the <code>readr</code> package:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="read.html#cb37-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">readr_example</span>(<span class="st">&quot;mtcars.csv&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="read.html#cb39-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">readr_example</span>(<span class="st">&quot;mtcars.csv&quot;</span>))</span></code></pre></div>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────────────────────────────────
 ## cols(
 ##   mpg = col_double(),
 ##   cyl = col_double(),
@@ -272,12 +274,12 @@ read_tsv
 </ul></li>
 <li><code>skip</code> : skip rows.</li>
 </ul>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="read.html#cb39-1" aria-hidden="true" tabindex="-1"></a>f2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">readr_example</span>(<span class="st">&quot;mtcars.csv&quot;</span>),</span>
-<span id="cb39-2"><a href="read.html#cb39-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">n_max=</span><span class="dv">5</span>,</span>
-<span id="cb39-3"><a href="read.html#cb39-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">skip=</span><span class="dv">1</span>,</span>
-<span id="cb39-4"><a href="read.html#cb39-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">col_names=</span>LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="read.html#cb41-1" aria-hidden="true" tabindex="-1"></a>f2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">readr_example</span>(<span class="st">&quot;mtcars.csv&quot;</span>),</span>
+<span id="cb41-2"><a href="read.html#cb41-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">n_max=</span><span class="dv">5</span>,</span>
+<span id="cb41-3"><a href="read.html#cb41-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">skip=</span><span class="dv">1</span>,</span>
+<span id="cb41-4"><a href="read.html#cb41-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">col_names=</span>LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>])</span></code></pre></div>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────────────────────────────────
 ## cols(
 ##   A = col_double(),
 ##   B = col_double(),
@@ -291,7 +293,7 @@ read_tsv
 ##   J = col_double(),
 ##   K = col_double()
 ## )</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="read.html#cb41-1" aria-hidden="true" tabindex="-1"></a>f2</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="read.html#cb43-1" aria-hidden="true" tabindex="-1"></a>f2</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 11
 ##       A     B     C     D     E     F     G     H     I     J     K
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;

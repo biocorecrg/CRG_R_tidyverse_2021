@@ -176,6 +176,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
 <li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
+<li class="chapter" data-level="7.6" data-path="more-useful-functions-from-dplyr.html"><a href="more-useful-functions-from-dplyr.html"><i class="fa fa-check"></i><b>7.6</b> More useful functions from <code>dplyr</code></a></li>
+<li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="divider"></li>
@@ -203,7 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Let’s work on the <strong>untidy</strong> tibble <strong><code>table5</code></strong> that is a built-in data set from the <code>tidyr</code> package <em>(table5 displays the number of tuberculosis cases documented by the WHO in selected countries)</em>:</p>
 <table>
 <caption>
-<span id="tab:unnamed-chunk-17">Table 4.1: </span><code>table5</code>
+<span id="tab:unnamed-chunk-16">Table 4.1: </span><code>table5</code>
 </caption>
 <thead>
 <tr>
@@ -311,14 +313,14 @@ China
 <div id="separate" class="section level3" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> Separate</h3>
 <p>Function <code>separate</code> separates (indeed!) a column into 2 or more columns: <code>separate(data, col, into, sep)</code></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="separate-unite.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># separate column &quot;rate&quot; into 2 columns that we name cases and population, based on the &quot;/&quot; separator.</span></span>
-<span id="cb26-2"><a href="separate-unite.html#cb26-2" aria-hidden="true" tabindex="-1"></a>table5_1 <span class="ot">&lt;-</span> <span class="fu">separate</span>(<span class="at">data=</span>table5, </span>
-<span id="cb26-3"><a href="separate-unite.html#cb26-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">col=</span>rate, </span>
-<span id="cb26-4"><a href="separate-unite.html#cb26-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>),</span>
-<span id="cb26-5"><a href="separate-unite.html#cb26-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">sep=</span><span class="st">&quot;/&quot;</span></span>
-<span id="cb26-6"><a href="separate-unite.html#cb26-6" aria-hidden="true" tabindex="-1"></a>         )</span>
-<span id="cb26-7"><a href="separate-unite.html#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="separate-unite.html#cb26-8" aria-hidden="true" tabindex="-1"></a>table5_1</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="separate-unite.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># separate column &quot;rate&quot; into 2 columns that we name cases and population, based on the &quot;/&quot; separator.</span></span>
+<span id="cb28-2"><a href="separate-unite.html#cb28-2" aria-hidden="true" tabindex="-1"></a>table5_1 <span class="ot">&lt;-</span> <span class="fu">separate</span>(<span class="at">data=</span>table5, </span>
+<span id="cb28-3"><a href="separate-unite.html#cb28-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">col=</span>rate, </span>
+<span id="cb28-4"><a href="separate-unite.html#cb28-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>),</span>
+<span id="cb28-5"><a href="separate-unite.html#cb28-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">sep=</span><span class="st">&quot;/&quot;</span></span>
+<span id="cb28-6"><a href="separate-unite.html#cb28-6" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb28-7"><a href="separate-unite.html#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="separate-unite.html#cb28-8" aria-hidden="true" tabindex="-1"></a>table5_1</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 5
 ##   country     century year  cases  population
 ##   &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     
@@ -332,13 +334,13 @@ China
 <div id="unite" class="section level3" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> Unite</h3>
 <p>Function <code>unite</code> does just the opposite: it will unite/stick together 2 or (more) columns: <code>unite(data, col, *column names*, sep)</code>.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="separate-unite.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unite columns &quot;century&quot; and &quot;year&quot;</span></span>
-<span id="cb28-2"><a href="separate-unite.html#cb28-2" aria-hidden="true" tabindex="-1"></a>table5a_2 <span class="ot">&lt;-</span> <span class="fu">unite</span>(<span class="at">data=</span>table5_1,</span>
-<span id="cb28-3"><a href="separate-unite.html#cb28-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">col=</span>year,</span>
-<span id="cb28-4"><a href="separate-unite.html#cb28-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(<span class="st">&quot;century&quot;</span>, <span class="st">&quot;year&quot;</span>), </span>
-<span id="cb28-5"><a href="separate-unite.html#cb28-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb28-6"><a href="separate-unite.html#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="separate-unite.html#cb28-7" aria-hidden="true" tabindex="-1"></a>table5a_2</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="separate-unite.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unite columns &quot;century&quot; and &quot;year&quot;</span></span>
+<span id="cb30-2"><a href="separate-unite.html#cb30-2" aria-hidden="true" tabindex="-1"></a>table5a_2 <span class="ot">&lt;-</span> <span class="fu">unite</span>(<span class="at">data=</span>table5_1,</span>
+<span id="cb30-3"><a href="separate-unite.html#cb30-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">col=</span>year,</span>
+<span id="cb30-4"><a href="separate-unite.html#cb30-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(<span class="st">&quot;century&quot;</span>, <span class="st">&quot;year&quot;</span>), </span>
+<span id="cb30-5"><a href="separate-unite.html#cb30-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb30-6"><a href="separate-unite.html#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="separate-unite.html#cb30-7" aria-hidden="true" tabindex="-1"></a>table5a_2</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   country     year  cases  population
 ##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     
@@ -348,33 +350,39 @@ China
 ## 4 Brazil      2000  80488  174504898 
 ## 5 China       1999  212258 1272915272
 ## 6 China       2000  213766 1280428583</code></pre>
-<p><strong>HANDS-ON</strong></p>
+<center>
+<h4 style="background-color: #a4edff; display: inline-block;">
+<strong>HANDS-ON</strong>
+</h4>
+</center>
 <p>Fix the following untidy <code>tibble</code>:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="separate-unite.html#cb30-1" aria-hidden="true" tabindex="-1"></a>patients <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb30-2"><a href="separate-unite.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ID1=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>),</span>
-<span id="cb30-3"><a href="separate-unite.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ID2=</span><span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>),</span>
-<span id="cb30-4"><a href="separate-unite.html#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">age=</span><span class="fu">c</span>( <span class="dv">21</span>,  <span class="dv">32</span>, <span class="dv">25</span>, <span class="dv">43</span>),</span>
-<span id="cb30-5"><a href="separate-unite.html#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;188_93&quot;</span>, <span class="st">&quot;167_55&quot;</span>, <span class="st">&quot;155_51&quot;</span>, <span class="st">&quot;175_72&quot;</span>)</span>
-<span id="cb30-6"><a href="separate-unite.html#cb30-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="separate-unite.html#cb32-1" aria-hidden="true" tabindex="-1"></a>patients <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb32-2"><a href="separate-unite.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ID1=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;B&quot;</span>),</span>
+<span id="cb32-3"><a href="separate-unite.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ID2=</span><span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>),</span>
+<span id="cb32-4"><a href="separate-unite.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">age=</span><span class="fu">c</span>( <span class="dv">21</span>,  <span class="dv">32</span>, <span class="dv">25</span>, <span class="dv">43</span>),</span>
+<span id="cb32-5"><a href="separate-unite.html#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;188_93&quot;</span>, <span class="st">&quot;167_55&quot;</span>, <span class="st">&quot;155_51&quot;</span>, <span class="st">&quot;175_72&quot;</span>)</span>
+<span id="cb32-6"><a href="separate-unite.html#cb32-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <ul>
 <li>Separate the two variables that are found in the last column into columns <strong>height</strong> and <strong>weight</strong>.</li>
 <li>Unite columns <strong>ID1</strong> and <strong>ID2</strong> so as to create a unique <strong>ID</strong> per patient.</li>
 </ul>
 <details>
 <summary>
+<h5 style="background-color: #a4edff; display: inline-block;">
 <em>Answer</em>
+</h5>
 </summary>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="separate-unite.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate the two variables that are found in the last column.</span></span>
-<span id="cb31-2"><a href="separate-unite.html#cb31-2" aria-hidden="true" tabindex="-1"></a>patients2 <span class="ot">&lt;-</span> <span class="fu">separate</span>(<span class="at">data=</span>patients, </span>
-<span id="cb31-3"><a href="separate-unite.html#cb31-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">col=</span><span class="dv">4</span>,</span>
-<span id="cb31-4"><a href="separate-unite.html#cb31-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>),</span>
-<span id="cb31-5"><a href="separate-unite.html#cb31-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">sep=</span><span class="st">&quot;_&quot;</span>)</span>
-<span id="cb31-6"><a href="separate-unite.html#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="separate-unite.html#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Unite columns ID1 and ID2 so as to create a unique ID per patient.</span></span>
-<span id="cb31-8"><a href="separate-unite.html#cb31-8" aria-hidden="true" tabindex="-1"></a>patients3 <span class="ot">&lt;-</span> <span class="fu">unite</span>(<span class="at">data=</span>patients2,</span>
-<span id="cb31-9"><a href="separate-unite.html#cb31-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">col=</span><span class="st">&quot;ID&quot;</span>,</span>
-<span id="cb31-10"><a href="separate-unite.html#cb31-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">&quot;ID1&quot;</span>, <span class="st">&quot;ID2&quot;</span>),</span>
-<span id="cb31-11"><a href="separate-unite.html#cb31-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="separate-unite.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate the two variables that are found in the last column.</span></span>
+<span id="cb33-2"><a href="separate-unite.html#cb33-2" aria-hidden="true" tabindex="-1"></a>patients2 <span class="ot">&lt;-</span> <span class="fu">separate</span>(<span class="at">data=</span>patients, </span>
+<span id="cb33-3"><a href="separate-unite.html#cb33-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">col=</span><span class="dv">4</span>,</span>
+<span id="cb33-4"><a href="separate-unite.html#cb33-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>),</span>
+<span id="cb33-5"><a href="separate-unite.html#cb33-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">sep=</span><span class="st">&quot;_&quot;</span>)</span>
+<span id="cb33-6"><a href="separate-unite.html#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="separate-unite.html#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Unite columns ID1 and ID2 so as to create a unique ID per patient.</span></span>
+<span id="cb33-8"><a href="separate-unite.html#cb33-8" aria-hidden="true" tabindex="-1"></a>patients3 <span class="ot">&lt;-</span> <span class="fu">unite</span>(<span class="at">data=</span>patients2,</span>
+<span id="cb33-9"><a href="separate-unite.html#cb33-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">col=</span><span class="st">&quot;ID&quot;</span>,</span>
+<span id="cb33-10"><a href="separate-unite.html#cb33-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="st">&quot;ID1&quot;</span>, <span class="st">&quot;ID2&quot;</span>),</span>
+<span id="cb33-11"><a href="separate-unite.html#cb33-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
 </details>
 <ul>
 <li>Is there a problem with <code>patients3</code>? Display the tibble in the R console…</li>
@@ -384,12 +392,14 @@ China
 We can convert them into numbers with the <code>mutate_at</code> function from the <code>dplyr</code> package: try it!</p>
 <details>
 <summary>
+<h5 style="background-color: #a4edff; display: inline-block;">
 <em>Answer</em>
+</h5>
 </summary>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="separate-unite.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first argument: the tibble</span></span>
-<span id="cb32-2"><a href="separate-unite.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># second argument: a vector of column names to mutate</span></span>
-<span id="cb32-3"><a href="separate-unite.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># third argument: how to mutate those columns</span></span>
-<span id="cb32-4"><a href="separate-unite.html#cb32-4" aria-hidden="true" tabindex="-1"></a>patients4 <span class="ot">&lt;-</span> <span class="fu">mutate_at</span>(patients3, <span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>), as.numeric)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="separate-unite.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first argument: the tibble</span></span>
+<span id="cb34-2"><a href="separate-unite.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># second argument: a vector of column names to mutate</span></span>
+<span id="cb34-3"><a href="separate-unite.html#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># third argument: how to mutate those columns</span></span>
+<span id="cb34-4"><a href="separate-unite.html#cb34-4" aria-hidden="true" tabindex="-1"></a>patients4 <span class="ot">&lt;-</span> <span class="fu">mutate_at</span>(patients3, <span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>), as.numeric)</span></code></pre></div>
 </details>
 
 </div>

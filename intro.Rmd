@@ -22,14 +22,14 @@
 
 Here is a piece of **R base code**:
 
-```{r, eval=FALSE}
+```{r class.source="bg-danger", class.output="bg-warning"}
 diamonds2 <- diamonds[diamonds$cut == "Ideal", c("cut", "color", "carat", "price")]
 diamonds2[order(diamonds2$price, decreasing=TRUE),]
 ```
 
 And its equivalent in the **tidyverse**:
 
-```{r, eval=FALSE}
+```{r df-drop-ok, class.source="bg-success"}
 diamonds %>% 
   select(cut, color, carat, price) %>%
   filter(cut=="Ideal") %>%

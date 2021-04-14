@@ -1,19 +1,21 @@
 # Data manipulation
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
 ```
 
-Package `dplyr` dntroduces a grammar of data manipulation. [Cheat sheet](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf)
+Package `dplyr` introduces a grammar of data manipulation. [Cheat sheet](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf)
 <br>
-We will introduce the **5 intuitively-named key functions** from **{dplyr}**:
+
+We will first introduce the **5 intuitively-named key functions** from **{dplyr}**:
 
 * **mutate()** adds new variables (columns) that are functions of existing variables
 * **select()** picks variables (columns) based on their names.
 * **filter()** picks observations (rows) based on their values.
 * **summarise()** collapses multiple values down to a single summary.
 * **arrange()** changes the ordering of the rows.
- 
+
+<br>
 
 All 5 functions work in a similar and consistent way:
 
@@ -23,7 +25,7 @@ All 5 functions work in a similar and consistent way:
 > *Note that {dplyr} never modifies the input: you need to* ***redirect the output*** *and save in a new - or the same - object.*
 
 <br><br> 
-We will use the **presidential** data set.
+We will use the `presidential` data set.
 *It contains data of the terms of* ***presidents of the USA***, *from Eisenhower to Obama:*
 
 * Name
@@ -69,7 +71,21 @@ Re-assign to a new - or the same - data frame/tibble using the R **assignment op
 presidential <- mutate(presidential, 
                 duration_days=end - start)
 ```
- 
+
+* If you want to change the name of a column, you can use the function `rename`:
+
+```{r, eval=T}
+# by the name
+rename(presidential, President=name)
+
+# or the index
+rename(presidential, President=1)
+
+# you can rename several columns
+rename(presidential, President=name, Political_party=party)
+```
+
+
 ## select
 
 `select` will select (and optionally rename) columns/variables in a data frame / tibble.
@@ -118,16 +134,50 @@ Select only columns containing characters with **select_if()**:
 
 ```{r, eval=T, echo =T}
 select_if(presidential, 
-    is.character) #<<
+    is.character)
 ```
 
 Select only columns containing a **date**:
 
 ```{r, eval=F, echo =FALSE}
 select_if(presidential, 
-          function(x)inherits(x, 'Date')) #<<
+          function(x)inherits(x, 'Date'))
 ```
- 
+
+<center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
+
+For the next hands-on, we will use th `starwars` dataset: it contains information about the Star Wars movie characters.
+
+* Create a new column **BMI** that contains the **BMI** of each character (Body Mass Index, calculated as `weight in kg / height in m`: we will assume that the `height` column is expressed as **cm** and the `mass` column is expressed as **kg**)
+* Rename column `name` to `character_name`.
+* Remove column `vehicles` and `starships`.
+* Save the changes to a new tibble `starwarsBMI`.
+
+<details>
+<summary>
+<h5 style="background-color: #a4edff; display: inline-block;">*Answer*</h5>
+</summary>
+
+```{r, eval=FALSE}
+# Create a new column BMI that contains the BMI of each character
+mutate(starwars, BMI=mass/(height*0.01)^2)
+
+# Rename column name to character_name.
+rename(starwars, character_name=name)
+
+# Remove column `vehicles` and `starships`.
+select(starwars, -c(vehicles, starships))
+
+# Save all the changes to a new tibble starwarsBMI (use the %>% operator)
+starwarsBMI <- starwars %>% 
+  mutate(BMI=mass/(height*0.01)^2) %>% 
+  select(-c(vehicles, starships)) %>%
+  rename(character_name=name)
+```
+
+</details>
+
+
 ## filter
 
 `filter()` is used to filter rows in a data frame / tibble.
@@ -158,6 +208,9 @@ filter(presidential,
 filter(presidential, 
        name %in% c("Bush", "Kennedy"))
 ```
+
+<center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
+
 
 ## summarise & group_by
  
@@ -217,7 +270,11 @@ group_by(presidential, party) %>%
   summarise(mean(duration_days))
 ```
 
+
+<center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
+
 starwars %>% group_by(gender, eye_color) %>% summarise(mycounts=n()) %>% arrange(desc(mycounts))
+
 
 ## arrange
 
@@ -244,22 +301,33 @@ mutate(presidential, duration_days=end-start) %>%
     arrange(duration_days, .by_group=TRUE)
 ```
     
+<center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
 
-**HANDS ON**
 
-```{r}
-mutate(presidential, duration_days=end-start) %>%
-    filter(party == "Democratic") %>%
-    summarise(mean(duration_days))
-```
 
-```{r}
-mutate(presidential, duration_days=end-start) %>%
-    group_by(party) %>%
-    summarise(mean(duration_days))
-```
+## More useful functions from `dplyr`
 
-**HANDS ON**
+nth(): extract the nth value of a vector
+
+presidential %>% nth(name, 4)
+
+extract a single column:
+
+presidential %>% pull(name)
+presidential %>% pull(duration_days, name=name)
+
+subset rows using their positions:
+
+presidential %>% slice(4)
+
+join (left, right etc.) functions
+
+count(presidential, party) 
+
+
+
+
+## Exercise
 
 We will work with the **storms** data set: positions and attributes of **198 tropical storms**, measured every 6 hours.
 
@@ -271,6 +339,11 @@ We will work with the **storms** data set: positions and attributes of **198 tro
   * *TIP: find what* `distinct()` *from* the `dplyr` package can do...
   * What are the years with the **maximum** number of storms?
 
+
+<details>
+<summary>
+<h5 style="background-color: #a4edff; display: inline-block;">*Answer*</h5>
+</summary>
 
 ```{r, eval=F}
 # 1. Remove columns month, day, hour, lat, long, ts_diameter and hu_diameter.
@@ -320,25 +393,4 @@ distinct(storms, name, year) %>%
 ```
 
 
-
-
-nth(): extract the nth value of a vector
-
-presidential %>% nth(name, 4)
-
-extract a single column:
-
-presidential %>% pull(name)
-presidential %>% pull(duration_days, name=name)
-
-subset rows using their positions:
-
-presidential %>% slice(4)
-
-join (left, right etc.) functions
-
-count(presidential, party) 
-
-tbl_iris %>% rename(species=1)
-tbl_iris %>% rename(species=Species)
 

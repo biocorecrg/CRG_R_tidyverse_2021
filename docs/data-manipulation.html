@@ -176,6 +176,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
 <li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
+<li class="chapter" data-level="7.6" data-path="more-useful-functions-from-dplyr.html"><a href="more-useful-functions-from-dplyr.html"><i class="fa fa-check"></i><b>7.6</b> More useful functions from <code>dplyr</code></a></li>
+<li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="divider"></li>
@@ -200,9 +202,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-manipulation" class="section level1" number="7">
 <h1><span class="header-section-number">Part 7</span> Data manipulation</h1>
-<p>Package <code>dplyr</code> dntroduces a grammar of data manipulation. <a href="https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf">Cheat sheet</a>
-<br>
-We will introduce the <strong>5 intuitively-named key functions</strong> from <strong>{dplyr}</strong>:</p>
+<p>Package <code>dplyr</code> introduces a grammar of data manipulation. <a href="https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf">Cheat sheet</a>
+<br></p>
+<p>We will first introduce the <strong>5 intuitively-named key functions</strong> from <strong>{dplyr}</strong>:</p>
 <ul>
 <li><strong>mutate()</strong> adds new variables (columns) that are functions of existing variables</li>
 <li><strong>select()</strong> picks variables (columns) based on their names.</li>
@@ -210,6 +212,7 @@ We will introduce the <strong>5 intuitively-named key functions</strong> from <s
 <li><strong>summarise()</strong> collapses multiple values down to a single summary.</li>
 <li><strong>arrange()</strong> changes the ordering of the rows.</li>
 </ul>
+<p><br></p>
 <p>All 5 functions work in a similar and consistent way:</p>
 <ul>
 <li>The first argument is a <strong>data frame</strong> or a <strong>tibble</strong>.</li>
@@ -219,7 +222,7 @@ We will introduce the <strong>5 intuitively-named key functions</strong> from <s
 <p><em>Note that {dplyr} never modifies the input: you need to</em> <strong><em>redirect the output</em></strong> <em>and save in a new - or the same - object.</em></p>
 </blockquote>
 <p><br><br>
-We will use the <strong>presidential</strong> data set.
+We will use the <code>presidential</code> data set.
 <em>It contains data of the terms of</em> <strong><em>presidents of the USA</em></strong>, <em>from Eisenhower to Obama:</em></p>
 <ul>
 <li>Name</li>
@@ -229,7 +232,7 @@ We will use the <strong>presidential</strong> data set.
 </ul>
 <table>
 <caption>
-<span id="tab:unnamed-chunk-31">Table 7.1: </span><code>presidential</code> data set
+<span id="tab:unnamed-chunk-32">Table 7.1: </span><code>presidential</code> data set
 </caption>
 <thead>
 <tr>
