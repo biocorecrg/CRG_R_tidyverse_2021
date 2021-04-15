@@ -3,15 +3,12 @@
 ## What is the "tidyverse"
 
 * A set of packages designed for **data science**:
-
   * Importing data into R
   * Preparing / Cleaning data
   * Data wrangling (tidying and transforming data)
   * Visualizing data
 
-
 * All packages share **good practices** in terms of: 
-* 
   * Philosophy
   * Grammar
   * Data structure
@@ -55,15 +52,12 @@ The following 8 packages are included in the core **tidyverse version 1.3.0.9000
   * stringr
   * forcats
 
-
 * Data Visualization and Exploration
   * ggplot2
-
 
 * Functional Programming
   * purrr
   
-
 
 <br>
 
