@@ -15,10 +15,10 @@ link-citations: yes
 <h3> About the course </h3>
 
 The so-called [**tidyverse** set of packages](https://www.tidyverse.org/) is widely used in the R community for powerful and efficient data reading, tidying, manipulation and visualization. It is one of the most popular and up-to-date set of tools for data analysis and data science using the R language.
-<br> 
-All **tidyverse** packages share a common vocabulary/grammar that makes code more intuitive and easier to read that the *base* R.
-<br>
-This 8-hour training aims at introducing some of the **tidyverse** packages for data wrangling and manipulation: dplyr, tidyr, stringr and readr.<br>
+<br> <br>
+All **tidyverse** packages share a common *vocabulary/grammar* that makes code more intuitive and easier to read than the *base* R.
+<br><br>
+This 8-hour training aims at introducing some of the **tidyverse** packages and functions for data wrangling and manipulation: dplyr, tidyr, stringr and readr.<br>
 
 <h3> Dates, time & location </h3>
 
@@ -37,8 +37,6 @@ This 8-hour training aims at introducing some of the **tidyverse** packages for 
 [Julia Ponomarenko](mailto:julia.ponomarenko@crg.eu)<br>
 from the CRG [Bioinformatics core facility](https://biocore.crg.eu/) (office , 4th floor hospital side)
 
-<h3> Learning objectives </h3>
-
 <h3>Prerequisites</h3>
 
 This is an intermediate course. <br>
@@ -55,22 +53,17 @@ If you want to get the latest version locally, you can:
 * keep only the "docs" and " images" folders.
 * open the "index.html" file in a web browser.
 
+<h3>Program</h3>
 
-* Data import & export: 
- * read_csv
-* tibbles characteristics
+* Data import & export with {readr} 
+* tibbles characteristics and manipulation
 * tidy data definition
-* tidyr: 
+* tidying data with {tidyr}: 
   * separate & unite
   * pivot (long and wide formats): pivot_longer, pivot_wider
   * complete (missing values)
-* "forward-pipe": %>% from the magrittr package
-* stringr:
-  * str_remove
-  * str_length
-  * str_c (paste)
-  * str_sub
-* dplyr:
+* "forward-pipe": %>% from the {magrittr} package
+* Data manipulation with {dplyr}:
   * mutate, mutate_at, transmute
   * select, select_if
   * filter
@@ -78,5 +71,10 @@ If you want to get the latest version locally, you can:
   * arrange
   * "join" functions
   * count
-  
+* Handling missing data
+* string manipulation with {stringr}:
+  * str_remove
+  * str_length
+  * str_c (paste)
+  * str_sub
   

@@ -24,7 +24,7 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-14" />
+<meta name="date" content="2021-04-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -147,9 +147,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="tibbles.html"><a href="tibbles.html"><i class="fa fa-check"></i><b>3</b> Tibbles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="what-are-tibbles.html"><a href="what-are-tibbles.html"><i class="fa fa-check"></i><b>3.1</b> What are tibbles?</a></li>
-<li class="chapter" data-level="3.2" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Displaying tibbles</a></li>
-<li class="chapter" data-level="3.3" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Data types in tibbles</a></li>
-<li class="chapter" data-level="3.4" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Subsetting / manipulating tibbles</a></li>
+<li class="chapter" data-level="3.2" data-path="creating-tibbles.html"><a href="creating-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Creating tibbles</a></li>
+<li class="chapter" data-level="3.3" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Displaying tibbles</a></li>
+<li class="chapter" data-level="3.4" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Data types in tibbles</a></li>
+<li class="chapter" data-level="3.5" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.5</b> Subsetting / manipulating tibbles</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tidy-data-with-tidyr.html"><a href="tidy-data-with-tidyr.html"><i class="fa fa-check"></i><b>4</b> Tidy data with <code>tidyr</code></a>
 <ul>
@@ -203,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="select" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> select</h2>
 <p><code>select</code> will select (and optionally rename) columns/variables in a data frame / tibble.</p>
-<p>Select column <strong>name</strong> only from the <code>presidential</code> data set:</p>
+<p>Select column <strong>“name”</strong> only from the <code>presidential</code> data set:</p>
 <table class="table table-striped" style="font-size: 14px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -414,61 +415,20 @@ Democratic
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="select.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, name)</span></code></pre></div>
-<pre><code>## # A tibble: 11 x 1
-##    name      
-##    &lt;chr&gt;     
-##  1 Eisenhower
-##  2 Kennedy   
-##  3 Johnson   
-##  4 Nixon     
-##  5 Ford      
-##  6 Carter    
-##  7 Reagan    
-##  8 Bush      
-##  9 Clinton   
-## 10 Bush      
-## 11 Obama</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="select.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, </span>
+<span id="cb46-2"><a href="select.html#cb46-2" aria-hidden="true" tabindex="-1"></a>       name)</span></code></pre></div>
 <p>Select 2 columns: <strong>party</strong> and <strong>name</strong> (in that order):</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="select.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, </span>
-<span id="cb56-2"><a href="select.html#cb56-2" aria-hidden="true" tabindex="-1"></a>       party, name)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="select.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, </span>
+<span id="cb47-2"><a href="select.html#cb47-2" aria-hidden="true" tabindex="-1"></a>       party, name)</span></code></pre></div>
 <p>Rename a column as you select it:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="select.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, </span>
-<span id="cb57-2"><a href="select.html#cb57-2" aria-hidden="true" tabindex="-1"></a>       party, <span class="at">President=</span>name)</span></code></pre></div>
-<pre><code>## # A tibble: 11 x 2
-##    party      President 
-##    &lt;chr&gt;      &lt;chr&gt;     
-##  1 Republican Eisenhower
-##  2 Democratic Kennedy   
-##  3 Democratic Johnson   
-##  4 Republican Nixon     
-##  5 Republican Ford      
-##  6 Democratic Carter    
-##  7 Republican Reagan    
-##  8 Republican Bush      
-##  9 Democratic Clinton   
-## 10 Republican Bush      
-## 11 Democratic Obama</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="select.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, </span>
+<span id="cb48-2"><a href="select.html#cb48-2" aria-hidden="true" tabindex="-1"></a>       party, <span class="at">President=</span>name)</span></code></pre></div>
 <p>Select all columns <strong>except</strong> party with the <strong>-</strong> sign:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="select.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, </span>
-<span id="cb59-2"><a href="select.html#cb59-2" aria-hidden="true" tabindex="-1"></a>       <span class="sc">-</span>party)</span></code></pre></div>
-<pre><code>## # A tibble: 11 x 4
-##    name       start      end        duration_days
-##    &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;drtn&gt;       
-##  1 Eisenhower 1953-01-20 1961-01-20 2922 days    
-##  2 Kennedy    1961-01-20 1963-11-22 1036 days    
-##  3 Johnson    1963-11-22 1969-01-20 1886 days    
-##  4 Nixon      1969-01-20 1974-08-09 2027 days    
-##  5 Ford       1974-08-09 1977-01-20  895 days    
-##  6 Carter     1977-01-20 1981-01-20 1461 days    
-##  7 Reagan     1981-01-20 1989-01-20 2922 days    
-##  8 Bush       1989-01-20 1993-01-20 1461 days    
-##  9 Clinton    1993-01-20 2001-01-20 2922 days    
-## 10 Bush       2001-01-20 2009-01-20 2922 days    
-## 11 Obama      2009-01-20 2017-01-20 2922 days</code></pre>
-<p>Select all columns between <strong>start</strong> and <strong>party</strong> (with both included)</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="select.html#cb61-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">select</span>(presidential, </span>
-<span id="cb61-2"><a href="select.html#cb61-2" aria-hidden="true" tabindex="-1"></a>        start<span class="sc">:</span>party)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="select.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(presidential, </span>
+<span id="cb49-2"><a href="select.html#cb49-2" aria-hidden="true" tabindex="-1"></a>       <span class="sc">-</span>party)</span></code></pre></div>
+<p>Select all columns between <strong>start</strong> and <strong>party</strong> (with both columns included)</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="select.html#cb50-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">select</span>(presidential, </span>
+<span id="cb50-2"><a href="select.html#cb50-2" aria-hidden="true" tabindex="-1"></a>        start<span class="sc">:</span>party)</span></code></pre></div>
 <pre><code>## # A tibble: 11 x 3
 ##    start      end        party     
 ##    &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;     
@@ -486,8 +446,9 @@ Democratic
 <div id="select_if" class="section level3" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> select_if</h3>
 <p>Select only columns containing characters with <strong>select_if()</strong>:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="select.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select_if</span>(presidential, </span>
-<span id="cb63-2"><a href="select.html#cb63-2" aria-hidden="true" tabindex="-1"></a>    is.character)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="select.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select columns containing characters:</span></span>
+<span id="cb52-2"><a href="select.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">select_if</span>(presidential, </span>
+<span id="cb52-3"><a href="select.html#cb52-3" aria-hidden="true" tabindex="-1"></a>    is.character)</span></code></pre></div>
 <pre><code>## # A tibble: 11 x 2
 ##    name       party     
 ##    &lt;chr&gt;      &lt;chr&gt;     
@@ -502,7 +463,7 @@ Democratic
 ##  9 Clinton    Democratic
 ## 10 Bush       Republican
 ## 11 Obama      Democratic</code></pre>
-<p>Select only columns containing a <strong>date</strong>:</p>
+<p>Select only columns containing a <strong>date</strong> with the <code>is.Date</code> function from the <code>lubridate</code> package:</p>
 <center>
 <h4 style="background-color: #a4edff; display: inline-block;">
 <strong>HANDS-ON</strong>
@@ -512,8 +473,8 @@ Democratic
 <ul>
 <li>Create a new column <strong>BMI</strong> that contains the <strong>BMI</strong> of each character (Body Mass Index, calculated as <code>weight in kg / height in m</code>: we will assume that the <code>height</code> column is expressed as <strong>cm</strong> and the <code>mass</code> column is expressed as <strong>kg</strong>)</li>
 <li>Rename column <code>name</code> to <code>character_name</code>.</li>
-<li>Remove column <code>vehicles</code> and <code>starships</code>.</li>
-<li>Save the changes to a new tibble <code>starwarsBMI</code>.</li>
+<li>Remove columns <code>vehicles</code> and <code>starships</code>.</li>
+<li>Save all the changes into a new tibble <code>starwarsBMI</code> (use the <code>%&gt;%</code> !).</li>
 </ul>
 <details>
 <summary>
@@ -521,20 +482,20 @@ Democratic
 <em>Answer</em>
 </h5>
 </summary>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="select.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column BMI that contains the BMI of each character</span></span>
-<span id="cb65-2"><a href="select.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(starwars, <span class="at">BMI=</span>mass<span class="sc">/</span>(height<span class="sc">*</span><span class="fl">0.01</span>)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb65-3"><a href="select.html#cb65-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-4"><a href="select.html#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename column name to character_name.</span></span>
-<span id="cb65-5"><a href="select.html#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(starwars, <span class="at">character_name=</span>name)</span>
-<span id="cb65-6"><a href="select.html#cb65-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-7"><a href="select.html#cb65-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove column `vehicles` and `starships`.</span></span>
-<span id="cb65-8"><a href="select.html#cb65-8" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(starwars, <span class="sc">-</span><span class="fu">c</span>(vehicles, starships))</span>
-<span id="cb65-9"><a href="select.html#cb65-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-10"><a href="select.html#cb65-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Save all the changes to a new tibble starwarsBMI (use the %&gt;% operator)</span></span>
-<span id="cb65-11"><a href="select.html#cb65-11" aria-hidden="true" tabindex="-1"></a>starwarsBMI <span class="ot">&lt;-</span> starwars <span class="sc">%&gt;%</span> </span>
-<span id="cb65-12"><a href="select.html#cb65-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">BMI=</span>mass<span class="sc">/</span>(height<span class="sc">*</span><span class="fl">0.01</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb65-13"><a href="select.html#cb65-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(vehicles, starships)) <span class="sc">%&gt;%</span></span>
-<span id="cb65-14"><a href="select.html#cb65-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">character_name=</span>name)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="select.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column BMI that contains the BMI of each character</span></span>
+<span id="cb54-2"><a href="select.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(starwars, <span class="at">BMI=</span>mass<span class="sc">/</span>(height<span class="sc">*</span><span class="fl">0.01</span>)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb54-3"><a href="select.html#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="select.html#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename column name to character_name.</span></span>
+<span id="cb54-5"><a href="select.html#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(starwars, <span class="at">character_name=</span>name)</span>
+<span id="cb54-6"><a href="select.html#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-7"><a href="select.html#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove columns `vehicles` and `starships`.</span></span>
+<span id="cb54-8"><a href="select.html#cb54-8" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(starwars, <span class="sc">-</span><span class="fu">c</span>(vehicles, starships))</span>
+<span id="cb54-9"><a href="select.html#cb54-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-10"><a href="select.html#cb54-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Save all the changes to a new tibble starwarsBMI (use the %&gt;% operator)</span></span>
+<span id="cb54-11"><a href="select.html#cb54-11" aria-hidden="true" tabindex="-1"></a>starwarsBMI <span class="ot">&lt;-</span> starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb54-12"><a href="select.html#cb54-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">BMI=</span>mass<span class="sc">/</span>(height<span class="sc">*</span><span class="fl">0.01</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb54-13"><a href="select.html#cb54-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(vehicles, starships)) <span class="sc">%&gt;%</span></span>
+<span id="cb54-14"><a href="select.html#cb54-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">character_name=</span>name)</span></code></pre></div>
 </details>
 </div>
 </div>

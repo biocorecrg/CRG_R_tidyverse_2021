@@ -6,7 +6,7 @@ Those functions are **up to 10 times faster** that the base R equivalent.
 
 ## Read
 
-`read_delim`, `read_csv`, `read_tsv`: Read a delimited file into a `tibble`:
+`read_delim`, `read_csv`, `read_tsv`: read a delimited file into a `tibble`:
 
 ```{r, echo=FALSE, eval=TRUE}
 knitr::kable(
@@ -23,16 +23,16 @@ Read in a file provided as an example with the `readr` package:
 f1 <- read_csv(readr_example("mtcars.csv"))
 ```
 
-As you can see, `readr` prints out the column specifications, so you can make sure the data is read the way it is meant to be.
+As you can see, `readr` prints out the **column specifications**, so you can make sure the data is read the way it is meant to be.
 <br>
 
 Useful arguments to consider, as you read in the file:
   
-* `n_max` : read in a subset.
+* `n_max=k` : read in a subset (*k* first rows).
 * col_names:
   * col_names=FALSE : your data doesn't contain headers/column names.
   * col_names=c("A", "B", "C") : you are providing a vector containing column names / header.
-* `skip` : skip rows.
+* `skip=j` : skip the *j* first rows.
 
 ```{r, message=TRUE}
 f2 <- read_csv(readr_example("mtcars.csv"),
@@ -45,13 +45,32 @@ f2
 
 ## Write
 
+`write_delim`, `write_csv`, `write_tsv`: write a `tibble` into a delimited file:
 
-format_csv
-format_tsv
+```{r, echo=FALSE, eval=TRUE}
+knitr::kable(
+  data.frame(name=c("write_delim", "write_csv", "write_tsv"), 
+             delim=c("*needs to be set*", "`,`: comma-separated", "`\t`: tab-separated")), caption = 'write_delim and derived functions',
+  format = "html", table.attr = "style='width:60%;'"
+)
+```
 
-write_delim
-write_csv
-write_tsv
+```{r, eval=F}
+write_csv(x=f2,
+          file="test_write_csv.csv")
+
+# to get the exact same in base R, you would need to set a few additional parameters:
+write.csv(x=f2,
+          file="test_base_write_csv.csv", 
+          quote=F, 
+          row.names = F)
+```
 
 <center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
 
+<details>
+<summary>
+<h5 style="background-color: #a4edff; display: inline-block;">*Answer*</h5>
+</summary>
+
+<details>

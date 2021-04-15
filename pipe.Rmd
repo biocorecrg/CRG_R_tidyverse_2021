@@ -16,11 +16,13 @@ patients3 <- unite(data=patients2,
       col="ID",
       c("ID1", "ID2"),
       sep="")
-patients4 <- mutate_at(patients3, c("height", "weight"), as.numeric)
+patients4 <- mutate_at(patients3, 
+      c("height", "weight"), 
+      as.numeric)
 ```
 
-If we are only interested in the final **tidy** data frame (and not in the intermediate objects `patients2` and `patients3`), there is a **simpler** and **cleaner** way: <br>
-The **%>%** (forward-pipe) operator from the `magritrrr` package (the `tidyverse` packages automatically load this operator).
+If we are only interested in the final **tidy** data frame (and not in the intermediate objects `patients2` and `patients3`), there is a **simple** and **clean** way to combine all steps. <br><br>
+The **%>%** (forward-pipe) operator from the `magritrrr` package (the `tidyverse` packages automatically load this operator):
 
 ```{r, echo=FALSE, out.width="30%", fig.align="center"}
 knitr::include_graphics("https://magrittr.tidyverse.org/logo.png")

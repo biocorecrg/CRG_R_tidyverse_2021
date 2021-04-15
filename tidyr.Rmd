@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
 * Each **row** describes an **observation**.
 * Each **value** is a **cell**.
 
-```{r, echo=FALSE, out.width="100%", fig.cap="Tidy data"}
+```{r, echo=FALSE, out.width="100%", fig.cap="Tidy data. [Source](https://garrettgman.github.io/images/tidy-1.png)"}
 knitr::include_graphics("images/tidy_data.png")
 ```
 
@@ -20,7 +20,7 @@ knitr::include_graphics("images/tidy_data.png")
 Example of a tidy data:
 
 | day | month  | year  |  weight |  height |
-|---|---|---|---|---|
+|:---:|:---:|:---:|:---:|:---:|
 | 12 | 4  | 2020  |  3.5 |  48 |
 | 23 |  8 | 2019  | 2.9  |  50 |
 | 9 |  11 | 2020  | 3.8  |  50 |
@@ -29,7 +29,7 @@ Example of a tidy data:
 Example of untidy data:
 
 | day | month,year  |  weight |  height |
-|---|---|---|---|
+|:---:|:---:|:---:|:---:|
 | 12 | 4,2020  |  3.5kg |  48 |
 | 23 |  8,2019  | 2.9kg  |  50 |
 | 9 |  11,2020  | 3.8kg  |  50 |
@@ -65,7 +65,7 @@ table5_1
 
 ### Unite
 
-Function `unite` does just the opposite: it will unite/stick together 2 or (more) columns: `unite(data, col, *column names*, sep)`.
+Function `unite` does just the opposite: it will unite/stick together 2 or (more) columns: `unite(data, col, column names, sep)`.
 
 ```{r}
 # unite columns "century" and "year"
@@ -90,8 +90,8 @@ patients <- tibble(
 )
 ```
 
-* Separate the two variables that are found in the last column into columns **height** and **weight**.
-* Unite columns **ID1** and **ID2** so as to create a unique **ID** per patient.
+* Separate the two variables that are found in the last column into columns **height** and **weight**: save in object `patients2`.
+* Unite columns **ID1** and **ID2** so as to create a unique **ID** per patient: save in `patients3`.
 
 <details>
 <summary>
@@ -116,7 +116,7 @@ patients3 <- unite(data=patients2,
 
 * Is there a problem with `patients3`? Display the tibble in the R console...
 
-Columns `height` and `weight` are **treated as characters** (because they contained *underscores "_"*).
+Columns `height` and `weight` are **treated as characters** (because they originally contained **underscores** "_" !).
 <br> 
 We can convert them into numbers with the `mutate_at` function from the `dplyr` package: try it!
 
@@ -129,7 +129,9 @@ We can convert them into numbers with the `mutate_at` function from the `dplyr` 
 # first argument: the tibble
 # second argument: a vector of column names to mutate
 # third argument: how to mutate those columns
-patients4 <- mutate_at(patients3, c("height", "weight"), as.numeric)
+patients4 <- mutate_at(patients3, 
+                       c("height", "weight"), 
+                       as.numeric)
 ```
 
 </details>

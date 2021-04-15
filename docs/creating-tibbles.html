@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Part 7 Data manipulation | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
-  <meta name="description" content="Part 7 Data manipulation | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <title>3.2 Creating tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="3.2 Creating tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Part 7 Data manipulation | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:title" content="3.2 Creating tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Part 7 Data manipulation | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="twitter:title" content="3.2 Creating tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="write.html"/>
-<link rel="next" href="mutate-transmute.html"/>
+<link rel="prev" href="what-are-tibbles.html"/>
+<link rel="next" href="displaying-tibbles.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -201,308 +201,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-manipulation" class="section level1" number="7">
-<h1><span class="header-section-number">Part 7</span> Data manipulation</h1>
-<p>Package <code>dplyr</code> introduces a grammar of data manipulation. See the nice <a href="https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf">cheat sheet</a>
-<br></p>
-<p>We will first introduce the <strong>5 intuitively-named key functions</strong> from <strong>{dplyr}</strong>:
-<br></p>
-<table style="width:90%;">
-<caption>
-<span id="tab:unnamed-chunk-34">Table 7.1: </span>the 5 core <code>dplyr</code> functions
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-name
-</th>
-<th style="text-align:left;">
-what.it.does
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<strong><code>mutate</code></strong>
-</td>
-<td style="text-align:left;">
-adds new variables (columns) that are functions of existing variables
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<strong><code>select</code></strong>
-</td>
-<td style="text-align:left;">
-picks variables (columns) based on their names.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<strong><code>filter</code></strong>
-</td>
-<td style="text-align:left;">
-picks observations (rows) based on their values.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<code>summarise</code>
-</td>
-<td style="text-align:left;">
-collapses multiple values down to a single summary.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<code>arrange</code>
-</td>
-<td style="text-align:left;">
-changes the ordering of the rows.
-</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<p>All 5 functions work in a similar and consistent way:</p>
+<div id="creating-tibbles" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Creating tibbles</h2>
+<p>You can create a simple tibble as you create a data frame, but with the <code>tibble</code> function:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="creating-tibbles.html#cb5-1" aria-hidden="true" tabindex="-1"></a>mytibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb5-2"><a href="creating-tibbles.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">letters =</span> LETTERS,</span>
+<span id="cb5-3"><a href="creating-tibbles.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">numbers =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">26</span></span>
+<span id="cb5-4"><a href="creating-tibbles.html#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre echo="F," eval="T"><code>mytibble</code></pre>
 <ul>
-<li>The first argument is the input: a <code>data frame</code> or a <code>tibble</code>.</li>
-<li>The output is a new <code>tibble</code>.</li>
+<li>Convert a data frame to a tibble:</li>
 </ul>
-<blockquote>
-<p><em>Note that {dplyr} never modifies the input: you need to</em> <strong><em>redirect the output</em></strong> <em>and save in a new - or the same - object.</em></p>
-</blockquote>
-<p><br><br>
-We will use the <code>presidential</code> data set.
-<em>It contains data of the terms of</em> <strong><em>presidents of the USA</em></strong>, <em>from Eisenhower to Obama:</em></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="creating-tibbles.html#cb7-1" aria-hidden="true" tabindex="-1"></a>mydf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">letters =</span> LETTERS,</span>
+<span id="cb7-2"><a href="creating-tibbles.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">numbers =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>)</span>
+<span id="cb7-3"><a href="creating-tibbles.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(mydf)</span></code></pre></div>
 <ul>
-<li>Name</li>
-<li>Term starting date</li>
-<li>Term ending date of mandate</li>
-<li>Political party</li>
+<li>Convert a tibble to a data frame (useful to interact with R code that doesn’t support tibbles):</li>
 </ul>
-<table>
-<caption>
-<span id="tab:unnamed-chunk-35">Table 7.2: </span><code>presidential</code> data set
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-name
-</th>
-<th style="text-align:left;">
-start
-</th>
-<th style="text-align:left;">
-end
-</th>
-<th style="text-align:left;">
-party
-</th>
-<th style="text-align:left;">
-duration_days
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Eisenhower
-</td>
-<td style="text-align:left;">
-1953-01-20
-</td>
-<td style="text-align:left;">
-1961-01-20
-</td>
-<td style="text-align:left;">
-Republican
-</td>
-<td style="text-align:left;">
-2922 days
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Kennedy
-</td>
-<td style="text-align:left;">
-1961-01-20
-</td>
-<td style="text-align:left;">
-1963-11-22
-</td>
-<td style="text-align:left;">
-Democratic
-</td>
-<td style="text-align:left;">
-1036 days
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Johnson
-</td>
-<td style="text-align:left;">
-1963-11-22
-</td>
-<td style="text-align:left;">
-1969-01-20
-</td>
-<td style="text-align:left;">
-Democratic
-</td>
-<td style="text-align:left;">
-1886 days
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Nixon
-</td>
-<td style="text-align:left;">
-1969-01-20
-</td>
-<td style="text-align:left;">
-1974-08-09
-</td>
-<td style="text-align:left;">
-Republican
-</td>
-<td style="text-align:left;">
-2027 days
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ford
-</td>
-<td style="text-align:left;">
-1974-08-09
-</td>
-<td style="text-align:left;">
-1977-01-20
-</td>
-<td style="text-align:left;">
-Republican
-</td>
-<td style="text-align:left;">
-895 days
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Carter
-</td>
-<td style="text-align:left;">
-1977-01-20
-</td>
-<td style="text-align:left;">
-1981-01-20
-</td>
-<td style="text-align:left;">
-Democratic
-</td>
-<td style="text-align:left;">
-1461 days
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Reagan
-</td>
-<td style="text-align:left;">
-1981-01-20
-</td>
-<td style="text-align:left;">
-1989-01-20
-</td>
-<td style="text-align:left;">
-Republican
-</td>
-<td style="text-align:left;">
-2922 days
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Bush
-</td>
-<td style="text-align:left;">
-1989-01-20
-</td>
-<td style="text-align:left;">
-1993-01-20
-</td>
-<td style="text-align:left;">
-Republican
-</td>
-<td style="text-align:left;">
-1461 days
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Clinton
-</td>
-<td style="text-align:left;">
-1993-01-20
-</td>
-<td style="text-align:left;">
-2001-01-20
-</td>
-<td style="text-align:left;">
-Democratic
-</td>
-<td style="text-align:left;">
-2922 days
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Bush
-</td>
-<td style="text-align:left;">
-2001-01-20
-</td>
-<td style="text-align:left;">
-2009-01-20
-</td>
-<td style="text-align:left;">
-Republican
-</td>
-<td style="text-align:left;">
-2922 days
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Obama
-</td>
-<td style="text-align:left;">
-2009-01-20
-</td>
-<td style="text-align:left;">
-2017-01-20
-</td>
-<td style="text-align:left;">
-Democratic
-</td>
-<td style="text-align:left;">
-2922 days
-</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="creating-tibbles.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(mytibble)</span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="write.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="mutate-transmute.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="what-are-tibbles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="displaying-tibbles.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -8,6 +8,8 @@
   * No automatic creation of row names.
   * Column names can be **non-valid R variable names** (for example, they can start with numbers).
 
+## Creating tibbles
+
 You can create a simple tibble as you create a data frame, but with the `tibble` function:
 
 ```{r, eval=T}
@@ -17,13 +19,13 @@ mytibble <- tibble(
 )
 ```
 
-```{echo=F, eval=F}
+```{echo=F, eval=T}
 mytibble
 ```
 
 * Convert a data frame to a tibble:
 
-```{r}
+```{r, eval=F}
 mydf <- data.frame(letters = LETTERS,
   numbers = 1:26)
 as_tibble(mydf)
@@ -31,7 +33,7 @@ as_tibble(mydf)
 
 * Convert a tibble to a data frame (useful to interact with R code that doesn't support tibbles):
 
-```{r}
+```{r, eval=F}
 as.data.frame(mytibble)
 ```
 
@@ -61,7 +63,7 @@ print(mytibble, n=Inf)
 
 ## Data types in tibbles
 
-When you display a tibble, mote that there is a 3 or 4-letter abbreviation under each column nam: these describe the type of each variable:
+When you display a tibble, note that there is a 3 or 4-letter abbreviation under each column name: these describe the type of each variable:
 
 ```{r, echo=F, eval=T}
 tbl_dtypes <-tibble(Abbreviation=c("int", "dbl", "chr", "lgl", "fctr", "date", "dttm"), 
@@ -83,7 +85,7 @@ mytibble$letters
 # or the [[]]
 mytibble[["letters"]]
 
-# Note: with using simple square brackets, you extract a sub-tibble (2 dimensions)
+# Note: with using simple square brackets, you extract a sub-tibble (it remains a 2 dimensional object)
 mytibble["letters"]
 ```
 
@@ -103,9 +105,9 @@ mytibble[, 1][[1]]
 We will work with the built-in dataset `iris`:
 
 * Is `iris` a tibble? How can you tell? Try to run `is_tibble`.
-* Convert `iris` to a tibble. Save in a new object `tbl_iris`.
-* Show all rows from `tbl_iris`.
-* Show the first 3 rows from `tbl_iris`.
+* Convert `iris` to a tibble. Save in a new object `tbl_iris`. Run `is_tibble` on `tbl_iris`.
+* Show all rows of `tbl_iris`.
+* Show the first 3 rows of `tbl_iris`.
 * Extract column `Species`.
 
 <details>

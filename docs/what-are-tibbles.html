@@ -24,7 +24,7 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-14" />
+<meta name="date" content="2021-04-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="tibbles.html"/>
-<link rel="next" href="displaying-tibbles.html"/>
+<link rel="next" href="creating-tibbles.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -147,9 +147,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="tibbles.html"><a href="tibbles.html"><i class="fa fa-check"></i><b>3</b> Tibbles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="what-are-tibbles.html"><a href="what-are-tibbles.html"><i class="fa fa-check"></i><b>3.1</b> What are tibbles?</a></li>
-<li class="chapter" data-level="3.2" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Displaying tibbles</a></li>
-<li class="chapter" data-level="3.3" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Data types in tibbles</a></li>
-<li class="chapter" data-level="3.4" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Subsetting / manipulating tibbles</a></li>
+<li class="chapter" data-level="3.2" data-path="creating-tibbles.html"><a href="creating-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Creating tibbles</a></li>
+<li class="chapter" data-level="3.3" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Displaying tibbles</a></li>
+<li class="chapter" data-level="3.4" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Data types in tibbles</a></li>
+<li class="chapter" data-level="3.5" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.5</b> Subsetting / manipulating tibbles</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tidy-data-with-tidyr.html"><a href="tidy-data-with-tidyr.html"><i class="fa fa-check"></i><b>4</b> Tidy data with <code>tidyr</code></a>
 <ul>
@@ -211,63 +212,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Column names can be <strong>non-valid R variable names</strong> (for example, they can start with numbers).</li>
 </ul></li>
 </ul>
-<p>You can create a simple tibble as you create a data frame, but with the <code>tibble</code> function:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="what-are-tibbles.html#cb7-1" aria-hidden="true" tabindex="-1"></a>mytibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb7-2"><a href="what-are-tibbles.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">letters =</span> LETTERS,</span>
-<span id="cb7-3"><a href="what-are-tibbles.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">numbers =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">26</span></span>
-<span id="cb7-4"><a href="what-are-tibbles.html#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<pre echo="F," eval="F"><code>mytibble</code></pre>
-<ul>
-<li>Convert a data frame to a tibble:</li>
-</ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="what-are-tibbles.html#cb9-1" aria-hidden="true" tabindex="-1"></a>mydf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">letters =</span> LETTERS,</span>
-<span id="cb9-2"><a href="what-are-tibbles.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">numbers =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>)</span>
-<span id="cb9-3"><a href="what-are-tibbles.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(mydf)</span></code></pre></div>
-<pre><code>## # A tibble: 26 x 2
-##    letters numbers
-##    &lt;chr&gt;     &lt;int&gt;
-##  1 A             1
-##  2 B             2
-##  3 C             3
-##  4 D             4
-##  5 E             5
-##  6 F             6
-##  7 G             7
-##  8 H             8
-##  9 I             9
-## 10 J            10
-## # … with 16 more rows</code></pre>
-<ul>
-<li>Convert a tibble to a data frame (useful to interact with R code that doesn’t support tibbles):</li>
-</ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="what-are-tibbles.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(mytibble)</span></code></pre></div>
-<pre><code>##    letters numbers
-## 1        A       1
-## 2        B       2
-## 3        C       3
-## 4        D       4
-## 5        E       5
-## 6        F       6
-## 7        G       7
-## 8        H       8
-## 9        I       9
-## 10       J      10
-## 11       K      11
-## 12       L      12
-## 13       M      13
-## 14       N      14
-## 15       O      15
-## 16       P      16
-## 17       Q      17
-## 18       R      18
-## 19       S      19
-## 20       T      20
-## 21       U      21
-## 22       V      22
-## 23       W      23
-## 24       X      24
-## 25       Y      25
-## 26       Z      26</code></pre>
 </div>
             </section>
 
@@ -275,7 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="tibbles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="displaying-tibbles.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="creating-tibbles.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

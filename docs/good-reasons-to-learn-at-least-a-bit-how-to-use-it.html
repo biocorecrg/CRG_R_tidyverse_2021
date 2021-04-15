@@ -24,7 +24,7 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-14" />
+<meta name="date" content="2021-04-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -147,9 +147,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="tibbles.html"><a href="tibbles.html"><i class="fa fa-check"></i><b>3</b> Tibbles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="what-are-tibbles.html"><a href="what-are-tibbles.html"><i class="fa fa-check"></i><b>3.1</b> What are tibbles?</a></li>
-<li class="chapter" data-level="3.2" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Displaying tibbles</a></li>
-<li class="chapter" data-level="3.3" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Data types in tibbles</a></li>
-<li class="chapter" data-level="3.4" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Subsetting / manipulating tibbles</a></li>
+<li class="chapter" data-level="3.2" data-path="creating-tibbles.html"><a href="creating-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Creating tibbles</a></li>
+<li class="chapter" data-level="3.3" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Displaying tibbles</a></li>
+<li class="chapter" data-level="3.4" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Data types in tibbles</a></li>
+<li class="chapter" data-level="3.5" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.5</b> Subsetting / manipulating tibbles</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tidy-data-with-tidyr.html"><a href="tidy-data-with-tidyr.html"><i class="fa fa-check"></i><b>4</b> Tidy data with <code>tidyr</code></a>
 <ul>
@@ -205,45 +206,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>More <strong>intuitive programming</strong>: the names of functions speak for themselves.</li>
 <li>The code is <strong>easier to read</strong> than with R base: it facilitates code sharing.</li>
-<li>More <strong>efficient</strong>: the functions are quite quick and you need to write less lines to get what you want.</li>
+<li>More <strong>efficient</strong>: the functions are quite quick (coded more efficiently).</li>
 <li>Very good <a href="https://www.tidyverse.org/learn/"><strong>documentation and tutorials</strong></a>.</li>
 </ul>
 <p>Here is a piece of <strong>R base code</strong>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r bg-danger"><code class="sourceCode r"><span id="cb1-1"><a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html#cb1-1" aria-hidden="true" tabindex="-1"></a>diamonds2 <span class="ot">&lt;-</span> diamonds[diamonds<span class="sc">$</span>cut <span class="sc">==</span> <span class="st">&quot;Ideal&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;cut&quot;</span>, <span class="st">&quot;color&quot;</span>, <span class="st">&quot;carat&quot;</span>, <span class="st">&quot;price&quot;</span>)]</span>
 <span id="cb1-2"><a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html#cb1-2" aria-hidden="true" tabindex="-1"></a>diamonds2[<span class="fu">order</span>(diamonds2<span class="sc">$</span>price, <span class="at">decreasing=</span><span class="cn">TRUE</span>),]</span></code></pre></div>
-<pre class="bg-warning"><code>## # A tibble: 21,551 x 4
-##    cut   color carat price
-##    &lt;ord&gt; &lt;ord&gt; &lt;dbl&gt; &lt;int&gt;
-##  1 Ideal G      1.51 18806
-##  2 Ideal G      2.07 18804
-##  3 Ideal G      2.15 18791
-##  4 Ideal G      2.05 18787
-##  5 Ideal F      1.6  18780
-##  6 Ideal I      2.06 18779
-##  7 Ideal G      1.71 18768
-##  8 Ideal H      2.08 18760
-##  9 Ideal G      2.03 18757
-## 10 Ideal I      2.61 18756
-## # … with 21,541 more rows</code></pre>
 <p>And its equivalent in the <strong>tidyverse</strong>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb3-1"><a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html#cb3-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span> </span>
-<span id="cb3-2"><a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(cut, color, carat, price) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cut<span class="sc">==</span><span class="st">&quot;Ideal&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-4"><a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(price))</span></code></pre></div>
-<pre><code>## # A tibble: 21,551 x 4
-##    cut   color carat price
-##    &lt;ord&gt; &lt;ord&gt; &lt;dbl&gt; &lt;int&gt;
-##  1 Ideal G      1.51 18806
-##  2 Ideal G      2.07 18804
-##  3 Ideal G      2.15 18791
-##  4 Ideal G      2.05 18787
-##  5 Ideal F      1.6  18780
-##  6 Ideal I      2.06 18779
-##  7 Ideal G      1.71 18768
-##  8 Ideal H      2.08 18760
-##  9 Ideal G      2.03 18757
-## 10 Ideal I      2.61 18756
-## # … with 21,541 more rows</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb2-1"><a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html#cb2-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(cut, color, carat, price) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cut<span class="sc">==</span><span class="st">&quot;Ideal&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(price))</span></code></pre></div>
 </div>
             </section>
 

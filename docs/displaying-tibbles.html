@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.2 Displaying tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
-  <meta name="description" content="3.2 Displaying tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <title>3.3 Displaying tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="3.3 Displaying tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.2 Displaying tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:title" content="3.3 Displaying tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.2 Displaying tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="twitter:title" content="3.3 Displaying tibbles | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   
   
   
@@ -24,14 +24,14 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-14" />
+<meta name="date" content="2021-04-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-are-tibbles.html"/>
+<link rel="prev" href="creating-tibbles.html"/>
 <link rel="next" href="data-types-in-tibbles.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -147,9 +147,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="tibbles.html"><a href="tibbles.html"><i class="fa fa-check"></i><b>3</b> Tibbles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="what-are-tibbles.html"><a href="what-are-tibbles.html"><i class="fa fa-check"></i><b>3.1</b> What are tibbles?</a></li>
-<li class="chapter" data-level="3.2" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Displaying tibbles</a></li>
-<li class="chapter" data-level="3.3" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Data types in tibbles</a></li>
-<li class="chapter" data-level="3.4" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Subsetting / manipulating tibbles</a></li>
+<li class="chapter" data-level="3.2" data-path="creating-tibbles.html"><a href="creating-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Creating tibbles</a></li>
+<li class="chapter" data-level="3.3" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Displaying tibbles</a></li>
+<li class="chapter" data-level="3.4" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Data types in tibbles</a></li>
+<li class="chapter" data-level="3.5" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.5</b> Subsetting / manipulating tibbles</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tidy-data-with-tidyr.html"><a href="tidy-data-with-tidyr.html"><i class="fa fa-check"></i><b>4</b> Tidy data with <code>tidyr</code></a>
 <ul>
@@ -200,8 +201,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="displaying-tibbles" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Displaying tibbles</h2>
+<div id="displaying-tibbles" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Displaying tibbles</h2>
 <p>The way it <strong>prints</strong> in the console is different that that of data frames:</p>
 <ul>
 <li>Dimensions are shown.</li>
@@ -213,7 +214,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Print the first 15 rows:</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="displaying-tibbles.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mytibble, <span class="at">n=</span><span class="dv">15</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="displaying-tibbles.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mytibble, <span class="at">n=</span><span class="dv">15</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 26 x 2
 ##    letters numbers
 ##    &lt;chr&gt;     &lt;int&gt;
@@ -236,7 +237,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Print all rows:</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="displaying-tibbles.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mytibble, <span class="at">n=</span><span class="cn">Inf</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="displaying-tibbles.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mytibble, <span class="at">n=</span><span class="cn">Inf</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 26 x 2
 ##    letters numbers
 ##    &lt;chr&gt;     &lt;int&gt;
@@ -272,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="what-are-tibbles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="creating-tibbles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="data-types-in-tibbles.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

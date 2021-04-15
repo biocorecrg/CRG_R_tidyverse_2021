@@ -17,19 +17,19 @@
 
 * More **intuitive programming**: the names of functions speak for themselves.
 * The code is **easier to read** than with R base: it facilitates code sharing.
-* More **efficient**: the functions are quite quick and you need to write less lines to get what you want.
+* More **efficient**: the functions are quite quick (coded more efficiently).
 * Very good [**documentation and tutorials**](https://www.tidyverse.org/learn/).
 
 Here is a piece of **R base code**:
 
-```{r class.source="bg-danger", class.output="bg-warning"}
+```{r class.source="bg-danger", class.output="bg-warning", eval=F}
 diamonds2 <- diamonds[diamonds$cut == "Ideal", c("cut", "color", "carat", "price")]
 diamonds2[order(diamonds2$price, decreasing=TRUE),]
 ```
 
 And its equivalent in the **tidyverse**:
 
-```{r df-drop-ok, class.source="bg-success"}
+```{r df-drop-ok, class.source="bg-success", eval=F}
 diamonds %>% 
   select(cut, color, carat, price) %>%
   filter(cut=="Ideal") %>%
@@ -75,7 +75,7 @@ tbl_logos %>%
   kbl(booktabs = T) %>%
   kable_paper(full_width = T) %>%
   column_spec(1, image = spec_image(
-    c("images/dplyr_logo.png", "images/tidyr_logo.png", "images/stringr_logo.png", "images/forcats_logo.png", "images/readr_logo.png", "images/tibble_logo.png", "images/purrr_logo.png", "images/ggplot2_logo.png"), width=380, height=260))
+    c("images/dplyr_logo.png", "images/tidyr_logo.png", "images/stringr_logo.png", "images/forcats_logo.png", "images/readr_logo.png", "images/tibble_logo.png", "images/purrr_logo.png", "images/ggplot2_logo.png"), width=380, height=270))
     
 ```
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-14" />
+<meta name="date" content="2021-04-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -147,9 +147,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="tibbles.html"><a href="tibbles.html"><i class="fa fa-check"></i><b>3</b> Tibbles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="what-are-tibbles.html"><a href="what-are-tibbles.html"><i class="fa fa-check"></i><b>3.1</b> What are tibbles?</a></li>
-<li class="chapter" data-level="3.2" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Displaying tibbles</a></li>
-<li class="chapter" data-level="3.3" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Data types in tibbles</a></li>
-<li class="chapter" data-level="3.4" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Subsetting / manipulating tibbles</a></li>
+<li class="chapter" data-level="3.2" data-path="creating-tibbles.html"><a href="creating-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Creating tibbles</a></li>
+<li class="chapter" data-level="3.3" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Displaying tibbles</a></li>
+<li class="chapter" data-level="3.4" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Data types in tibbles</a></li>
+<li class="chapter" data-level="3.5" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.5</b> Subsetting / manipulating tibbles</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tidy-data-with-tidyr.html"><a href="tidy-data-with-tidyr.html"><i class="fa fa-check"></i><b>4</b> Tidy data with <code>tidyr</code></a>
 <ul>
@@ -203,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Intermediate R: introduction to data wrangling with the Tidyverse (2021)</h1>
 <p class="author"><em>Sarah Bonnin</em></p>
-<p class="date"><em>2021-04-14</em></p>
+<p class="date"><em>2021-04-15</em></p>
 </div>
 <div id="welcome" class="section level1" number="1">
 <h1><span class="header-section-number">Part 1</span> Welcome</h1>
@@ -211,10 +212,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 About the course
 </h3>
 <p>The so-called <a href="https://www.tidyverse.org/"><strong>tidyverse</strong> set of packages</a> is widely used in the R community for powerful and efficient data reading, tidying, manipulation and visualization. It is one of the most popular and up-to-date set of tools for data analysis and data science using the R language.
-<br>
-All <strong>tidyverse</strong> packages share a common vocabulary/grammar that makes code more intuitive and easier to read that the <em>base</em> R.
-<br>
-This 8-hour training aims at introducing some of the <strong>tidyverse</strong> packages for data wrangling and manipulation: dplyr, tidyr, stringr and readr.<br></p>
+<br> <br>
+All <strong>tidyverse</strong> packages share a common <em>vocabulary/grammar</em> that makes code more intuitive and easier to read than the <em>base</em> R.
+<br><br>
+This 8-hour training aims at introducing some of the <strong>tidyverse</strong> packages and functions for data wrangling and manipulation: dplyr, tidyr, stringr and readr.<br></p>
 <h3>
 Dates, time &amp; location
 </h3>
@@ -239,9 +240,6 @@ Instructors
 <a href="mailto:julia.ponomarenko@crg.eu">Julia Ponomarenko</a><br>
 from the CRG <a href="https://biocore.crg.eu/">Bioinformatics core facility</a> (office , 4th floor hospital side)</p>
 <h3>
-Learning objectives
-</h3>
-<h3>
 Prerequisites
 </h3>
 <p>This is an intermediate course. <br>
@@ -253,28 +251,25 @@ Material
 <br></p>
 <p>If you want to get the latest version locally, you can:</p>
 <ul>
-<li><p>download and uncompress the <a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021/archive/master.zip">zip archive</a></p></li>
-<li><p>keep only the “docs” and " images" folders.</p></li>
-<li><p>open the “index.html” file in a web browser.</p></li>
-<li><p>Data import &amp; export:</p></li>
-<li><p>read_csv</p></li>
-<li><p>tibbles characteristics</p></li>
-<li><p>tidy data definition</p></li>
-<li><p>tidyr:</p>
+<li>download and uncompress the <a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021/archive/master.zip">zip archive</a></li>
+<li>keep only the “docs” and " images" folders.</li>
+<li>open the “index.html” file in a web browser.</li>
+</ul>
+<h3>
+Program
+</h3>
+<ul>
+<li>Data import &amp; export with {readr}</li>
+<li>tibbles characteristics and manipulation</li>
+<li>tidy data definition</li>
+<li>tidying data with {tidyr}:
 <ul>
 <li>separate &amp; unite</li>
 <li>pivot (long and wide formats): pivot_longer, pivot_wider</li>
 <li>complete (missing values)</li>
 </ul></li>
-<li><p>“forward-pipe”: %&gt;% from the magrittr package</p></li>
-<li><p>stringr:</p>
-<ul>
-<li>str_remove</li>
-<li>str_length</li>
-<li>str_c (paste)</li>
-<li>str_sub</li>
-</ul></li>
-<li><p>dplyr:</p>
+<li>“forward-pipe”: %&gt;% from the {magrittr} package</li>
+<li>Data manipulation with {dplyr}:
 <ul>
 <li>mutate, mutate_at, transmute</li>
 <li>select, select_if</li>
@@ -283,6 +278,14 @@ Material
 <li>arrange</li>
 <li>“join” functions</li>
 <li>count</li>
+</ul></li>
+<li>Handling missing data</li>
+<li>string manipulation with {stringr}:
+<ul>
+<li>str_remove</li>
+<li>str_length</li>
+<li>str_c (paste)</li>
+<li>str_sub</li>
 </ul></li>
 </ul>
 

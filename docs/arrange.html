@@ -24,7 +24,7 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-14" />
+<meta name="date" content="2021-04-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -147,9 +147,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="tibbles.html"><a href="tibbles.html"><i class="fa fa-check"></i><b>3</b> Tibbles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="what-are-tibbles.html"><a href="what-are-tibbles.html"><i class="fa fa-check"></i><b>3.1</b> What are tibbles?</a></li>
-<li class="chapter" data-level="3.2" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Displaying tibbles</a></li>
-<li class="chapter" data-level="3.3" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Data types in tibbles</a></li>
-<li class="chapter" data-level="3.4" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Subsetting / manipulating tibbles</a></li>
+<li class="chapter" data-level="3.2" data-path="creating-tibbles.html"><a href="creating-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Creating tibbles</a></li>
+<li class="chapter" data-level="3.3" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Displaying tibbles</a></li>
+<li class="chapter" data-level="3.4" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Data types in tibbles</a></li>
+<li class="chapter" data-level="3.5" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.5</b> Subsetting / manipulating tibbles</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tidy-data-with-tidyr.html"><a href="tidy-data-with-tidyr.html"><i class="fa fa-check"></i><b>4</b> Tidy data with <code>tidyr</code></a>
 <ul>
@@ -205,7 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>arrange</code> orders the rows of a data frame by the values of selected columns.
 <br>
 Let’s order rows by increasing mandate duration:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="arrange.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(presidential, duration_days)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="arrange.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(presidential, duration_days)</span></code></pre></div>
 <pre><code>## # A tibble: 11 x 5
 ##    name       start      end        party      duration_days
 ##    &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;drtn&gt;       
@@ -220,10 +221,10 @@ Let’s order rows by increasing mandate duration:</p>
 ##  9 Clinton    1993-01-20 2001-01-20 Democratic 2922 days    
 ## 10 Bush       2001-01-20 2009-01-20 Republican 2922 days    
 ## 11 Obama      2009-01-20 2017-01-20 Democratic 2922 days</code></pre>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="arrange.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># decreasing order: arrange(presidential2, desc(duration_days))</span></span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="arrange.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># decreasing order: arrange(presidential2, desc(duration_days))</span></span></code></pre></div>
 <p>You can use several columns for the sorting</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="arrange.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(presidential, </span>
-<span id="cb86-2"><a href="arrange.html#cb86-2" aria-hidden="true" tabindex="-1"></a>        duration_days, name)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="arrange.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(presidential, </span>
+<span id="cb76-2"><a href="arrange.html#cb76-2" aria-hidden="true" tabindex="-1"></a>        duration_days, name)</span></code></pre></div>
 <pre><code>## # A tibble: 11 x 5
 ##    name       start      end        party      duration_days
 ##    &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;drtn&gt;       
