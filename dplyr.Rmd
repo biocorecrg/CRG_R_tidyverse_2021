@@ -12,7 +12,7 @@ We will first introduce the **5 intuitively-named key functions** from **{dplyr}
 
 ```{r, echo=FALSE, eval=TRUE}
 knitr::kable(
-  data.frame(name=c("**`mutate`**", "**`select`**", "**`filter`**", "`summarise`", "`arrange`"), 
+  data.frame(name=c("**`mutate`**", "**`select`**", "**`filter`**", "**`summarise`**", "**`arrange`**"), 
              `what it does`=c("adds new variables (columns) that are functions of existing variables", "picks variables (columns) based on their names.", "picks observations (rows) based on their values.", "collapses multiple values down to a single summary.", "changes the ordering of the rows.")), caption = 'the 5 core `dplyr` functions',
   format = "html", table.attr = "style='width:90%;'"
 )
@@ -199,7 +199,7 @@ Some [select helpers](https://tidyselect.r-lib.org/reference/starts_with.html) a
 
 ```{r, echo=FALSE, eval=TRUE}
 knitr::kable(
-  data.frame(name=c("starts_with", "ends_with", "contains", "matches", "num_range()"), 
+  data.frame(name=c("starts_with", "ends_with", "contains", "matches", "num_range"), 
              description=c("starts with a prefix", "ends with a suffix", "contains a literal string", "matches a regular expression", "matches a numerical range like x01, x02, x03")), caption = 'select helpers',
   format = "html", table.attr = "style='width:60%;'"
 )
@@ -224,7 +224,7 @@ If you are familiar with **regular expressions**, you can also use them within t
 
 ```{r}
 select(starwars,
-       matches("^h")) # same as starts_with
+       matches("^h")) # same as starts_with("h")
 ```
 
 Finally, you can select columns which name match a **numerical range** with `num_range`.
@@ -443,44 +443,15 @@ starwarsBMI %>%
 
 </details>
 
-## A few more useful functions from `dplyr`
-
-* Extract rows with `slice`:
-
-```{r, eval=F}
-# Fetch the first 2 rows
-slice(presidential2, 1:2)
-```
-
-* Extract a single column as a vector with `pull`:
-
-```{r, eval=F}
-# extract column "duration_days"
-presidential2 %>% pull(duration_days)
-
-# extract column "duration_days" as a vector, and name the vector using the "name" column
-presidential2 %>% pull(duration_days, name=name)
-```
-
-```{r, eval=F}
-```
-
-```{r, eval=F}
-```
-
-
 ## Exercise
 
-We will work with the **storms** data set: positions and attributes of **198 tropical storms**, measured every 6 hours.
+We will work with a modified version of the **storms** data set: positions and attributes of **198 tropical storms**, measured every 6 hours.
 
-1. Remove columns **month**, **day**, **hour**, **lat**, **long**, **ts_diameter** and **hu_diameter**.
-2. Calculate the **median pressure for each storm status**.
-3. Calculate the **minimum wind speed for each storm (name)**.
-  * What storm has the minimum wind speed?
-4. Calculate **how many storms happened each year**.
-  * *TIP: find what* `distinct()` *from* the `dplyr` package can do...
+1. Download [this file](https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/modified_storms.csv) (using a `tidyverse` function!):
+  * read in and **tidy** the tibble.
+2. What storm has the highest median wind speed?
+3. Calculate how many storms happen each year: check what the `distinct` function can do! You might need to `separate` a column...
   * What are the years with the **maximum** number of storms?
-
 
 <details>
 <summary>
@@ -488,51 +459,31 @@ We will work with the **storms** data set: positions and attributes of **198 tro
 </summary>
 
 ```{r, eval=F}
-# 1. Remove columns month, day, hour, lat, long, ts_diameter and hu_diameter.
-  # remove columns
-  select(storms, -lat, -long, -ts_diameter, -hu_diameter)
-  # same as:
-  select(storms, -c(lat, long, ts_diameter, hu_diameter))
+# 1. download, read in, tidy
+mystorms <- read_csv("https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/modified_storms.csv") %>%
+            separate(col=wind_and_pressure, into=c("wind", "pressure"), sep="-", convert=TRUE) 
+
+# 2. What storm has the highest median wind speed?
+mystorms %>% group_by(name) %>%
+            summarise(median_wind = median(wind)) %>%
+            arrange(desc(median_wind)) %>%
+            slice(1) # slice() can be used to retrieve rows by their index
+      
+# 3. Calculate how many storms happen each year: 
+mystorms %>%  separate(date, into=c("year", "month", "day"), sep="-") %>%
+          distinct(name, year) %>%
+          group_by(year) %>%
+          summarise(storms_per_year=n())
+  #  What are the years with the **maximum** number of storms?
+mystorms %>%  separate(date, into=c("year", "month", "day"), sep="-") %>%
+          distinct(name, year) %>%
+          group_by(year) %>%
+          summarise(storms_per_year=n()) %>%
+          arrange(desc(storms_per_year)) %>% 
+          slice(1:4)
 ```
 
-
-```{r}
-# 2. Calculate the median pressure for each storm status.
-  # group by status and calculate median pressure per storm status
-select(storms, -lat, -long, -ts_diameter, -hu_diameter) %>% 
-  group_by(status) %>%
-  summarise(median(pressure))
-```
-
-
-```{r, eval=F}
-# 3. Calculate the minimum wind speed for each storm (name).  
-  # group storms by name and calculate minimum wind speed
-storms %>%
-  group_by(name) %>%
-  summarise(min_wind = min(wind))
-  # what storm(s) has/have the smallest minimum wind speed?
-storms %>%
-  group_by(name) %>%
-  summarise(min_wind = min(wind)) %>% 
-  slice_min(min_wind)
-```
-
-```{r, eval=F}
-# 4. Calculate how many storms happened each year.
-  # get unique rows when considering both name and year columns
-distinct(storms, name, year)
-  # group by year and count the number of storms
-distinct(storms, name, year) %>%
-  group_by(year) %>%
-  summarise(storms_per_year=n())
-    # What are the years with the **maximum** number of storms?
-distinct(storms, name, year) %>%
-  group_by(year) %>%
-  summarise(storms_per_year=n()) %>%
-  arrange(desc(storms_per_year)) %>% 
-  head()
-```
+</details>
 
 
 

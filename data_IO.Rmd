@@ -30,7 +30,7 @@ f1 <- read_csv(readr_example("mtcars.csv"))
 Read in a file available online (https protocol):
 
 ```{r, message=TRUE}
-f2 <- read_tsv("https://public-docs.crg.es/biocore/projects/training/R_introduction_2021/inputB.txt")
+f2 <- read_tsv("https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/inputB.txt")
 ```
 
 As you can see, `readr` prints out the **column specifications**, so you can make sure the data is read the way it is meant to be.

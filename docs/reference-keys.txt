@@ -35,6 +35,5 @@ select-using-patterns
 filter
 summarise-group_by
 arrange
-a-few-more-useful-functions-from-dplyr
 exercise
 handling-missing-values

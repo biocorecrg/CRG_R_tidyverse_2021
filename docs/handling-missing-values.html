@@ -179,8 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
 <li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
-<li class="chapter" data-level="7.6" data-path="a-few-more-useful-functions-from-dplyr.html"><a href="a-few-more-useful-functions-from-dplyr.html"><i class="fa fa-check"></i><b>7.6</b> A few more useful functions from <code>dplyr</code></a></li>
-<li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
+<li class="chapter" data-level="7.6" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.6</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="divider"></li>
@@ -209,10 +208,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>tidyr::drop_na</code>: drop rows containing missing values.</li>
 </ul>
 <p>Create a tibble that contains missing (NA) values:</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="handling-missing-values.html#cb113-1" aria-hidden="true" tabindex="-1"></a>dfwithNA <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">5</span>), </span>
-<span id="cb113-2"><a href="handling-missing-values.html#cb113-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="cn">NA</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>))</span>
-<span id="cb113-3"><a href="handling-missing-values.html#cb113-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-4"><a href="handling-missing-values.html#cb113-4" aria-hidden="true" tabindex="-1"></a>dfwithNA</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="handling-missing-values.html#cb107-1" aria-hidden="true" tabindex="-1"></a>dfwithNA <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">5</span>), </span>
+<span id="cb107-2"><a href="handling-missing-values.html#cb107-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="cn">NA</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>))</span>
+<span id="cb107-3"><a href="handling-missing-values.html#cb107-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-4"><a href="handling-missing-values.html#cb107-4" aria-hidden="true" tabindex="-1"></a>dfwithNA</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 2
 ##       x y    
 ##   &lt;dbl&gt; &lt;chr&gt;
@@ -221,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3    NA b    
 ## 4     5 c</code></pre>
 <p>Remove rows that contain NA values with <code>drop_na</code>:</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="handling-missing-values.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop_na</span>(dfwithNA)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="handling-missing-values.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop_na</span>(dfwithNA)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##       x y    
 ##   &lt;dbl&gt; &lt;chr&gt;
@@ -230,9 +229,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><code>tidyr::replace_na</code>: change NA values to a selected value (one per column):</li>
 </ul>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="handling-missing-values.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace NAs by 0s in column &quot;x&quot;, and by &quot;k&quot; in column &quot;y&quot;</span></span>
-<span id="cb117-2"><a href="handling-missing-values.html#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="fu">replace_na</span>(dfwithNA, </span>
-<span id="cb117-3"><a href="handling-missing-values.html#cb117-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">list</span>(<span class="at">x=</span><span class="dv">0</span>, <span class="at">y=</span><span class="st">&quot;k&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="handling-missing-values.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace NAs by 0s in column &quot;x&quot;, and by &quot;k&quot; in column &quot;y&quot;</span></span>
+<span id="cb111-2"><a href="handling-missing-values.html#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="fu">replace_na</span>(dfwithNA, </span>
+<span id="cb111-3"><a href="handling-missing-values.html#cb111-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">list</span>(<span class="at">x=</span><span class="dv">0</span>, <span class="at">y=</span><span class="st">&quot;k&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 2
 ##       x y    
 ##   &lt;dbl&gt; &lt;chr&gt;
@@ -243,15 +242,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><code>tidyr::complete</code>: turns implicit missing values into explicit missing values:</li>
 </ul>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="handling-missing-values.html#cb119-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb119-2"><a href="handling-missing-values.html#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">patient =</span> <span class="fu">c</span>(<span class="st">&quot;Patient1&quot;</span>, <span class="st">&quot;Patient1&quot;</span>, <span class="st">&quot;Patient2&quot;</span>, <span class="st">&quot;Patient3&quot;</span>, <span class="st">&quot;Patient3&quot;</span>),</span>
-<span id="cb119-3"><a href="handling-missing-values.html#cb119-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>),</span>
-<span id="cb119-4"><a href="handling-missing-values.html#cb119-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">value1 =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb119-5"><a href="handling-missing-values.html#cb119-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">value2 =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">8</span></span>
-<span id="cb119-6"><a href="handling-missing-values.html#cb119-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb119-7"><a href="handling-missing-values.html#cb119-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb119-8"><a href="handling-missing-values.html#cb119-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Missing a row for Patient2 / Treatment B: add it and fill in with NA values:</span></span>
-<span id="cb119-9"><a href="handling-missing-values.html#cb119-9" aria-hidden="true" tabindex="-1"></a><span class="fu">complete</span>(df, patient, treatment)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="handling-missing-values.html#cb113-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb113-2"><a href="handling-missing-values.html#cb113-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">patient =</span> <span class="fu">c</span>(<span class="st">&quot;Patient1&quot;</span>, <span class="st">&quot;Patient1&quot;</span>, <span class="st">&quot;Patient2&quot;</span>, <span class="st">&quot;Patient3&quot;</span>, <span class="st">&quot;Patient3&quot;</span>),</span>
+<span id="cb113-3"><a href="handling-missing-values.html#cb113-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>),</span>
+<span id="cb113-4"><a href="handling-missing-values.html#cb113-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">value1 =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb113-5"><a href="handling-missing-values.html#cb113-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">value2 =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">8</span></span>
+<span id="cb113-6"><a href="handling-missing-values.html#cb113-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb113-7"><a href="handling-missing-values.html#cb113-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-8"><a href="handling-missing-values.html#cb113-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Missing a row for Patient2 / Treatment B: add it and fill in with NA values:</span></span>
+<span id="cb113-9"><a href="handling-missing-values.html#cb113-9" aria-hidden="true" tabindex="-1"></a><span class="fu">complete</span>(df, patient, treatment)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   patient  treatment value1 value2
 ##   &lt;chr&gt;    &lt;chr&gt;      &lt;int&gt;  &lt;int&gt;
@@ -261,9 +260,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 Patient2 B             NA     NA
 ## 5 Patient3 A              4      7
 ## 6 Patient3 B              5      8</code></pre>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="handling-missing-values.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to fill it missing other values that NA, you can use the fill parameter</span></span>
-<span id="cb121-2"><a href="handling-missing-values.html#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="fu">complete</span>(df, patient, treatment, </span>
-<span id="cb121-3"><a href="handling-missing-values.html#cb121-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill=</span><span class="fu">list</span>(<span class="at">value1=</span><span class="dv">0</span>, <span class="at">value2=</span><span class="cn">NA</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="handling-missing-values.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to fill it missing other values that NA, you can use the fill parameter</span></span>
+<span id="cb115-2"><a href="handling-missing-values.html#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">complete</span>(df, patient, treatment, </span>
+<span id="cb115-3"><a href="handling-missing-values.html#cb115-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill=</span><span class="fu">list</span>(<span class="at">value1=</span><span class="dv">0</span>, <span class="at">value2=</span><span class="cn">NA</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   patient  treatment value1 value2
 ##   &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt;  &lt;int&gt;
@@ -276,10 +275,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>In practice: what if you have <code>NA</code> values, along with empty cells and “customized” missing values?</li>
 </ul>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="handling-missing-values.html#cb123-1" aria-hidden="true" tabindex="-1"></a>dfwithNA2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">5</span>, <span class="st">&quot;&quot;</span>, <span class="dv">4</span>), </span>
-<span id="cb123-2"><a href="handling-missing-values.html#cb123-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="cn">NA</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;missing&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="handling-missing-values.html#cb117-1" aria-hidden="true" tabindex="-1"></a>dfwithNA2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">5</span>, <span class="st">&quot;&quot;</span>, <span class="dv">4</span>), </span>
+<span id="cb117-2"><a href="handling-missing-values.html#cb117-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="cn">NA</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;missing&quot;</span>))</span></code></pre></div>
 <p>Replace empty cells and “customized” missing values with <code>NA</code> with <code>na_if</code>:</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="handling-missing-values.html#cb124-1" aria-hidden="true" tabindex="-1"></a>dfwithNA2 <span class="sc">%&gt;%</span> <span class="fu">na_if</span>(<span class="st">&quot;missing&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">na_if</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="handling-missing-values.html#cb118-1" aria-hidden="true" tabindex="-1"></a>dfwithNA2 <span class="sc">%&gt;%</span> <span class="fu">na_if</span>(<span class="st">&quot;missing&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">na_if</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 2
 ##   x     y    
 ##   &lt;chr&gt; &lt;chr&gt;
@@ -297,8 +296,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>.cols</code>: columns to transform: by default, all columns will be transformed.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="handling-missing-values.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="co"># across: </span></span>
-<span id="cb126-2"><a href="handling-missing-values.html#cb126-2" aria-hidden="true" tabindex="-1"></a>dfwithNA2 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.fns =</span> <span class="sc">~</span><span class="fu">replace</span>(., . <span class="sc">==</span>  <span class="st">&quot;&quot;</span> <span class="sc">|</span> . <span class="sc">==</span> <span class="st">&quot;missing&quot;</span>, <span class="cn">NA</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="handling-missing-values.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># across: </span></span>
+<span id="cb120-2"><a href="handling-missing-values.html#cb120-2" aria-hidden="true" tabindex="-1"></a>dfwithNA2 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.fns =</span> <span class="sc">~</span><span class="fu">replace</span>(., . <span class="sc">==</span>  <span class="st">&quot;&quot;</span> <span class="sc">|</span> . <span class="sc">==</span> <span class="st">&quot;missing&quot;</span>, <span class="cn">NA</span>)))</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 2
 ##   x     y    
 ##   &lt;chr&gt; &lt;chr&gt;
