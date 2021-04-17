@@ -9,9 +9,9 @@ delete_merged_file: true
 rmd_files: ["index.Rmd", 
             "intro.Rmd",
             "tibbles.Rmd",
+            "data_IO.Rmd",
             "tidyr.Rmd",
             "pipe.Rmd",
-            "data_IO.Rmd",
             "dplyr.Rmd",
             "missing_values.Rmd"]
 output:

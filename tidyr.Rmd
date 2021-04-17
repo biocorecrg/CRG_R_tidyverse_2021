@@ -136,3 +136,77 @@ patients4 <- mutate_at(patients3,
 
 </details>
 
+
+## Pivoting data
+
+The examples above were obvious untidy (two values in one cell, date in t2o different columns).
+<br>
+It will happen that the format of the data you are usually working with is NOT tidy.
+
+<br>
+Example: here we create a tibble that contains the expression of 4 genes in 4 samples:
+
+```{r, eval=T}
+df_expr <- tibble(gene=c("Fgfrl1", "Usp34", "Mlf2", "Gga1"),
+                KO_t0=1:4,
+                KO_t10=5:2,
+                WT_t0=6:3,
+                WT_t10=0:3
+                )
+```
+
+**Why can't this tibble be considered `tidy`?**
+<br>
+* One variable (expression) is spread across 4 columns.
+
+In order to fix this, we can use the `pivot_longer` function: we will increase the number of rows and decreases the number of columns:
+
+```{r}
+pivot_longer(df_expr,
+             cols=c("KO_t0", "KO_t10", "WT_t0", "WT_t10")
+)
+```
+
+Now **only one column**, column `value` contains the expression variable..
+
+```{r}
+expr_long <- pivot_longer(df_expr,
+             cols=c("KO_t0", "KO_t10", "WT_t0", "WT_t10"),
+             values_to="expression",
+             names_to="sample"
+)
+```
+
+Is there anything else wrong here, to make the data **tidy**?
+
+* There are 2 variables in column `sample`: samples experimental group (KO or WT) and time point (t0 and t10): we can `separate` them.
+
+```{r}
+# we can add "remove=FALSE" so as to keep the original column (sample name) that can be useful
+expr_tidy <- separate(expr_long,
+              col=sample, 
+              into=c("group", "time"),
+              sep="_",
+              remove=FALSE
+         )    
+```
+
+
+`pivot_wider` does just the opposite: when an observation is scattered across multiple rows, you can move it back to a column.
+<br> 
+```{r}
+df_expr2 <- tibble(gene=c(rep("Fgfrl1", 4), rep("Mlf2", 4)),
+                group=rep(rep(c("KO", "WT"), each=2), 2),
+                type=rep(c("counts_rnaseq", "Ct_qpcr"), 4),
+                value=c(10, 25, 8, 22, 7, 23, 11, 28)
+                )
+
+```
+
+Here, it would make sense to have a column `counts_rnaseq` and a column `Ct_qpcr`, which would contain their corresponding values.
+
+
+df_expr2_wider <- pivot_wider(df_expr2,
+                        names_from=type, 
+                        values_from=value)
+
