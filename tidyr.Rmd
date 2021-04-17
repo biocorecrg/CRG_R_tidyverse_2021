@@ -41,7 +41,7 @@ Here we introduce some useful functions from the `tidyr` package to clean up and
 
 ## Separate & Unite
 
-Let's work on the **untidy** tibble **`table5`** that is a built-in data set from the `tidyr` package *(table5 displays the number of tuberculosis cases documented by the WHO in selected countries)*:
+Let's work on the **untidy** tibble **`table5`**, a built-in data set from the `tidyr` package *(table5 displays the number of tuberculosis cases documented by the WHO in selected countries)*:
 
 
 ```{r, echo=F}
@@ -50,7 +50,7 @@ knitr::kable(table5, caption ="`table5`")
 
 ### Separate
 
-Function `separate` separates (indeed!) a column into 2 or more columns: `separate(data, col, into, sep)`
+Function `separate` separates (indeed!) a column into 2 or more columns, given a specified field separator: `separate(data, col, into, sep)`
 
 ```{r}
 # separate column "rate" into 2 columns that we name cases and population, based on the "/" separator.
@@ -112,39 +112,33 @@ patients3 <- unite(data=patients2,
       sep="")
 ```
 
-</details>
-
 * Is there a problem with `patients3`? Display the tibble in the R console...
 
 Columns `height` and `weight` are **treated as characters** (because they originally contained **underscores** "_" !).
 <br> 
-We can convert them into numbers with the `mutate_at` function from the `dplyr` package: try it!
-
-<details>
-<summary>
-<h5 style="background-color: #a4edff; display: inline-block;">*Answer*</h5>
-</summary>
+We can convert them into numbers with the `convert=TRUE` parameter in `separate`:
 
 ```{r}
-# first argument: the tibble
-# second argument: a vector of column names to mutate
-# third argument: how to mutate those columns
-patients4 <- mutate_at(patients3, 
-                       c("height", "weight"), 
-                       as.numeric)
+# convert=TRUE: runs `type.convert` fonction (that converts data to appropriate type)
+patients2 <- separate(data=patients, 
+                      col=4,
+                      into=c("height", "weight"),
+                      sep="_", 
+                      convert=TRUE)
 ```
 
 </details>
 
 
+
 ## Pivoting data
 
-The examples above were obvious untidy (two values in one cell, date in t2o different columns).
-<br>
+The examples given before were obviously untidy: two values in one cell, date split in two different columns.
+<br><br>
 It will happen that the format of the data you are usually working with is NOT tidy.
 
 <br>
-Example: here we create a tibble that contains the expression of 4 genes in 4 samples:
+Example: here we create a tibble that contains the expression of 4 genes in 4 samples: the  gene expression is measured at **two time points** and for **two experimental conditions**:
 
 ```{r, eval=T}
 df_expr <- tibble(gene=c("Fgfrl1", "Usp34", "Mlf2", "Gga1"),
@@ -155,11 +149,11 @@ df_expr <- tibble(gene=c("Fgfrl1", "Usp34", "Mlf2", "Gga1"),
                 )
 ```
 
-**Why can't this tibble be considered `tidy`?**
+**Why this tibble can't be considered `tidy`?**
 <br>
 * One variable (expression) is spread across 4 columns.
 
-In order to fix this, we can use the `pivot_longer` function: we will increase the number of rows and decreases the number of columns:
+In order to fix this, we can use the `pivot_longer` function: we will **increase the number of rows** and **decrease the number of columns**:
 
 ```{r}
 pivot_longer(df_expr,
@@ -167,7 +161,9 @@ pivot_longer(df_expr,
 )
 ```
 
-Now **only one column**, column `value` contains the expression variable..
+Now **only one column** - `value` - contains the **expression** variable.
+
+We can change the name of the newly created columns with parameters `values_to` (where the values are stored) and `names_to` (where the former column names are stored):
 
 ```{r}
 expr_long <- pivot_longer(df_expr,
@@ -177,12 +173,12 @@ expr_long <- pivot_longer(df_expr,
 )
 ```
 
-Is there anything else wrong here, to make the data **tidy**?
+Is there anything else that we could do here, to make the data even more **tidy**?
 
-* There are 2 variables in column `sample`: samples experimental group (KO or WT) and time point (t0 and t10): we can `separate` them.
+* There are 2 variables in column `sample`: samples **experimental group** (KO or WT) and **time point** (t0 and t10): we can `separate` them.
 
 ```{r}
-# we can add "remove=FALSE" so as to keep the original column (sample name) that can be useful
+# we can add "remove=FALSE" so as to keep the original column (sample name), that can be useful in this case:
 expr_tidy <- separate(expr_long,
               col=sample, 
               into=c("group", "time"),
@@ -191,22 +187,59 @@ expr_tidy <- separate(expr_long,
          )    
 ```
 
-
-`pivot_wider` does just the opposite: when an observation is scattered across multiple rows, you can move it back to a column.
-<br> 
+The `pivot_wider` function does just the opposite: when an observation is scattered across multiple rows, you can move it back to a column.
+<br><br>
+Let's take the following example, where expression of 2 genes is measured under **two conditions** (KO and WT) using **two techniques** (RNA-seq and qPCR):
 ```{r}
 df_expr2 <- tibble(gene=c(rep("Fgfrl1", 4), rep("Mlf2", 4)),
                 group=rep(rep(c("KO", "WT"), each=2), 2),
                 type=rep(c("counts_rnaseq", "Ct_qpcr"), 4),
                 value=c(10, 25, 8, 22, 7, 23, 11, 28)
                 )
-
 ```
 
-Here, it would make sense to have a column `counts_rnaseq` and a column `Ct_qpcr`, which would contain their corresponding values.
+Here, it would make sense to have a column `counts_rnaseq` and a column `Ct_qpcr`, which would contain their corresponding values:
 
-
+```{r}
 df_expr2_wider <- pivot_wider(df_expr2,
                         names_from=type, 
                         values_from=value)
+```
+
+<center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
+
+Make the following data frame **tidy**!
+
+```{r, eval=T}
+df_w <- tibble(Name=c("Anna", "Jordi", "Laura", "Miquel"),
+                Weight_day0=c(67, 72, 62, 85),
+                Weight_day10=c(65, 73, 66, 80),
+                )
+```
+
+<details>
+<summary>
+<h5 style="background-color: #a4edff; display: inline-block;">*Answer*</h5>
+</summary>
+
+```{r, eval=T}
+# `pivot_longer` on "Weight" columns:
+df_w2 <- pivot_longer(df_w, 
+                    cols=c("Weight_day0", "Weight_day10"),
+                    values_to="weight", 
+                    names_to="day"
+                    )
+
+# `separate` on the "day" column
+  # into=c(NA, "day"): the first output is ignored (in the), the "Weight" strings
+df_w3 <- separate(df_w2, col = "day", 
+                  sep="_", 
+                  into=c(NA, "day")
+                  )
+```
+
+</details>
+
+
+                
 

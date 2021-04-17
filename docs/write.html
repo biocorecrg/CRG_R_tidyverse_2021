@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.2 Write | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
-  <meta name="description" content="6.2 Write | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <title>4.2 Write | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="4.2 Write | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.2 Write | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:title" content="4.2 Write | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.2 Write | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="twitter:title" content="4.2 Write | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   
   
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-15" />
+<meta name="date" content="2021-04-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="read.html"/>
-<link rel="next" href="data-manipulation.html"/>
+<link rel="next" href="tidy-data-with-tidyr.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -152,32 +152,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Data types in tibbles</a></li>
 <li class="chapter" data-level="3.5" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.5</b> Subsetting / manipulating tibbles</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="tidy-data-with-tidyr.html"><a href="tidy-data-with-tidyr.html"><i class="fa fa-check"></i><b>4</b> Tidy data with <code>tidyr</code></a>
+<li class="chapter" data-level="4" data-path="input-output-with-readr.html"><a href="input-output-with-readr.html"><i class="fa fa-check"></i><b>4</b> Input / output with <em><code>readr</code></em></a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="what-is-tidy-data.html"><a href="what-is-tidy-data.html"><i class="fa fa-check"></i><b>4.1</b> What is “tidy” data?</a></li>
-<li class="chapter" data-level="4.2" data-path="separate-unite.html"><a href="separate-unite.html"><i class="fa fa-check"></i><b>4.2</b> Separate &amp; Unite</a>
+<li class="chapter" data-level="4.1" data-path="read.html"><a href="read.html"><i class="fa fa-check"></i><b>4.1</b> Read</a></li>
+<li class="chapter" data-level="4.2" data-path="write.html"><a href="write.html"><i class="fa fa-check"></i><b>4.2</b> Write</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tidy-data-with-tidyr.html"><a href="tidy-data-with-tidyr.html"><i class="fa fa-check"></i><b>5</b> Tidy data with <code>tidyr</code></a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="separate-unite.html"><a href="separate-unite.html#separate"><i class="fa fa-check"></i><b>4.2.1</b> Separate</a></li>
-<li class="chapter" data-level="4.2.2" data-path="separate-unite.html"><a href="separate-unite.html#unite"><i class="fa fa-check"></i><b>4.2.2</b> Unite</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="the-forward-pipe-operator.html"><a href="the-forward-pipe-operator.html"><i class="fa fa-check"></i><b>5</b> The <code>%&gt;%</code> forward-pipe operator</a></li>
-<li class="chapter" data-level="6" data-path="input-output-with-readr.html"><a href="input-output-with-readr.html"><i class="fa fa-check"></i><b>6</b> Input / output with <em><code>readr</code></em></a>
+<li class="chapter" data-level="5.1" data-path="what-is-tidy-data.html"><a href="what-is-tidy-data.html"><i class="fa fa-check"></i><b>5.1</b> What is “tidy” data?</a></li>
+<li class="chapter" data-level="5.2" data-path="separate-unite.html"><a href="separate-unite.html"><i class="fa fa-check"></i><b>5.2</b> Separate &amp; Unite</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="read.html"><a href="read.html"><i class="fa fa-check"></i><b>6.1</b> Read</a></li>
-<li class="chapter" data-level="6.2" data-path="write.html"><a href="write.html"><i class="fa fa-check"></i><b>6.2</b> Write</a></li>
+<li class="chapter" data-level="5.2.1" data-path="separate-unite.html"><a href="separate-unite.html#separate"><i class="fa fa-check"></i><b>5.2.1</b> Separate</a></li>
+<li class="chapter" data-level="5.2.2" data-path="separate-unite.html"><a href="separate-unite.html#unite"><i class="fa fa-check"></i><b>5.2.2</b> Unite</a></li>
 </ul></li>
+<li class="chapter" data-level="5.3" data-path="pivoting-data.html"><a href="pivoting-data.html"><i class="fa fa-check"></i><b>5.3</b> Pivoting data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="the-forward-pipe-operator.html"><a href="the-forward-pipe-operator.html"><i class="fa fa-check"></i><b>6</b> The <code>%&gt;%</code> forward-pipe operator</a></li>
 <li class="chapter" data-level="7" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>7</b> Data manipulation</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="mutate-transmute.html"><a href="mutate-transmute.html"><i class="fa fa-check"></i><b>7.1</b> mutate &amp; transmute</a></li>
 <li class="chapter" data-level="7.2" data-path="select.html"><a href="select.html"><i class="fa fa-check"></i><b>7.2</b> select</a>
 <ul>
 <li class="chapter" data-level="7.2.1" data-path="select.html"><a href="select.html#select_if"><i class="fa fa-check"></i><b>7.2.1</b> select_if</a></li>
+<li class="chapter" data-level="7.2.2" data-path="select.html"><a href="select.html#select-using-patterns"><i class="fa fa-check"></i><b>7.2.2</b> select using patterns</a></li>
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
 <li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
-<li class="chapter" data-level="7.6" data-path="more-useful-functions-from-dplyr.html"><a href="more-useful-functions-from-dplyr.html"><i class="fa fa-check"></i><b>7.6</b> More useful functions from <code>dplyr</code></a></li>
+<li class="chapter" data-level="7.6" data-path="a-few-more-useful-functions-from-dplyr.html"><a href="a-few-more-useful-functions-from-dplyr.html"><i class="fa fa-check"></i><b>7.6</b> A few more useful functions from <code>dplyr</code></a></li>
 <li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
@@ -201,12 +203,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="write" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> Write</h2>
+<div id="write" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Write</h2>
 <p><code>write_delim</code>, <code>write_csv</code>, <code>write_tsv</code>: write a <code>tibble</code> into a delimited file:</p>
 <table style="width:60%;">
 <caption>
-<span id="tab:unnamed-chunk-31">Table 6.2: </span>write_delim and derived functions
+<span id="tab:unnamed-chunk-18">Table 4.2: </span>write_delim and derived functions
 </caption>
 <thead>
 <tr>
@@ -245,25 +247,38 @@ write_tsv
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="write.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(<span class="at">x=</span>f2,</span>
-<span id="cb41-2"><a href="write.html#cb41-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">file=</span><span class="st">&quot;test_write_csv.csv&quot;</span>)</span>
-<span id="cb41-3"><a href="write.html#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="write.html#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># to get the exact same in base R, you would need to set a few additional parameters:</span></span>
-<span id="cb41-5"><a href="write.html#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x=</span>f2,</span>
-<span id="cb41-6"><a href="write.html#cb41-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">file=</span><span class="st">&quot;test_base_write_csv.csv&quot;</span>, </span>
-<span id="cb41-7"><a href="write.html#cb41-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">quote=</span>F, </span>
-<span id="cb41-8"><a href="write.html#cb41-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">row.names =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="write.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(<span class="at">x=</span>f2,</span>
+<span id="cb31-2"><a href="write.html#cb31-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">file=</span><span class="st">&quot;test_write_csv.csv&quot;</span>)</span>
+<span id="cb31-3"><a href="write.html#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="write.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># to get the exact same in base R, you would need to set a few additional parameters:</span></span>
+<span id="cb31-5"><a href="write.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x=</span>f2,</span>
+<span id="cb31-6"><a href="write.html#cb31-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">file=</span><span class="st">&quot;test_base_write_csv.csv&quot;</span>, </span>
+<span id="cb31-7"><a href="write.html#cb31-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">quote=</span>F, </span>
+<span id="cb31-8"><a href="write.html#cb31-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">row.names =</span> F)</span></code></pre></div>
 <center>
 <h4 style="background-color: #a4edff; display: inline-block;">
 <strong>HANDS-ON</strong>
 </h4>
 </center>
+<ul>
+<li>Read in file <code>readr_example("mtcars.csv.zip")</code> (also provided with the readr package)</li>
+<li>With base R coding, remove rows where <strong>mpg &gt; 20</strong></li>
+<li>Write this new tibble to a <strong>tab-separated file</strong>.</li>
+</ul>
 <details>
 <summary>
 <h5 style="background-color: #a4edff; display: inline-block;">
 <em>Answer</em>
 </h5>
 </summary>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="write.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in file readr_example(&quot;mtcars.csv.zip&quot;)</span></span>
+<span id="cb32-2"><a href="write.html#cb32-2" aria-hidden="true" tabindex="-1"></a>Cars <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">readr_example</span>(<span class="st">&quot;mtcars.csv.zip&quot;</span>))</span>
+<span id="cb32-3"><a href="write.html#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="write.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># With base R coding, remove rows where mpg &gt; 20</span></span>
+<span id="cb32-5"><a href="write.html#cb32-5" aria-hidden="true" tabindex="-1"></a>mpg20 <span class="ot">&lt;-</span> Cars[Cars<span class="sc">$</span>mpg <span class="sc">&gt;</span> <span class="dv">20</span>, ]</span>
+<span id="cb32-6"><a href="write.html#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="write.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Write this new tibble to a tab-separated file.</span></span>
+<span id="cb32-8"><a href="write.html#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="fu">write_tsv</span>(mpg20, <span class="st">&quot;mtcars_mpg20.txt&quot;</span>)</span></code></pre></div>
 <details>
 
 </div>
@@ -274,7 +289,7 @@ write_tsv
         </div>
       </div>
 <a href="read.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-manipulation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tidy-data-with-tidyr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

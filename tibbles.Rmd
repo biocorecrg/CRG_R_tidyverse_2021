@@ -3,24 +3,20 @@
 ## What are tibbles?
 
 * Modern re-thinking of data frame.
-* They leave behind some features (sometimes user-unfriendly) of classical data frames:
+* They leave behind some (sometimes user-unfriendly) features of classical data frames:
   * No string to factor conversion (*NOTE*: since version 4.0 of R, this is <u>no longer the case for classical data frames</u>)
   * No automatic creation of row names.
   * Column names can be **non-valid R variable names** (for example, they can start with numbers).
 
 ## Creating tibbles
 
-You can create a simple tibble as you create a data frame, but with the `tibble` function:
+You can create a simple tibble with the `tibble` function, similarly as when you create a data frame:
 
-```{r, eval=T}
+```{r, echo=TRUE, eval=TRUE}
 mytibble <- tibble(
   letters = LETTERS,
   numbers = 1:26
 )
-```
-
-```{echo=F, eval=T}
-mytibble
 ```
 
 * Convert a data frame to a tibble:
@@ -40,7 +36,7 @@ as.data.frame(mytibble)
 
 ## Displaying tibbles
 
-The way it **prints** in the console is different that that of data frames:
+The way it **prints** in the console is different than that of data frames:
 
 * Dimensions are shown.
 * Information about columns **data types** (no need for `mode()` or `typeof`).
@@ -63,7 +59,7 @@ print(mytibble, n=Inf)
 
 ## Data types in tibbles
 
-When you display a tibble, note that there is a 3 or 4-letter abbreviation under each column name: these describe the type of each variable:
+When you display a tibble, note that there is a **3 or 4-letter abbreviation** under each column name that describes the type of each variable:
 
 ```{r, echo=F, eval=T}
 tbl_dtypes <-tibble(Abbreviation=c("int", "dbl", "chr", "lgl", "fctr", "date", "dttm"), 
@@ -85,7 +81,7 @@ mytibble$letters
 # or the [[]]
 mytibble[["letters"]]
 
-# Note: with using simple square brackets, you extract a sub-tibble (it remains a 2 dimensional object)
+# Note: with simple square brackets, you extract a sub-tibble (it remains a 2 dimensional object)
 mytibble["letters"]
 ```
 

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5.3 Pivoting data | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="5.3 Pivoting data | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5.3 Pivoting data | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5.3 Pivoting data | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  
+  
+  
+
+<meta name="author" content="Sarah Bonnin" />
+
+
+<meta name="date" content="2021-04-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="separate-unite.html"/>
+<link rel="next" href="the-forward-pipe-operator.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Intermediate R: the "tidyverse"</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-the-tidyverse.html"><a href="what-is-the-tidyverse.html"><i class="fa fa-check"></i><b>2.1</b> What is the “tidyverse”</a></li>
+<li class="chapter" data-level="2.2" data-path="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html"><a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html"><i class="fa fa-check"></i><b>2.2</b> Good reasons to learn (at least a bit) how to use it</a></li>
+<li class="chapter" data-level="2.3" data-path="tidyverse-core-packages.html"><a href="tidyverse-core-packages.html"><i class="fa fa-check"></i><b>2.3</b> Tidyverse core packages</a></li>
+<li class="chapter" data-level="2.4" data-path="install-and-load-all-tidyverse-package.html"><a href="install-and-load-all-tidyverse-package.html"><i class="fa fa-check"></i><b>2.4</b> Install and load all tidyverse package</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tibbles.html"><a href="tibbles.html"><i class="fa fa-check"></i><b>3</b> Tibbles</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="what-are-tibbles.html"><a href="what-are-tibbles.html"><i class="fa fa-check"></i><b>3.1</b> What are tibbles?</a></li>
+<li class="chapter" data-level="3.2" data-path="creating-tibbles.html"><a href="creating-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Creating tibbles</a></li>
+<li class="chapter" data-level="3.3" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Displaying tibbles</a></li>
+<li class="chapter" data-level="3.4" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Data types in tibbles</a></li>
+<li class="chapter" data-level="3.5" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.5</b> Subsetting / manipulating tibbles</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="input-output-with-readr.html"><a href="input-output-with-readr.html"><i class="fa fa-check"></i><b>4</b> Input / output with <em><code>readr</code></em></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="read.html"><a href="read.html"><i class="fa fa-check"></i><b>4.1</b> Read</a></li>
+<li class="chapter" data-level="4.2" data-path="write.html"><a href="write.html"><i class="fa fa-check"></i><b>4.2</b> Write</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tidy-data-with-tidyr.html"><a href="tidy-data-with-tidyr.html"><i class="fa fa-check"></i><b>5</b> Tidy data with <code>tidyr</code></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="what-is-tidy-data.html"><a href="what-is-tidy-data.html"><i class="fa fa-check"></i><b>5.1</b> What is “tidy” data?</a></li>
+<li class="chapter" data-level="5.2" data-path="separate-unite.html"><a href="separate-unite.html"><i class="fa fa-check"></i><b>5.2</b> Separate &amp; Unite</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="separate-unite.html"><a href="separate-unite.html#separate"><i class="fa fa-check"></i><b>5.2.1</b> Separate</a></li>
+<li class="chapter" data-level="5.2.2" data-path="separate-unite.html"><a href="separate-unite.html#unite"><i class="fa fa-check"></i><b>5.2.2</b> Unite</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="pivoting-data.html"><a href="pivoting-data.html"><i class="fa fa-check"></i><b>5.3</b> Pivoting data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="the-forward-pipe-operator.html"><a href="the-forward-pipe-operator.html"><i class="fa fa-check"></i><b>6</b> The <code>%&gt;%</code> forward-pipe operator</a></li>
+<li class="chapter" data-level="7" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>7</b> Data manipulation</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mutate-transmute.html"><a href="mutate-transmute.html"><i class="fa fa-check"></i><b>7.1</b> mutate &amp; transmute</a></li>
+<li class="chapter" data-level="7.2" data-path="select.html"><a href="select.html"><i class="fa fa-check"></i><b>7.2</b> select</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="select.html"><a href="select.html#select_if"><i class="fa fa-check"></i><b>7.2.1</b> select_if</a></li>
+<li class="chapter" data-level="7.2.2" data-path="select.html"><a href="select.html#select-using-patterns"><i class="fa fa-check"></i><b>7.2.2</b> select using patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
+<li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
+<li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
+<li class="chapter" data-level="7.6" data-path="a-few-more-useful-functions-from-dplyr.html"><a href="a-few-more-useful-functions-from-dplyr.html"><i class="fa fa-check"></i><b>7.6</b> A few more useful functions from <code>dplyr</code></a></li>
+<li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Intermediate R: introduction to data wrangling with the Tidyverse (2021)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pivoting-data" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Pivoting data</h2>
+<p>The examples given before were obviously untidy: two values in one cell, date split in two different columns.
+<br><br>
+It will happen that the format of the data you are usually working with is NOT tidy.</p>
+<p><br>
+Example: here we create a tibble that contains the expression of 4 genes in 4 samples: the gene expression is measured at <strong>two time points</strong> and for <strong>two experimental conditions</strong>:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="pivoting-data.html#cb40-1" aria-hidden="true" tabindex="-1"></a>df_expr <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">gene=</span><span class="fu">c</span>(<span class="st">&quot;Fgfrl1&quot;</span>, <span class="st">&quot;Usp34&quot;</span>, <span class="st">&quot;Mlf2&quot;</span>, <span class="st">&quot;Gga1&quot;</span>),</span>
+<span id="cb40-2"><a href="pivoting-data.html#cb40-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">KO_t0=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb40-3"><a href="pivoting-data.html#cb40-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">KO_t10=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">2</span>,</span>
+<span id="cb40-4"><a href="pivoting-data.html#cb40-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">WT_t0=</span><span class="dv">6</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb40-5"><a href="pivoting-data.html#cb40-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">WT_t10=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb40-6"><a href="pivoting-data.html#cb40-6" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div>
+<p><strong>Why this tibble can’t be considered <code>tidy</code>?</strong>
+<br>
+* One variable (expression) is spread across 4 columns.</p>
+<p>In order to fix this, we can use the <code>pivot_longer</code> function: we will <strong>increase the number of rows</strong> and <strong>decrease the number of columns</strong>:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="pivoting-data.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(df_expr,</span>
+<span id="cb41-2"><a href="pivoting-data.html#cb41-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;KO_t0&quot;</span>, <span class="st">&quot;KO_t10&quot;</span>, <span class="st">&quot;WT_t0&quot;</span>, <span class="st">&quot;WT_t10&quot;</span>)</span>
+<span id="cb41-3"><a href="pivoting-data.html#cb41-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 16 x 3
+##    gene   name   value
+##    &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt;
+##  1 Fgfrl1 KO_t0      1
+##  2 Fgfrl1 KO_t10     5
+##  3 Fgfrl1 WT_t0      6
+##  4 Fgfrl1 WT_t10     0
+##  5 Usp34  KO_t0      2
+##  6 Usp34  KO_t10     4
+##  7 Usp34  WT_t0      5
+##  8 Usp34  WT_t10     1
+##  9 Mlf2   KO_t0      3
+## 10 Mlf2   KO_t10     3
+## 11 Mlf2   WT_t0      4
+## 12 Mlf2   WT_t10     2
+## 13 Gga1   KO_t0      4
+## 14 Gga1   KO_t10     2
+## 15 Gga1   WT_t0      3
+## 16 Gga1   WT_t10     3</code></pre>
+<p>Now <strong>only one column</strong> - <code>value</code> - contains the <strong>expression</strong> variable.</p>
+<p>We can change the name of the newly created columns with parameters <code>values_to</code> (where the values are stored) and <code>names_to</code> (where the former column names are stored):</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="pivoting-data.html#cb43-1" aria-hidden="true" tabindex="-1"></a>expr_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_expr,</span>
+<span id="cb43-2"><a href="pivoting-data.html#cb43-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;KO_t0&quot;</span>, <span class="st">&quot;KO_t10&quot;</span>, <span class="st">&quot;WT_t0&quot;</span>, <span class="st">&quot;WT_t10&quot;</span>),</span>
+<span id="cb43-3"><a href="pivoting-data.html#cb43-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">values_to=</span><span class="st">&quot;expression&quot;</span>,</span>
+<span id="cb43-4"><a href="pivoting-data.html#cb43-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">names_to=</span><span class="st">&quot;sample&quot;</span></span>
+<span id="cb43-5"><a href="pivoting-data.html#cb43-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Is there anything else that we could do here, to make the data even more <strong>tidy</strong>?</p>
+<ul>
+<li>There are 2 variables in column <code>sample</code>: samples <strong>experimental group</strong> (KO or WT) and <strong>time point</strong> (t0 and t10): we can <code>separate</code> them.</li>
+</ul>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="pivoting-data.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we can add &quot;remove=FALSE&quot; so as to keep the original column (sample name), that can be useful in this case:</span></span>
+<span id="cb44-2"><a href="pivoting-data.html#cb44-2" aria-hidden="true" tabindex="-1"></a>expr_tidy <span class="ot">&lt;-</span> <span class="fu">separate</span>(expr_long,</span>
+<span id="cb44-3"><a href="pivoting-data.html#cb44-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">col=</span>sample, </span>
+<span id="cb44-4"><a href="pivoting-data.html#cb44-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;group&quot;</span>, <span class="st">&quot;time&quot;</span>),</span>
+<span id="cb44-5"><a href="pivoting-data.html#cb44-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">sep=</span><span class="st">&quot;_&quot;</span>,</span>
+<span id="cb44-6"><a href="pivoting-data.html#cb44-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">remove=</span><span class="cn">FALSE</span></span>
+<span id="cb44-7"><a href="pivoting-data.html#cb44-7" aria-hidden="true" tabindex="-1"></a>         )    </span></code></pre></div>
+<p>The <code>pivot_wider</code> function does just the opposite: when an observation is scattered across multiple rows, you can move it back to a column.
+<br><br>
+Let’s take the following example, where expression of 2 genes is measured under <strong>two conditions</strong> (KO and WT) using <strong>two techniques</strong> (RNA-seq and qPCR):</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="pivoting-data.html#cb45-1" aria-hidden="true" tabindex="-1"></a>df_expr2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">gene=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Fgfrl1&quot;</span>, <span class="dv">4</span>), <span class="fu">rep</span>(<span class="st">&quot;Mlf2&quot;</span>, <span class="dv">4</span>)),</span>
+<span id="cb45-2"><a href="pivoting-data.html#cb45-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">group=</span><span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;KO&quot;</span>, <span class="st">&quot;WT&quot;</span>), <span class="at">each=</span><span class="dv">2</span>), <span class="dv">2</span>),</span>
+<span id="cb45-3"><a href="pivoting-data.html#cb45-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">type=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;counts_rnaseq&quot;</span>, <span class="st">&quot;Ct_qpcr&quot;</span>), <span class="dv">4</span>),</span>
+<span id="cb45-4"><a href="pivoting-data.html#cb45-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">value=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">8</span>, <span class="dv">22</span>, <span class="dv">7</span>, <span class="dv">23</span>, <span class="dv">11</span>, <span class="dv">28</span>)</span>
+<span id="cb45-5"><a href="pivoting-data.html#cb45-5" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div>
+<p>Here, it would make sense to have a column <code>counts_rnaseq</code> and a column <code>Ct_qpcr</code>, which would contain their corresponding values:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="pivoting-data.html#cb46-1" aria-hidden="true" tabindex="-1"></a>df_expr2_wider <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(df_expr2,</span>
+<span id="cb46-2"><a href="pivoting-data.html#cb46-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">names_from=</span>type, </span>
+<span id="cb46-3"><a href="pivoting-data.html#cb46-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">values_from=</span>value)</span></code></pre></div>
+<center>
+<h4 style="background-color: #a4edff; display: inline-block;">
+<strong>HANDS-ON</strong>
+</h4>
+</center>
+<p>Make the following data frame <strong>tidy</strong>!</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="pivoting-data.html#cb47-1" aria-hidden="true" tabindex="-1"></a>df_w <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Name=</span><span class="fu">c</span>(<span class="st">&quot;Anna&quot;</span>, <span class="st">&quot;Jordi&quot;</span>, <span class="st">&quot;Laura&quot;</span>, <span class="st">&quot;Miquel&quot;</span>),</span>
+<span id="cb47-2"><a href="pivoting-data.html#cb47-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">Weight_day0=</span><span class="fu">c</span>(<span class="dv">67</span>, <span class="dv">72</span>, <span class="dv">62</span>, <span class="dv">85</span>),</span>
+<span id="cb47-3"><a href="pivoting-data.html#cb47-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">Weight_day10=</span><span class="fu">c</span>(<span class="dv">65</span>, <span class="dv">73</span>, <span class="dv">66</span>, <span class="dv">80</span>),</span>
+<span id="cb47-4"><a href="pivoting-data.html#cb47-4" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div>
+<details>
+<summary>
+<h5 style="background-color: #a4edff; display: inline-block;">
+<em>Answer</em>
+</h5>
+</summary>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="pivoting-data.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># `pivot_longer` on &quot;Weight&quot; columns:</span></span>
+<span id="cb48-2"><a href="pivoting-data.html#cb48-2" aria-hidden="true" tabindex="-1"></a>df_w2 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_w, </span>
+<span id="cb48-3"><a href="pivoting-data.html#cb48-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;Weight_day0&quot;</span>, <span class="st">&quot;Weight_day10&quot;</span>),</span>
+<span id="cb48-4"><a href="pivoting-data.html#cb48-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">values_to=</span><span class="st">&quot;weight&quot;</span>, </span>
+<span id="cb48-5"><a href="pivoting-data.html#cb48-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">names_to=</span><span class="st">&quot;day&quot;</span></span>
+<span id="cb48-6"><a href="pivoting-data.html#cb48-6" aria-hidden="true" tabindex="-1"></a>                    )</span>
+<span id="cb48-7"><a href="pivoting-data.html#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="pivoting-data.html#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="co"># `separate` on the &quot;day&quot; column</span></span>
+<span id="cb48-9"><a href="pivoting-data.html#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># into=c(NA, &quot;day&quot;): the first output is ignored (in the), the &quot;Weight&quot; strings</span></span>
+<span id="cb48-10"><a href="pivoting-data.html#cb48-10" aria-hidden="true" tabindex="-1"></a>df_w3 <span class="ot">&lt;-</span> <span class="fu">separate</span>(df_w2, <span class="at">col =</span> <span class="st">&quot;day&quot;</span>, </span>
+<span id="cb48-11"><a href="pivoting-data.html#cb48-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep=</span><span class="st">&quot;_&quot;</span>, </span>
+<span id="cb48-12"><a href="pivoting-data.html#cb48-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">into=</span><span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">&quot;day&quot;</span>)</span>
+<span id="cb48-13"><a href="pivoting-data.html#cb48-13" aria-hidden="true" tabindex="-1"></a>                  )</span></code></pre></div>
+</details>
+
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="separate-unite.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-forward-pipe-operator.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["r-tidyverse-crg.pdf", "r-tidyverse-crg.epub"],
+"toc": {
+"collapse": "section"
+},
+"search": true
+});
+});
+</script>
+
+</body>
+
+</html>

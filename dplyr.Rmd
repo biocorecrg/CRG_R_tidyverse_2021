@@ -28,7 +28,7 @@ All 5 functions work in a similar and consistent way:
 > *Note that {dplyr} never modifies the input: you need to* ***redirect the output*** *and save in a new - or the same - object.*
 
 <br><br> 
-We will use the `presidential` data set.
+We will use the `presidential` data set from the `ggplot2` package.
 *It contains data of the terms of* ***presidents of the USA***, *from Eisenhower to Obama:*
 
 * Name
@@ -38,7 +38,7 @@ We will use the `presidential` data set.
  
 ```{r, echo=F, warning=F, message=F}
 library(kableExtra)
-knitr::kable(presidential, caption="`presidential` data set")
+knitr::kable(ggplot2::presidential, caption="`presidential` data set")
 ```
 
 
@@ -51,7 +51,7 @@ knitr::kable(presidential, caption="`presidential` data set")
 ```{r, eval=FALSE}
 # Subtracting column start to column end
 mutate(presidential, 
-    duration_days=end - start)
+    duration_days=end-start)
 ```
 
 > *Notes:*
@@ -71,7 +71,7 @@ transmute(presidential,
 Re-assign to a new - or the same - data frame/tibble using the **usual R assignment operator: <-**
 
 ```{r, eval=T}
-presidential <- mutate(presidential, 
+presidential2 <- mutate(presidential, 
                 duration_days=end - start)
 ```
 
@@ -79,15 +79,15 @@ presidential <- mutate(presidential,
 
 ```{r, eval=F}
 # using the column name:
-rename(presidential, 
+rename(presidential2, 
        President=name)
 
 # or the column index:
-rename(presidential, 
+rename(presidential2, 
        President=1)
 
 # you can rename several columns using the same command:
-rename(presidential, 
+rename(presidential2, 
        President=name, 
        Political_party=party)
 ```
@@ -97,42 +97,42 @@ rename(presidential,
 
 `select` will select (and optionally rename) columns/variables in a data frame / tibble.
 
-Select column **"name"** only from the `presidential` data set:
+Select column **"name"** only from the `presidential2` object:
 
 ```{r, highlight=c(1,3), echo=F, warning=F,message=F}
 library(kableExtra)
-knitr::kable(presidential) %>% 
+knitr::kable(presidential2) %>% 
   kable_styling(bootstrap_options = "striped", font_size = 14) %>% 
   column_spec(1, background = "yellow")
 ```
 
 ```{r, eval=F}
-select(presidential, 
+select(presidential2, 
        name)
 ```
 
 Select 2 columns: **party** and **name** (in that order):
 
 ```{r, eval=F}
-select(presidential, 
+select(presidential2, 
        party, name)
 ```
 
 Rename a column as you select it:
 ```{r, eval=F}
-select(presidential, 
+select(presidential2, 
        party, President=name)
 ```
 
 Select all columns **except** party with the **-** sign:
 ```{r, eval=F}
-select(presidential, 
+select(presidential2, 
        -party)
 ```
 
 Select all columns between **start** and **party** (with both columns included)
 ```{r, eval=T}
- select(presidential, 
+ select(presidential2, 
         start:party)
 ```
 
@@ -142,25 +142,32 @@ Select only columns containing characters with **select_if()**:
 
 ```{r, eval=T, echo =T}
 # select columns containing characters:
-select_if(presidential, 
+select_if(presidential2, 
     is.character)
 ```
 
 Select only columns containing a **date** with the `is.Date` function from the `lubridate` package:
 
-```{r, eval=F, echo =FALSE}
-select_if(presidential, 
+```{r, eval=TRUE, echo=TRUE}
+select_if(presidential2, 
       lubridate::is.Date)
 ```
 
 <center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
 
-For the next hands-on, we will use th `starwars` dataset: it contains information about the Star Wars movie characters.
+For the next hands-on, we will use th `starwars` dataset: it contains information about the Star Wars movie characters:
 
-* Create a new column **BMI** that contains the **BMI** of each character (Body Mass Index, calculated as `weight in kg / height in m`: we will assume that the `height` column is expressed as **cm** and the `mass` column is expressed as **kg**)
+```{r, echo=F, warning=F,message=F}
+library(kableExtra)
+knitr::kable(starwars[1:5,1:9]) %>% 
+  kable_styling(bootstrap_options = "striped", font_size = 14)
+```
+
+
+* Create a new column **BMI** that contains the **BMI** of each character (Body Mass Index, calculated as `weight in kg / (height in m)^2`: we will assume that the `height` column is expressed as **cm** and the `mass` column is expressed as **kg**)
 * Rename column `name` to `character_name`.
 * Remove columns `vehicles` and `starships`.
-* Save all the changes into a new tibble `starwarsBMI` (use the `%>%` !).
+* Save all the changes into the new tibble `starwarsBMI` (use the `%>%` !).
 
 <details>
 <summary>
@@ -177,7 +184,7 @@ rename(starwars, character_name=name)
 # Remove columns `vehicles` and `starships`.
 select(starwars, -c(vehicles, starships))
 
-# Save all the changes to a new tibble starwarsBMI (use the %>% operator)
+# Save all the changes into the new tibble starwarsBMI (use the %>% operator)
 starwarsBMI <- starwars %>% 
   mutate(BMI=mass/(height*0.01)^2) %>% 
   select(-c(vehicles, starships)) %>%
@@ -186,12 +193,54 @@ starwarsBMI <- starwars %>%
 
 </details>
 
+### select using patterns
+
+Some [select helpers](https://tidyselect.r-lib.org/reference/starts_with.html) are available, that help you select columns given certain **patterns** in their names:
+
+```{r, echo=FALSE, eval=TRUE}
+knitr::kable(
+  data.frame(name=c("starts_with", "ends_with", "contains", "matches", "num_range()"), 
+             description=c("starts with a prefix", "ends with a suffix", "contains a literal string", "matches a regular expression", "matches a numerical range like x01, x02, x03")), caption = 'select helpers',
+  format = "html", table.attr = "style='width:60%;'"
+)
+```
+
+<br>
+For example, select only columns from the `starwars` dataset which name **end with** "color":
+
+```{r}
+select(starwars,
+       ends_with("color"))
+```
+
+Or which start with the letter **h**:
+
+```{r}
+select(starwars,
+       starts_with("h"))
+```
+
+If you are familiar with **regular expressions**, you can also use them within the `matches` function:
+
+```{r}
+select(starwars,
+       matches("^h")) # same as starts_with
+```
+
+Finally, you can select columns which name match a **numerical range** with `num_range`.
+<br>
+For example, let's take the `billboard` dataset that contains column names wk1, wk2, wk3 ... up to wk76, and select only columns from wk18 to wk22:
+
+```{r}
+select(billboard,
+       num_range("wk", 18:22))
+```
 
 ## filter
 
 `filter()` is used to filter rows in a data frame / tibble.
 
-Keep rows if **Democratic** is found in the `party` column:
+Keep rows if **Democratic** is found in column `party`:
 
 ```{r, highlight=c(1,3), echo=F, warning=F,message=F}
 knitr::kable(presidential) %>% 
@@ -216,6 +265,13 @@ filter(presidential,
 # Any logical operators can be used
 filter(presidential, 
        name %in% c("Bush", "Kennedy"))
+```
+
+The same can be used for numerical values: let's select all rows from `table5` where `century > 19`:
+
+```{r}
+filter(table5,
+       century > 19)
 ```
 
 <center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
@@ -248,19 +304,19 @@ DroidBMI30 <- starwarsBMI %>%
 
 ## summarise & group_by
  
-`summarise` collapses a data frame to a single row (base R: **aggregate()**)
+`summarise` collapses a data frame to a **1-row tibble** (base R equivalent of **aggregate()**)
  
 Get average length of terms:
 
 ```{r, eval=T}
-summarise(presidential, 
+summarise(presidential2, 
           mean(duration_days))
 ```
 
 Get average length of terms + count of the total of entries:
 
 ```{r, eval=T}
-summarise(presidential,
+summarise(presidential2,
           mean(duration_days), 
           n())
 ```
@@ -268,7 +324,7 @@ summarise(presidential,
 You can also give a name to each of the calculations you produce with `summarise` (and add more calculations!):
 
 ```{r, eval=T}
-summarise(presidential,
+summarise(presidential2,
           mean_term=mean(duration_days), 
           min_term=min(duration_days),
           max_term=max(duration_days),
@@ -281,97 +337,136 @@ You can combine `summarise` with `group_by` to get, for example, the number of p
 * `summarise` then processes the command based on the grouping
 
 ```{r}
-groups <- group_by(presidential,
+# group based on the "party" column (that contains "Democratic" or "Republican")
+groups <- group_by(presidential2,
                    party)
+
+# count the number of presidents per party:
 summarise(groups, 
           n())
 
 # One line, using the %>% operator:
-group_by(presidential, party) %>% 
-  summarise(n())
+group_by(presidential2, party) %>% 
+      summarise(n())
 ```
 
 > Note: the row above is equivalent to using `count` (a wrapper): `count(presidential, party)`
 
 ```{r}
-count(presidential, party)
+count(presidential2, party)
 ```
 
 You can use the same structure to calculate **the average length of terms per political party**:
 
 ```{r}
-group_by(presidential, party) %>% 
+group_by(presidential2, party) %>% 
   summarise(mean(duration_days))
 ```
 
 
 <center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
 
-starwars %>% group_by(gender, eye_color) %>% summarise(mycounts=n()) %>% arrange(desc(mycounts))
+Back to our `starwarsBMI` tibble:
+
+* Count the number of occurrences of each `hair color` per `gender`.
+* Count the average BMI per `species`. Add a count of the number of individuals per species.
 
 <details>
 <summary>
 <h5 style="background-color: #a4edff; display: inline-block;">*Answer*</h5>
 </summary>
 
-starwarsBMI %>% summarise(average_bmi=mean(BMI, na.rm=TRUE))
+```{r, eval=F}
+# Count the number of occurrences of each `hair color` per `gender`
+starwarsBMI %>% 
+  group_by(gender, hair_color) %>% 
+  summarise(mycounts=n())
 
-starwarsBMI %>% group_by(species) %>% summarise(average_bmi=mean(BMI, na.rm=TRUE))
+# Count the average **BMI** per `species`.  Add a count of the number of individuals per species.
+starwarsBMI %>% 
+  group_by(species) %>% 
+  summarise(average_bmi=mean(BMI, na.rm=TRUE), count_individuals=n())
+```
 
-starwarsBMI %>% group_by(species, gender) %>% summarise(average_bmi=mean(BMI, na.rm=TRUE), count=n())
-
-
-<details>
+</details>
 
 ## arrange
 
-`arrange` orders the rows of a data frame by the values of selected columns.
+`arrange` orders the rows of a data frame **by the values of selected columns**.
 <br>
 Let's order rows by increasing mandate duration:
 
 ```{r, eval=T}
-arrange(presidential, duration_days)
-# decreasing order: arrange(presidential2, desc(duration_days))
+arrange(presidential2, duration_days)
+# decreasing order with arrange(presidential2, desc(duration_days))
 ```
 
 You can use several columns for the sorting
 ```{r, eval=T}
-arrange(presidential, 
+arrange(presidential2, 
         duration_days, name)
 ```
 
 If a grouping was done before, you can arrange first by grouping and then by selected variable(s) setting the `.by_group=TRUE` parameter:
 
-```
-mutate(presidential, duration_days=end-start) %>%
+```{r}
+mutate(presidential2, duration_days=end-start) %>%
     group_by(party) %>% 
     arrange(duration_days, .by_group=TRUE)
 ```
     
 <center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
 
+Go back to the previous exercise: "count the average **BMI** per `species`.  Add a count of the number of individuals per species." (on the `starwarsBMI` data set):
 
+```{r, eval=FALSE}
+starwarsBMI %>% 
+  group_by(species) %>% 
+  summarise(average_bmi=mean(BMI, na.rm=TRUE), count_individuals=n())
+```
 
-## More useful functions from `dplyr`
+* Keep only species that have **2 or more individuals**.
+* Arrange by decreasing **average BMI**.
 
-nth(): extract the nth value of a vector
+<details>
+<summary>
+<h5 style="background-color: #a4edff; display: inline-block;">*Answer*</h5>
+</summary>
 
-presidential %>% nth(name, 4)
+```{r, eval=F}
+starwarsBMI %>% 
+  group_by(species) %>% 
+  summarise(average_bmi=mean(BMI, na.rm=TRUE), count_individuals=n()) %>%
+  filter(count_individuals >= 2) %>%
+  arrange(desc(average_bmi))
+```
 
-extract a single column:
+</details>
 
-presidential %>% pull(name)
-presidential %>% pull(duration_days, name=name)
+## A few more useful functions from `dplyr`
 
-subset rows using their positions:
+* Extract rows with `slice`:
 
-presidential %>% slice(4)
+```{r, eval=F}
+# Fetch the first 2 rows
+slice(presidential2, 1:2)
+```
 
-join (left, right etc.) functions
+* Extract a single column as a vector with `pull`:
 
-count(presidential, party) 
+```{r, eval=F}
+# extract column "duration_days"
+presidential2 %>% pull(duration_days)
 
+# extract column "duration_days" as a vector, and name the vector using the "name" column
+presidential2 %>% pull(duration_days, name=name)
+```
 
+```{r, eval=F}
+```
+
+```{r, eval=F}
+```
 
 
 ## Exercise

@@ -8,20 +8,18 @@ knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
 Let's review the steps from the previous hands-on:
 
 ```{r}
-patients2 <- separate(data=patients, 
-         col=4,
-         into=c("height", "weight"),
-         sep="_")
-patients3 <- unite(data=patients2,
-      col="ID",
-      c("ID1", "ID2"),
-      sep="")
-patients4 <- mutate_at(patients3, 
-      c("height", "weight"), 
-      as.numeric)
+df_w2 <- pivot_longer(df_w, 
+                    cols=c("Weight_day0", "Weight_day10"),
+                    values_to="weight", 
+                    names_to="day"
+                    )
+df_w3 <- separate(df_w2, col = "day", 
+                  sep="_", 
+                  into=c(NA, "day")
+                  )
 ```
 
-If we are only interested in the final **tidy** data frame (and not in the intermediate objects `patients2` and `patients3`), there is a **simple** and **clean** way to combine all steps. <br><br>
+If we are only interested in the final **tidy** data frame (and not in the intermediate object `df_w2`), there is a **simple** and **clean** way to combine all steps. <br><br>
 The **%>%** (forward-pipe) operator from the `magritrrr` package (the `tidyverse` packages automatically load this operator):
 
 ```{r, echo=FALSE, out.width="30%", fig.align="center"}
@@ -38,15 +36,20 @@ The pipe allows to process **the output of a function as the input of the follow
 If we go back to the previous exercise, we can simplify the code the following way:
 
 ```{r}
-patients2 <- separate(patients, col=4, into=c("height", "weight"), sep="_") %>%
-              unite(col="ID", c("ID1", "ID2"), sep="") %>%
-              mutate_at(c("height", "weight"), as.numeric)
+
+df_w_clean <- pivot_longer(df_w,
+                           cols=c("Weight_day0", "Weight_day10"),
+                           values_to="weight", 
+                           names_to="day") %>%
+              separate(col = "day",
+                        into=c(NA, "day"))
 
 # This is equivalent to:
-patients2 <- patients %>% 
-              separate(col=4, into=c("height", "weight"), sep="_") %>%
-              unite(col="ID", c("ID1", "ID2"), sep="") %>%
-              mutate_at(c("height", "weight"), as.numeric)
+df_w_clean <- df_w %>% pivot_longer(cols=c("Weight_day0", "Weight_day10"),
+                           values_to="weight", 
+                           names_to="day") %>%
+                       separate(col = "day",
+                            into=c(NA, "day"))
 ```
 
 <center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>

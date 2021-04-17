@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.3 Tidyverse core packages | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
-  <meta name="description" content="2.3 Tidyverse core packages | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <title>7.6 A few more useful functions from dplyr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="7.6 A few more useful functions from dplyr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.3 Tidyverse core packages | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:title" content="7.6 A few more useful functions from dplyr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.3 Tidyverse core packages | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="twitter:title" content="7.6 A few more useful functions from dplyr | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html"/>
-<link rel="next" href="install-and-load-all-tidyverse-package.html"/>
+<link rel="prev" href="arrange.html"/>
+<link rel="next" href="exercise.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -203,177 +203,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="tidyverse-core-packages" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Tidyverse core packages</h2>
-<p>The following 8 packages are included in the core <strong>tidyverse version 1.3.0.9000</strong> (current version in April 2021):</p>
+<div id="a-few-more-useful-functions-from-dplyr" class="section level2" number="7.6">
+<h2><span class="header-section-number">7.6</span> A few more useful functions from <code>dplyr</code></h2>
 <ul>
-<li>Data Import and Management
-<ul>
-<li>tibble</li>
-<li>readr</li>
-</ul></li>
-<li>Data Wrangling (Tyding and Transformation)
-<ul>
-<li>dplyr</li>
-<li>tidyr</li>
-<li>stringr</li>
-<li>forcats</li>
-</ul></li>
-<li>Data Visualization and Exploration
-<ul>
-<li>ggplot2</li>
-</ul></li>
-<li>Functional Programming
-<ul>
-<li>purrr</li>
-</ul></li>
+<li>Extract rows with <code>slice</code>:</li>
 </ul>
-<p><br></p>
-<table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-logo
-</th>
-<th style="text-align:left;">
-name
-</th>
-<th style="text-align:left;">
-description
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<html>
-<body>
-<img src="images/dplyr_logo.png" width="121.6" height="86.4">
-</body>
-</html>
-</td>
-<td style="text-align:left;">
-dplyr
-</td>
-<td style="text-align:left;">
-Package for data manipulation and exploratory data analysis.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<html>
-<body>
-<img src="images/tidyr_logo.png" width="121.6" height="86.4">
-</body>
-</html>
-</td>
-<td style="text-align:left;">
-tidyr
-</td>
-<td style="text-align:left;">
-Package that aims at creating tidy data. Tidy data describe a standard way of storing data.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<html>
-<body>
-<img src="images/stringr_logo.png" width="121.6" height="86.4">
-</body>
-</html>
-</td>
-<td style="text-align:left;">
-stringr
-</td>
-<td style="text-align:left;">
-Package that provides a set of functions for user-friendly string manipulation.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<html>
-<body>
-<img src="images/forcats_logo.png" width="121.6" height="86.4">
-</body>
-</html>
-</td>
-<td style="text-align:left;">
-forcats
-</td>
-<td style="text-align:left;">
-Package that helps you deal with factors
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<html>
-<body>
-<img src="images/readr_logo.png" width="121.6" height="86.4">
-</body>
-</html>
-</td>
-<td style="text-align:left;">
-readr
-</td>
-<td style="text-align:left;">
-Package for fast and efficient import and export of data.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<html>
-<body>
-<img src="images/tibble_logo.png" width="121.6" height="86.4">
-</body>
-</html>
-</td>
-<td style="text-align:left;">
-tibble
-</td>
-<td style="text-align:left;">
-Tibbles are improved - easier to manage - data frames.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<html>
-<body>
-<img src="images/purrr_logo.png" width="121.6" height="86.4">
-</body>
-</html>
-</td>
-<td style="text-align:left;">
-purrr
-</td>
-<td style="text-align:left;">
-Package that aims at enhancing R’s functional programming toolkit. It provides a set of tools for working with functions and vectors.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<html>
-<body>
-<img src="images/ggplot2_logo.png" width="121.6" height="86.4">
-</body>
-</html>
-</td>
-<td style="text-align:left;">
-ggplot2
-</td>
-<td style="text-align:left;">
-Package for data vizualization of graphics based on Leland Wilkinson’s’ Grammar of Graphics: graphics are built one layer at a time.
-</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="a-few-more-useful-functions-from-dplyr.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch the first 2 rows</span></span>
+<span id="cb106-2"><a href="a-few-more-useful-functions-from-dplyr.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice</span>(presidential2, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code></pre></div>
+<ul>
+<li>Extract a single column as a vector with <code>pull</code>:</li>
+</ul>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="a-few-more-useful-functions-from-dplyr.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract column &quot;duration_days&quot;</span></span>
+<span id="cb107-2"><a href="a-few-more-useful-functions-from-dplyr.html#cb107-2" aria-hidden="true" tabindex="-1"></a>presidential2 <span class="sc">%&gt;%</span> <span class="fu">pull</span>(duration_days)</span>
+<span id="cb107-3"><a href="a-few-more-useful-functions-from-dplyr.html#cb107-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-4"><a href="a-few-more-useful-functions-from-dplyr.html#cb107-4" aria-hidden="true" tabindex="-1"></a><span class="co"># extract column &quot;duration_days&quot; as a vector, and name the vector using the &quot;name&quot; column</span></span>
+<span id="cb107-5"><a href="a-few-more-useful-functions-from-dplyr.html#cb107-5" aria-hidden="true" tabindex="-1"></a>presidential2 <span class="sc">%&gt;%</span> <span class="fu">pull</span>(duration_days, <span class="at">name=</span>name)</span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="install-and-load-all-tidyverse-package.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="arrange.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercise.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

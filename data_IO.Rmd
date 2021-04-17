@@ -2,7 +2,11 @@
 
 `readr` provides functions for reading in and writing out files.
 <br>
-Those functions are **up to 10 times faster** that the base R equivalent.
+Those functions :
+
+* are **up to 10 times faster** that the base R equivalent.
+* automatically uncompress files with **.gz**, **.bz2**, **.xz** or **.zip** extensions.
+* automatically download files starting with **http://**, **https://**, **ftp://**, or **ftps://**.
 
 ## Read
 
@@ -23,24 +27,30 @@ Read in a file provided as an example with the `readr` package:
 f1 <- read_csv(readr_example("mtcars.csv"))
 ```
 
+Read in a file available online (https protocol):
+
+```{r, message=TRUE}
+f2 <- read_tsv("https://public-docs.crg.es/biocore/projects/training/R_introduction_2021/inputB.txt")
+```
+
 As you can see, `readr` prints out the **column specifications**, so you can make sure the data is read the way it is meant to be.
 <br>
 
 Useful arguments to consider, as you read in the file:
   
-* `n_max=k` : read in a subset (*k* first rows).
+* `n_max=k` : read in a subset (first *k* rows).
 * col_names:
   * col_names=FALSE : your data doesn't contain headers/column names.
   * col_names=c("A", "B", "C") : you are providing a vector containing column names / header.
-* `skip=j` : skip the *j* first rows.
+* `skip=j` : skip the first *j* rows.
 
 ```{r, message=TRUE}
-f2 <- read_csv(readr_example("mtcars.csv"),
+f1 <- read_csv(readr_example("mtcars.csv"),
                 n_max=5,
                 skip=1,
                 col_names=LETTERS[1:11])
 
-f2
+f1
 ```
 
 ## Write
@@ -68,9 +78,24 @@ write.csv(x=f2,
 
 <center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
 
+* Read in file `readr_example("mtcars.csv.zip")` (also provided with the readr package)
+* With base R coding, remove rows where **mpg > 20**
+* Write this new tibble to a **tab-separated file**.
+
 <details>
 <summary>
 <h5 style="background-color: #a4edff; display: inline-block;">*Answer*</h5>
 </summary>
+
+```{r, eval=F}
+# Read in file readr_example("mtcars.csv.zip")
+Cars <- read_csv(readr_example("mtcars.csv.zip"))
+
+# With base R coding, remove rows where mpg > 20
+mpg20 <- Cars[Cars$mpg > 20, ]
+
+# Write this new tibble to a tab-separated file.
+write_tsv(mpg20, "mtcars_mpg20.txt")
+```
 
 <details>
