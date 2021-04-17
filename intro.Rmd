@@ -3,15 +3,16 @@
 ## What is the "tidyverse"
 
 * A set of packages designed for **data science**:
-
-  * Preparing / cleaning
-  * Wrangling
-  * Visualizing
+  * Importing data into R
+  * Preparing / Cleaning data
+  * Data wrangling (tidying and transforming data)
+  * Visualizing data
 
 * All packages share **good practices** in terms of: 
   * Philosophy
   * Grammar
   * Data structure
+  
   
 ## Good reasons to learn (at least a bit) how to use it
 
@@ -41,18 +42,22 @@ diamonds %>%
 
 The following 8 packages are included in the core **tidyverse version 1.3.0.9000** (current version in April 2021):
 
-* Data Wrangling and Transformation
+* Data Import and Management
+  * tibble
+  * readr 
+  
+* Data Wrangling (Tyding and Transformation)
   * dplyr
   * tidyr 
   * stringr
   * forcats
-* Data Import and Management
-  * tibble
-  * readr 
-* Functional Programming
-  * purrr
+
 * Data Visualization and Exploration
   * ggplot2
+
+* Functional Programming
+  * purrr
+  
 
 <br>
 
