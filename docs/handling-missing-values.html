@@ -24,7 +24,7 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-17" />
+<meta name="date" content="2021-04-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -312,6 +312,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <strong>HANDS-ON</strong>
 </h4>
 </center>
+<p>Back to the <code>starwars</code> data set:</p>
+<ul>
+<li>Replace <strong>NA</strong> in <code>hair_color</code> with “unknown.”</li>
+<li>Remove rows that still contain NA values.</li>
+</ul>
+<details>
+<summary>
+<h5 style="background-color: #a4edff; display: inline-block;">
+<em>Answer</em>
+</h5>
+</summary>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="handling-missing-values.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace NA in `hair_color` with &quot;unknown&quot;.</span></span>
+<span id="cb122-2"><a href="handling-missing-values.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows that still contain NA values.</span></span>
+<span id="cb122-3"><a href="handling-missing-values.html#cb122-3" aria-hidden="true" tabindex="-1"></a><span class="fu">replace_na</span>(starwars, <span class="fu">list</span>(<span class="at">hair_color=</span><span class="st">&quot;unknown&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb122-4"><a href="handling-missing-values.html#cb122-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div>
+</details>
 
 </div>
             </section>
