@@ -60,6 +60,20 @@ mutate(presidential,
 > * Columns are added at the end of the data frame.
 > * `mutate` keeps all columns. 
 
+You can change **where the column is added** (if you don't want it to be added at the last position):
+
+```{r, eval=FALSE}
+# add it before column "start"
+mutate(presidential, 
+    duration_days=end-start,
+    .before=start)
+
+# add it after column "end"
+mutate(presidential, 
+    duration_days=end-start,
+    .after=end)
+```
+
 <br>
 If you want to keep **only the newly created column(s)** (drop the remaining ones): use `transmute()` instead of `mutate()`:
 
@@ -363,6 +377,53 @@ group_by(presidential2, party) %>%
   summarise(mean(duration_days))
 ```
 
+Note that you can group using **more than one variable**:
+
+```{r, eval=F}
+group_by(starwars, species, hair_color, gender) %>%
+      summarise(n())
+```
+
+Grouping variables also influences how other `dplyr` functions work.
+
+<br>
+  
+For example, let's group our `starwars` characters by both **species and gender** variables:
+
+```{r, eval=TRUE}
+sw_sg <- group_by(starwars, species, gender) 
+```
+
+We can then use `slice_max` (function that retrieves the entry that contains the maximum value in the specified variable) to retrieve the character with the **maximum `height`**:
+ 
+```{r, eval=TRUE}
+sw_sg %>% 
+  select(name, species, gender, height) %>% # we are selecting the columns here just to make the output more readable
+  slice_max(height)
+```
+
+We get one entry for each unique combination of **species and gender**.
+<br>
+If you query the maximum height on an **non-grouped tibble**, you will get only one row (maximum height overall):
+
+```{r, eval=TRUE}
+starwars %>% 
+  select(name, species, gender, height) %>%
+  slice_max(height)
+```
+
+Another example is that you can create new columns (with `mutate`) **based on the grouping**.
+<br>
+Here we are grouping the data by `species` and we add a column `average_height_species` that describes the **average height**. 
+<br>
+As the data is grouped by `species`, we will get the value **per species**, not taking into account the whole tibble:
+
+```{r}
+starwars %>% group_by(species) %>% 
+  select(name, species, height, mass) %>% 
+  mutate(average_height_species=mean(height, na.rm=TRUE))
+```
+
 
 <center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
 
@@ -386,9 +447,45 @@ starwarsBMI %>%
 starwarsBMI %>% 
   group_by(species) %>% 
   summarise(average_bmi=mean(BMI, na.rm=TRUE), count_individuals=n())
+
+# Also report the number of individuals for which BMI is NOT NA (i.e. the actual number of individuals for which the average was computed)
+starwarsBMI %>%
+  group_by(species) %>% 
+  summarise(average_bmi=mean(BMI, na.rm=TRUE), count_all_individuals=n(), count_individuals_non_NA=sum(!is.na(BMI)))
 ```
 
 </details>
+
+### `ungroup`
+
+When you are grouping variables with `group_by`, the tibble will **keep the grouping until you ungroup**!
+
+<br>
+While this is not an issue when you are summarizing (you get a small summary table), it can be useful in case you are using the grouping - for example - to **create a new column** (example stated above):
+
+```{r, eval=TRUE}
+starwars %>% group_by(species) %>% 
+  select(name, species, height, mass) %>% 
+  mutate(average_height_species=mean(height, na.rm=TRUE))
+```
+
+If now you want to add a column that describes the **average mass of ALL individuals**, you need to **ungroup** the tibble:
+
+```{r}
+# Without ungrouping, you get the average mass calculated per species
+starwars %>% group_by(species) %>% 
+  select(name, species, height, mass) %>% 
+  mutate(average_height_species=mean(height, na.rm=TRUE)) %>%
+  mutate(average_mass=mean(mass, na.rm=TRUE))
+
+# ungroup first, and you get the average mass calculated for the whole tibble
+starwars %>% group_by(species) %>% 
+  select(name, species, height, mass) %>% 
+  mutate(average_height_species=mean(height, na.rm=TRUE)) %>%
+  ungroup %>%
+  mutate(average_mass=mean(mass, na.rm=TRUE))
+```
+
 
 ## arrange
 
@@ -442,6 +539,111 @@ starwarsBMI %>%
 ```
 
 </details>
+
+## A few more useful `dplyr` functions
+
+* Extract rows with `slice`:
+
+```{r, eval=F}
+# Fetch the first 2 rows
+slice(presidential2, 1:2)
+```
+
+`slice` helpers:
+
+```{r, echo=FALSE, eval=TRUE}
+knitr::kable(
+  data.frame(name=c("slice_min", "slice_max", "slice_head", "slice_tail", "slice_sample"), 
+             usage=c("select rows with lowest values of a variable", "select rows with highest values of a variable", "select the first rows", "select the last rows", "randomly select rows")), caption = '`slice` helpers',
+  format = "html", table.attr = "style='width:70%;'"
+)
+```
+
+Extract the row that has the maximum "height" from in the `starwars` dataset:
+
+```{r}
+slice_max(starwars, order_by=height)
+
+# set parameter "n" if you want to extract the n top rows
+slice_max(starwars, order_by=height,
+          n=10)
+```
+
+Same for the minimum:
+
+```{r}
+slice_min(starwars, order_by=mass,
+          n=2)
+```
+
+Check the first or last row with `slice_head` and `slice_tail`, respectively
+
+```{r}
+# first row
+slice_head(starwars)
+
+# first five rows
+slice_head(starwars, n=5)
+
+# first 10% of the rows
+slice_head(starwars, prop=0.1)
+
+# last row
+slice_tail(starwars)
+
+# last 7 rows
+slice_tail(starwars, n=7)
+
+# last 25% of the rows
+slice_tail(starwars, prop=0.25)
+```
+
+Select a random sample of rows with `slice_random`
+
+```{r}
+# one random row
+slice_sample(starwars)
+
+# 5 random rows
+slice_sample(starwars, n=5)
+
+# 15% of rows selected randomly
+slice_sample(starwars, prop=0.15)
+```
+
+
+* Extract a single column as a vector with `pull`:
+
+```{r, eval=F}
+# extract column "duration_days"
+presidential2 %>% pull(duration_days)
+
+# extract column "duration_days" as a vector, and name the vector using the "name" column
+presidential2 %>% pull(duration_days, name=name)
+```
+
+* Change column order with `relocate`:
+
+```{r, eval=F}
+# move column "party" as the start
+relocate(presidential, party)
+
+# move column "name" at the end (after last column)
+relocate(presidential, name, .after=last_col())
+
+# move column "name" before column "party"
+relocate(presidential, party, .before=party)
+
+# move around all columns
+relocate(presidential, party, start, name, end)
+
+# rename a column as you relocate it
+relocate(presidential, President=name, .after=last_col())
+```
+
+```{r, eval=F}
+```
+
 
 ## Exercise
 

@@ -236,6 +236,14 @@ df_w3 <- separate(df_w2, col = "day",
                   sep="_", 
                   into=c(NA, "day")
                   )
+# If you want to keep only "0" and "10", you can use "day" as a field separator (optionally set convert=TRUE if you want to convert the newly created column to numeric values)
+df_w4 <- separate(df_w2, col = "day", 
+                  sep="day", 
+                  into=c(NA, "day"),
+                  convert=TRUE
+                  )
+# If you want to remove "day" from an existing tibble, you can also use the str_remove function from the stringr package, and optionally add a conversion step:
+df_w3$day <- as.numeric(str_remove(df_w3$day, "day"))
 ```
 
 </details>

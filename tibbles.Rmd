@@ -92,7 +92,7 @@ mytibble["letters"]
 mytibble[, 1]
 
 # corresponding vector
-mytibble[, 1][[1]]
+mytibble[[1]]
 ```
 
 
