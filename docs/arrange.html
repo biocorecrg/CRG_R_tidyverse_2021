@@ -24,7 +24,7 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-18" />
+<meta name="date" content="2021-04-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="summarise-group-by.html"/>
-<link rel="next" href="exercise.html"/>
+<link rel="next" href="a-few-more-useful-dplyr-functions.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -177,11 +177,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.2" data-path="select.html"><a href="select.html#select-using-patterns"><i class="fa fa-check"></i><b>7.2.2</b> select using patterns</a></li>
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
-<li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
+<li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="summarise-group-by.html"><a href="summarise-group-by.html#ungroup"><i class="fa fa-check"></i><b>7.4.1</b> <code>ungroup</code></a></li>
+</ul></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
-<li class="chapter" data-level="7.6" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.6</b> Exercise</a></li>
+<li class="chapter" data-level="7.6" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html"><i class="fa fa-check"></i><b>7.6</b> A few more useful <code>dplyr</code> functions</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#mutating-joins"><i class="fa fa-check"></i><b>7.6.1</b> Mutating joins</a></li>
+<li class="chapter" data-level="7.6.2" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#extract-or-remove-rows-with-slice"><i class="fa fa-check"></i><b>7.6.2</b> Extract or remove rows with <code>slice</code>:</a></li>
+<li class="chapter" data-level="7.6.3" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#extract-a-single-column-as-a-vector-with-pull"><i class="fa fa-check"></i><b>7.6.3</b> Extract a single column as a vector with <code>pull</code>:</a></li>
+<li class="chapter" data-level="7.6.4" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#change-column-order-with-relocate"><i class="fa fa-check"></i><b>7.6.4</b> Change column order with <code>relocate</code>:</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
+<li class="chapter" data-level="9" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>9</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
 
@@ -207,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>arrange</code> orders the rows of a data frame <strong>by the values of selected columns</strong>.
 <br>
 Let’s order rows by increasing mandate duration:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="arrange.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(presidential2, duration_days)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="arrange.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(presidential2, duration_days)</span></code></pre></div>
 <pre><code>## # A tibble: 11 x 5
 ##    name       start      end        party      duration_days
 ##    &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;drtn&gt;       
@@ -222,10 +232,10 @@ Let’s order rows by increasing mandate duration:</p>
 ##  9 Clinton    1993-01-20 2001-01-20 Democratic 2922 days    
 ## 10 Bush       2001-01-20 2009-01-20 Republican 2922 days    
 ## 11 Obama      2009-01-20 2017-01-20 Democratic 2922 days</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="arrange.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># decreasing order with arrange(presidential2, desc(duration_days))</span></span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="arrange.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># decreasing order with arrange(presidential2, desc(duration_days))</span></span></code></pre></div>
 <p>You can use several columns for the sorting</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="arrange.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(presidential2, </span>
-<span id="cb100-2"><a href="arrange.html#cb100-2" aria-hidden="true" tabindex="-1"></a>        duration_days, name)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="arrange.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(presidential2, </span>
+<span id="cb115-2"><a href="arrange.html#cb115-2" aria-hidden="true" tabindex="-1"></a>        duration_days, name)</span></code></pre></div>
 <pre><code>## # A tibble: 11 x 5
 ##    name       start      end        party      duration_days
 ##    &lt;chr&gt;      &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;drtn&gt;       
@@ -241,9 +251,9 @@ Let’s order rows by increasing mandate duration:</p>
 ## 10 Obama      2009-01-20 2017-01-20 Democratic 2922 days    
 ## 11 Reagan     1981-01-20 1989-01-20 Republican 2922 days</code></pre>
 <p>If a grouping was done before, you can arrange first by grouping and then by selected variable(s) setting the <code>.by_group=TRUE</code> parameter:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="arrange.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(presidential2, <span class="at">duration_days=</span>end<span class="sc">-</span>start) <span class="sc">%&gt;%</span></span>
-<span id="cb102-2"><a href="arrange.html#cb102-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(party) <span class="sc">%&gt;%</span> </span>
-<span id="cb102-3"><a href="arrange.html#cb102-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(duration_days, <span class="at">.by_group=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="arrange.html#cb117-1" aria-hidden="true" tabindex="-1"></a>presidential2 <span class="sc">%&gt;%</span></span>
+<span id="cb117-2"><a href="arrange.html#cb117-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(party) <span class="sc">%&gt;%</span> </span>
+<span id="cb117-3"><a href="arrange.html#cb117-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(duration_days, <span class="at">.by_group=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 11 x 5
 ## # Groups:   party [2]
 ##    name       start      end        party      duration_days
@@ -265,9 +275,9 @@ Let’s order rows by increasing mandate duration:</p>
 </h4>
 </center>
 <p>Go back to the previous exercise: “count the average <strong>BMI</strong> per <code>species</code>. Add a count of the number of individuals per species.” (on the <code>starwarsBMI</code> data set):</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="arrange.html#cb104-1" aria-hidden="true" tabindex="-1"></a>starwarsBMI <span class="sc">%&gt;%</span> </span>
-<span id="cb104-2"><a href="arrange.html#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
-<span id="cb104-3"><a href="arrange.html#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_bmi=</span><span class="fu">mean</span>(BMI, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">count_individuals=</span><span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="arrange.html#cb119-1" aria-hidden="true" tabindex="-1"></a>starwarsBMI <span class="sc">%&gt;%</span> </span>
+<span id="cb119-2"><a href="arrange.html#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb119-3"><a href="arrange.html#cb119-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_bmi=</span><span class="fu">mean</span>(BMI, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">count_individuals=</span><span class="fu">n</span>())</span></code></pre></div>
 <ul>
 <li>Keep only species that have <strong>2 or more individuals</strong>.</li>
 <li>Arrange by decreasing <strong>average BMI</strong>.</li>
@@ -278,11 +288,11 @@ Let’s order rows by increasing mandate duration:</p>
 <em>Answer</em>
 </h5>
 </summary>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="arrange.html#cb105-1" aria-hidden="true" tabindex="-1"></a>starwarsBMI <span class="sc">%&gt;%</span> </span>
-<span id="cb105-2"><a href="arrange.html#cb105-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
-<span id="cb105-3"><a href="arrange.html#cb105-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_bmi=</span><span class="fu">mean</span>(BMI, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">count_individuals=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb105-4"><a href="arrange.html#cb105-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(count_individuals <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb105-5"><a href="arrange.html#cb105-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(average_bmi))</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="arrange.html#cb120-1" aria-hidden="true" tabindex="-1"></a>starwarsBMI <span class="sc">%&gt;%</span> </span>
+<span id="cb120-2"><a href="arrange.html#cb120-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb120-3"><a href="arrange.html#cb120-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_bmi=</span><span class="fu">mean</span>(BMI, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">count_individuals=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb120-4"><a href="arrange.html#cb120-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(count_individuals <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb120-5"><a href="arrange.html#cb120-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(average_bmi))</span></code></pre></div>
 </details>
 </div>
             </section>
@@ -291,7 +301,7 @@ Let’s order rows by increasing mandate duration:</p>
         </div>
       </div>
 <a href="summarise-group-by.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="exercise.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="a-few-more-useful-dplyr-functions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

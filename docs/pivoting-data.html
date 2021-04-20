@@ -24,7 +24,7 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-18" />
+<meta name="date" content="2021-04-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -177,11 +177,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.2" data-path="select.html"><a href="select.html#select-using-patterns"><i class="fa fa-check"></i><b>7.2.2</b> select using patterns</a></li>
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
-<li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
+<li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="summarise-group-by.html"><a href="summarise-group-by.html#ungroup"><i class="fa fa-check"></i><b>7.4.1</b> <code>ungroup</code></a></li>
+</ul></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
-<li class="chapter" data-level="7.6" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.6</b> Exercise</a></li>
+<li class="chapter" data-level="7.6" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html"><i class="fa fa-check"></i><b>7.6</b> A few more useful <code>dplyr</code> functions</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#mutating-joins"><i class="fa fa-check"></i><b>7.6.1</b> Mutating joins</a></li>
+<li class="chapter" data-level="7.6.2" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#extract-or-remove-rows-with-slice"><i class="fa fa-check"></i><b>7.6.2</b> Extract or remove rows with <code>slice</code>:</a></li>
+<li class="chapter" data-level="7.6.3" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#extract-a-single-column-as-a-vector-with-pull"><i class="fa fa-check"></i><b>7.6.3</b> Extract a single column as a vector with <code>pull</code>:</a></li>
+<li class="chapter" data-level="7.6.4" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#change-column-order-with-relocate"><i class="fa fa-check"></i><b>7.6.4</b> Change column order with <code>relocate</code>:</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
+<li class="chapter" data-level="9" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>9</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
 
@@ -299,7 +309,15 @@ Let’s take the following example, where expression of 2 genes is measured unde
 <span id="cb48-10"><a href="pivoting-data.html#cb48-10" aria-hidden="true" tabindex="-1"></a>df_w3 <span class="ot">&lt;-</span> <span class="fu">separate</span>(df_w2, <span class="at">col =</span> <span class="st">&quot;day&quot;</span>, </span>
 <span id="cb48-11"><a href="pivoting-data.html#cb48-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep=</span><span class="st">&quot;_&quot;</span>, </span>
 <span id="cb48-12"><a href="pivoting-data.html#cb48-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">into=</span><span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">&quot;day&quot;</span>)</span>
-<span id="cb48-13"><a href="pivoting-data.html#cb48-13" aria-hidden="true" tabindex="-1"></a>                  )</span></code></pre></div>
+<span id="cb48-13"><a href="pivoting-data.html#cb48-13" aria-hidden="true" tabindex="-1"></a>                  )</span>
+<span id="cb48-14"><a href="pivoting-data.html#cb48-14" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to keep only &quot;0&quot; and &quot;10&quot;, you can use &quot;day&quot; as a field separator (optionally set convert=TRUE if you want to convert the newly created column to numeric values)</span></span>
+<span id="cb48-15"><a href="pivoting-data.html#cb48-15" aria-hidden="true" tabindex="-1"></a>df_w4 <span class="ot">&lt;-</span> <span class="fu">separate</span>(df_w2, <span class="at">col =</span> <span class="st">&quot;day&quot;</span>, </span>
+<span id="cb48-16"><a href="pivoting-data.html#cb48-16" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep=</span><span class="st">&quot;day&quot;</span>, </span>
+<span id="cb48-17"><a href="pivoting-data.html#cb48-17" aria-hidden="true" tabindex="-1"></a>                  <span class="at">into=</span><span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">&quot;day&quot;</span>),</span>
+<span id="cb48-18"><a href="pivoting-data.html#cb48-18" aria-hidden="true" tabindex="-1"></a>                  <span class="at">convert=</span><span class="cn">TRUE</span></span>
+<span id="cb48-19"><a href="pivoting-data.html#cb48-19" aria-hidden="true" tabindex="-1"></a>                  )</span>
+<span id="cb48-20"><a href="pivoting-data.html#cb48-20" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to remove &quot;day&quot; from an existing tibble, you can also use the str_remove function from the stringr package, and optionally add a conversion step:</span></span>
+<span id="cb48-21"><a href="pivoting-data.html#cb48-21" aria-hidden="true" tabindex="-1"></a>df_w3<span class="sc">$</span>day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">str_remove</span>(df_w3<span class="sc">$</span>day, <span class="st">&quot;day&quot;</span>))</span></code></pre></div>
 </details>
 
 </div>

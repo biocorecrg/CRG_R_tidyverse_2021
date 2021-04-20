@@ -320,14 +320,14 @@ DroidBMI30 <- starwarsBMI %>%
  
 `summarise` collapses a data frame to a **1-row tibble** (base R equivalent of **aggregate()**)
  
-Get average length of terms:
+* Get average length of terms:
 
 ```{r, eval=T}
 summarise(presidential2, 
           mean(duration_days))
 ```
 
-Get average length of terms + count of the total of entries:
+* Get average length of terms + count of the total of entries:
 
 ```{r, eval=T}
 summarise(presidential2,
@@ -335,7 +335,7 @@ summarise(presidential2,
           n())
 ```
 
-You can also give a name to each of the calculations you produce with `summarise` (and add more calculations!):
+* You can also give a name to each of the calculations you produce with `summarise` (and add more calculations!):
 
 ```{r, eval=T}
 summarise(presidential2,
@@ -345,10 +345,10 @@ summarise(presidential2,
           count_presidents=n())
 ```
 
-You can combine `summarise` with `group_by` to get, for example, the number of presidents per political party:
+* You can combine `summarise` with `group_by` to get, for example, the number of presidents per political party:
 
-* `group_by` defines a grouping based on existing variables.
-* `summarise` then processes the command based on the grouping
+  * `group_by` defines a grouping based on existing variables.
+  * `summarise` then processes the command based on the grouping
 
 ```{r}
 # group based on the "party" column (that contains "Democratic" or "Republican")
@@ -360,7 +360,8 @@ summarise(groups,
           n())
 
 # One line, using the %>% operator:
-group_by(presidential2, party) %>% 
+group_by(presidential2, 
+         party) %>% 
       summarise(n())
 ```
 
@@ -370,39 +371,41 @@ group_by(presidential2, party) %>%
 count(presidential2, party)
 ```
 
-You can use the same structure to calculate **the average length of terms per political party**:
+* Use the same structure to calculate **the average length of terms per political party**:
 
 ```{r}
-group_by(presidential2, party) %>% 
+group_by(presidential2, 
+         party) %>% 
   summarise(mean(duration_days))
 ```
 
-Note that you can group using **more than one variable**:
+* Note that you can **group using more than one variable**:
 
 ```{r, eval=F}
-group_by(starwars, species, hair_color, gender) %>%
+group_by(starwars, 
+         species, hair_color, gender) %>%
       summarise(n())
 ```
 
-Grouping variables also influences how other `dplyr` functions work.
-
+* Grouping variables also **influences how other `dplyr` functions work**!
 <br>
   
 For example, let's group our `starwars` characters by both **species and gender** variables:
 
 ```{r, eval=TRUE}
-sw_sg <- group_by(starwars, species, gender) 
+sw_sg <- group_by(starwars, 
+                  species, gender) 
 ```
 
-We can then use `slice_max` (function that retrieves the entry that contains the maximum value in the specified variable) to retrieve the character with the **maximum `height`**:
+We can then use `slice_max` (function that retrieves the row that contains the **maximum value** in a selected variable) to retrieve the character with the **maximum `height`**:
  
 ```{r, eval=TRUE}
 sw_sg %>% 
-  select(name, species, gender, height) %>% # we are selecting the columns here just to make the output more readable
+  select(name, species, gender, height) %>% # columns selection just to make the output more readable
   slice_max(height)
 ```
 
-We get one entry for each unique combination of **species and gender**.
+We get one entry for **each unique combination of species and gender**.
 <br>
 If you query the maximum height on an **non-grouped tibble**, you will get only one row (maximum height overall):
 
@@ -412,11 +415,11 @@ starwars %>%
   slice_max(height)
 ```
 
-Another example is that you can create new columns (with `mutate`) **based on the grouping**.
+* Another example is that you can create new columns (with `mutate`) **based on the grouping**.
 <br>
-Here we are grouping the data by `species` and we add a column `average_height_species` that describes the **average height**. 
-<br>
-As the data is grouped by `species`, we will get the value **per species**, not taking into account the whole tibble:
+
+  * Here we are grouping the data by `species` and we add a column `average_height_species` that describes the **average height**. 
+  * As the data is grouped by `species`, we will get the **average height PER SPECIES**:
 
 ```{r}
 starwars %>% group_by(species) %>% 
@@ -461,29 +464,39 @@ starwarsBMI %>%
 When you are grouping variables with `group_by`, the tibble will **keep the grouping until you ungroup**!
 
 <br>
-While this is not an issue when you are summarizing (you get a small summary table), it can be useful in case you are using the grouping - for example - to **create a new column** (example stated above):
+While this is not an issue when you are summarizing (you get a summary table), it can be useful in case you are using the grouping - for example - to **create a new column**.
+<br><br>
+In the example stated before, we created a new column `average_height_species` that contains the **average height per species**:
 
 ```{r, eval=TRUE}
 starwars %>% group_by(species) %>% 
   select(name, species, height, mass) %>% 
-  mutate(average_height_species=mean(height, na.rm=TRUE))
+  mutate(average_height_species=mean(height, na.rm=TRUE)) %>% head(n=2)
 ```
 
-If now you want to add a column that describes the **average mass of ALL individuals**, you need to **ungroup** the tibble:
+What if we also want to add a column that describes the **average mass of ALL individuals** (<u>regardless of the species</u>)? 
+<br>
 
-```{r}
-# Without ungrouping, you get the average mass calculated per species
+```{r, eval=TRUE}
+# With the current grouping (species), you get the average mass calculated per species
 starwars %>% group_by(species) %>% 
   select(name, species, height, mass) %>% 
   mutate(average_height_species=mean(height, na.rm=TRUE)) %>%
-  mutate(average_mass=mean(mass, na.rm=TRUE))
+  mutate(average_mass=mean(mass, na.rm=TRUE)) %>% head(n=2)
+```
 
+Column `average_mass` still contains the average per species!
+
+<br>
+* We need to **ungroup** the tibble before creating this new column!!
+
+```{r, eval=TRUE}
 # ungroup first, and you get the average mass calculated for the whole tibble
 starwars %>% group_by(species) %>% 
   select(name, species, height, mass) %>% 
   mutate(average_height_species=mean(height, na.rm=TRUE)) %>%
   ungroup %>%
-  mutate(average_mass=mean(mass, na.rm=TRUE))
+  mutate(average_mass=mean(mass, na.rm=TRUE)) %>% head(n=2)
 ```
 
 
@@ -507,7 +520,7 @@ arrange(presidential2,
 If a grouping was done before, you can arrange first by grouping and then by selected variable(s) setting the `.by_group=TRUE` parameter:
 
 ```{r}
-mutate(presidential2, duration_days=end-start) %>%
+presidential2 %>%
     group_by(party) %>% 
     arrange(duration_days, .by_group=TRUE)
 ```
@@ -540,16 +553,133 @@ starwarsBMI %>%
 
 </details>
 
+
 ## A few more useful `dplyr` functions
 
-* Extract rows with `slice`:
+### Mutating joins
 
-```{r, eval=F}
-# Fetch the first 2 rows
-slice(presidential2, 1:2)
+The following functions allows one to **join / merge** 2 tibbles into 1 using columns that contain **common keys**.
+
+```{r, echo=FALSE, eval=TRUE}
+knitr::kable(
+  data.frame(name=c("**`inner_join`**", "**`left_join`**", "**`right_join`**", "**`full_join`**"), 
+             `what it does`=c("includes all rows in x and y (intersection)", "includes all rows in x", "includes all rows in y", "includes all rows in x or y (union)")), caption = 'mutating joins functions',
+  format = "html", table.attr = "style='width:90%;'"
+)
 ```
 
-`slice` helpers:
+Let's create 2 small tibbles:
+
+```{r, eval=TRUE, message=F}
+tibX <- tibble(ID=LETTERS[1:4],
+               year=c("2020", "2021", "2021", "2020")
+)
+
+tibY <- tibble(ID=LETTERS[3:5],
+               month=c("January", "October", "July")
+               )
+```
+
+We will join `tibX` and `tibY` using the **ID** column, and keep only rows that contain a **matching ID** with `inner_join`:
+
+```{r}
+inner_join(x=tibX,
+           y=tibY,
+           by="ID")
+```
+
+Keep all rows from `tibX` regardless on whether they have a match in `tibY` with `left_join`:
+
+```{r}
+left_join(x=tibX,
+           y=tibY,
+           by="ID")
+```
+
+Keep all rows from `tibY` regardless on whether they have a match in `tibX` with `right_join`:
+
+```{r}
+right_join(x=tibX,
+           y=tibY,
+           by="ID")
+```
+
+Keep all rows from both tibbles with `full_join`:
+
+```{r}
+full_join(x=tibX,
+           y=tibY,
+           by="ID")
+```
+
+Note that columns do **NOT** need to be named the same way!
+<br>
+Let's consider the new tibble `tibZ`:
+
+```{r, eval=TRUE}
+tibZ <- tibble(id=LETTERS[3:5],
+               month=c("May", "June", "April")
+               )
+```
+
+We can join it with `tibX` by giving the **"by"** parameter a **named** vector that contains **1 element**:
+
+```{r}
+full_join(x=tibX,
+           y=tibZ,
+           by=c("ID" = "id")
+)
+```
+
+<center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
+
+Join the 2 following tibbles (keep all rows from the `mynames` tibble):
+
+```{r}
+mynames <- tibble(name=c("Einstein", "Newton", "Curie", "Mendel", "Franklin"),
+                  birth_year=c(1879, 1643, 1867, 1822, 1920))
+  
+myemails <- tibble(full_name=c("Albert Einstein", "Isaac Newton", "Marie Curie", "Rosalind Franklin"),
+                               email_address=c("aeinstein283@coolmail.com", "isaac.newton.scientist@coolmail.com", "mariecurie007@coolmail.com", "rosalind2_franklin@coolmail.com"))
+```
+
+
+<details>
+<summary>
+<h5 style="background-color: #a4edff; display: inline-block;">*Answer*</h5>
+</summary>
+
+```{r, eval=F}
+# need to separate a column first!
+myemails %>% separate(col=full_name,
+                      into=c("first_name", "last_name"),
+                      sep=" ") %>%
+            right_join(y=mynames,
+                       by=c("last_name" = "name"))
+```
+
+</details>
+
+
+### Extract or remove rows with `slice`:
+
+* Extract rows:
+
+```{r, eval=F}
+# Fetch the first 2 rows (index 1 and 2)
+slice(presidential2, 
+      1:2)
+```
+
+* Remove rows:
+
+```{r, eval=F}
+# Remove 1rst and 4th rows
+slice(presidential2, 
+      -c(1,4)
+```
+
+These **`slice` helpers** can be useful:
 
 ```{r, echo=FALSE, eval=TRUE}
 knitr::kable(
@@ -559,133 +689,117 @@ knitr::kable(
 )
 ```
 
-Extract the row that has the maximum "height" from in the `starwars` dataset:
+Extract the row that has the **maximum** `height` from in the `starwars` dataset with `slice_max`:
 
 ```{r}
-slice_max(starwars, order_by=height)
+# by default, only 1 row is extracted
+slice_max(starwars, 
+          order_by=height)
 
-# set parameter "n" if you want to extract the n top rows
-slice_max(starwars, order_by=height,
-          n=10)
+# set parameter "n" if you want to extract the "n" top rows
+slice_max(starwars, 
+          order_by=height,
+          n=3)
 ```
 
-Same for the minimum:
+Same for the minimum with `slice_min`:
 
 ```{r}
-slice_min(starwars, order_by=mass,
+slice_min(starwars, 
+          order_by=mass,
           n=2)
 ```
 
-Check the first or last row with `slice_head` and `slice_tail`, respectively
+Extract the first or last row with `slice_head` and `slice_tail`, respectively
 
 ```{r}
 # first row
 slice_head(starwars)
 
-# first five rows
-slice_head(starwars, n=5)
-
-# first 10% of the rows
-slice_head(starwars, prop=0.1)
-
 # last row
 slice_tail(starwars)
+```
+
+You can extract the **"n"** first or last rows, or you can extract a certain **proportions of rows to select** with **"prop"**:
+
+```{r, eval=FALSE}
+# first 5 rows
+slice_head(starwars, 
+           n=5)
+
+# first 10% of the rows
+slice_head(starwars, 
+           prop=0.1)
+
+
 
 # last 7 rows
-slice_tail(starwars, n=7)
+slice_tail(starwars, 
+           n=7)
 
 # last 25% of the rows
-slice_tail(starwars, prop=0.25)
+slice_tail(starwars, 
+           prop=0.25)
 ```
 
-Select a random sample of rows with `slice_random`
+Select a random sample of rows with `slice_random`:
 
 ```{r}
-# one random row
+# 1 random row
 slice_sample(starwars)
 
-# 5 random rows
-slice_sample(starwars, n=5)
+# 4 random rows
+slice_sample(starwars, 
+             n=4)
 
-# 15% of rows selected randomly
-slice_sample(starwars, prop=0.15)
+# 3% of rows selected randomly
+slice_sample(starwars, 
+             prop=0.03)
 ```
 
 
-* Extract a single column as a vector with `pull`:
+### Extract a single column as a vector with `pull`:
 
-```{r, eval=F}
+```{r, eval=T}
 # extract column "duration_days"
 presidential2 %>% pull(duration_days)
 
 # extract column "duration_days" as a vector, and name the vector using the "name" column
-presidential2 %>% pull(duration_days, name=name)
+presidential2 %>% pull(duration_days, 
+                       name=name)
 ```
 
-* Change column order with `relocate`:
+### Change column order with `relocate`:
 
 ```{r, eval=F}
 # move column "party" as the start
-relocate(presidential, party)
-
-# move column "name" at the end (after last column)
-relocate(presidential, name, .after=last_col())
+relocate(presidential, 
+         party)
 
 # move column "name" before column "party"
-relocate(presidential, party, .before=party)
+relocate(presidential, 
+         party, 
+         .before=party)
+
+# move column "name" at the end (after last column)
+relocate(presidential, 
+         name, 
+         .after=last_col())
 
 # move around all columns
-relocate(presidential, party, start, name, end)
+relocate(presidential, 
+         party, start, name, end)
 
 # rename a column as you relocate it
-relocate(presidential, President=name, .after=last_col())
+relocate(presidential, 
+         President=name, 
+         .after=last_col())
 ```
 
-```{r, eval=F}
-```
 
 
-## Exercise
 
-We will work with a modified version of the **storms** data set: positions and attributes of **198 tropical storms**, measured every 6 hours.
 
-1. Download and read in [this file](https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/modified_storms.csv) (using a `tidyverse` function!):
-  * store the dataset into object `mystorms`, and then **tidy** it!
-2. What storm has the **highest median wind speed**?
-3. Calculate **how many storms happen each year**. You might need to `separate` a column... And check how the `distinct` function can help you!
-  * What are the years with the **maximum** number of storms?
-
-<details>
-<summary>
-<h5 style="background-color: #a4edff; display: inline-block;">*Answer*</h5>
-</summary>
-
-```{r, eval=F}
-# 1. download, read in, tidy
-mystorms <- read_csv("https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/modified_storms.csv") %>%
-            separate(col=wind_and_pressure, into=c("wind", "pressure"), sep="-", convert=TRUE) 
-
-# 2. What storm has the highest median wind speed?
-mystorms %>% group_by(name) %>%
-            summarise(median_wind = median(wind)) %>%
-            arrange(desc(median_wind)) %>%
-            slice(1) # slice() can be used to retrieve rows by their index
-      
-# 3. Calculate how many storms happen each year: 
-mystorms %>%  separate(date, into=c("year", "month", "day"), sep="-") %>%
-          distinct(name, year) %>%
-          group_by(year) %>%
-          summarise(storms_per_year=n())
-  #  What are the years with the **maximum** number of storms?
-mystorms %>%  separate(date, into=c("year", "month", "day"), sep="-") %>%
-          distinct(name, year) %>%
-          group_by(year) %>%
-          summarise(storms_per_year=n()) %>%
-          arrange(desc(storms_per_year)) %>% 
-          slice(1:4)
-```
-
-</details>
 
 
 

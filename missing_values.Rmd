@@ -4,15 +4,13 @@
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
 ```
 
-* `tidyr::drop_na`: drop rows containing missing values.
+* `drop_na`: drop rows containing missing values.
 
 Create a tibble that contains missing (NA) values:
 
 ```{r}
 dfwithNA <- tibble(x = c(1, 2, NA, 5), 
                    y = c("a", NA, "b", "c"))
-
-dfwithNA
 ```
 
 Remove rows that contain NA values with `drop_na`:
@@ -21,7 +19,7 @@ Remove rows that contain NA values with `drop_na`:
 drop_na(dfwithNA)
 ```
 
-* `tidyr::replace_na`: change NA values to a selected value (one per column):
+* `replace_na`: change NA values to a selected value (one per column):
 
 ```{r}
 # replace NAs by 0s in column "x", and by "k" in column "y"
@@ -29,7 +27,7 @@ replace_na(dfwithNA,
            list(x=0, y="k"))
 ```
 
-* `tidyr::complete`: turns implicit missing values into explicit missing values:
+* `complete`: turns implicit missing values into explicit missing values:
 
 ```{r}
 df <- tibble(
@@ -38,16 +36,25 @@ df <- tibble(
   value1 = 1:5,
   value2 = 4:8
 )
+```
 
-# Missing a row for Patient2 / Treatment B: add it and fill in with NA values:
-complete(df, patient, treatment)
+Here we are missing a row for **Patient2 / Treatment B**: add it and fill in with NA values:
 
-# If you want to fill it missing other values that NA, you can use the fill parameter
-complete(df, patient, treatment, 
+```{r}
+complete(df, 
+         patient, treatment) # columns to expand
+```
+
+If you want implicit missing values to be filled by something else than NA, use the **fill** parameter:
+
+```{r}
+# we will fill in missing values with 0s in column "value1", and with NAs in column "value2"
+complete(df, 
+         patient, treatment, 
          fill=list(value1=0, value2=NA))
 ```
 
-* In practice: what if you have `NA` values, along with empty cells and "customized" missing values?
+* In practice: what if you have `NA` values, along with <u>empty cells</u> and "customized" missing values?
 
 ```{r}
 dfwithNA2 <- tibble(x = c(1, 2, NA, 5, "", 4), 
@@ -57,19 +64,11 @@ dfwithNA2 <- tibble(x = c(1, 2, NA, 5, "", 4),
 Replace empty cells and "customized" missing values with `NA` with `na_if`:
 
 ```{r}
-dfwithNA2 %>% na_if("missing") %>% na_if("")
+dfwithNA2 %>% 
+  na_if(y="missing") %>% 
+  na_if(y="")
 ```
 
-More complex solution: with `mutate` and `across`:
-
-* `across`: apply the same transformation to multiple columns. It takes the following parameters:
-  * `.fns`: function to apply to each of the selected columns.
-  * `.cols`: columns to transform: by default, all columns will be transformed.
-  
-```{r}
-# across: 
-dfwithNA2 %>% mutate(across(.fns = ~replace(., . ==  "" | . == "missing", NA)))
-```
 
 <center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
 

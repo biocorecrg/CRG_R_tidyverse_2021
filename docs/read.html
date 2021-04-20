@@ -24,7 +24,7 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-18" />
+<meta name="date" content="2021-04-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -177,11 +177,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.2" data-path="select.html"><a href="select.html#select-using-patterns"><i class="fa fa-check"></i><b>7.2.2</b> select using patterns</a></li>
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
-<li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
+<li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="summarise-group-by.html"><a href="summarise-group-by.html#ungroup"><i class="fa fa-check"></i><b>7.4.1</b> <code>ungroup</code></a></li>
+</ul></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
-<li class="chapter" data-level="7.6" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.6</b> Exercise</a></li>
+<li class="chapter" data-level="7.6" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html"><i class="fa fa-check"></i><b>7.6</b> A few more useful <code>dplyr</code> functions</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#mutating-joins"><i class="fa fa-check"></i><b>7.6.1</b> Mutating joins</a></li>
+<li class="chapter" data-level="7.6.2" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#extract-or-remove-rows-with-slice"><i class="fa fa-check"></i><b>7.6.2</b> Extract or remove rows with <code>slice</code>:</a></li>
+<li class="chapter" data-level="7.6.3" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#extract-a-single-column-as-a-vector-with-pull"><i class="fa fa-check"></i><b>7.6.3</b> Extract a single column as a vector with <code>pull</code>:</a></li>
+<li class="chapter" data-level="7.6.4" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#change-column-order-with-relocate"><i class="fa fa-check"></i><b>7.6.4</b> Change column order with <code>relocate</code>:</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
+<li class="chapter" data-level="9" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>9</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
 
@@ -250,7 +260,7 @@ read_tsv
 <p>Read in a file provided as an example with the <code>readr</code> package:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="read.html#cb23-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">readr_example</span>(<span class="st">&quot;mtcars.csv&quot;</span>))</span></code></pre></div>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   mpg = col_double(),
 ##   cyl = col_double(),
@@ -267,7 +277,7 @@ read_tsv
 <p>Read in a file available online (https protocol):</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="read.html#cb25-1" aria-hidden="true" tabindex="-1"></a>f2 <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/inputB.txt&quot;</span>)</span></code></pre></div>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   State = col_character(),
 ##   Population = col_double(),
@@ -291,7 +301,7 @@ read_tsv
 <span id="cb27-3"><a href="read.html#cb27-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">skip=</span><span class="dv">1</span>,</span>
 <span id="cb27-4"><a href="read.html#cb27-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">col_names=</span>LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>])</span></code></pre></div>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   A = col_double(),
 ##   B = col_double(),

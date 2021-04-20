@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Part 10 Mini project with code | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="Part 10 Mini project with code | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Part 10 Mini project with code | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Part 10 Mini project with code | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  
+  
+  
+
+<meta name="author" content="Sarah Bonnin" />
+
+
+<meta name="date" content="2021-04-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="join-annotation-and-expression-data.html"/>
+<link rel="next" href="references-and-resources.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Intermediate R: the "tidyverse"</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="what-is-the-tidyverse.html"><a href="what-is-the-tidyverse.html"><i class="fa fa-check"></i><b>2.1</b> What is the “tidyverse”</a></li>
+<li class="chapter" data-level="2.2" data-path="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html"><a href="good-reasons-to-learn-at-least-a-bit-how-to-use-it.html"><i class="fa fa-check"></i><b>2.2</b> Good reasons to learn (at least a bit) how to use it</a></li>
+<li class="chapter" data-level="2.3" data-path="tidyverse-core-packages.html"><a href="tidyverse-core-packages.html"><i class="fa fa-check"></i><b>2.3</b> Tidyverse core packages</a></li>
+<li class="chapter" data-level="2.4" data-path="install-and-load-all-tidyverse-package.html"><a href="install-and-load-all-tidyverse-package.html"><i class="fa fa-check"></i><b>2.4</b> Install and load all tidyverse package</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tibbles.html"><a href="tibbles.html"><i class="fa fa-check"></i><b>3</b> Tibbles</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="what-are-tibbles.html"><a href="what-are-tibbles.html"><i class="fa fa-check"></i><b>3.1</b> What are tibbles?</a></li>
+<li class="chapter" data-level="3.2" data-path="creating-tibbles.html"><a href="creating-tibbles.html"><i class="fa fa-check"></i><b>3.2</b> Creating tibbles</a></li>
+<li class="chapter" data-level="3.3" data-path="displaying-tibbles.html"><a href="displaying-tibbles.html"><i class="fa fa-check"></i><b>3.3</b> Displaying tibbles</a></li>
+<li class="chapter" data-level="3.4" data-path="data-types-in-tibbles.html"><a href="data-types-in-tibbles.html"><i class="fa fa-check"></i><b>3.4</b> Data types in tibbles</a></li>
+<li class="chapter" data-level="3.5" data-path="subsetting-manipulating-tibbles.html"><a href="subsetting-manipulating-tibbles.html"><i class="fa fa-check"></i><b>3.5</b> Subsetting / manipulating tibbles</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="input-output-with-readr.html"><a href="input-output-with-readr.html"><i class="fa fa-check"></i><b>4</b> Input / output with <em><code>readr</code></em></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="read.html"><a href="read.html"><i class="fa fa-check"></i><b>4.1</b> Read</a></li>
+<li class="chapter" data-level="4.2" data-path="write.html"><a href="write.html"><i class="fa fa-check"></i><b>4.2</b> Write</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tidy-data-with-tidyr.html"><a href="tidy-data-with-tidyr.html"><i class="fa fa-check"></i><b>5</b> Tidy data with <code>tidyr</code></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="what-is-tidy-data.html"><a href="what-is-tidy-data.html"><i class="fa fa-check"></i><b>5.1</b> What is “tidy” data?</a></li>
+<li class="chapter" data-level="5.2" data-path="separate-unite.html"><a href="separate-unite.html"><i class="fa fa-check"></i><b>5.2</b> Separate &amp; Unite</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="separate-unite.html"><a href="separate-unite.html#separate"><i class="fa fa-check"></i><b>5.2.1</b> Separate</a></li>
+<li class="chapter" data-level="5.2.2" data-path="separate-unite.html"><a href="separate-unite.html#unite"><i class="fa fa-check"></i><b>5.2.2</b> Unite</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="pivoting-data.html"><a href="pivoting-data.html"><i class="fa fa-check"></i><b>5.3</b> Pivoting data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="the-forward-pipe-operator.html"><a href="the-forward-pipe-operator.html"><i class="fa fa-check"></i><b>6</b> The <code>%&gt;%</code> forward-pipe operator</a></li>
+<li class="chapter" data-level="7" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>7</b> Data manipulation</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mutate-transmute.html"><a href="mutate-transmute.html"><i class="fa fa-check"></i><b>7.1</b> mutate &amp; transmute</a></li>
+<li class="chapter" data-level="7.2" data-path="select.html"><a href="select.html"><i class="fa fa-check"></i><b>7.2</b> select</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="select.html"><a href="select.html#select_if"><i class="fa fa-check"></i><b>7.2.1</b> select_if</a></li>
+<li class="chapter" data-level="7.2.2" data-path="select.html"><a href="select.html#select-using-patterns"><i class="fa fa-check"></i><b>7.2.2</b> select using patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
+<li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="summarise-group-by.html"><a href="summarise-group-by.html#ungroup"><i class="fa fa-check"></i><b>7.4.1</b> <code>ungroup</code></a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
+<li class="chapter" data-level="7.6" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html"><i class="fa fa-check"></i><b>7.6</b> A few more useful <code>dplyr</code> functions</a></li>
+<li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
+<li class="chapter" data-level="9" data-path="mini-project.html"><a href="mini-project.html"><i class="fa fa-check"></i><b>9</b> Mini project</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="download-and-read-in-the-files.html"><a href="download-and-read-in-the-files.html"><i class="fa fa-check"></i><b>9.1</b> Download and read in the files:</a></li>
+<li class="chapter" data-level="9.2" data-path="tidy-the-files.html"><a href="tidy-the-files.html"><i class="fa fa-check"></i><b>9.2</b> Tidy the files</a></li>
+<li class="chapter" data-level="9.3" data-path="join-annotation-and-expression-data.html"><a href="join-annotation-and-expression-data.html"><i class="fa fa-check"></i><b>9.3</b> Join annotation and expression data</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="mini-project-with-code.html"><a href="mini-project-with-code.html"><i class="fa fa-check"></i><b>10</b> Mini project with code</a></li>
+<li class="chapter" data-level="11" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>11</b> References and resources</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Intermediate R: introduction to data wrangling with the Tidyverse (2021)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mini-project-with-code" class="section level1" number="10">
+<h1><span class="header-section-number">Part 10</span> Mini project with code</h1>
+<p>We will work with two input files:</p>
+<ul>
+<li><strong>annotation.tsv</strong>: contains the annotation (from Gencode) of 29244 Human genes.</li>
+<li><strong>normalized_counts.csv</strong>: contains the log2-transformed normalized counts from an RNA-seq project. The expression of 14769 Human genes in <strong>8 samples</strong> from <strong>4 experimental groups</strong> is assessed:
+<ul>
+<li>Treatment 1, time 0 (2 samples)</li>
+<li>Treatment 1, time 20 (2 samples)</li>
+<li>Treatment 2, time 0 (2 samples)</li>
+<li>Treatment 2, time 20 (2 samples)</li>
+</ul></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Download / read in the two files that are found <a href="https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/mini_project/">here</a> into two tibbles.</li>
+</ol>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="mini-project-with-code.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download and read in the files</span></span>
+<span id="cb169-2"><a href="mini-project-with-code.html#cb169-2" aria-hidden="true" tabindex="-1"></a>annotation <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/mini_project/annotation.tsv&quot;</span>)</span>
+<span id="cb169-3"><a href="mini-project-with-code.html#cb169-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-4"><a href="mini-project-with-code.html#cb169-4" aria-hidden="true" tabindex="-1"></a>norm_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/mini_project/normalized_counts.csv&quot;</span>)</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Tidy</strong> each tibble individually.</li>
+</ol>
+<details>
+<summary>
+<h6 style="background-color: #fdffaf; display: inline-block;">
+<em>Some tips!</em>
+</h6>
+</summary>
+<ul>
+<li>For the <strong>annotation</strong>: something needs to be separated.</li>
+<li>For the <strong>normalized data</strong>: it’s important to pivot some columns… And to separate one created by the pivoting!</li>
+</ul>
+</details>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="mini-project-with-code.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate the &quot;gene_name_gene_type&quot; column into gene_name and gene_type</span></span>
+<span id="cb170-2"><a href="mini-project-with-code.html#cb170-2" aria-hidden="true" tabindex="-1"></a>annotation_tidy <span class="ot">&lt;-</span> annotation <span class="sc">%&gt;%</span> </span>
+<span id="cb170-3"><a href="mini-project-with-code.html#cb170-3" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">separate</span>(<span class="at">col=</span>gene_name_gene_type, </span>
+<span id="cb170-4"><a href="mini-project-with-code.html#cb170-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;gene_name&quot;</span>, <span class="st">&quot;gene_type&quot;</span>), </span>
+<span id="cb170-5"><a href="mini-project-with-code.html#cb170-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">sep=</span><span class="st">&quot;/&quot;</span>)</span>
+<span id="cb170-6"><a href="mini-project-with-code.html#cb170-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-7"><a href="mini-project-with-code.html#cb170-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot the data so there is a single column for the expression value</span></span>
+<span id="cb170-8"><a href="mini-project-with-code.html#cb170-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Use separate to create 3 new columns that will contain information, respectively on: Treatment, replicate, time point.</span></span>
+<span id="cb170-9"><a href="mini-project-with-code.html#cb170-9" aria-hidden="true" tabindex="-1"></a><span class="co"># (optional) mutate the &quot;time&quot; column to get a numeric column that contains only the actual time point (without the &quot;t&quot;)</span></span>
+<span id="cb170-10"><a href="mini-project-with-code.html#cb170-10" aria-hidden="true" tabindex="-1"></a>norm_data_tidy <span class="ot">&lt;-</span> norm_data <span class="sc">%&gt;%</span> </span>
+<span id="cb170-11"><a href="mini-project-with-code.html#cb170-11" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="fu">contains</span>(<span class="st">&quot;Treatment&quot;</span>), </span>
+<span id="cb170-12"><a href="mini-project-with-code.html#cb170-12" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">values_to=</span><span class="st">&quot;expression&quot;</span>, </span>
+<span id="cb170-13"><a href="mini-project-with-code.html#cb170-13" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">names_to=</span><span class="st">&quot;samples&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb170-14"><a href="mini-project-with-code.html#cb170-14" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">separate</span>(<span class="at">col=</span>samples, </span>
+<span id="cb170-15"><a href="mini-project-with-code.html#cb170-15" aria-hidden="true" tabindex="-1"></a>                               <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Treatment&quot;</span>, <span class="st">&quot;replicate&quot;</span>, <span class="st">&quot;time&quot;</span>), </span>
+<span id="cb170-16"><a href="mini-project-with-code.html#cb170-16" aria-hidden="true" tabindex="-1"></a>                               <span class="at">sep=</span><span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb170-17"><a href="mini-project-with-code.html#cb170-17" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">mutate</span>(<span class="at">time=</span><span class="fu">as.numeric</span>(<span class="fu">str_remove</span>(time, <span class="st">&quot;t&quot;</span>)))</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Join</strong> both datasets so as to obtain one tibble (keep the intersection).</li>
+</ol>
+<details>
+<summary>
+<h6 style="background-color: #fdffaf; display: inline-block;">
+<em>Don’t know which columns to use for the joining? Click here for help!</em>
+</h6>
+</summary>
+<p>Work on the <code>gencode_id</code> column of the normalized data: Gencode IDs only differ from the Ensembl IDs by the suffix (point + numbers).
+e.g. ENSG00000140853.15 in Gencode is ENSG00000140853 in Ensembl. Perhaps <code>str_sub</code> can help?</p>
+</details>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="mini-project-with-code.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, we need a common ID: remove the suffix with the point + numbers from &quot;gencode_id&quot; in order to obtain &quot;ensembl&quot; IDs</span></span>
+<span id="cb171-2"><a href="mini-project-with-code.html#cb171-2" aria-hidden="true" tabindex="-1"></a>norm_data_tidy <span class="ot">&lt;-</span> norm_data_tidy <span class="sc">%&gt;%</span> </span>
+<span id="cb171-3"><a href="mini-project-with-code.html#cb171-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">mutate</span>(<span class="at">ensembl_gene_id=</span><span class="fu">str_sub</span>(gencode_id, <span class="dv">1</span>, <span class="dv">15</span>), </span>
+<span id="cb171-4"><a href="mini-project-with-code.html#cb171-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">.before=</span>Treatment) <span class="co"># not important, just more convenient</span></span>
+<span id="cb171-5"><a href="mini-project-with-code.html#cb171-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb171-6"><a href="mini-project-with-code.html#cb171-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Use inner join in order to keep only common data</span></span>
+<span id="cb171-7"><a href="mini-project-with-code.html#cb171-7" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x=</span>annotation_tidy, </span>
+<span id="cb171-8"><a href="mini-project-with-code.html#cb171-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y=</span>norm_data_tidy, </span>
+<span id="cb171-9"><a href="mini-project-with-code.html#cb171-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">by=</span><span class="st">&quot;ensembl_gene_id&quot;</span>)</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>What is the <strong>average expression</strong> of the different <strong>types of genes</strong> (<code>gene_type</code>)?
+<ul>
+<li>According to this data, <strong>which 2 gene types have the highest average expression</strong>?</li>
+<li>Remove all rows which correspond to these 2 gene types from the dataset.</li>
+<li>What is now the size of our dataset?</li>
+</ul></li>
+</ol>
+<details>
+<summary>
+<h6 style="background-color: #fdffaf; display: inline-block;">
+<em>A couple of tips…</em>
+</h6>
+</summary>
+<ul>
+<li>Remember <code>slice_max</code>? <br></li>
+<li><code>pull</code> could also be useful!</li>
+</ul>
+</details>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="mini-project-with-code.html#cb172-1" aria-hidden="true" tabindex="-1"></a>highest_mean_2types <span class="ot">&lt;-</span> all_data <span class="sc">%&gt;%</span> </span>
+<span id="cb172-2"><a href="mini-project-with-code.html#cb172-2" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">group_by</span>(gene_type) <span class="sc">%&gt;%</span> </span>
+<span id="cb172-3"><a href="mini-project-with-code.html#cb172-3" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">summarise</span>(<span class="at">average_mean_gene_type=</span><span class="fu">mean</span>(expression)) <span class="sc">%&gt;%</span> </span>
+<span id="cb172-4"><a href="mini-project-with-code.html#cb172-4" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">slice_max</span>(<span class="at">order_by=</span>average_mean_gene_type, </span>
+<span id="cb172-5"><a href="mini-project-with-code.html#cb172-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">n=</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb172-6"><a href="mini-project-with-code.html#cb172-6" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">pull</span>(gene_type)</span>
+<span id="cb172-7"><a href="mini-project-with-code.html#cb172-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb172-8"><a href="mini-project-with-code.html#cb172-8" aria-hidden="true" tabindex="-1"></a>data_no_highest_2types <span class="ot">&lt;-</span> all_data <span class="sc">%&gt;%</span> </span>
+<span id="cb172-9"><a href="mini-project-with-code.html#cb172-9" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">filter</span>(<span class="sc">!</span>gene_type <span class="sc">%in%</span> highest_mean_2types)</span>
+<span id="cb172-10"><a href="mini-project-with-code.html#cb172-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb172-11"><a href="mini-project-with-code.html#cb172-11" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(data_no_highest_2types)</span></code></pre></div>
+<ol start="5" style="list-style-type: decimal">
+<li>Create a new column that contains <strong>the median expression per gene, per experimental group and per gene type.</strong><br>
+<em>By experimental group, we mean Treatment + time (for example, samples “Treatment1_rep1_t0” and “Treatment1_rep2_t0” are part of the same experimental group: Treatment1_t0)</em></li>
+</ol>
+<details>
+<summary>
+<h6 style="background-color: #fdffaf; display: inline-block;">
+<em>Help!</em>
+</h6>
+</summary>
+<ul>
+<li>If you don’t have it already, create a column <code>experimental_group</code>.</li>
+<li>The grouping should be done using 3 variables.</li>
+<li>Remember that, if the data is grouped, the newly created columns will take into account the groups…</li>
+</ul>
+</details>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="mini-project-with-code.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="co"># New column for the actual experimental group (no &quot;rep1&quot; and &quot;rep2&quot;)</span></span>
+<span id="cb173-2"><a href="mini-project-with-code.html#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="co"># group_by gene_name, gene_type and experimental_group</span></span>
+<span id="cb173-3"><a href="mini-project-with-code.html#cb173-3" aria-hidden="true" tabindex="-1"></a>data_no_highest_2_types <span class="ot">&lt;-</span> data_no_highest_2types <span class="sc">%&gt;%</span> </span>
+<span id="cb173-4"><a href="mini-project-with-code.html#cb173-4" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">unite</span>(<span class="at">col=</span><span class="st">&quot;experimental_group&quot;</span>, </span>
+<span id="cb173-5"><a href="mini-project-with-code.html#cb173-5" aria-hidden="true" tabindex="-1"></a>                                      Treatment, time, </span>
+<span id="cb173-6"><a href="mini-project-with-code.html#cb173-6" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">sep=</span><span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb173-7"><a href="mini-project-with-code.html#cb173-7" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">group_by</span>(experimental_group, gene_type, gene_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb173-8"><a href="mini-project-with-code.html#cb173-8" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">mutate</span>(<span class="at">median_expression_experimental_group=</span><span class="fu">median</span>(expression))</span></code></pre></div>
+<ol start="6" style="list-style-type: decimal">
+<li>For each experimental group, retrieve the <strong>lincRNA</strong> that has the <strong>highest median expression</strong>.
+<ul>
+<li>Is it the same lincRNA gene for all 4 experimental groups?</li>
+</ul></li>
+</ol>
+<details>
+<summary>
+<h6 style="background-color: #fdffaf; display: inline-block;">
+<em>Stuck? Click here.</em>
+</h6>
+</summary>
+<p>Check this <a href="https://stackoverflow.com/questions/24237399/how-to-select-the-rows-with-maximum-values-in-each-group-with-dplyr">stackoverflow post</a> for inspiration.</p>
+</details>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="mini-project-with-code.html#cb174-1" aria-hidden="true" tabindex="-1"></a>data_no_highest_2_types <span class="sc">%&gt;%</span> </span>
+<span id="cb174-2"><a href="mini-project-with-code.html#cb174-2" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb174-3"><a href="mini-project-with-code.html#cb174-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">group_by</span>(experimental_group, gene_type) <span class="sc">%&gt;%</span> </span>
+<span id="cb174-4"><a href="mini-project-with-code.html#cb174-4" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">filter</span>(expression <span class="sc">==</span> <span class="fu">max</span>(expression) <span class="sc">&amp;</span> gene_type<span class="sc">==</span><span class="st">&quot;lincRNA&quot;</span>)</span></code></pre></div>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="join-annotation-and-expression-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references-and-resources.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["r-tidyverse-crg.pdf", "r-tidyverse-crg.epub"],
+"toc": {
+"collapse": "section"
+},
+"search": true
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+# Mini project
+
+Download and read the two files that are found [https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/mini_project/](here)
+
+**Tidy** and **join** the files.
+str_remove could be useful here!
+
+Tip:
+You need to remove the suffix with the point + numbers in order to be able to merge the IDs! e.g. ENSG00000140853.15 should be ENSG00000140853. Check out `str_sub`... Or any of the `stringr` function that you think could help you!
+
+
+## Download and read in the files:
+
+```{r, eval=FALSE}
+# Download and read in the files
+annotation <- read_tsv("https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/mini_project/annotation.tsv")
+
+norm_data <- read_csv("https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/mini_project/normalized_counts.csv")
+```
+
+## Tidy the files
+
+```{r, eval=FALSE}
+# Separate the "gene_name_gene_type" column into gene_name and gene_type
+annotation_tidy <- annotation %>% 
+                        separate(col=gene_name_gene_type, 
+                                 into=c("gene_name", "gene_type"), 
+                                 sep="/")
+
+# Pivot the data so there is a single column for the expression value
+# Use separate to create 3 new columns that will contain information, respectively on: Treatment, replicate, time point.
+# (optional) mutate the "time" column to get a numeric column that contains only the actual time point (without the "t")
+norm_data_tidy <- norm_data %>% 
+                      pivot_longer(cols=contains("Treatment"), 
+                                   values_to="expression", 
+                                   names_to="samples") %>% 
+                      separate(col=samples, 
+                               into=c("Treatment", "replicate", "time"), 
+                               sep="_") %>% 
+                      mutate(time=as.numeric(str_remove(time, "t")))
+```
+
+## Join annotation and expression data
+
+```{r, eval=FALSE}
+# First, we need a common ID: remove the suffix with the point + numbers from "gencode_id" in order to obtain "ensembl" IDs
+
+norm_data_tidy <- norm_data_tidy %>% 
+                      mutate(ensembl_gene_id=str_sub(gencode_id, 1, 15), 
+                             .before=Treatment)
+
+# Use inner join in order to keep only common data
+all_data <- inner_join(x=annotation_tidy, 
+                       y=norm_data_tidy, 
+                       by="ensembl_gene_id")
+```
+
+```{r, eval=FALSE}
+# Manipulate
+
+* What is the average expression of the different types of genes? How many genes are present in each group? According to this data, what are the 2 groups that have the highest average expression? Retrieve those gene types and remove the corresponding rows from the input data. What is now the size of our dataset?
+
+highest_mean_2types <- all_data %>% 
+                          group_by(gene_type) %>% 
+                          summarise(average_mean_gene_type=mean(expression), 
+                                    count=n()) %>% 
+                          slice_max(order_by=average_mean_gene_type, 
+                                    n=2) %>% 
+                          pull(gene_type)
+
+data_no_highest_2types <- all_data %>% 
+                            filter(!gene_type %in% highest_mean_2types)
+
+* Create a new column that contains the median expression of per gene, per experimental group and per gene type.
+By experimental group, we mean Treatment + time (for example, Treatment1_rep1_t0 and Treatment1_rep2_t0 are part of the same experimental group)
+
+New column for the actual experimental group (no "rep1" and "rep2")
+
+data_no_highest_2_types_gene_average <- data_no_highest_2types %>% 
+                    unite(col="experimental_group", 
+                          Treatment, time, 
+                          sep="_") %>% 
+                    group_by(experimental_group, gene_type, gene_name) %>% 
+                    mutate(median_expression_experimental_group=mean(expression))
+
+* What lincRNA gene has the highest median expression in each of the experimental group? Is it the same lincRNA gene for all 4 groups?
+
+data_no_highest_2_types_gene_average %>% 
+                      ungroup() %>% 
+                      group_by(experimental_group, gene_type) %>% 
+                      filter(expression == max(expression) & gene_type=="lincRNA")
+```
+
+Stuck? [Check this stackoverflow post](https://stackoverflow.com/questions/24237399/how-to-select-the-rows-with-maximum-values-in-each-group-with-dplyr)
+
+

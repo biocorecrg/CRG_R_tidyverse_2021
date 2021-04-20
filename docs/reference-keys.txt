@@ -4,7 +4,9 @@ fig:unnamed-chunk-22
 tab:unnamed-chunk-23
 tab:unnamed-chunk-44
 tab:unnamed-chunk-45
-tab:unnamed-chunk-60
+tab:unnamed-chunk-61
+tab:unnamed-chunk-91
+tab:unnamed-chunk-103
 welcome
 introduction
 what-is-the-tidyverse
@@ -34,6 +36,12 @@ select_if
 select-using-patterns
 filter
 summarise-group_by
+ungroup
 arrange
-exercise
+a-few-more-useful-dplyr-functions
+mutating-joins
+extract-or-remove-rows-with-slice
+extract-a-single-column-as-a-vector-with-pull
+change-column-order-with-relocate
 handling-missing-values
+references-and-resources

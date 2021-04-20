@@ -24,7 +24,7 @@
 <meta name="author" content="Sarah Bonnin" />
 
 
-<meta name="date" content="2021-04-18" />
+<meta name="date" content="2021-04-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -177,11 +177,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.2" data-path="select.html"><a href="select.html#select-using-patterns"><i class="fa fa-check"></i><b>7.2.2</b> select using patterns</a></li>
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="filter.html"><a href="filter.html"><i class="fa fa-check"></i><b>7.3</b> filter</a></li>
-<li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a></li>
+<li class="chapter" data-level="7.4" data-path="summarise-group-by.html"><a href="summarise-group-by.html"><i class="fa fa-check"></i><b>7.4</b> summarise &amp; group_by</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="summarise-group-by.html"><a href="summarise-group-by.html#ungroup"><i class="fa fa-check"></i><b>7.4.1</b> <code>ungroup</code></a></li>
+</ul></li>
 <li class="chapter" data-level="7.5" data-path="arrange.html"><a href="arrange.html"><i class="fa fa-check"></i><b>7.5</b> arrange</a></li>
-<li class="chapter" data-level="7.6" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.6</b> Exercise</a></li>
+<li class="chapter" data-level="7.6" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html"><i class="fa fa-check"></i><b>7.6</b> A few more useful <code>dplyr</code> functions</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#mutating-joins"><i class="fa fa-check"></i><b>7.6.1</b> Mutating joins</a></li>
+<li class="chapter" data-level="7.6.2" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#extract-or-remove-rows-with-slice"><i class="fa fa-check"></i><b>7.6.2</b> Extract or remove rows with <code>slice</code>:</a></li>
+<li class="chapter" data-level="7.6.3" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#extract-a-single-column-as-a-vector-with-pull"><i class="fa fa-check"></i><b>7.6.3</b> Extract a single column as a vector with <code>pull</code>:</a></li>
+<li class="chapter" data-level="7.6.4" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#change-column-order-with-relocate"><i class="fa fa-check"></i><b>7.6.4</b> Change column order with <code>relocate</code>:</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
+<li class="chapter" data-level="9" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>9</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
 
@@ -221,28 +231,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>mutate</code> keeps all columns.</li>
 </ul>
 </blockquote>
+<p>You can change <strong>where the column is added</strong> (if you don’t want it to be added at the last position):</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="mutate-transmute.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add it before column &quot;start&quot;</span></span>
+<span id="cb54-2"><a href="mutate-transmute.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(presidential, </span>
+<span id="cb54-3"><a href="mutate-transmute.html#cb54-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end<span class="sc">-</span>start,</span>
+<span id="cb54-4"><a href="mutate-transmute.html#cb54-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.before=</span>start)</span>
+<span id="cb54-5"><a href="mutate-transmute.html#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-6"><a href="mutate-transmute.html#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="co"># add it after column &quot;end&quot;</span></span>
+<span id="cb54-7"><a href="mutate-transmute.html#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(presidential, </span>
+<span id="cb54-8"><a href="mutate-transmute.html#cb54-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end<span class="sc">-</span>start,</span>
+<span id="cb54-9"><a href="mutate-transmute.html#cb54-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">.after=</span>end)</span></code></pre></div>
 <p><br>
 If you want to keep <strong>only the newly created column(s)</strong> (drop the remaining ones): use <code>transmute()</code> instead of <code>mutate()</code>:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="mutate-transmute.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">transmute</span>(presidential, </span>
-<span id="cb54-2"><a href="mutate-transmute.html#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="mutate-transmute.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">transmute</span>(presidential, </span>
+<span id="cb55-2"><a href="mutate-transmute.html#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
 <p>Re-assign to a new - or the same - data frame/tibble using the <strong>usual R assignment operator: &lt;-</strong></p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="mutate-transmute.html#cb55-1" aria-hidden="true" tabindex="-1"></a>presidential2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(presidential, </span>
-<span id="cb55-2"><a href="mutate-transmute.html#cb55-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="mutate-transmute.html#cb56-1" aria-hidden="true" tabindex="-1"></a>presidential2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(presidential, </span>
+<span id="cb56-2"><a href="mutate-transmute.html#cb56-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
 <ul>
 <li>If you want to change the name of a column, you can use the function <code>rename</code>:</li>
 </ul>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="mutate-transmute.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using the column name:</span></span>
-<span id="cb56-2"><a href="mutate-transmute.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(presidential2, </span>
-<span id="cb56-3"><a href="mutate-transmute.html#cb56-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">President=</span>name)</span>
-<span id="cb56-4"><a href="mutate-transmute.html#cb56-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-5"><a href="mutate-transmute.html#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="co"># or the column index:</span></span>
-<span id="cb56-6"><a href="mutate-transmute.html#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(presidential2, </span>
-<span id="cb56-7"><a href="mutate-transmute.html#cb56-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">President=</span><span class="dv">1</span>)</span>
-<span id="cb56-8"><a href="mutate-transmute.html#cb56-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-9"><a href="mutate-transmute.html#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="co"># you can rename several columns using the same command:</span></span>
-<span id="cb56-10"><a href="mutate-transmute.html#cb56-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(presidential2, </span>
-<span id="cb56-11"><a href="mutate-transmute.html#cb56-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">President=</span>name, </span>
-<span id="cb56-12"><a href="mutate-transmute.html#cb56-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">Political_party=</span>party)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="mutate-transmute.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using the column name:</span></span>
+<span id="cb57-2"><a href="mutate-transmute.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(presidential2, </span>
+<span id="cb57-3"><a href="mutate-transmute.html#cb57-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">President=</span>name)</span>
+<span id="cb57-4"><a href="mutate-transmute.html#cb57-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-5"><a href="mutate-transmute.html#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="co"># or the column index:</span></span>
+<span id="cb57-6"><a href="mutate-transmute.html#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(presidential2, </span>
+<span id="cb57-7"><a href="mutate-transmute.html#cb57-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">President=</span><span class="dv">1</span>)</span>
+<span id="cb57-8"><a href="mutate-transmute.html#cb57-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-9"><a href="mutate-transmute.html#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="co"># you can rename several columns using the same command:</span></span>
+<span id="cb57-10"><a href="mutate-transmute.html#cb57-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(presidential2, </span>
+<span id="cb57-11"><a href="mutate-transmute.html#cb57-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">President=</span>name, </span>
+<span id="cb57-12"><a href="mutate-transmute.html#cb57-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">Political_party=</span>party)</span></code></pre></div>
 </div>
             </section>
 
