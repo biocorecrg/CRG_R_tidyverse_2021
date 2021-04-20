@@ -16,6 +16,8 @@ exampletibble <- tibble(day=c("day0", "day1", "day2"),
                     temperature=c("25C", "27C", "24Celsius"))
 ```
 
+***
+
 * `str_detect`: detects the presence or absence of a pattern in a string.
 
 ```{r}
@@ -38,11 +40,15 @@ str_detect(examplestring,
            negate=TRUE)
 ```
 
+***
+
 * `str_length`: outputs length of strings (number of characters) in each element of a vector.
 
 ```{r}
 str_length(examplestring)
 ```
+
+***
 
 * `str_replace`: looks for a pattern in a string and replace it.
 
@@ -79,6 +85,8 @@ You can use it inside another `tidyverse` function:
 mutate(exampletibble, day=str_remove(day, pattern="day"))
 ```
 
+***
+
 * `str_count`: count the number of occurences of a pattern:
 
 Count how many times "omics" is found in each element:
@@ -94,6 +102,8 @@ Count how many vowels are found in each element:
 str_count(examplestring, 
             pattern="[aeiouy]")
 ```
+
+***
 
 * `str_sub`: extracts and replace substrings from a character vector
 

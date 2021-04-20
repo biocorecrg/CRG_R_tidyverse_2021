@@ -19,6 +19,8 @@ Remove rows that contain NA values with `drop_na`:
 drop_na(dfwithNA)
 ```
 
+***
+
 * `replace_na`: change NA values to a selected value (one per column):
 
 ```{r}
@@ -26,6 +28,8 @@ drop_na(dfwithNA)
 replace_na(dfwithNA, 
            list(x=0, y="k"))
 ```
+
+***
 
 * `complete`: turns implicit missing values into explicit missing values:
 
@@ -53,6 +57,8 @@ complete(df,
          patient, treatment, 
          fill=list(value1=0, value2=NA))
 ```
+
+***
 
 * In practice: what if you have `NA` values, along with <u>empty cells</u> and "customized" missing values?
 

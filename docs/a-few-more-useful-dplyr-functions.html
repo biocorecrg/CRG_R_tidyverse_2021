@@ -500,9 +500,9 @@ randomly select rows
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="a-few-more-useful-dplyr-functions.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 random row</span></span>
 <span id="cb148-2"><a href="a-few-more-useful-dplyr-functions.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(starwars)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 14
-##   name   height  mass hair_color skin_color eye_color birth_year sex   gender    homeworld
-##   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;    
-## 1 Greedo    173    74 &lt;NA&gt;       green      black             44 male  masculine Rodia    
+##   name    height  mass hair_color skin_color eye_color birth_year sex   gender    homeworld
+##   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;    
+## 1 Tarfful    234   136 brown      brown      blue              NA male  masculine Kashyyyk 
 ## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="a-few-more-useful-dplyr-functions.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 random rows</span></span>
 <span id="cb150-2"><a href="a-few-more-useful-dplyr-functions.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(starwars, </span>
@@ -510,10 +510,10 @@ randomly select rows
 <pre><code>## # A tibble: 4 x 14
 ##   name       height  mass hair_color skin_color eye_color birth_year sex    gender  homeworld
 ##   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;    
-## 1 Cordé         157  NA   brown      light      brown           NA   female femini… Naboo    
-## 2 Boba Fett     183  78.2 black      fair       brown           31.5 male   mascul… Kamino   
-## 3 Arvel Cry…     NA  NA   brown      fair       brown           NA   male   mascul… &lt;NA&gt;     
-## 4 Dooku         193  80   white      fair       brown          102   male   mascul… Serenno  
+## 1 Jek Tono …    180   110 brown      fair       blue              NA male   mascul… Bestine …
+## 2 Arvel Cry…     NA    NA brown      fair       brown             NA male   mascul… &lt;NA&gt;     
+## 3 Eeth Koth     171    NA black      brown      brown             NA male   mascul… Iridonia 
+## 4 Dormé         165    NA brown      light      brown             NA female femini… Naboo    
 ## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="a-few-more-useful-dplyr-functions.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3% of rows selected randomly</span></span>
 <span id="cb152-2"><a href="a-few-more-useful-dplyr-functions.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(starwars, </span>
@@ -521,8 +521,8 @@ randomly select rows
 <pre><code>## # A tibble: 2 x 14
 ##   name       height  mass hair_color skin_color eye_color birth_year sex   gender   homeworld
 ##   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    
-## 1 Rugor Nass    206    NA none       green      orange            NA male  masculi… Naboo    
-## 2 Tion Medon    206    80 none       grey       black             NA male  masculi… Utapau   
+## 1 Leia Orga…    150    49 brown      light      brown             19 fema… feminine Alderaan 
+## 2 Han Solo      180    80 brown      fair       brown             29 male  masculi… Corellia 
 ## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 </div>
 <div id="extract-a-single-column-as-a-vector-with-pull" class="section level3" number="7.6.3">

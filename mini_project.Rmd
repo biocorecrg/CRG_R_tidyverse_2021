@@ -9,7 +9,11 @@ We will work with two input files:
   * Treatment 2, time 0 (2 samples)
   * Treatment 2, time 20 (2 samples)
 
+***
+
 1. Download / read in the two files that are found [here](https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/mini_project/) into two tibbles.
+
+***
 
 2. **Tidy** each tibble individually.
 
@@ -23,6 +27,8 @@ We will work with two input files:
 
 </details>
 
+***
+
 3. **Join** both datasets so as to obtain one tibble (keep the intersection).
 
 <details>
@@ -34,6 +40,8 @@ Work on the `gencode_id` column of the normalized data: Gencode IDs only differ 
 e.g. ENSG00000140853.15 in Gencode is ENSG00000140853 in Ensembl. Perhaps `str_sub` can help?
 
 </details>
+
+***
 
 4. What is the **average expression** of the different **types of genes** (`gene_type`)? 
     * According to this data, **which 2 gene types have the highest average expression**? 
@@ -50,6 +58,8 @@ e.g. ENSG00000140853.15 in Gencode is ENSG00000140853 in Ensembl. Perhaps `str_s
 
 </details>
 
+***
+
 5. Create a new column that contains **the median expression per gene, per experimental group and per gene type.**<br>
 *By experimental group, we mean Treatment + time (for example, samples "Treatment1_rep1_t0" and "Treatment1_rep2_t0" are part of the same experimental group: Treatment1_t0)*
 
@@ -63,6 +73,8 @@ e.g. ENSG00000140853.15 in Gencode is ENSG00000140853 in Ensembl. Perhaps `str_s
 * Remember that, if the data is grouped, the newly created columns will take into account the groups...
 
 </details>
+
+***
 
 6. For each experimental group, retrieve the **lincRNA** that has the **highest median expression**.
     * Is it the same lincRNA gene for all 4 experimental groups?
