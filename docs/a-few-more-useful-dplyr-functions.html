@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="arrange.html"/>
-<link rel="next" href="handling-missing-values.html"/>
+<link rel="next" href="exercise.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -189,6 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.6.3" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#extract-a-single-column-as-a-vector-with-pull"><i class="fa fa-check"></i><b>7.6.3</b> Extract a single column as a vector with <code>pull</code>:</a></li>
 <li class="chapter" data-level="7.6.4" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#change-column-order-with-relocate"><i class="fa fa-check"></i><b>7.6.4</b> Change column order with <code>relocate</code>:</a></li>
 </ul></li>
+<li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="chapter" data-level="9" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>9</b> References and resources</a></li>
@@ -499,20 +500,20 @@ randomly select rows
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="a-few-more-useful-dplyr-functions.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 random row</span></span>
 <span id="cb148-2"><a href="a-few-more-useful-dplyr-functions.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(starwars)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 14
-##   name     height  mass hair_color skin_color eye_color birth_year sex   gender  homeworld species films 
-##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;list&gt;
-## 1 Raymus …    188    79 brown      light      brown             NA male  mascul… Alderaan  Human   &lt;chr …
+##   name  height  mass hair_color skin_color eye_color birth_year sex   gender    homeworld species films  
+##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;   &lt;list&gt; 
+## 1 IG-88    200   140 none       metal      red               15 none  masculine &lt;NA&gt;      Droid   &lt;chr […
 ## # … with 2 more variables: vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="a-few-more-useful-dplyr-functions.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 random rows</span></span>
 <span id="cb150-2"><a href="a-few-more-useful-dplyr-functions.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(starwars, </span>
 <span id="cb150-3"><a href="a-few-more-useful-dplyr-functions.html#cb150-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">n=</span><span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 14
-##   name    height  mass hair_color skin_color  eye_color birth_year sex    gender homeworld species films 
-##   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;list&gt;
-## 1 Taun We    213    NA none       grey        black             NA female femin… Kamino    Kamino… &lt;chr …
-## 2 Gasgano    122    NA none       white, blue black             NA male   mascu… Troiken   Xexto   &lt;chr …
-## 3 Tion M…    206    80 none       grey        black             NA male   mascu… Utapau    Pau&#39;an  &lt;chr …
-## 4 Bossk      190   113 none       green       red               53 male   mascu… Trandosha Trando… &lt;chr …
+##   name      height  mass hair_color skin_color eye_color birth_year sex   gender  homeworld species films
+##   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;lis&gt;
+## 1 Boba Fett    183  78.2 black      fair       brown           31.5 male  mascul… Kamino    Human   &lt;chr…
+## 2 R5-D4         97  32   &lt;NA&gt;       white, red red             NA   none  mascul… Tatooine  Droid   &lt;chr…
+## 3 Bail Pre…    191  NA   black      tan        brown           67   male  mascul… Alderaan  Human   &lt;chr…
+## 4 Poe Dame…     NA  NA   brown      light      brown           NA   male  mascul… &lt;NA&gt;      Human   &lt;chr…
 ## # … with 2 more variables: vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="a-few-more-useful-dplyr-functions.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3% of rows selected randomly</span></span>
 <span id="cb152-2"><a href="a-few-more-useful-dplyr-functions.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(starwars, </span>
@@ -520,8 +521,8 @@ randomly select rows
 <pre><code>## # A tibble: 2 x 14
 ##   name     height  mass hair_color skin_color eye_color birth_year sex   gender  homeworld species films 
 ##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;list&gt;
-## 1 Jek Ton…    180   110 brown      fair       blue              NA male  mascul… Bestine … Human   &lt;chr …
-## 2 Lobot       175    79 none       light      blue              37 male  mascul… Bespin    Human   &lt;chr …
+## 1 R5-D4        97    32 &lt;NA&gt;       white, red red               NA none  mascul… Tatooine  Droid   &lt;chr …
+## 2 Raymus …    188    79 brown      light      brown             NA male  mascul… Alderaan  Human   &lt;chr …
 ## # … with 2 more variables: vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 </div>
 <div id="extract-a-single-column-as-a-vector-with-pull" class="section level3" number="7.6.3">
@@ -563,17 +564,15 @@ randomly select rows
 <span id="cb158-20"><a href="a-few-more-useful-dplyr-functions.html#cb158-20" aria-hidden="true" tabindex="-1"></a><span class="fu">relocate</span>(presidential, </span>
 <span id="cb158-21"><a href="a-few-more-useful-dplyr-functions.html#cb158-21" aria-hidden="true" tabindex="-1"></a>         <span class="at">President=</span>name, </span>
 <span id="cb158-22"><a href="a-few-more-useful-dplyr-functions.html#cb158-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">.after=</span><span class="fu">last_col</span>())</span></code></pre></div>
-
 </div>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
 <a href="arrange.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="handling-missing-values.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exercise.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

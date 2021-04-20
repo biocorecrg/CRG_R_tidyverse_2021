@@ -553,7 +553,6 @@ starwarsBMI %>%
 
 </details>
 
-
 ## A few more useful `dplyr` functions
 
 ### Mutating joins
@@ -796,6 +795,47 @@ relocate(presidential,
          .after=last_col())
 ```
 
+## Exercise
+
+We will work with a modified version of the **storms** data set: positions and attributes of **198 tropical storms**, measured every 6 hours.
+
+1. Download and read in [this file](https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/modified_storms.csv) (using a `tidyverse` function!):
+  * store the dataset into object `mystorms`, and then **tidy** it!
+2. What storm has the **highest median wind speed**?
+3. Calculate **how many storms happen each year**. You might need to `separate` a column... And check how the `distinct` function can help you!
+  * What are the years with the **maximum** number of storms?
+
+<details>
+<summary>
+<h5 style="background-color: #a4edff; display: inline-block;">*Answer*</h5>
+</summary>
+
+```{r, eval=F}
+# 1. download, read in, tidy
+mystorms <- read_csv("https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/modified_storms.csv") %>%
+            separate(col=wind_and_pressure, into=c("wind", "pressure"), sep="-", convert=TRUE) 
+
+# 2. What storm has the highest median wind speed?
+mystorms %>% group_by(name) %>%
+            summarise(median_wind = median(wind)) %>%
+            arrange(desc(median_wind)) %>%
+            slice(1) # slice() can be used to retrieve rows by their index
+      
+# 3. Calculate how many storms happen each year: 
+mystorms %>%  separate(date, into=c("year", "month", "day"), sep="-") %>%
+          distinct(name, year) %>%
+          group_by(year) %>%
+          summarise(storms_per_year=n())
+  #  What are the years with the **maximum** number of storms?
+mystorms %>%  separate(date, into=c("year", "month", "day"), sep="-") %>%
+          distinct(name, year) %>%
+          group_by(year) %>%
+          summarise(storms_per_year=n()) %>%
+          arrange(desc(storms_per_year)) %>% 
+          slice(1:4)
+```
+
+</details>
 
 
 

@@ -11,3 +11,4 @@ More resources:
 * Course on [computing for the social sciences](https://cfss.uchicago.edu/notes/problem-solving/)
 * [Wrangling penguins: some basic data wrangling in R with `dplyr`](https://allisonhorst.shinyapps.io/dplyr-learnr/)
 * [Be awesome in `ggplot2`](http://www.sthda.com/english/wiki/be-awesome-in-ggplot2-a-practical-guide-to-be-highly-effective-r-software-and-data-visualization)
+* The course's material was made using [bookdown](https://bookdown.org/)
