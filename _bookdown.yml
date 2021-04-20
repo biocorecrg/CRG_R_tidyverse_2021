@@ -14,6 +14,7 @@ rmd_files: ["index.Rmd",
             "pipe.Rmd",
             "dplyr.Rmd",
             "missing_values.Rmd",
+            "stringr.Rmd",
             "references.Rmd"]
 output:
   bookdown::gitbook:

@@ -1,0 +1,162 @@
+# Strings manipulation with `stringr`
+
+The `stringr` package provides tools for **string manipulation**.
+<br>
+All functions in `stringr` start with **str_** and take a vector of strings as the first argument.
+<br><br>
+We will show here a few useful functions (for a complete list of `stringr` functions, you can have a look at the [Cheat sheet](https://github.com/rstudio/cheatsheets/blob/master/strings.pdf). The cheat sheet also provides guidance on how to work with **regular expressions**.
+
+<br><br>
+Let's take a simple **character vector** and a small **tibble** as examples:
+
+```{r, message=FALSE}
+examplestring <- c("genomics", "proteomics", "proteome", "transcriptomics", "metagenomics", "metabolomics")
+
+exampletibble <- tibble(day=c("day0", "day1", "day2"),
+                    temperature=c("25C", "27C", "24Celsius"))
+```
+
+* `str_detect`: detects the presence or absence of a pattern in a string.
+
+```{r}
+str_detect(examplestring, 
+            pattern="genom")
+```
+
+You can use regular expressions: as a simple example, here we want to detect which element of `examplestring` **starts** with **genom**.
+
+```{r}
+str_detect(examplestring, 
+            pattern="^genom")
+```
+
+You can reverse the search and output elements where the pattern is NOT found with `negate=TRUE`
+
+```{r}
+str_detect(examplestring, 
+            pattern="genom",
+           negate=TRUE)
+```
+
+* `str_length`: outputs length of strings (number of characters) in each element of a vector.
+
+```{r}
+str_length(examplestring)
+```
+
+* `str_replace`: looks for a pattern in a string and replace it.
+
+We can replace "omics" with "ome"
+
+```{r}
+str_replace(examplestring, 
+            pattern="omics", 
+            "ome")
+```
+
+`str_replace` can be used to remove selected patterns from strings:
+
+```{r}
+str_replace(examplestring, 
+            pattern="omics", 
+            "")
+
+# str_remove is a wrapper for the same thing (no need for the 3rd argument)
+str_remove(examplestring, 
+            pattern="omics")
+```
+
+Same with a **tibble's column**:
+
+```{r}
+str_remove(exampletibble$day, 
+            pattern="day")
+```
+
+You can use it inside another `tidyverse` function:
+
+```{r}
+mutate(exampletibble, day=str_remove(day, pattern="day"))
+```
+
+* `str_count`: count the number of occurences of a pattern:
+
+Count how many times "omics" is found in each element:
+
+```{r}
+str_count(examplestring, 
+            pattern="omics")
+```
+
+Count how many vowels are found in each element:
+
+```{r}
+str_count(examplestring, 
+            pattern="[aeiouy]")
+```
+
+* `str_sub`: extracts and replace substrings from a character vector
+
+```{r}
+str_sub(examplestring, 
+            start=1, # position of the first character
+            end=10) # position of the last character
+```
+
+Let's keep the first 2 characters of the **temperature** column of our `exampletibble`:
+
+```{r}
+str_sub(exampletibble$temperature, 
+        start=1, 
+        end=2)
+```
+
+Within `mutate`:
+
+```{r}
+mutate(exampletibble, temperature=str_sub(temperature, start=1, end=2))
+```
+
+<center><h4 style="background-color: #a4edff; display: inline-block;">**HANDS-ON**</h4></center>
+
+We will play with the following **character vector**:
+
+```{r}
+countries <- c("Germany", "Uganda", "Canada", "Australia", "Switzerland", "Thailand", "Bolivia", "Russia", "Italy", "Senegal", "South Korea", "Mexico", "Argentina", "England")
+```
+
+* What is the **average length** of the country names?
+* How many country names **end with an "a"**?
+* Replace **empty spaces with underscores** in `countries`.
+* In which country name do you find more the **letter "a"**?
+
+<details>
+<summary>
+<h5 style="background-color: #a4edff; display: inline-block;">*Answer*</h5>
+</summary>
+
+```{r, eval=F}
+# What is the average length of the country names?
+mean(str_length(countries))
+
+# How many country names end with an "a"?
+  # Get the logical vector
+str_detect(countries, "a$")
+  # Retrieve only the "TRUE" and count
+length(which(str_detect(countries, "a$")))
+length(countries[str_detect(countries, "a$")])
+
+# Replace empty spaces with underscores in `countries`.
+str_replace(countries, " ", "_")
+
+# In which country name do you find more the letter "a"?
+  # count how many "a" per country name
+str_count(countries, "a")
+  # extract the country name where there are more "a".
+countries[max(str_count(countries, "a"))]
+```
+
+</details>
+
+
+

@@ -192,7 +192,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
-<li class="chapter" data-level="9" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>9</b> References and resources</a></li>
+<li class="chapter" data-level="9" data-path="strings-manipulation-with-stringr.html"><a href="strings-manipulation-with-stringr.html"><i class="fa fa-check"></i><b>9</b> Strings manipulation with <code>stringr</code></a></li>
+<li class="chapter" data-level="10" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>10</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
 
@@ -261,7 +262,7 @@ read_tsv
 <p>Read in a file provided as an example with the <code>readr</code> package:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="read.html#cb23-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">readr_example</span>(<span class="st">&quot;mtcars.csv&quot;</span>))</span></code></pre></div>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────
 ## cols(
 ##   mpg = col_double(),
 ##   cyl = col_double(),
@@ -278,7 +279,7 @@ read_tsv
 <p>Read in a file available online (https protocol):</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="read.html#cb25-1" aria-hidden="true" tabindex="-1"></a>f2 <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/inputB.txt&quot;</span>)</span></code></pre></div>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────
 ## cols(
 ##   State = col_character(),
 ##   Population = col_double(),
@@ -302,7 +303,7 @@ read_tsv
 <span id="cb27-3"><a href="read.html#cb27-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">skip=</span><span class="dv">1</span>,</span>
 <span id="cb27-4"><a href="read.html#cb27-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">col_names=</span>LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>])</span></code></pre></div>
 <pre><code>## 
-## ── Column specification ─────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────
 ## cols(
 ##   A = col_double(),
 ##   B = col_double(),

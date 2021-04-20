@@ -192,7 +192,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
-<li class="chapter" data-level="9" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>9</b> References and resources</a></li>
+<li class="chapter" data-level="9" data-path="strings-manipulation-with-stringr.html"><a href="strings-manipulation-with-stringr.html"><i class="fa fa-check"></i><b>9</b> Strings manipulation with <code>stringr</code></a></li>
+<li class="chapter" data-level="10" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>10</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
 
@@ -438,46 +439,46 @@ randomly select rows
 <span id="cb137-2"><a href="a-few-more-useful-dplyr-functions.html#cb137-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_max</span>(starwars, </span>
 <span id="cb137-3"><a href="a-few-more-useful-dplyr-functions.html#cb137-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">order_by=</span>height)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 14
-##   name     height  mass hair_color skin_color eye_color birth_year sex   gender  homeworld species films 
-##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;list&gt;
-## 1 Yarael …    264    NA none       white      yellow            NA male  mascul… Quermia   Quermi… &lt;chr …
-## # … with 2 more variables: vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+##   name       height  mass hair_color skin_color eye_color birth_year sex   gender   homeworld
+##   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    
+## 1 Yarael Po…    264    NA none       white      yellow            NA male  masculi… Quermia  
+## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="a-few-more-useful-dplyr-functions.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set parameter &quot;n&quot; if you want to extract the &quot;n&quot; top rows</span></span>
 <span id="cb139-2"><a href="a-few-more-useful-dplyr-functions.html#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_max</span>(starwars, </span>
 <span id="cb139-3"><a href="a-few-more-useful-dplyr-functions.html#cb139-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">order_by=</span>height,</span>
 <span id="cb139-4"><a href="a-few-more-useful-dplyr-functions.html#cb139-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">n=</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 14
-##   name     height  mass hair_color skin_color eye_color birth_year sex   gender  homeworld species films 
-##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;list&gt;
-## 1 Yarael …    264    NA none       white      yellow            NA male  mascul… Quermia   Quermi… &lt;chr …
-## 2 Tarfful     234   136 brown      brown      blue              NA male  mascul… Kashyyyk  Wookiee &lt;chr …
-## 3 Lama Su     229    88 none       grey       black             NA male  mascul… Kamino    Kamino… &lt;chr …
-## # … with 2 more variables: vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+##   name       height  mass hair_color skin_color eye_color birth_year sex   gender   homeworld
+##   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    
+## 1 Yarael Po…    264    NA none       white      yellow            NA male  masculi… Quermia  
+## 2 Tarfful       234   136 brown      brown      blue              NA male  masculi… Kashyyyk 
+## 3 Lama Su       229    88 none       grey       black             NA male  masculi… Kamino   
+## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <p>Same for the minimum with <code>slice_min</code>:</p>
 <div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="a-few-more-useful-dplyr-functions.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_min</span>(starwars, </span>
 <span id="cb141-2"><a href="a-few-more-useful-dplyr-functions.html#cb141-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">order_by=</span>mass,</span>
 <span id="cb141-3"><a href="a-few-more-useful-dplyr-functions.html#cb141-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">n=</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 14
-##   name    height  mass hair_color skin_color eye_color birth_year sex   gender  homeworld  species  films
-##   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;    &lt;lis&gt;
-## 1 Ratts …     79    15 none       grey, blue unknown           NA male  mascul… Aleen Min… Aleena   &lt;chr…
-## 2 Yoda        66    17 white      green      brown            896 male  mascul… &lt;NA&gt;       Yoda&#39;s … &lt;chr…
-## # … with 2 more variables: vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+##   name       height  mass hair_color skin_color eye_color birth_year sex   gender  homeworld 
+##   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;     
+## 1 Ratts Tye…     79    15 none       grey, blue unknown           NA male  mascul… Aleen Min…
+## 2 Yoda           66    17 white      green      brown            896 male  mascul… &lt;NA&gt;      
+## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <p>Extract the first or last row with <code>slice_head</code> and <code>slice_tail</code>, respectively</p>
 <div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="a-few-more-useful-dplyr-functions.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first row</span></span>
 <span id="cb143-2"><a href="a-few-more-useful-dplyr-functions.html#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_head</span>(starwars)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 14
-##   name     height  mass hair_color skin_color eye_color birth_year sex   gender  homeworld species films 
-##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;list&gt;
-## 1 Luke Sk…    172    77 blond      fair       blue              19 male  mascul… Tatooine  Human   &lt;chr …
-## # … with 2 more variables: vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+##   name        height  mass hair_color skin_color eye_color birth_year sex   gender  homeworld
+##   &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;    
+## 1 Luke Skywa…    172    77 blond      fair       blue              19 male  mascul… Tatooine 
+## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="a-few-more-useful-dplyr-functions.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="co"># last row</span></span>
 <span id="cb145-2"><a href="a-few-more-useful-dplyr-functions.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_tail</span>(starwars)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 14
-##   name     height  mass hair_color skin_color eye_color birth_year sex    gender homeworld species films 
-##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;list&gt;
-## 1 Padmé A…    165    45 brown      light      brown             46 female femin… Naboo     Human   &lt;chr …
-## # … with 2 more variables: vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+##   name        height  mass hair_color skin_color eye_color birth_year sex   gender  homeworld
+##   &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;    
+## 1 Padmé Amid…    165    45 brown      light      brown             46 fema… femini… Naboo    
+## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <p>You can extract the <strong>“n”</strong> first or last rows, or you can extract a certain <strong>proportions of rows to select</strong> with <strong>“prop”</strong>:</p>
 <div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="a-few-more-useful-dplyr-functions.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first 5 rows</span></span>
 <span id="cb147-2"><a href="a-few-more-useful-dplyr-functions.html#cb147-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_head</span>(starwars, </span>
@@ -500,30 +501,30 @@ randomly select rows
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="a-few-more-useful-dplyr-functions.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 random row</span></span>
 <span id="cb148-2"><a href="a-few-more-useful-dplyr-functions.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(starwars)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 14
-##   name  height  mass hair_color skin_color eye_color birth_year sex   gender    homeworld species films  
-##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;   &lt;list&gt; 
-## 1 IG-88    200   140 none       metal      red               15 none  masculine &lt;NA&gt;      Droid   &lt;chr […
-## # … with 2 more variables: vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+##   name  height  mass hair_color skin_color eye_color birth_year sex   gender    homeworld
+##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;    
+## 1 Bossk    190   113 none       green      red               53 male  masculine Trandosha
+## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="a-few-more-useful-dplyr-functions.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 random rows</span></span>
 <span id="cb150-2"><a href="a-few-more-useful-dplyr-functions.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(starwars, </span>
 <span id="cb150-3"><a href="a-few-more-useful-dplyr-functions.html#cb150-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">n=</span><span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 14
-##   name      height  mass hair_color skin_color eye_color birth_year sex   gender  homeworld species films
-##   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;lis&gt;
-## 1 Boba Fett    183  78.2 black      fair       brown           31.5 male  mascul… Kamino    Human   &lt;chr…
-## 2 R5-D4         97  32   &lt;NA&gt;       white, red red             NA   none  mascul… Tatooine  Droid   &lt;chr…
-## 3 Bail Pre…    191  NA   black      tan        brown           67   male  mascul… Alderaan  Human   &lt;chr…
-## 4 Poe Dame…     NA  NA   brown      light      brown           NA   male  mascul… &lt;NA&gt;      Human   &lt;chr…
-## # … with 2 more variables: vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+##   name     height  mass hair_color  skin_color  eye_color  birth_year sex   gender  homeworld
+##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;    
+## 1 Wilhuff…    180    NA auburn, gr… fair        blue               64 male  mascul… Eriadu   
+## 2 Quarsh …    183    NA black       dark        brown              62 &lt;NA&gt;  &lt;NA&gt;    Naboo    
+## 3 Obi-Wan…    182    77 auburn, wh… fair        blue-gray          57 male  mascul… Stewjon  
+## 4 Grievous    216   159 none        brown, whi… green, ye…         NA male  mascul… Kalee    
+## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="a-few-more-useful-dplyr-functions.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3% of rows selected randomly</span></span>
 <span id="cb152-2"><a href="a-few-more-useful-dplyr-functions.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(starwars, </span>
 <span id="cb152-3"><a href="a-few-more-useful-dplyr-functions.html#cb152-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">prop=</span><span class="fl">0.03</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 14
-##   name     height  mass hair_color skin_color eye_color birth_year sex   gender  homeworld species films 
-##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;list&gt;
-## 1 R5-D4        97    32 &lt;NA&gt;       white, red red               NA none  mascul… Tatooine  Droid   &lt;chr …
-## 2 Raymus …    188    79 brown      light      brown             NA male  mascul… Alderaan  Human   &lt;chr …
-## # … with 2 more variables: vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+##   name        height  mass hair_color skin_color eye_color birth_year sex   gender  homeworld
+##   &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;    
+## 1 Bail Prest…    191    NA black      tan        brown             67 male  mascul… Alderaan 
+## 2 Gasgano        122    NA none       white, bl… black             NA male  mascul… Troiken  
+## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 </div>
 <div id="extract-a-single-column-as-a-vector-with-pull" class="section level3" number="7.6.3">
 <h3><span class="header-section-number">7.6.3</span> Extract a single column as a vector with <code>pull</code>:</h3>
@@ -535,10 +536,10 @@ randomly select rows
 <span id="cb156-2"><a href="a-few-more-useful-dplyr-functions.html#cb156-2" aria-hidden="true" tabindex="-1"></a>presidential2 <span class="sc">%&gt;%</span> <span class="fu">pull</span>(duration_days, </span>
 <span id="cb156-3"><a href="a-few-more-useful-dplyr-functions.html#cb156-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name=</span>name)</span></code></pre></div>
 <pre><code>## Time differences in days
-## Eisenhower    Kennedy    Johnson      Nixon       Ford     Carter     Reagan       Bush    Clinton 
-##       2922       1036       1886       2027        895       1461       2922       1461       2922 
-##       Bush      Obama 
-##       2922       2922</code></pre>
+## Eisenhower    Kennedy    Johnson      Nixon       Ford     Carter     Reagan       Bush 
+##       2922       1036       1886       2027        895       1461       2922       1461 
+##    Clinton       Bush      Obama 
+##       2922       2922       2922</code></pre>
 </div>
 <div id="change-column-order-with-relocate" class="section level3" number="7.6.4">
 <h3><span class="header-section-number">7.6.4</span> Change column order with <code>relocate</code>:</h3>

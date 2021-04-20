@@ -45,4 +45,5 @@ extract-a-single-column-as-a-vector-with-pull
 change-column-order-with-relocate
 exercise
 handling-missing-values
+strings-manipulation-with-stringr
 references-and-resources
