@@ -46,4 +46,5 @@ change-column-order-with-relocate
 exercise
 handling-missing-values
 strings-manipulation-with-stringr
+mini-project
 references-and-resources

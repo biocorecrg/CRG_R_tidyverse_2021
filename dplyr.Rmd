@@ -675,10 +675,10 @@ slice(presidential2,
 ```{r, eval=F}
 # Remove 1rst and 4th rows
 slice(presidential2, 
-      -c(1,4)
+      -c(1,4))
 ```
 
-These **`slice` helpers** can be useful:
+The **`slice` helpers** can be useful:
 
 ```{r, echo=FALSE, eval=TRUE}
 knitr::kable(
@@ -729,8 +729,6 @@ slice_head(starwars,
 # first 10% of the rows
 slice_head(starwars, 
            prop=0.1)
-
-
 
 # last 7 rows
 slice_tail(starwars, 

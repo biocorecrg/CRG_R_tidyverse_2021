@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Part 8 Mini project | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
-  <meta name="description" content="Part 8 Mini project | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <title>Part 10 Mini project | Intermediate R: introduction to data wrangling with the Tidyverse (2021)</title>
+  <meta name="description" content="Part 10 Mini project | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Part 8 Mini project | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta property="og:title" content="Part 10 Mini project | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Part 8 Mini project | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
+  <meta name="twitter:title" content="Part 10 Mini project | Intermediate R: introduction to data wrangling with the Tidyverse (2021)" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="a-few-more-useful-dplyr-functions.html"/>
-<link rel="next" href="download-and-read-in-the-files.html"/>
+<link rel="prev" href="strings-manipulation-with-stringr.html"/>
+<link rel="next" href="references-and-resources.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -189,14 +189,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.6.3" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#extract-a-single-column-as-a-vector-with-pull"><i class="fa fa-check"></i><b>7.6.3</b> Extract a single column as a vector with <code>pull</code>:</a></li>
 <li class="chapter" data-level="7.6.4" data-path="a-few-more-useful-dplyr-functions.html"><a href="a-few-more-useful-dplyr-functions.html#change-column-order-with-relocate"><i class="fa fa-check"></i><b>7.6.4</b> Change column order with <code>relocate</code>:</a></li>
 </ul></li>
+<li class="chapter" data-level="7.7" data-path="exercise.html"><a href="exercise.html"><i class="fa fa-check"></i><b>7.7</b> Exercise</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="mini-project.html"><a href="mini-project.html"><i class="fa fa-check"></i><b>8</b> Mini project</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="download-and-read-in-the-files.html"><a href="download-and-read-in-the-files.html"><i class="fa fa-check"></i><b>8.1</b> Download and read in the files:</a></li>
-<li class="chapter" data-level="8.2" data-path="tidy-the-files.html"><a href="tidy-the-files.html"><i class="fa fa-check"></i><b>8.2</b> Tidy the files</a></li>
-<li class="chapter" data-level="8.3" data-path="join-annotation-and-expression-data.html"><a href="join-annotation-and-expression-data.html"><i class="fa fa-check"></i><b>8.3</b> Join annotation and expression data</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>9</b> References and resources</a></li>
+<li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
+<li class="chapter" data-level="9" data-path="strings-manipulation-with-stringr.html"><a href="strings-manipulation-with-stringr.html"><i class="fa fa-check"></i><b>9</b> Strings manipulation with <code>stringr</code></a></li>
+<li class="chapter" data-level="10" data-path="mini-project.html"><a href="mini-project.html"><i class="fa fa-check"></i><b>10</b> Mini project</a></li>
+<li class="chapter" data-level="11" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>11</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
 
@@ -217,21 +215,104 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="mini-project" class="section level1" number="8">
-<h1><span class="header-section-number">Part 8</span> Mini project</h1>
-<p>Download and read the two files that are found <a href="here">https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/mini_project/</a></p>
-<p><strong>Tidy</strong> and <strong>join</strong> the files.
-str_remove could be useful here!</p>
-<p>Tip:
-You need to remove the suffix with the point + numbers in order to be able to merge the IDs! e.g. ENSG00000140853.15 should be ENSG00000140853. Check out <code>str_sub</code>… Or any of the <code>stringr</code> function that you think could help you!</p>
+<div id="mini-project" class="section level1" number="10">
+<h1><span class="header-section-number">Part 10</span> Mini project</h1>
+<p>We will work with two input files:</p>
+<ul>
+<li><strong>annotation.tsv</strong>: contains the annotation (from Gencode) of 29244 Human genes.</li>
+<li><strong>normalized_counts.csv</strong>: contains the log2-transformed normalized counts from an RNA-seq project. The expression of 14769 Human genes in <strong>8 samples</strong> from <strong>4 experimental groups</strong> is assessed:
+<ul>
+<li>Treatment 1, time 0 (2 samples)</li>
+<li>Treatment 1, time 20 (2 samples)</li>
+<li>Treatment 2, time 0 (2 samples)</li>
+<li>Treatment 2, time 20 (2 samples)</li>
+</ul></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><p>Download / read in the two files that are found <a href="https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/mini_project/">here</a> into two tibbles.</p></li>
+<li><p><strong>Tidy</strong> each tibble individually.</p></li>
+</ol>
+<details>
+<summary>
+<h6 style="background-color: #fdffaf; display: inline-block;">
+<em>Some tips!</em>
+</h6>
+</summary>
+<ul>
+<li>For the <strong>annotation</strong>: something needs to be separated.</li>
+<li>For the <strong>normalized data</strong>: it’s important to pivot some columns… And to separate one created by the pivoting!</li>
+</ul>
+</details>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Join</strong> both datasets so as to obtain one tibble (keep the intersection).</li>
+</ol>
+<details>
+<summary>
+<h6 style="background-color: #fdffaf; display: inline-block;">
+<em>Don’t know which columns to use for the joining? Click here for help!</em>
+</h6>
+</summary>
+<p>Work on the <code>gencode_id</code> column of the normalized data: Gencode IDs only differ from the Ensembl IDs by the suffix (point + numbers).
+e.g. ENSG00000140853.15 in Gencode is ENSG00000140853 in Ensembl. Perhaps <code>str_sub</code> can help?</p>
+</details>
+<ol start="4" style="list-style-type: decimal">
+<li>What is the <strong>average expression</strong> of the different <strong>types of genes</strong> (<code>gene_type</code>)?
+<ul>
+<li>According to this data, <strong>which 2 gene types have the highest average expression</strong>?</li>
+<li>Remove all rows which correspond to these 2 gene types from the dataset.</li>
+<li>What is now the size of our dataset?</li>
+</ul></li>
+</ol>
+<details>
+<summary>
+<h6 style="background-color: #fdffaf; display: inline-block;">
+<em>A couple of tips…</em>
+</h6>
+</summary>
+<ul>
+<li>Remember <code>slice_max</code>? <br></li>
+<li><code>pull</code> could also be useful!</li>
+</ul>
+</details>
+<ol start="5" style="list-style-type: decimal">
+<li>Create a new column that contains <strong>the median expression per gene, per experimental group and per gene type.</strong><br>
+<em>By experimental group, we mean Treatment + time (for example, samples “Treatment1_rep1_t0” and “Treatment1_rep2_t0” are part of the same experimental group: Treatment1_t0)</em></li>
+</ol>
+<details>
+<summary>
+<h6 style="background-color: #fdffaf; display: inline-block;">
+<em>Help!</em>
+</h6>
+</summary>
+<ul>
+<li>If you don’t have it already, create a column <code>experimental_group</code>.</li>
+<li>The grouping should be done using 3 variables.</li>
+<li>Remember that, if the data is grouped, the newly created columns will take into account the groups…</li>
+</ul>
+</details>
+<ol start="6" style="list-style-type: decimal">
+<li>For each experimental group, retrieve the <strong>lincRNA</strong> that has the <strong>highest median expression</strong>.
+<ul>
+<li>Is it the same lincRNA gene for all 4 experimental groups?</li>
+</ul></li>
+</ol>
+<details>
+<summary>
+<h6 style="background-color: #fdffaf; display: inline-block;">
+<em>Stuck? Click here.</em>
+</h6>
+</summary>
+<p>Check this <a href="https://stackoverflow.com/questions/24237399/how-to-select-the-rows-with-maximum-values-in-each-group-with-dplyr">stackoverflow post</a> for inspiration.</p>
+</details>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="a-few-more-useful-dplyr-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="download-and-read-in-the-files.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="strings-manipulation-with-stringr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references-and-resources.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

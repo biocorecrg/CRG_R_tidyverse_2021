@@ -193,7 +193,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="chapter" data-level="9" data-path="strings-manipulation-with-stringr.html"><a href="strings-manipulation-with-stringr.html"><i class="fa fa-check"></i><b>9</b> Strings manipulation with <code>stringr</code></a></li>
-<li class="chapter" data-level="10" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>10</b> References and resources</a></li>
+<li class="chapter" data-level="10" data-path="mini-project.html"><a href="mini-project.html"><i class="fa fa-check"></i><b>10</b> Mini project</a></li>
+<li class="chapter" data-level="11" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>11</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
 
@@ -375,8 +376,8 @@ Let’s consider the new tibble <code>tibZ</code>:</p>
 </ul>
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="a-few-more-useful-dplyr-functions.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove 1rst and 4th rows</span></span>
 <span id="cb136-2"><a href="a-few-more-useful-dplyr-functions.html#cb136-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice</span>(presidential2, </span>
-<span id="cb136-3"><a href="a-few-more-useful-dplyr-functions.html#cb136-3" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>)</span></code></pre></div>
-<p>These <strong><code>slice</code> helpers</strong> can be useful:</p>
+<span id="cb136-3"><a href="a-few-more-useful-dplyr-functions.html#cb136-3" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>))</span></code></pre></div>
+<p>The <strong><code>slice</code> helpers</strong> can be useful:</p>
 <table style="width:70%;">
 <caption>
 <span id="tab:unnamed-chunk-103">Table 7.5: </span><code>slice</code> helpers
@@ -488,42 +489,40 @@ randomly select rows
 <span id="cb147-6"><a href="a-few-more-useful-dplyr-functions.html#cb147-6" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_head</span>(starwars, </span>
 <span id="cb147-7"><a href="a-few-more-useful-dplyr-functions.html#cb147-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">prop=</span><span class="fl">0.1</span>)</span>
 <span id="cb147-8"><a href="a-few-more-useful-dplyr-functions.html#cb147-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb147-9"><a href="a-few-more-useful-dplyr-functions.html#cb147-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb147-10"><a href="a-few-more-useful-dplyr-functions.html#cb147-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb147-11"><a href="a-few-more-useful-dplyr-functions.html#cb147-11" aria-hidden="true" tabindex="-1"></a><span class="co"># last 7 rows</span></span>
-<span id="cb147-12"><a href="a-few-more-useful-dplyr-functions.html#cb147-12" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_tail</span>(starwars, </span>
-<span id="cb147-13"><a href="a-few-more-useful-dplyr-functions.html#cb147-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">n=</span><span class="dv">7</span>)</span>
-<span id="cb147-14"><a href="a-few-more-useful-dplyr-functions.html#cb147-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb147-15"><a href="a-few-more-useful-dplyr-functions.html#cb147-15" aria-hidden="true" tabindex="-1"></a><span class="co"># last 25% of the rows</span></span>
-<span id="cb147-16"><a href="a-few-more-useful-dplyr-functions.html#cb147-16" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_tail</span>(starwars, </span>
-<span id="cb147-17"><a href="a-few-more-useful-dplyr-functions.html#cb147-17" aria-hidden="true" tabindex="-1"></a>           <span class="at">prop=</span><span class="fl">0.25</span>)</span></code></pre></div>
+<span id="cb147-9"><a href="a-few-more-useful-dplyr-functions.html#cb147-9" aria-hidden="true" tabindex="-1"></a><span class="co"># last 7 rows</span></span>
+<span id="cb147-10"><a href="a-few-more-useful-dplyr-functions.html#cb147-10" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_tail</span>(starwars, </span>
+<span id="cb147-11"><a href="a-few-more-useful-dplyr-functions.html#cb147-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">n=</span><span class="dv">7</span>)</span>
+<span id="cb147-12"><a href="a-few-more-useful-dplyr-functions.html#cb147-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb147-13"><a href="a-few-more-useful-dplyr-functions.html#cb147-13" aria-hidden="true" tabindex="-1"></a><span class="co"># last 25% of the rows</span></span>
+<span id="cb147-14"><a href="a-few-more-useful-dplyr-functions.html#cb147-14" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_tail</span>(starwars, </span>
+<span id="cb147-15"><a href="a-few-more-useful-dplyr-functions.html#cb147-15" aria-hidden="true" tabindex="-1"></a>           <span class="at">prop=</span><span class="fl">0.25</span>)</span></code></pre></div>
 <p>Select a random sample of rows with <code>slice_random</code>:</p>
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="a-few-more-useful-dplyr-functions.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 random row</span></span>
 <span id="cb148-2"><a href="a-few-more-useful-dplyr-functions.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(starwars)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 14
-##   name  height  mass hair_color skin_color eye_color birth_year sex   gender    homeworld
-##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;    
-## 1 Bossk    190   113 none       green      red               53 male  masculine Trandosha
+##   name   height  mass hair_color skin_color eye_color birth_year sex   gender    homeworld
+##   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;    
+## 1 Greedo    173    74 &lt;NA&gt;       green      black             44 male  masculine Rodia    
 ## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="a-few-more-useful-dplyr-functions.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 random rows</span></span>
 <span id="cb150-2"><a href="a-few-more-useful-dplyr-functions.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(starwars, </span>
 <span id="cb150-3"><a href="a-few-more-useful-dplyr-functions.html#cb150-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">n=</span><span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 14
-##   name     height  mass hair_color  skin_color  eye_color  birth_year sex   gender  homeworld
-##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;    
-## 1 Wilhuff…    180    NA auburn, gr… fair        blue               64 male  mascul… Eriadu   
-## 2 Quarsh …    183    NA black       dark        brown              62 &lt;NA&gt;  &lt;NA&gt;    Naboo    
-## 3 Obi-Wan…    182    77 auburn, wh… fair        blue-gray          57 male  mascul… Stewjon  
-## 4 Grievous    216   159 none        brown, whi… green, ye…         NA male  mascul… Kalee    
+##   name       height  mass hair_color skin_color eye_color birth_year sex    gender  homeworld
+##   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;    
+## 1 Cordé         157  NA   brown      light      brown           NA   female femini… Naboo    
+## 2 Boba Fett     183  78.2 black      fair       brown           31.5 male   mascul… Kamino   
+## 3 Arvel Cry…     NA  NA   brown      fair       brown           NA   male   mascul… &lt;NA&gt;     
+## 4 Dooku         193  80   white      fair       brown          102   male   mascul… Serenno  
 ## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="a-few-more-useful-dplyr-functions.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3% of rows selected randomly</span></span>
 <span id="cb152-2"><a href="a-few-more-useful-dplyr-functions.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(starwars, </span>
 <span id="cb152-3"><a href="a-few-more-useful-dplyr-functions.html#cb152-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">prop=</span><span class="fl">0.03</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 14
-##   name        height  mass hair_color skin_color eye_color birth_year sex   gender  homeworld
-##   &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;    
-## 1 Bail Prest…    191    NA black      tan        brown             67 male  mascul… Alderaan 
-## 2 Gasgano        122    NA none       white, bl… black             NA male  mascul… Troiken  
+##   name       height  mass hair_color skin_color eye_color birth_year sex   gender   homeworld
+##   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    
+## 1 Rugor Nass    206    NA none       green      orange            NA male  masculi… Naboo    
+## 2 Tion Medon    206    80 none       grey       black             NA male  masculi… Utapau   
 ## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 </div>
 <div id="extract-a-single-column-as-a-vector-with-pull" class="section level3" number="7.6.3">
