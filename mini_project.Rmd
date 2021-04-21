@@ -1,4 +1,4 @@
-# Mini project with code
+# Mini project
 
 We will work with two input files:
 

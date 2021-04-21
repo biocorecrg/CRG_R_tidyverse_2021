@@ -193,7 +193,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="chapter" data-level="9" data-path="strings-manipulation-with-stringr.html"><a href="strings-manipulation-with-stringr.html"><i class="fa fa-check"></i><b>9</b> Strings manipulation with <code>stringr</code></a></li>
-<li class="chapter" data-level="10" data-path="mini-project-with-code.html"><a href="mini-project-with-code.html"><i class="fa fa-check"></i><b>10</b> Mini project with code</a></li>
+<li class="chapter" data-level="10" data-path="mini-project.html"><a href="mini-project.html"><i class="fa fa-check"></i><b>10</b> Mini project</a></li>
 <li class="chapter" data-level="11" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>11</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
@@ -502,7 +502,7 @@ randomly select rows
 <pre><code>## # A tibble: 1 x 14
 ##   name   height  mass hair_color skin_color eye_color birth_year sex   gender homeworld species
 ##   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  
-## 1 Dexte…    198   102 none       brown      yellow            NA male  mascu… Ojom      Besali…
+## 1 Plo K…    188    80 none       orange     black             22 male  mascu… Dorin     Kel Dor
 ## # … with 3 more variables: films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="a-few-more-useful-dplyr-functions.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 random rows</span></span>
 <span id="cb152-2"><a href="a-few-more-useful-dplyr-functions.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(starwars, </span>
@@ -510,10 +510,10 @@ randomly select rows
 <pre><code>## # A tibble: 4 x 14
 ##   name   height  mass hair_color skin_color eye_color birth_year sex   gender homeworld species
 ##   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  
-## 1 Clieg…    183    NA brown      fair       blue              82 male  mascu… Tatooine  Human  
-## 2 Owen …    178   120 brown, gr… light      blue              52 male  mascu… Tatooine  Human  
-## 3 IG-88     200   140 none       metal      red               15 none  mascu… &lt;NA&gt;      Droid  
-## 4 Qui-G…    193    89 brown      fair       blue              92 male  mascu… &lt;NA&gt;      Human  
+## 1 Taun …    213    NA none       grey       black             NA fema… femin… Kamino    Kamino…
+## 2 Gasga…    122    NA none       white, bl… black             NA male  mascu… Troiken   Xexto  
+## 3 Grega…    185    85 black      dark       brown             NA male  mascu… Naboo     Human  
+## 4 Saese…    188    NA none       pale       orange            NA male  mascu… Iktotch   Iktotc…
 ## # … with 3 more variables: films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="a-few-more-useful-dplyr-functions.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3% of rows selected randomly</span></span>
 <span id="cb154-2"><a href="a-few-more-useful-dplyr-functions.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(starwars, </span>
@@ -521,8 +521,8 @@ randomly select rows
 <pre><code>## # A tibble: 2 x 14
 ##   name   height  mass hair_color skin_color eye_color birth_year sex   gender homeworld species
 ##   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  
-## 1 Yoda       66    17 white      green      brown            896 male  mascu… &lt;NA&gt;      Yoda&#39;s…
-## 2 Roos …    224    82 none       grey       orange            NA male  mascu… Naboo     Gungan 
+## 1 Plo K…    188    80 none       orange     black             22 male  mascu… Dorin     Kel Dor
+## 2 Clieg…    183    NA brown      fair       blue              82 male  mascu… Tatooine  Human  
 ## # … with 3 more variables: films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <p>Note that the <code>slice</code> functions can be combined with a <code>grouping</code>.</p>
 <ul>

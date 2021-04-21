@@ -228,14 +228,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Treatment 2, time 20 (2 samples)</li>
 </ul></li>
 </ul>
-<p>We will work in <strong>break-out rooms</strong> of 3-4 people. We encourage one of you to <strong>share the RStudio screen</strong> and discuss together how to proceed.
-<br>
-As you go through the different questions of the exercise, please <strong>write your code in the corresponding column in this</strong> <a href="https://padlet.com/sarahbonnin/r29zq2fq3bhzx81m"><strong>padlet</strong></a> !</p>
-<hr />
 <ol style="list-style-type: decimal">
 <li>Download / read in the two files that are found <a href="https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/mini_project/">here</a> into two tibbles.</li>
 </ol>
-<hr />
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="mini-project.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download and read in the files</span></span>
+<span id="cb211-2"><a href="mini-project.html#cb211-2" aria-hidden="true" tabindex="-1"></a>annotation <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/mini_project/annotation.tsv&quot;</span>)</span>
+<span id="cb211-3"><a href="mini-project.html#cb211-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb211-4"><a href="mini-project.html#cb211-4" aria-hidden="true" tabindex="-1"></a>norm_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/mini_project/normalized_counts.csv&quot;</span>)</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li><strong>Tidy</strong> each tibble individually.</li>
 </ol>
@@ -250,7 +249,23 @@ As you go through the different questions of the exercise, please <strong>write 
 <li>For the <strong>normalized data</strong>: it’s important to pivot some columns… And to separate one created by the pivoting!</li>
 </ul>
 </details>
-<hr />
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="mini-project.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate the &quot;gene_name_gene_type&quot; column into gene_name and gene_type</span></span>
+<span id="cb212-2"><a href="mini-project.html#cb212-2" aria-hidden="true" tabindex="-1"></a>annotation_tidy <span class="ot">&lt;-</span> annotation <span class="sc">%&gt;%</span> </span>
+<span id="cb212-3"><a href="mini-project.html#cb212-3" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">separate</span>(<span class="at">col=</span>gene_name_gene_type, </span>
+<span id="cb212-4"><a href="mini-project.html#cb212-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;gene_name&quot;</span>, <span class="st">&quot;gene_type&quot;</span>), </span>
+<span id="cb212-5"><a href="mini-project.html#cb212-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">sep=</span><span class="st">&quot;/&quot;</span>)</span>
+<span id="cb212-6"><a href="mini-project.html#cb212-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb212-7"><a href="mini-project.html#cb212-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot the data so there is a single column for the expression value</span></span>
+<span id="cb212-8"><a href="mini-project.html#cb212-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Use separate to create 3 new columns that will contain information, respectively on: Treatment, replicate, time point.</span></span>
+<span id="cb212-9"><a href="mini-project.html#cb212-9" aria-hidden="true" tabindex="-1"></a><span class="co"># (optional) mutate the &quot;time&quot; column to get a numeric column that contains only the actual time point (without the &quot;t&quot;)</span></span>
+<span id="cb212-10"><a href="mini-project.html#cb212-10" aria-hidden="true" tabindex="-1"></a>norm_data_tidy <span class="ot">&lt;-</span> norm_data <span class="sc">%&gt;%</span> </span>
+<span id="cb212-11"><a href="mini-project.html#cb212-11" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="fu">contains</span>(<span class="st">&quot;Treatment&quot;</span>), </span>
+<span id="cb212-12"><a href="mini-project.html#cb212-12" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">values_to=</span><span class="st">&quot;expression&quot;</span>, </span>
+<span id="cb212-13"><a href="mini-project.html#cb212-13" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">names_to=</span><span class="st">&quot;samples&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb212-14"><a href="mini-project.html#cb212-14" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">separate</span>(<span class="at">col=</span>samples, </span>
+<span id="cb212-15"><a href="mini-project.html#cb212-15" aria-hidden="true" tabindex="-1"></a>                               <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;Treatment&quot;</span>, <span class="st">&quot;replicate&quot;</span>, <span class="st">&quot;time&quot;</span>), </span>
+<span id="cb212-16"><a href="mini-project.html#cb212-16" aria-hidden="true" tabindex="-1"></a>                               <span class="at">sep=</span><span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb212-17"><a href="mini-project.html#cb212-17" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">mutate</span>(<span class="at">time=</span><span class="fu">as.numeric</span>(<span class="fu">str_remove</span>(time, <span class="st">&quot;t&quot;</span>)))</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li><strong>Join</strong> both datasets so as to obtain one tibble (keep the intersection).</li>
 </ol>
@@ -263,7 +278,15 @@ As you go through the different questions of the exercise, please <strong>write 
 <p>Work on the <code>gencode_id</code> column of the normalized data: Gencode IDs only differ from the Ensembl IDs by the suffix (point + numbers).
 e.g. ENSG00000140853.15 in Gencode is ENSG00000140853 in Ensembl. Perhaps <code>str_sub</code> can help?</p>
 </details>
-<hr />
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="mini-project.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, we need a common ID: remove the suffix with the point + numbers from &quot;gencode_id&quot; in order to obtain &quot;ensembl&quot; IDs</span></span>
+<span id="cb213-2"><a href="mini-project.html#cb213-2" aria-hidden="true" tabindex="-1"></a>norm_data_tidy <span class="ot">&lt;-</span> norm_data_tidy <span class="sc">%&gt;%</span> </span>
+<span id="cb213-3"><a href="mini-project.html#cb213-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">mutate</span>(<span class="at">ensembl_gene_id=</span><span class="fu">str_sub</span>(gencode_id, <span class="dv">1</span>, <span class="dv">15</span>), </span>
+<span id="cb213-4"><a href="mini-project.html#cb213-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">.before=</span>Treatment) <span class="co"># not important, just more convenient</span></span>
+<span id="cb213-5"><a href="mini-project.html#cb213-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb213-6"><a href="mini-project.html#cb213-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Use inner join in order to keep only common data</span></span>
+<span id="cb213-7"><a href="mini-project.html#cb213-7" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x=</span>annotation_tidy, </span>
+<span id="cb213-8"><a href="mini-project.html#cb213-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y=</span>norm_data_tidy, </span>
+<span id="cb213-9"><a href="mini-project.html#cb213-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">by=</span><span class="st">&quot;ensembl_gene_id&quot;</span>)</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>What is the <strong>average expression</strong> of the different <strong>types of genes</strong> (<code>gene_type</code>)?
 <ul>
@@ -283,7 +306,17 @@ e.g. ENSG00000140853.15 in Gencode is ENSG00000140853 in Ensembl. Perhaps <code
 <li><code>pull</code> could also be useful!</li>
 </ul>
 </details>
-<hr />
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="mini-project.html#cb214-1" aria-hidden="true" tabindex="-1"></a>highest_mean_2types <span class="ot">&lt;-</span> all_data <span class="sc">%&gt;%</span> </span>
+<span id="cb214-2"><a href="mini-project.html#cb214-2" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">group_by</span>(gene_type) <span class="sc">%&gt;%</span> </span>
+<span id="cb214-3"><a href="mini-project.html#cb214-3" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">summarise</span>(<span class="at">average_mean_gene_type=</span><span class="fu">mean</span>(expression)) <span class="sc">%&gt;%</span> </span>
+<span id="cb214-4"><a href="mini-project.html#cb214-4" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">slice_max</span>(<span class="at">order_by=</span>average_mean_gene_type, </span>
+<span id="cb214-5"><a href="mini-project.html#cb214-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">n=</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb214-6"><a href="mini-project.html#cb214-6" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">pull</span>(gene_type)</span>
+<span id="cb214-7"><a href="mini-project.html#cb214-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb214-8"><a href="mini-project.html#cb214-8" aria-hidden="true" tabindex="-1"></a>data_no_highest_2types <span class="ot">&lt;-</span> all_data <span class="sc">%&gt;%</span> </span>
+<span id="cb214-9"><a href="mini-project.html#cb214-9" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">filter</span>(<span class="sc">!</span>gene_type <span class="sc">%in%</span> highest_mean_2types)</span>
+<span id="cb214-10"><a href="mini-project.html#cb214-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb214-11"><a href="mini-project.html#cb214-11" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(data_no_highest_2types)</span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Create a new column that contains <strong>the median expression per gene, per experimental group and per gene type.</strong><br>
 <em>By experimental group, we mean Treatment + time (for example, samples “Treatment1_rep1_t0” and “Treatment1_rep2_t0” are part of the same experimental group: Treatment1_t0)</em></li>
@@ -300,7 +333,14 @@ e.g. ENSG00000140853.15 in Gencode is ENSG00000140853 in Ensembl. Perhaps <code
 <li>Remember that, if the data is grouped, the newly created columns will take into account the groups…</li>
 </ul>
 </details>
-<hr />
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="mini-project.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="co"># New column for the actual experimental group (no &quot;rep1&quot; and &quot;rep2&quot;)</span></span>
+<span id="cb215-2"><a href="mini-project.html#cb215-2" aria-hidden="true" tabindex="-1"></a><span class="co"># group_by gene_name, gene_type and experimental_group</span></span>
+<span id="cb215-3"><a href="mini-project.html#cb215-3" aria-hidden="true" tabindex="-1"></a>data_no_highest_2_types <span class="ot">&lt;-</span> data_no_highest_2types <span class="sc">%&gt;%</span> </span>
+<span id="cb215-4"><a href="mini-project.html#cb215-4" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">unite</span>(<span class="at">col=</span><span class="st">&quot;experimental_group&quot;</span>, </span>
+<span id="cb215-5"><a href="mini-project.html#cb215-5" aria-hidden="true" tabindex="-1"></a>                                      Treatment, time, </span>
+<span id="cb215-6"><a href="mini-project.html#cb215-6" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">sep=</span><span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb215-7"><a href="mini-project.html#cb215-7" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">group_by</span>(experimental_group, gene_type, gene_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb215-8"><a href="mini-project.html#cb215-8" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">mutate</span>(<span class="at">median_expression_experimental_group=</span><span class="fu">median</span>(expression))</span></code></pre></div>
 <ol start="6" style="list-style-type: decimal">
 <li>For each experimental group, retrieve the <strong>lincRNA</strong> that has the <strong>highest median expression</strong>.
 <ul>
@@ -315,6 +355,10 @@ e.g. ENSG00000140853.15 in Gencode is ENSG00000140853 in Ensembl. Perhaps <code
 </summary>
 <p>Check this <a href="https://stackoverflow.com/questions/24237399/how-to-select-the-rows-with-maximum-values-in-each-group-with-dplyr">stackoverflow post</a> for inspiration.</p>
 </details>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="mini-project.html#cb216-1" aria-hidden="true" tabindex="-1"></a>data_no_highest_2_types <span class="sc">%&gt;%</span> </span>
+<span id="cb216-2"><a href="mini-project.html#cb216-2" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb216-3"><a href="mini-project.html#cb216-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">group_by</span>(experimental_group, gene_type) <span class="sc">%&gt;%</span> </span>
+<span id="cb216-4"><a href="mini-project.html#cb216-4" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">filter</span>(expression <span class="sc">==</span> <span class="fu">max</span>(expression) <span class="sc">&amp;</span> gene_type<span class="sc">==</span><span class="st">&quot;lincRNA&quot;</span>)</span></code></pre></div>
 
 </div>
             </section>
