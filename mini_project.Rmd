@@ -9,6 +9,10 @@ We will work with two input files:
   * Treatment 2, time 0 (2 samples)
   * Treatment 2, time 20 (2 samples)
 
+We will work in **break-out rooms** of 3-4 people. We encourage one of you to **share the RStudio screen** and discuss together how to proceed.
+<br>
+As you go through the different questions of the exercise, please **write your code in the corresponding column in this** [**padlet**](https://padlet.com/sarahbonnin/r29zq2fq3bhzx81m) !
+
 ***
 
 1. Download / read in the two files that are found [here](https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/mini_project/) into two tibbles.
