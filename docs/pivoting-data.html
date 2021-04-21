@@ -193,7 +193,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="chapter" data-level="9" data-path="strings-manipulation-with-stringr.html"><a href="strings-manipulation-with-stringr.html"><i class="fa fa-check"></i><b>9</b> Strings manipulation with <code>stringr</code></a></li>
-<li class="chapter" data-level="10" data-path="mini-project.html"><a href="mini-project.html"><i class="fa fa-check"></i><b>10</b> Mini project</a></li>
+<li class="chapter" data-level="10" data-path="mini-project-with-code.html"><a href="mini-project-with-code.html"><i class="fa fa-check"></i><b>10</b> Mini project with code</a></li>
 <li class="chapter" data-level="11" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>11</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
@@ -222,19 +222,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 It will happen that the format of the data you are usually working with is NOT tidy.</p>
 <p><br>
 Example: here we create a tibble that contains the expression of 4 genes in 4 samples: the gene expression is measured at <strong>two time points</strong> and for <strong>two experimental conditions</strong>:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="pivoting-data.html#cb40-1" aria-hidden="true" tabindex="-1"></a>df_expr <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">gene=</span><span class="fu">c</span>(<span class="st">&quot;Fgfrl1&quot;</span>, <span class="st">&quot;Usp34&quot;</span>, <span class="st">&quot;Mlf2&quot;</span>, <span class="st">&quot;Gga1&quot;</span>),</span>
-<span id="cb40-2"><a href="pivoting-data.html#cb40-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">KO_t0=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
-<span id="cb40-3"><a href="pivoting-data.html#cb40-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">KO_t10=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">2</span>,</span>
-<span id="cb40-4"><a href="pivoting-data.html#cb40-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">WT_t0=</span><span class="dv">6</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb40-5"><a href="pivoting-data.html#cb40-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">WT_t10=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">3</span></span>
-<span id="cb40-6"><a href="pivoting-data.html#cb40-6" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="pivoting-data.html#cb42-1" aria-hidden="true" tabindex="-1"></a>df_expr <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">gene=</span><span class="fu">c</span>(<span class="st">&quot;Fgfrl1&quot;</span>, <span class="st">&quot;Usp34&quot;</span>, <span class="st">&quot;Mlf2&quot;</span>, <span class="st">&quot;Gga1&quot;</span>),</span>
+<span id="cb42-2"><a href="pivoting-data.html#cb42-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">KO_t0=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb42-3"><a href="pivoting-data.html#cb42-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">KO_t10=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">2</span>,</span>
+<span id="cb42-4"><a href="pivoting-data.html#cb42-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">WT_t0=</span><span class="dv">6</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb42-5"><a href="pivoting-data.html#cb42-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">WT_t10=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb42-6"><a href="pivoting-data.html#cb42-6" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div>
 <p><strong>Why this tibble can’t be considered <code>tidy</code>?</strong>
 <br>
 * One variable (expression) is spread across 4 columns.</p>
 <p>In order to fix this, we can use the <code>pivot_longer</code> function: we will <strong>increase the number of rows</strong> and <strong>decrease the number of columns</strong>:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="pivoting-data.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(df_expr,</span>
-<span id="cb41-2"><a href="pivoting-data.html#cb41-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;KO_t0&quot;</span>, <span class="st">&quot;KO_t10&quot;</span>, <span class="st">&quot;WT_t0&quot;</span>, <span class="st">&quot;WT_t10&quot;</span>)</span>
-<span id="cb41-3"><a href="pivoting-data.html#cb41-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="pivoting-data.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(df_expr,</span>
+<span id="cb43-2"><a href="pivoting-data.html#cb43-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;KO_t0&quot;</span>, <span class="st">&quot;KO_t10&quot;</span>, <span class="st">&quot;WT_t0&quot;</span>, <span class="st">&quot;WT_t10&quot;</span>)</span>
+<span id="cb43-3"><a href="pivoting-data.html#cb43-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## # A tibble: 16 x 3
 ##    gene   name   value
 ##    &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt;
@@ -256,71 +256,71 @@ Example: here we create a tibble that contains the expression of 4 genes in 4 sa
 ## 16 Gga1   WT_t10     3</code></pre>
 <p>Now <strong>only one column</strong> - <code>value</code> - contains the <strong>expression</strong> variable.</p>
 <p>We can change the name of the newly created columns with parameters <code>values_to</code> (where the values are stored) and <code>names_to</code> (where the former column names are stored):</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="pivoting-data.html#cb43-1" aria-hidden="true" tabindex="-1"></a>expr_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_expr,</span>
-<span id="cb43-2"><a href="pivoting-data.html#cb43-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;KO_t0&quot;</span>, <span class="st">&quot;KO_t10&quot;</span>, <span class="st">&quot;WT_t0&quot;</span>, <span class="st">&quot;WT_t10&quot;</span>),</span>
-<span id="cb43-3"><a href="pivoting-data.html#cb43-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">values_to=</span><span class="st">&quot;expression&quot;</span>,</span>
-<span id="cb43-4"><a href="pivoting-data.html#cb43-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">names_to=</span><span class="st">&quot;sample&quot;</span></span>
-<span id="cb43-5"><a href="pivoting-data.html#cb43-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="pivoting-data.html#cb45-1" aria-hidden="true" tabindex="-1"></a>expr_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_expr,</span>
+<span id="cb45-2"><a href="pivoting-data.html#cb45-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;KO_t0&quot;</span>, <span class="st">&quot;KO_t10&quot;</span>, <span class="st">&quot;WT_t0&quot;</span>, <span class="st">&quot;WT_t10&quot;</span>),</span>
+<span id="cb45-3"><a href="pivoting-data.html#cb45-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">values_to=</span><span class="st">&quot;expression&quot;</span>,</span>
+<span id="cb45-4"><a href="pivoting-data.html#cb45-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">names_to=</span><span class="st">&quot;sample&quot;</span></span>
+<span id="cb45-5"><a href="pivoting-data.html#cb45-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Is there anything else that we could do here, to make the data even more <strong>tidy</strong>?</p>
 <ul>
 <li>There are 2 variables in column <code>sample</code>: samples <strong>experimental group</strong> (KO or WT) and <strong>time point</strong> (t0 and t10): we can <code>separate</code> them.</li>
 </ul>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="pivoting-data.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we can add &quot;remove=FALSE&quot; so as to keep the original column (sample name), that can be useful in this case:</span></span>
-<span id="cb44-2"><a href="pivoting-data.html#cb44-2" aria-hidden="true" tabindex="-1"></a>expr_tidy <span class="ot">&lt;-</span> <span class="fu">separate</span>(expr_long,</span>
-<span id="cb44-3"><a href="pivoting-data.html#cb44-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">col=</span>sample, </span>
-<span id="cb44-4"><a href="pivoting-data.html#cb44-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;group&quot;</span>, <span class="st">&quot;time&quot;</span>),</span>
-<span id="cb44-5"><a href="pivoting-data.html#cb44-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">sep=</span><span class="st">&quot;_&quot;</span>,</span>
-<span id="cb44-6"><a href="pivoting-data.html#cb44-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">remove=</span><span class="cn">FALSE</span></span>
-<span id="cb44-7"><a href="pivoting-data.html#cb44-7" aria-hidden="true" tabindex="-1"></a>         )    </span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="pivoting-data.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we can add &quot;remove=FALSE&quot; so as to keep the original column (sample name), that can be useful in this case:</span></span>
+<span id="cb46-2"><a href="pivoting-data.html#cb46-2" aria-hidden="true" tabindex="-1"></a>expr_tidy <span class="ot">&lt;-</span> <span class="fu">separate</span>(expr_long,</span>
+<span id="cb46-3"><a href="pivoting-data.html#cb46-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">col=</span>sample, </span>
+<span id="cb46-4"><a href="pivoting-data.html#cb46-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;group&quot;</span>, <span class="st">&quot;time&quot;</span>),</span>
+<span id="cb46-5"><a href="pivoting-data.html#cb46-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">sep=</span><span class="st">&quot;_&quot;</span>,</span>
+<span id="cb46-6"><a href="pivoting-data.html#cb46-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">remove=</span><span class="cn">FALSE</span></span>
+<span id="cb46-7"><a href="pivoting-data.html#cb46-7" aria-hidden="true" tabindex="-1"></a>         )    </span></code></pre></div>
 <p>The <code>pivot_wider</code> function does just the opposite: when an observation is scattered across multiple rows, you can move it back to a column.
 <br><br>
 Let’s take the following example, where expression of 2 genes is measured under <strong>two conditions</strong> (KO and WT) using <strong>two techniques</strong> (RNA-seq and qPCR):</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="pivoting-data.html#cb45-1" aria-hidden="true" tabindex="-1"></a>df_expr2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">gene=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Fgfrl1&quot;</span>, <span class="dv">4</span>), <span class="fu">rep</span>(<span class="st">&quot;Mlf2&quot;</span>, <span class="dv">4</span>)),</span>
-<span id="cb45-2"><a href="pivoting-data.html#cb45-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">group=</span><span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;KO&quot;</span>, <span class="st">&quot;WT&quot;</span>), <span class="at">each=</span><span class="dv">2</span>), <span class="dv">2</span>),</span>
-<span id="cb45-3"><a href="pivoting-data.html#cb45-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">type=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;counts_rnaseq&quot;</span>, <span class="st">&quot;Ct_qpcr&quot;</span>), <span class="dv">4</span>),</span>
-<span id="cb45-4"><a href="pivoting-data.html#cb45-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">value=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">8</span>, <span class="dv">22</span>, <span class="dv">7</span>, <span class="dv">23</span>, <span class="dv">11</span>, <span class="dv">28</span>)</span>
-<span id="cb45-5"><a href="pivoting-data.html#cb45-5" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="pivoting-data.html#cb47-1" aria-hidden="true" tabindex="-1"></a>df_expr2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">gene=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Fgfrl1&quot;</span>, <span class="dv">4</span>), <span class="fu">rep</span>(<span class="st">&quot;Mlf2&quot;</span>, <span class="dv">4</span>)),</span>
+<span id="cb47-2"><a href="pivoting-data.html#cb47-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">group=</span><span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;KO&quot;</span>, <span class="st">&quot;WT&quot;</span>), <span class="at">each=</span><span class="dv">2</span>), <span class="dv">2</span>),</span>
+<span id="cb47-3"><a href="pivoting-data.html#cb47-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">type=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;counts_rnaseq&quot;</span>, <span class="st">&quot;Ct_qpcr&quot;</span>), <span class="dv">4</span>),</span>
+<span id="cb47-4"><a href="pivoting-data.html#cb47-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">value=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">8</span>, <span class="dv">22</span>, <span class="dv">7</span>, <span class="dv">23</span>, <span class="dv">11</span>, <span class="dv">28</span>)</span>
+<span id="cb47-5"><a href="pivoting-data.html#cb47-5" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div>
 <p>Here, it would make sense to have a column <code>counts_rnaseq</code> and a column <code>Ct_qpcr</code>, which would contain their corresponding values:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="pivoting-data.html#cb46-1" aria-hidden="true" tabindex="-1"></a>df_expr2_wider <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(df_expr2,</span>
-<span id="cb46-2"><a href="pivoting-data.html#cb46-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">names_from=</span>type, </span>
-<span id="cb46-3"><a href="pivoting-data.html#cb46-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">values_from=</span>value)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="pivoting-data.html#cb48-1" aria-hidden="true" tabindex="-1"></a>df_expr2_wider <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(df_expr2,</span>
+<span id="cb48-2"><a href="pivoting-data.html#cb48-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">names_from=</span>type, </span>
+<span id="cb48-3"><a href="pivoting-data.html#cb48-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">values_from=</span>value)</span></code></pre></div>
 <center>
 <h4 style="background-color: #a4edff; display: inline-block;">
 <strong>HANDS-ON</strong>
 </h4>
 </center>
 <p>Make the following data frame <strong>tidy</strong>!</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="pivoting-data.html#cb47-1" aria-hidden="true" tabindex="-1"></a>df_w <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Name=</span><span class="fu">c</span>(<span class="st">&quot;Anna&quot;</span>, <span class="st">&quot;Jordi&quot;</span>, <span class="st">&quot;Laura&quot;</span>, <span class="st">&quot;Miquel&quot;</span>),</span>
-<span id="cb47-2"><a href="pivoting-data.html#cb47-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">Weight_day0=</span><span class="fu">c</span>(<span class="dv">67</span>, <span class="dv">72</span>, <span class="dv">62</span>, <span class="dv">85</span>),</span>
-<span id="cb47-3"><a href="pivoting-data.html#cb47-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">Weight_day10=</span><span class="fu">c</span>(<span class="dv">65</span>, <span class="dv">73</span>, <span class="dv">66</span>, <span class="dv">80</span>),</span>
-<span id="cb47-4"><a href="pivoting-data.html#cb47-4" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="pivoting-data.html#cb49-1" aria-hidden="true" tabindex="-1"></a>df_w <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Name=</span><span class="fu">c</span>(<span class="st">&quot;Anna&quot;</span>, <span class="st">&quot;Jordi&quot;</span>, <span class="st">&quot;Laura&quot;</span>, <span class="st">&quot;Miquel&quot;</span>),</span>
+<span id="cb49-2"><a href="pivoting-data.html#cb49-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">Weight_day0=</span><span class="fu">c</span>(<span class="dv">67</span>, <span class="dv">72</span>, <span class="dv">62</span>, <span class="dv">85</span>),</span>
+<span id="cb49-3"><a href="pivoting-data.html#cb49-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">Weight_day10=</span><span class="fu">c</span>(<span class="dv">65</span>, <span class="dv">73</span>, <span class="dv">66</span>, <span class="dv">80</span>),</span>
+<span id="cb49-4"><a href="pivoting-data.html#cb49-4" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div>
 <details>
 <summary>
 <h5 style="background-color: #a4edff; display: inline-block;">
 <em>Answer</em>
 </h5>
 </summary>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="pivoting-data.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># `pivot_longer` on &quot;Weight&quot; columns:</span></span>
-<span id="cb48-2"><a href="pivoting-data.html#cb48-2" aria-hidden="true" tabindex="-1"></a>df_w2 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_w, </span>
-<span id="cb48-3"><a href="pivoting-data.html#cb48-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;Weight_day0&quot;</span>, <span class="st">&quot;Weight_day10&quot;</span>),</span>
-<span id="cb48-4"><a href="pivoting-data.html#cb48-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">values_to=</span><span class="st">&quot;weight&quot;</span>, </span>
-<span id="cb48-5"><a href="pivoting-data.html#cb48-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">names_to=</span><span class="st">&quot;day&quot;</span></span>
-<span id="cb48-6"><a href="pivoting-data.html#cb48-6" aria-hidden="true" tabindex="-1"></a>                    )</span>
-<span id="cb48-7"><a href="pivoting-data.html#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-8"><a href="pivoting-data.html#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="co"># `separate` on the &quot;day&quot; column</span></span>
-<span id="cb48-9"><a href="pivoting-data.html#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># into=c(NA, &quot;day&quot;): the first output is ignored (in the), the &quot;Weight&quot; strings</span></span>
-<span id="cb48-10"><a href="pivoting-data.html#cb48-10" aria-hidden="true" tabindex="-1"></a>df_w3 <span class="ot">&lt;-</span> <span class="fu">separate</span>(df_w2, <span class="at">col =</span> <span class="st">&quot;day&quot;</span>, </span>
-<span id="cb48-11"><a href="pivoting-data.html#cb48-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep=</span><span class="st">&quot;_&quot;</span>, </span>
-<span id="cb48-12"><a href="pivoting-data.html#cb48-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">into=</span><span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">&quot;day&quot;</span>)</span>
-<span id="cb48-13"><a href="pivoting-data.html#cb48-13" aria-hidden="true" tabindex="-1"></a>                  )</span>
-<span id="cb48-14"><a href="pivoting-data.html#cb48-14" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to keep only &quot;0&quot; and &quot;10&quot;, you can use &quot;day&quot; as a field separator (optionally set convert=TRUE if you want to convert the newly created column to numeric values)</span></span>
-<span id="cb48-15"><a href="pivoting-data.html#cb48-15" aria-hidden="true" tabindex="-1"></a>df_w4 <span class="ot">&lt;-</span> <span class="fu">separate</span>(df_w2, <span class="at">col =</span> <span class="st">&quot;day&quot;</span>, </span>
-<span id="cb48-16"><a href="pivoting-data.html#cb48-16" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep=</span><span class="st">&quot;day&quot;</span>, </span>
-<span id="cb48-17"><a href="pivoting-data.html#cb48-17" aria-hidden="true" tabindex="-1"></a>                  <span class="at">into=</span><span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">&quot;day&quot;</span>),</span>
-<span id="cb48-18"><a href="pivoting-data.html#cb48-18" aria-hidden="true" tabindex="-1"></a>                  <span class="at">convert=</span><span class="cn">TRUE</span></span>
-<span id="cb48-19"><a href="pivoting-data.html#cb48-19" aria-hidden="true" tabindex="-1"></a>                  )</span>
-<span id="cb48-20"><a href="pivoting-data.html#cb48-20" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to remove &quot;day&quot; from an existing tibble, you can also use the str_remove function from the stringr package, and optionally add a conversion step:</span></span>
-<span id="cb48-21"><a href="pivoting-data.html#cb48-21" aria-hidden="true" tabindex="-1"></a>df_w3<span class="sc">$</span>day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">str_remove</span>(df_w3<span class="sc">$</span>day, <span class="st">&quot;day&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="pivoting-data.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># `pivot_longer` on &quot;Weight&quot; columns:</span></span>
+<span id="cb50-2"><a href="pivoting-data.html#cb50-2" aria-hidden="true" tabindex="-1"></a>df_w2 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_w, </span>
+<span id="cb50-3"><a href="pivoting-data.html#cb50-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;Weight_day0&quot;</span>, <span class="st">&quot;Weight_day10&quot;</span>),</span>
+<span id="cb50-4"><a href="pivoting-data.html#cb50-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">values_to=</span><span class="st">&quot;weight&quot;</span>, </span>
+<span id="cb50-5"><a href="pivoting-data.html#cb50-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">names_to=</span><span class="st">&quot;day&quot;</span></span>
+<span id="cb50-6"><a href="pivoting-data.html#cb50-6" aria-hidden="true" tabindex="-1"></a>                    )</span>
+<span id="cb50-7"><a href="pivoting-data.html#cb50-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-8"><a href="pivoting-data.html#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="co"># `separate` on the &quot;day&quot; column</span></span>
+<span id="cb50-9"><a href="pivoting-data.html#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># into=c(NA, &quot;day&quot;): the first output is ignored (in the), the &quot;Weight&quot; strings</span></span>
+<span id="cb50-10"><a href="pivoting-data.html#cb50-10" aria-hidden="true" tabindex="-1"></a>df_w3 <span class="ot">&lt;-</span> <span class="fu">separate</span>(df_w2, <span class="at">col =</span> <span class="st">&quot;day&quot;</span>, </span>
+<span id="cb50-11"><a href="pivoting-data.html#cb50-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep=</span><span class="st">&quot;_&quot;</span>, </span>
+<span id="cb50-12"><a href="pivoting-data.html#cb50-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">into=</span><span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">&quot;day&quot;</span>)</span>
+<span id="cb50-13"><a href="pivoting-data.html#cb50-13" aria-hidden="true" tabindex="-1"></a>                  )</span>
+<span id="cb50-14"><a href="pivoting-data.html#cb50-14" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to keep only &quot;0&quot; and &quot;10&quot;, you can use &quot;day&quot; as a field separator (optionally set convert=TRUE if you want to convert the newly created column to numeric values)</span></span>
+<span id="cb50-15"><a href="pivoting-data.html#cb50-15" aria-hidden="true" tabindex="-1"></a>df_w4 <span class="ot">&lt;-</span> <span class="fu">separate</span>(df_w2, <span class="at">col =</span> <span class="st">&quot;day&quot;</span>, </span>
+<span id="cb50-16"><a href="pivoting-data.html#cb50-16" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep=</span><span class="st">&quot;day&quot;</span>, </span>
+<span id="cb50-17"><a href="pivoting-data.html#cb50-17" aria-hidden="true" tabindex="-1"></a>                  <span class="at">into=</span><span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">&quot;day&quot;</span>),</span>
+<span id="cb50-18"><a href="pivoting-data.html#cb50-18" aria-hidden="true" tabindex="-1"></a>                  <span class="at">convert=</span><span class="cn">TRUE</span></span>
+<span id="cb50-19"><a href="pivoting-data.html#cb50-19" aria-hidden="true" tabindex="-1"></a>                  )</span>
+<span id="cb50-20"><a href="pivoting-data.html#cb50-20" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to remove &quot;day&quot; from an existing tibble, you can also use the str_remove function from the stringr package, and optionally add a conversion step:</span></span>
+<span id="cb50-21"><a href="pivoting-data.html#cb50-21" aria-hidden="true" tabindex="-1"></a>df_w3<span class="sc">$</span>day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">str_remove</span>(df_w3<span class="sc">$</span>day, <span class="st">&quot;day&quot;</span>))</span></code></pre></div>
 </details>
 
 </div>

@@ -193,7 +193,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="chapter" data-level="9" data-path="strings-manipulation-with-stringr.html"><a href="strings-manipulation-with-stringr.html"><i class="fa fa-check"></i><b>9</b> Strings manipulation with <code>stringr</code></a></li>
-<li class="chapter" data-level="10" data-path="mini-project.html"><a href="mini-project.html"><i class="fa fa-check"></i><b>10</b> Mini project</a></li>
+<li class="chapter" data-level="10" data-path="mini-project-with-code.html"><a href="mini-project-with-code.html"><i class="fa fa-check"></i><b>10</b> Mini project with code</a></li>
 <li class="chapter" data-level="11" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>11</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
@@ -218,15 +218,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="the-forward-pipe-operator" class="section level1" number="6">
 <h1><span class="header-section-number">Part 6</span> The <code>%&gt;%</code> forward-pipe operator</h1>
 <p>Let’s review the steps from the previous hands-on:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="the-forward-pipe-operator.html#cb49-1" aria-hidden="true" tabindex="-1"></a>df_w2 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_w, </span>
-<span id="cb49-2"><a href="the-forward-pipe-operator.html#cb49-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;Weight_day0&quot;</span>, <span class="st">&quot;Weight_day10&quot;</span>),</span>
-<span id="cb49-3"><a href="the-forward-pipe-operator.html#cb49-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">values_to=</span><span class="st">&quot;weight&quot;</span>, </span>
-<span id="cb49-4"><a href="the-forward-pipe-operator.html#cb49-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">names_to=</span><span class="st">&quot;day&quot;</span></span>
-<span id="cb49-5"><a href="the-forward-pipe-operator.html#cb49-5" aria-hidden="true" tabindex="-1"></a>                    )</span>
-<span id="cb49-6"><a href="the-forward-pipe-operator.html#cb49-6" aria-hidden="true" tabindex="-1"></a>df_w3 <span class="ot">&lt;-</span> <span class="fu">separate</span>(df_w2, <span class="at">col =</span> <span class="st">&quot;day&quot;</span>, </span>
-<span id="cb49-7"><a href="the-forward-pipe-operator.html#cb49-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep=</span><span class="st">&quot;_&quot;</span>, </span>
-<span id="cb49-8"><a href="the-forward-pipe-operator.html#cb49-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">into=</span><span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">&quot;day&quot;</span>)</span>
-<span id="cb49-9"><a href="the-forward-pipe-operator.html#cb49-9" aria-hidden="true" tabindex="-1"></a>                  )</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="the-forward-pipe-operator.html#cb51-1" aria-hidden="true" tabindex="-1"></a>df_w2 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_w, </span>
+<span id="cb51-2"><a href="the-forward-pipe-operator.html#cb51-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;Weight_day0&quot;</span>, <span class="st">&quot;Weight_day10&quot;</span>),</span>
+<span id="cb51-3"><a href="the-forward-pipe-operator.html#cb51-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">values_to=</span><span class="st">&quot;weight&quot;</span>, </span>
+<span id="cb51-4"><a href="the-forward-pipe-operator.html#cb51-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">names_to=</span><span class="st">&quot;day&quot;</span></span>
+<span id="cb51-5"><a href="the-forward-pipe-operator.html#cb51-5" aria-hidden="true" tabindex="-1"></a>                    )</span>
+<span id="cb51-6"><a href="the-forward-pipe-operator.html#cb51-6" aria-hidden="true" tabindex="-1"></a>df_w3 <span class="ot">&lt;-</span> <span class="fu">separate</span>(df_w2, <span class="at">col =</span> <span class="st">&quot;day&quot;</span>, </span>
+<span id="cb51-7"><a href="the-forward-pipe-operator.html#cb51-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep=</span><span class="st">&quot;_&quot;</span>, </span>
+<span id="cb51-8"><a href="the-forward-pipe-operator.html#cb51-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">into=</span><span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">&quot;day&quot;</span>)</span>
+<span id="cb51-9"><a href="the-forward-pipe-operator.html#cb51-9" aria-hidden="true" tabindex="-1"></a>                  )</span></code></pre></div>
 <p>If we are only interested in the final <strong>tidy</strong> data frame (and not in the intermediate object <code>df_w2</code>), there is a <strong>simple</strong> and <strong>clean</strong> way to combine all steps. <br><br>
 The <strong>%&gt;%</strong> (forward-pipe) operator from the <code>magritrrr</code> package (the <code>tidyverse</code> packages automatically load this operator):</p>
 <p><img src="https://magrittr.tidyverse.org/logo.png" width="30%" style="display: block; margin: auto;" /></p>
@@ -240,36 +240,36 @@ The <strong>%&gt;%</strong> (forward-pipe) operator from the <code>magritrrr</co
 </ul></li>
 </ul>
 <p>If we go back to the previous exercise, we can simplify the code the following way:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="the-forward-pipe-operator.html#cb50-1" aria-hidden="true" tabindex="-1"></a>df_w_clean <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_w,</span>
-<span id="cb50-2"><a href="the-forward-pipe-operator.html#cb50-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;Weight_day0&quot;</span>, <span class="st">&quot;Weight_day10&quot;</span>),</span>
-<span id="cb50-3"><a href="the-forward-pipe-operator.html#cb50-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">values_to=</span><span class="st">&quot;weight&quot;</span>, </span>
-<span id="cb50-4"><a href="the-forward-pipe-operator.html#cb50-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">names_to=</span><span class="st">&quot;day&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb50-5"><a href="the-forward-pipe-operator.html#cb50-5" aria-hidden="true" tabindex="-1"></a>              <span class="fu">separate</span>(<span class="at">col =</span> <span class="st">&quot;day&quot;</span>,</span>
-<span id="cb50-6"><a href="the-forward-pipe-operator.html#cb50-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">into=</span><span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">&quot;day&quot;</span>))</span>
-<span id="cb50-7"><a href="the-forward-pipe-operator.html#cb50-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-8"><a href="the-forward-pipe-operator.html#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="co"># This is equivalent to:</span></span>
-<span id="cb50-9"><a href="the-forward-pipe-operator.html#cb50-9" aria-hidden="true" tabindex="-1"></a>df_w_clean <span class="ot">&lt;-</span> df_w <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;Weight_day0&quot;</span>, <span class="st">&quot;Weight_day10&quot;</span>),</span>
-<span id="cb50-10"><a href="the-forward-pipe-operator.html#cb50-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">values_to=</span><span class="st">&quot;weight&quot;</span>, </span>
-<span id="cb50-11"><a href="the-forward-pipe-operator.html#cb50-11" aria-hidden="true" tabindex="-1"></a>                           <span class="at">names_to=</span><span class="st">&quot;day&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb50-12"><a href="the-forward-pipe-operator.html#cb50-12" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">separate</span>(<span class="at">col =</span> <span class="st">&quot;day&quot;</span>,</span>
-<span id="cb50-13"><a href="the-forward-pipe-operator.html#cb50-13" aria-hidden="true" tabindex="-1"></a>                            <span class="at">into=</span><span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">&quot;day&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="the-forward-pipe-operator.html#cb52-1" aria-hidden="true" tabindex="-1"></a>df_w_clean <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_w,</span>
+<span id="cb52-2"><a href="the-forward-pipe-operator.html#cb52-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;Weight_day0&quot;</span>, <span class="st">&quot;Weight_day10&quot;</span>),</span>
+<span id="cb52-3"><a href="the-forward-pipe-operator.html#cb52-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">values_to=</span><span class="st">&quot;weight&quot;</span>, </span>
+<span id="cb52-4"><a href="the-forward-pipe-operator.html#cb52-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">names_to=</span><span class="st">&quot;day&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb52-5"><a href="the-forward-pipe-operator.html#cb52-5" aria-hidden="true" tabindex="-1"></a>              <span class="fu">separate</span>(<span class="at">col =</span> <span class="st">&quot;day&quot;</span>,</span>
+<span id="cb52-6"><a href="the-forward-pipe-operator.html#cb52-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">into=</span><span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">&quot;day&quot;</span>))</span>
+<span id="cb52-7"><a href="the-forward-pipe-operator.html#cb52-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-8"><a href="the-forward-pipe-operator.html#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="co"># This is equivalent to:</span></span>
+<span id="cb52-9"><a href="the-forward-pipe-operator.html#cb52-9" aria-hidden="true" tabindex="-1"></a>df_w_clean <span class="ot">&lt;-</span> df_w <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="fu">c</span>(<span class="st">&quot;Weight_day0&quot;</span>, <span class="st">&quot;Weight_day10&quot;</span>),</span>
+<span id="cb52-10"><a href="the-forward-pipe-operator.html#cb52-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">values_to=</span><span class="st">&quot;weight&quot;</span>, </span>
+<span id="cb52-11"><a href="the-forward-pipe-operator.html#cb52-11" aria-hidden="true" tabindex="-1"></a>                           <span class="at">names_to=</span><span class="st">&quot;day&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb52-12"><a href="the-forward-pipe-operator.html#cb52-12" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">separate</span>(<span class="at">col =</span> <span class="st">&quot;day&quot;</span>,</span>
+<span id="cb52-13"><a href="the-forward-pipe-operator.html#cb52-13" aria-hidden="true" tabindex="-1"></a>                            <span class="at">into=</span><span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">&quot;day&quot;</span>))</span></code></pre></div>
 <center>
 <h4 style="background-color: #a4edff; display: inline-block;">
 <strong>HANDS-ON</strong>
 </h4>
 </center>
 <p>Simplify the following piece of code using the <code>%&gt;%</code> operator:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="the-forward-pipe-operator.html#cb51-1" aria-hidden="true" tabindex="-1"></a>table5_1 <span class="ot">&lt;-</span> <span class="fu">separate</span>(<span class="at">data=</span>table5, <span class="at">col=</span>rate, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>), <span class="at">sep=</span><span class="st">&quot;/&quot;</span>)</span>
-<span id="cb51-2"><a href="the-forward-pipe-operator.html#cb51-2" aria-hidden="true" tabindex="-1"></a>table5_2 <span class="ot">&lt;-</span> <span class="fu">unite</span>(<span class="at">data=</span>table5_1, <span class="at">col=</span>year, <span class="fu">c</span>(<span class="st">&quot;century&quot;</span>, <span class="st">&quot;year&quot;</span>), <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="the-forward-pipe-operator.html#cb53-1" aria-hidden="true" tabindex="-1"></a>table5_1 <span class="ot">&lt;-</span> <span class="fu">separate</span>(<span class="at">data=</span>table5, <span class="at">col=</span>rate, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>), <span class="at">sep=</span><span class="st">&quot;/&quot;</span>)</span>
+<span id="cb53-2"><a href="the-forward-pipe-operator.html#cb53-2" aria-hidden="true" tabindex="-1"></a>table5_2 <span class="ot">&lt;-</span> <span class="fu">unite</span>(<span class="at">data=</span>table5_1, <span class="at">col=</span>year, <span class="fu">c</span>(<span class="st">&quot;century&quot;</span>, <span class="st">&quot;year&quot;</span>), <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <details>
 <summary>
 <h5 style="background-color: #a4edff; display: inline-block;">
 <em>Answer</em>
 </h5>
 </summary>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="the-forward-pipe-operator.html#cb52-1" aria-hidden="true" tabindex="-1"></a>table5_1 <span class="ot">&lt;-</span> table5 <span class="sc">%&gt;%</span> </span>
-<span id="cb52-2"><a href="the-forward-pipe-operator.html#cb52-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">separate</span>(<span class="at">col=</span>rate, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>), <span class="at">sep=</span><span class="st">&quot;/&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb52-3"><a href="the-forward-pipe-operator.html#cb52-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">unite</span>(<span class="at">col=</span>year, <span class="fu">c</span>(<span class="st">&quot;century&quot;</span>, <span class="st">&quot;year&quot;</span>), <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="the-forward-pipe-operator.html#cb54-1" aria-hidden="true" tabindex="-1"></a>table5_1 <span class="ot">&lt;-</span> table5 <span class="sc">%&gt;%</span> </span>
+<span id="cb54-2"><a href="the-forward-pipe-operator.html#cb54-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">separate</span>(<span class="at">col=</span>rate, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;population&quot;</span>), <span class="at">sep=</span><span class="st">&quot;/&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb54-3"><a href="the-forward-pipe-operator.html#cb54-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">unite</span>(<span class="at">col=</span>year, <span class="fu">c</span>(<span class="st">&quot;century&quot;</span>, <span class="st">&quot;year&quot;</span>), <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
 </details>
 
 </div>

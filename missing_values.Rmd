@@ -63,16 +63,15 @@ complete(df,
 * In practice: what if you have `NA` values, along with <u>empty cells</u> and "customized" missing values?
 
 ```{r}
-dfwithNA2 <- tibble(x = c(1, 2, NA, 5, "", 4), 
-          y = c("a", NA, "b", "c", "d", "missing"))
+dfwithNA2 <- tibble(col1=c(1, 2, NA, 5, "", 4), 
+                    col2=c("a", NA, "b", "c", "d", "missing"))
 ```
 
 Replace empty cells and "customized" missing values with `NA` with `na_if`:
 
 ```{r}
 dfwithNA2 %>% 
-  na_if(y="missing") %>% 
-  na_if(y="")
+   mutate(col1=na_if(col1, ""), col2=na_if(col2, "missing"))
 ```
 
 

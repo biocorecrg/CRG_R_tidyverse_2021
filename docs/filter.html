@@ -193,7 +193,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="chapter" data-level="9" data-path="strings-manipulation-with-stringr.html"><a href="strings-manipulation-with-stringr.html"><i class="fa fa-check"></i><b>9</b> Strings manipulation with <code>stringr</code></a></li>
-<li class="chapter" data-level="10" data-path="mini-project.html"><a href="mini-project.html"><i class="fa fa-check"></i><b>10</b> Mini project</a></li>
+<li class="chapter" data-level="10" data-path="mini-project-with-code.html"><a href="mini-project-with-code.html"><i class="fa fa-check"></i><b>10</b> Mini project with code</a></li>
 <li class="chapter" data-level="11" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>11</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
@@ -393,8 +393,8 @@ Democratic
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="filter.html#cb77-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(presidential, </span>
-<span id="cb77-2"><a href="filter.html#cb77-2" aria-hidden="true" tabindex="-1"></a>        party<span class="sc">==</span><span class="st">&quot;Democratic&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="filter.html#cb79-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(presidential, </span>
+<span id="cb79-2"><a href="filter.html#cb79-2" aria-hidden="true" tabindex="-1"></a>        party<span class="sc">==</span><span class="st">&quot;Democratic&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 4
 ##   name    start      end        party     
 ##   &lt;chr&gt;   &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;     
@@ -404,19 +404,19 @@ Democratic
 ## 4 Clinton 1993-01-20 2001-01-20 Democratic
 ## 5 Obama   2009-01-20 2017-01-20 Democratic</code></pre>
 <p>You can filter using several variables/columns:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="filter.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
-<span id="cb79-2"><a href="filter.html#cb79-2" aria-hidden="true" tabindex="-1"></a>       party<span class="sc">==</span><span class="st">&quot;Republican&quot;</span>, name<span class="sc">==</span><span class="st">&quot;Bush&quot;</span>)</span>
-<span id="cb79-3"><a href="filter.html#cb79-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-4"><a href="filter.html#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="co"># This implicity uses the &quot;&amp;&quot;, i.e. the fact that both conditions have to be TRUE</span></span>
-<span id="cb79-5"><a href="filter.html#cb79-5" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
-<span id="cb79-6"><a href="filter.html#cb79-6" aria-hidden="true" tabindex="-1"></a>       party<span class="sc">==</span><span class="st">&quot;Republican&quot;</span> <span class="sc">&amp;</span> name<span class="sc">==</span><span class="st">&quot;Bush&quot;</span>)</span>
-<span id="cb79-7"><a href="filter.html#cb79-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-8"><a href="filter.html#cb79-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Any logical operators can be used</span></span>
-<span id="cb79-9"><a href="filter.html#cb79-9" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
-<span id="cb79-10"><a href="filter.html#cb79-10" aria-hidden="true" tabindex="-1"></a>       name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Bush&quot;</span>, <span class="st">&quot;Kennedy&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="filter.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
+<span id="cb81-2"><a href="filter.html#cb81-2" aria-hidden="true" tabindex="-1"></a>       party<span class="sc">==</span><span class="st">&quot;Republican&quot;</span>, name<span class="sc">==</span><span class="st">&quot;Bush&quot;</span>)</span>
+<span id="cb81-3"><a href="filter.html#cb81-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-4"><a href="filter.html#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="co"># This implicity uses the &quot;&amp;&quot;, i.e. the fact that both conditions have to be TRUE</span></span>
+<span id="cb81-5"><a href="filter.html#cb81-5" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
+<span id="cb81-6"><a href="filter.html#cb81-6" aria-hidden="true" tabindex="-1"></a>       party<span class="sc">==</span><span class="st">&quot;Republican&quot;</span> <span class="sc">&amp;</span> name<span class="sc">==</span><span class="st">&quot;Bush&quot;</span>)</span>
+<span id="cb81-7"><a href="filter.html#cb81-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-8"><a href="filter.html#cb81-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Any logical operators can be used</span></span>
+<span id="cb81-9"><a href="filter.html#cb81-9" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(presidential, </span>
+<span id="cb81-10"><a href="filter.html#cb81-10" aria-hidden="true" tabindex="-1"></a>       name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Bush&quot;</span>, <span class="st">&quot;Kennedy&quot;</span>))</span></code></pre></div>
 <p>The same can be used for numerical values: let’s select all rows from <code>table5</code> where <code>century &gt; 19</code>:</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="filter.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(table5,</span>
-<span id="cb80-2"><a href="filter.html#cb80-2" aria-hidden="true" tabindex="-1"></a>       century <span class="sc">&gt;</span> <span class="dv">19</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="filter.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(table5,</span>
+<span id="cb82-2"><a href="filter.html#cb82-2" aria-hidden="true" tabindex="-1"></a>       century <span class="sc">&gt;</span> <span class="dv">19</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   country     century year  rate             
 ##   &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;            
@@ -440,16 +440,16 @@ Democratic
 <em>Answer</em>
 </h5>
 </summary>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="filter.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many characters have a BMI &gt; 30?</span></span>
-<span id="cb82-2"><a href="filter.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(starwarsBMI, BMI <span class="sc">&gt;</span> <span class="dv">30</span>)</span>
-<span id="cb82-3"><a href="filter.html#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-4"><a href="filter.html#cb82-4" aria-hidden="true" tabindex="-1"></a><span class="co"># How many characters have a BMI &gt; 30 AND are Droids (&quot;Droid&quot; in column &quot;species&quot;)?</span></span>
-<span id="cb82-5"><a href="filter.html#cb82-5" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(starwarsBMI, BMI <span class="sc">&gt;</span> <span class="dv">30</span> <span class="sc">&amp;</span> species<span class="sc">==</span><span class="st">&quot;Droid&quot;</span>)</span>
-<span id="cb82-6"><a href="filter.html#cb82-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb82-7"><a href="filter.html#cb82-7" aria-hidden="true" tabindex="-1"></a><span class="co"># From the previous selection (BMI &gt; 30 and Droid), select columns BMI, character_name, height and mass, and save in the new object DroidBMI30.</span></span>
-<span id="cb82-8"><a href="filter.html#cb82-8" aria-hidden="true" tabindex="-1"></a>DroidBMI30 <span class="ot">&lt;-</span> starwarsBMI <span class="sc">%&gt;%</span> </span>
-<span id="cb82-9"><a href="filter.html#cb82-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">filter</span>(BMI <span class="sc">&gt;</span> <span class="dv">30</span> <span class="sc">&amp;</span> species<span class="sc">==</span><span class="st">&quot;Droid&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb82-10"><a href="filter.html#cb82-10" aria-hidden="true" tabindex="-1"></a>            <span class="fu">select</span>(BMI, character_name, height, mass)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="filter.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many characters have a BMI &gt; 30?</span></span>
+<span id="cb84-2"><a href="filter.html#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(starwarsBMI, BMI <span class="sc">&gt;</span> <span class="dv">30</span>)</span>
+<span id="cb84-3"><a href="filter.html#cb84-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-4"><a href="filter.html#cb84-4" aria-hidden="true" tabindex="-1"></a><span class="co"># How many characters have a BMI &gt; 30 AND are Droids (&quot;Droid&quot; in column &quot;species&quot;)?</span></span>
+<span id="cb84-5"><a href="filter.html#cb84-5" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(starwarsBMI, BMI <span class="sc">&gt;</span> <span class="dv">30</span> <span class="sc">&amp;</span> species<span class="sc">==</span><span class="st">&quot;Droid&quot;</span>)</span>
+<span id="cb84-6"><a href="filter.html#cb84-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb84-7"><a href="filter.html#cb84-7" aria-hidden="true" tabindex="-1"></a><span class="co"># From the previous selection (BMI &gt; 30 and Droid), select columns BMI, character_name, height and mass, and save in the new object DroidBMI30.</span></span>
+<span id="cb84-8"><a href="filter.html#cb84-8" aria-hidden="true" tabindex="-1"></a>DroidBMI30 <span class="ot">&lt;-</span> starwarsBMI <span class="sc">%&gt;%</span> </span>
+<span id="cb84-9"><a href="filter.html#cb84-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">filter</span>(BMI <span class="sc">&gt;</span> <span class="dv">30</span> <span class="sc">&amp;</span> species<span class="sc">==</span><span class="st">&quot;Droid&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-10"><a href="filter.html#cb84-10" aria-hidden="true" tabindex="-1"></a>            <span class="fu">select</span>(BMI, character_name, height, mass)</span></code></pre></div>
 </details>
 </div>
             </section>

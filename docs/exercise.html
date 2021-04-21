@@ -193,7 +193,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="chapter" data-level="9" data-path="strings-manipulation-with-stringr.html"><a href="strings-manipulation-with-stringr.html"><i class="fa fa-check"></i><b>9</b> Strings manipulation with <code>stringr</code></a></li>
-<li class="chapter" data-level="10" data-path="mini-project.html"><a href="mini-project.html"><i class="fa fa-check"></i><b>10</b> Mini project</a></li>
+<li class="chapter" data-level="10" data-path="mini-project-with-code.html"><a href="mini-project-with-code.html"><i class="fa fa-check"></i><b>10</b> Mini project with code</a></li>
 <li class="chapter" data-level="11" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>11</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
@@ -237,28 +237,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <em>Answer</em>
 </h5>
 </summary>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="exercise.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. download, read in, tidy</span></span>
-<span id="cb159-2"><a href="exercise.html#cb159-2" aria-hidden="true" tabindex="-1"></a>mystorms <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/modified_storms.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb159-3"><a href="exercise.html#cb159-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">separate</span>(<span class="at">col=</span>wind_and_pressure, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;wind&quot;</span>, <span class="st">&quot;pressure&quot;</span>), <span class="at">sep=</span><span class="st">&quot;-&quot;</span>, <span class="at">convert=</span><span class="cn">TRUE</span>) </span>
-<span id="cb159-4"><a href="exercise.html#cb159-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb159-5"><a href="exercise.html#cb159-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. What storm has the highest median wind speed?</span></span>
-<span id="cb159-6"><a href="exercise.html#cb159-6" aria-hidden="true" tabindex="-1"></a>mystorms <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span></span>
-<span id="cb159-7"><a href="exercise.html#cb159-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">summarise</span>(<span class="at">median_wind =</span> <span class="fu">median</span>(wind)) <span class="sc">%&gt;%</span></span>
-<span id="cb159-8"><a href="exercise.html#cb159-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">arrange</span>(<span class="fu">desc</span>(median_wind)) <span class="sc">%&gt;%</span></span>
-<span id="cb159-9"><a href="exercise.html#cb159-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">slice</span>(<span class="dv">1</span>) <span class="co"># slice() can be used to retrieve rows by their index</span></span>
-<span id="cb159-10"><a href="exercise.html#cb159-10" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb159-11"><a href="exercise.html#cb159-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Calculate how many storms happen each year: </span></span>
-<span id="cb159-12"><a href="exercise.html#cb159-12" aria-hidden="true" tabindex="-1"></a>mystorms <span class="sc">%&gt;%</span>  <span class="fu">separate</span>(date, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>), <span class="at">sep=</span><span class="st">&quot;-&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb159-13"><a href="exercise.html#cb159-13" aria-hidden="true" tabindex="-1"></a>          <span class="fu">distinct</span>(name, year) <span class="sc">%&gt;%</span></span>
-<span id="cb159-14"><a href="exercise.html#cb159-14" aria-hidden="true" tabindex="-1"></a>          <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
-<span id="cb159-15"><a href="exercise.html#cb159-15" aria-hidden="true" tabindex="-1"></a>          <span class="fu">summarise</span>(<span class="at">storms_per_year=</span><span class="fu">n</span>())</span>
-<span id="cb159-16"><a href="exercise.html#cb159-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  What are the years with the **maximum** number of storms?</span></span>
-<span id="cb159-17"><a href="exercise.html#cb159-17" aria-hidden="true" tabindex="-1"></a>mystorms <span class="sc">%&gt;%</span>  <span class="fu">separate</span>(date, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>), <span class="at">sep=</span><span class="st">&quot;-&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb159-18"><a href="exercise.html#cb159-18" aria-hidden="true" tabindex="-1"></a>          <span class="fu">distinct</span>(name, year) <span class="sc">%&gt;%</span></span>
-<span id="cb159-19"><a href="exercise.html#cb159-19" aria-hidden="true" tabindex="-1"></a>          <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
-<span id="cb159-20"><a href="exercise.html#cb159-20" aria-hidden="true" tabindex="-1"></a>          <span class="fu">summarise</span>(<span class="at">storms_per_year=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb159-21"><a href="exercise.html#cb159-21" aria-hidden="true" tabindex="-1"></a>          <span class="fu">arrange</span>(<span class="fu">desc</span>(storms_per_year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb159-22"><a href="exercise.html#cb159-22" aria-hidden="true" tabindex="-1"></a>          <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="exercise.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. download, read in, tidy</span></span>
+<span id="cb165-2"><a href="exercise.html#cb165-2" aria-hidden="true" tabindex="-1"></a>mystorms <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://public-docs.crg.es/biocore/projects/training/R_tidyverse_2021/modified_storms.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb165-3"><a href="exercise.html#cb165-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">separate</span>(<span class="at">col=</span>wind_and_pressure, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;wind&quot;</span>, <span class="st">&quot;pressure&quot;</span>), <span class="at">sep=</span><span class="st">&quot;-&quot;</span>, <span class="at">convert=</span><span class="cn">TRUE</span>) </span>
+<span id="cb165-4"><a href="exercise.html#cb165-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-5"><a href="exercise.html#cb165-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. What storm has the highest median wind speed?</span></span>
+<span id="cb165-6"><a href="exercise.html#cb165-6" aria-hidden="true" tabindex="-1"></a>mystorms <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span></span>
+<span id="cb165-7"><a href="exercise.html#cb165-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">summarise</span>(<span class="at">median_wind =</span> <span class="fu">median</span>(wind)) <span class="sc">%&gt;%</span></span>
+<span id="cb165-8"><a href="exercise.html#cb165-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">slice_max</span>(<span class="at">order_by=</span>median_wind)</span>
+<span id="cb165-9"><a href="exercise.html#cb165-9" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb165-10"><a href="exercise.html#cb165-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Calculate how many storms happen each year: </span></span>
+<span id="cb165-11"><a href="exercise.html#cb165-11" aria-hidden="true" tabindex="-1"></a>mystorms <span class="sc">%&gt;%</span>  <span class="fu">separate</span>(date, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>), <span class="at">sep=</span><span class="st">&quot;-&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb165-12"><a href="exercise.html#cb165-12" aria-hidden="true" tabindex="-1"></a>          <span class="fu">distinct</span>(name, year) <span class="sc">%&gt;%</span></span>
+<span id="cb165-13"><a href="exercise.html#cb165-13" aria-hidden="true" tabindex="-1"></a>          <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb165-14"><a href="exercise.html#cb165-14" aria-hidden="true" tabindex="-1"></a>          <span class="fu">summarise</span>(<span class="at">storms_per_year=</span><span class="fu">n</span>())</span>
+<span id="cb165-15"><a href="exercise.html#cb165-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  What are the years with the **maximum** number of storms?</span></span>
+<span id="cb165-16"><a href="exercise.html#cb165-16" aria-hidden="true" tabindex="-1"></a>mystorms <span class="sc">%&gt;%</span>  <span class="fu">separate</span>(date, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>), <span class="at">sep=</span><span class="st">&quot;-&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb165-17"><a href="exercise.html#cb165-17" aria-hidden="true" tabindex="-1"></a>          <span class="fu">distinct</span>(name, year) <span class="sc">%&gt;%</span></span>
+<span id="cb165-18"><a href="exercise.html#cb165-18" aria-hidden="true" tabindex="-1"></a>          <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb165-19"><a href="exercise.html#cb165-19" aria-hidden="true" tabindex="-1"></a>          <span class="fu">summarise</span>(<span class="at">storms_per_year=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb165-20"><a href="exercise.html#cb165-20" aria-hidden="true" tabindex="-1"></a>          <span class="fu">slice_max</span>(<span class="at">order_by=</span>storms_per_year, <span class="at">n=</span><span class="dv">5</span>)</span></code></pre></div>
 </details>
 
 </div>

@@ -63,6 +63,20 @@ table5_1 <- separate(data=table5,
 table5_1
 ```
 
+The default field separator is *a regular expression that matches any sequence of non-alphanumeric values.*
+<br>
+So this would work well in our example:
+
+```{r}
+separate(data=table5, 
+         col=rate, 
+         into=c("cases", "population")
+         )
+```
+
+It is good practice to explicitly specify the field separator, so as not to get any bad surprise.
+
+
 ### Unite
 
 Function `unite` does just the opposite: it will unite/stick together 2 or (more) columns: `unite(data, col, column names, sep)`.

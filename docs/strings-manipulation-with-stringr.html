@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="handling-missing-values.html"/>
-<link rel="next" href="mini-project.html"/>
+<link rel="next" href="mini-project-with-code.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -193,7 +193,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="chapter" data-level="9" data-path="strings-manipulation-with-stringr.html"><a href="strings-manipulation-with-stringr.html"><i class="fa fa-check"></i><b>9</b> Strings manipulation with <code>stringr</code></a></li>
-<li class="chapter" data-level="10" data-path="mini-project.html"><a href="mini-project.html"><i class="fa fa-check"></i><b>10</b> Mini project</a></li>
+<li class="chapter" data-level="10" data-path="mini-project-with-code.html"><a href="mini-project-with-code.html"><i class="fa fa-check"></i><b>10</b> Mini project with code</a></li>
 <li class="chapter" data-level="11" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>11</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
@@ -224,57 +224,57 @@ All functions in <code>stringr</code> start with <strong>str_</strong> and take 
 We will show here a few useful functions (for a complete list of <code>stringr</code> functions, you can have a look at the <a href="https://github.com/rstudio/cheatsheets/blob/master/strings.pdf">Cheat sheet</a>. The cheat sheet also provides guidance on how to work with <strong>regular expressions</strong>.</p>
 <p><br><br>
 Let’s take a simple <strong>character vector</strong> and a small <strong>tibble</strong> as examples:</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="strings-manipulation-with-stringr.html#cb174-1" aria-hidden="true" tabindex="-1"></a>examplestring <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;genomics&quot;</span>, <span class="st">&quot;proteomics&quot;</span>, <span class="st">&quot;proteome&quot;</span>, <span class="st">&quot;transcriptomics&quot;</span>, <span class="st">&quot;metagenomics&quot;</span>, <span class="st">&quot;metabolomics&quot;</span>)</span>
-<span id="cb174-2"><a href="strings-manipulation-with-stringr.html#cb174-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb174-3"><a href="strings-manipulation-with-stringr.html#cb174-3" aria-hidden="true" tabindex="-1"></a>exampletibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">day=</span><span class="fu">c</span>(<span class="st">&quot;day0&quot;</span>, <span class="st">&quot;day1&quot;</span>, <span class="st">&quot;day2&quot;</span>),</span>
-<span id="cb174-4"><a href="strings-manipulation-with-stringr.html#cb174-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">temperature=</span><span class="fu">c</span>(<span class="st">&quot;25C&quot;</span>, <span class="st">&quot;27C&quot;</span>, <span class="st">&quot;24Celsius&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="strings-manipulation-with-stringr.html#cb180-1" aria-hidden="true" tabindex="-1"></a>examplestring <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;genomics&quot;</span>, <span class="st">&quot;proteomics&quot;</span>, <span class="st">&quot;proteome&quot;</span>, <span class="st">&quot;transcriptomics&quot;</span>, <span class="st">&quot;metagenomics&quot;</span>, <span class="st">&quot;metabolomics&quot;</span>)</span>
+<span id="cb180-2"><a href="strings-manipulation-with-stringr.html#cb180-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb180-3"><a href="strings-manipulation-with-stringr.html#cb180-3" aria-hidden="true" tabindex="-1"></a>exampletibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">day=</span><span class="fu">c</span>(<span class="st">&quot;day0&quot;</span>, <span class="st">&quot;day1&quot;</span>, <span class="st">&quot;day2&quot;</span>),</span>
+<span id="cb180-4"><a href="strings-manipulation-with-stringr.html#cb180-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">temperature=</span><span class="fu">c</span>(<span class="st">&quot;25C&quot;</span>, <span class="st">&quot;27C&quot;</span>, <span class="st">&quot;24Celsius&quot;</span>))</span></code></pre></div>
 <hr />
 <ul>
 <li><code>str_detect</code>: detects the presence or absence of a pattern in a string.</li>
 </ul>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="strings-manipulation-with-stringr.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(examplestring, </span>
-<span id="cb175-2"><a href="strings-manipulation-with-stringr.html#cb175-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;genom&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="strings-manipulation-with-stringr.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(examplestring, </span>
+<span id="cb181-2"><a href="strings-manipulation-with-stringr.html#cb181-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;genom&quot;</span>)</span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE FALSE FALSE  TRUE FALSE</code></pre>
 <p>You can use regular expressions: as a simple example, here we want to detect which element of <code>examplestring</code> <strong>starts</strong> with <strong>genom</strong>.</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="strings-manipulation-with-stringr.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(examplestring, </span>
-<span id="cb177-2"><a href="strings-manipulation-with-stringr.html#cb177-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;^genom&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="strings-manipulation-with-stringr.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(examplestring, </span>
+<span id="cb183-2"><a href="strings-manipulation-with-stringr.html#cb183-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;^genom&quot;</span>)</span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
 <p>You can reverse the search and output elements where the pattern is NOT found with <code>negate=TRUE</code></p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="strings-manipulation-with-stringr.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(examplestring, </span>
-<span id="cb179-2"><a href="strings-manipulation-with-stringr.html#cb179-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;genom&quot;</span>,</span>
-<span id="cb179-3"><a href="strings-manipulation-with-stringr.html#cb179-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">negate=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="strings-manipulation-with-stringr.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(examplestring, </span>
+<span id="cb185-2"><a href="strings-manipulation-with-stringr.html#cb185-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;genom&quot;</span>,</span>
+<span id="cb185-3"><a href="strings-manipulation-with-stringr.html#cb185-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">negate=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] FALSE  TRUE  TRUE  TRUE FALSE  TRUE</code></pre>
 <hr />
 <ul>
 <li><code>str_length</code>: outputs length of strings (number of characters) in each element of a vector.</li>
 </ul>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="strings-manipulation-with-stringr.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_length</span>(examplestring)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="strings-manipulation-with-stringr.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_length</span>(examplestring)</span></code></pre></div>
 <pre><code>## [1]  8 10  8 15 12 12</code></pre>
 <hr />
 <ul>
 <li><code>str_replace</code>: looks for a pattern in a string and replace it.</li>
 </ul>
 <p>We can replace “omics” with “ome”</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="strings-manipulation-with-stringr.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace</span>(examplestring, </span>
-<span id="cb183-2"><a href="strings-manipulation-with-stringr.html#cb183-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;omics&quot;</span>, </span>
-<span id="cb183-3"><a href="strings-manipulation-with-stringr.html#cb183-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;ome&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="strings-manipulation-with-stringr.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace</span>(examplestring, </span>
+<span id="cb189-2"><a href="strings-manipulation-with-stringr.html#cb189-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;omics&quot;</span>, </span>
+<span id="cb189-3"><a href="strings-manipulation-with-stringr.html#cb189-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;ome&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;genome&quot;        &quot;proteome&quot;      &quot;proteome&quot;      &quot;transcriptome&quot; &quot;metagenome&quot;   
 ## [6] &quot;metabolome&quot;</code></pre>
 <p><code>str_replace</code> can be used to remove selected patterns from strings:</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="strings-manipulation-with-stringr.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace</span>(examplestring, </span>
-<span id="cb185-2"><a href="strings-manipulation-with-stringr.html#cb185-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;omics&quot;</span>, </span>
-<span id="cb185-3"><a href="strings-manipulation-with-stringr.html#cb185-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="strings-manipulation-with-stringr.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace</span>(examplestring, </span>
+<span id="cb191-2"><a href="strings-manipulation-with-stringr.html#cb191-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;omics&quot;</span>, </span>
+<span id="cb191-3"><a href="strings-manipulation-with-stringr.html#cb191-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;gen&quot;        &quot;prote&quot;      &quot;proteome&quot;   &quot;transcript&quot; &quot;metagen&quot;    &quot;metabol&quot;</code></pre>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="strings-manipulation-with-stringr.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="co"># str_remove is a wrapper for the same thing (no need for the 3rd argument)</span></span>
-<span id="cb187-2"><a href="strings-manipulation-with-stringr.html#cb187-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_remove</span>(examplestring, </span>
-<span id="cb187-3"><a href="strings-manipulation-with-stringr.html#cb187-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;omics&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="strings-manipulation-with-stringr.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="co"># str_remove is a wrapper for the same thing (no need for the 3rd argument)</span></span>
+<span id="cb193-2"><a href="strings-manipulation-with-stringr.html#cb193-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_remove</span>(examplestring, </span>
+<span id="cb193-3"><a href="strings-manipulation-with-stringr.html#cb193-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;omics&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;gen&quot;        &quot;prote&quot;      &quot;proteome&quot;   &quot;transcript&quot; &quot;metagen&quot;    &quot;metabol&quot;</code></pre>
 <p>Same with a <strong>tibble’s column</strong>:</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="strings-manipulation-with-stringr.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_remove</span>(exampletibble<span class="sc">$</span>day, </span>
-<span id="cb189-2"><a href="strings-manipulation-with-stringr.html#cb189-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;day&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="strings-manipulation-with-stringr.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_remove</span>(exampletibble<span class="sc">$</span>day, </span>
+<span id="cb195-2"><a href="strings-manipulation-with-stringr.html#cb195-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;day&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;0&quot; &quot;1&quot; &quot;2&quot;</code></pre>
 <p>You can use it inside another <code>tidyverse</code> function:</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="strings-manipulation-with-stringr.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(exampletibble, <span class="at">day=</span><span class="fu">str_remove</span>(day, <span class="at">pattern=</span><span class="st">&quot;day&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="strings-manipulation-with-stringr.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(exampletibble, <span class="at">day=</span><span class="fu">str_remove</span>(day, <span class="at">pattern=</span><span class="st">&quot;day&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   day   temperature
 ##   &lt;chr&gt; &lt;chr&gt;      
@@ -286,28 +286,28 @@ Let’s take a simple <strong>character vector</strong> and a small <strong>tibb
 <li><code>str_count</code>: count the number of occurences of a pattern:</li>
 </ul>
 <p>Count how many times “omics” is found in each element:</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="strings-manipulation-with-stringr.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_count</span>(examplestring, </span>
-<span id="cb193-2"><a href="strings-manipulation-with-stringr.html#cb193-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;omics&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="strings-manipulation-with-stringr.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_count</span>(examplestring, </span>
+<span id="cb199-2"><a href="strings-manipulation-with-stringr.html#cb199-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;omics&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 1 1 0 1 1 1</code></pre>
 <p>Count how many vowels are found in each element:</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="strings-manipulation-with-stringr.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_count</span>(examplestring, </span>
-<span id="cb195-2"><a href="strings-manipulation-with-stringr.html#cb195-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;[aeiouy]&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="strings-manipulation-with-stringr.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_count</span>(examplestring, </span>
+<span id="cb201-2"><a href="strings-manipulation-with-stringr.html#cb201-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">pattern=</span><span class="st">&quot;[aeiouy]&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 3 4 4 4 5 5</code></pre>
 <hr />
 <ul>
 <li><code>str_sub</code>: extracts and replace substrings from a character vector</li>
 </ul>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="strings-manipulation-with-stringr.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(examplestring, </span>
-<span id="cb197-2"><a href="strings-manipulation-with-stringr.html#cb197-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">start=</span><span class="dv">1</span>, <span class="co"># position of the first character</span></span>
-<span id="cb197-3"><a href="strings-manipulation-with-stringr.html#cb197-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">end=</span><span class="dv">10</span>) <span class="co"># position of the last character</span></span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="strings-manipulation-with-stringr.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(examplestring, </span>
+<span id="cb203-2"><a href="strings-manipulation-with-stringr.html#cb203-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">start=</span><span class="dv">1</span>, <span class="co"># position of the first character</span></span>
+<span id="cb203-3"><a href="strings-manipulation-with-stringr.html#cb203-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">end=</span><span class="dv">10</span>) <span class="co"># position of the last character</span></span></code></pre></div>
 <pre><code>## [1] &quot;genomics&quot;   &quot;proteomics&quot; &quot;proteome&quot;   &quot;transcript&quot; &quot;metagenomi&quot; &quot;metabolomi&quot;</code></pre>
 <p>Let’s keep the first 2 characters of the <strong>temperature</strong> column of our <code>exampletibble</code>:</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="strings-manipulation-with-stringr.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(exampletibble<span class="sc">$</span>temperature, </span>
-<span id="cb199-2"><a href="strings-manipulation-with-stringr.html#cb199-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">start=</span><span class="dv">1</span>, </span>
-<span id="cb199-3"><a href="strings-manipulation-with-stringr.html#cb199-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">end=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="strings-manipulation-with-stringr.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(exampletibble<span class="sc">$</span>temperature, </span>
+<span id="cb205-2"><a href="strings-manipulation-with-stringr.html#cb205-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">start=</span><span class="dv">1</span>, </span>
+<span id="cb205-3"><a href="strings-manipulation-with-stringr.html#cb205-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">end=</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;25&quot; &quot;27&quot; &quot;24&quot;</code></pre>
 <p>Within <code>mutate</code>:</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="strings-manipulation-with-stringr.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(exampletibble, <span class="at">temperature=</span><span class="fu">str_sub</span>(temperature, <span class="at">start=</span><span class="dv">1</span>, <span class="at">end=</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="strings-manipulation-with-stringr.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(exampletibble, <span class="at">temperature=</span><span class="fu">str_sub</span>(temperature, <span class="at">start=</span><span class="dv">1</span>, <span class="at">end=</span><span class="dv">2</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   day   temperature
 ##   &lt;chr&gt; &lt;chr&gt;      
@@ -320,7 +320,7 @@ Let’s take a simple <strong>character vector</strong> and a small <strong>tibb
 </h4>
 </center>
 <p>We will play with the following <strong>character vector</strong>:</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="strings-manipulation-with-stringr.html#cb203-1" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Uganda&quot;</span>, <span class="st">&quot;Canada&quot;</span>, <span class="st">&quot;Australia&quot;</span>, <span class="st">&quot;Switzerland&quot;</span>, <span class="st">&quot;Thailand&quot;</span>, <span class="st">&quot;Bolivia&quot;</span>, <span class="st">&quot;Russia&quot;</span>, <span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;Senegal&quot;</span>, <span class="st">&quot;South Korea&quot;</span>, <span class="st">&quot;Mexico&quot;</span>, <span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;England&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="strings-manipulation-with-stringr.html#cb209-1" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Uganda&quot;</span>, <span class="st">&quot;Canada&quot;</span>, <span class="st">&quot;Australia&quot;</span>, <span class="st">&quot;Switzerland&quot;</span>, <span class="st">&quot;Thailand&quot;</span>, <span class="st">&quot;Bolivia&quot;</span>, <span class="st">&quot;Russia&quot;</span>, <span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;Senegal&quot;</span>, <span class="st">&quot;South Korea&quot;</span>, <span class="st">&quot;Mexico&quot;</span>, <span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;England&quot;</span>)</span></code></pre></div>
 <ul>
 <li>What is the <strong>average length</strong> of the country names?</li>
 <li>How many country names <strong>end with an “a”</strong>?</li>
@@ -333,24 +333,24 @@ Let’s take a simple <strong>character vector</strong> and a small <strong>tibb
 <em>Answer</em>
 </h5>
 </summary>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="strings-manipulation-with-stringr.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What is the average length of the country names?</span></span>
-<span id="cb204-2"><a href="strings-manipulation-with-stringr.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">str_length</span>(countries))</span>
-<span id="cb204-3"><a href="strings-manipulation-with-stringr.html#cb204-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb204-4"><a href="strings-manipulation-with-stringr.html#cb204-4" aria-hidden="true" tabindex="-1"></a><span class="co"># How many country names end with an &quot;a&quot;?</span></span>
-<span id="cb204-5"><a href="strings-manipulation-with-stringr.html#cb204-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get the logical vector</span></span>
-<span id="cb204-6"><a href="strings-manipulation-with-stringr.html#cb204-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(countries, <span class="st">&quot;a$&quot;</span>)</span>
-<span id="cb204-7"><a href="strings-manipulation-with-stringr.html#cb204-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Retrieve only the &quot;TRUE&quot; and count</span></span>
-<span id="cb204-8"><a href="strings-manipulation-with-stringr.html#cb204-8" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(<span class="fu">str_detect</span>(countries, <span class="st">&quot;a$&quot;</span>)))</span>
-<span id="cb204-9"><a href="strings-manipulation-with-stringr.html#cb204-9" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(countries[<span class="fu">str_detect</span>(countries, <span class="st">&quot;a$&quot;</span>)])</span>
-<span id="cb204-10"><a href="strings-manipulation-with-stringr.html#cb204-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb204-11"><a href="strings-manipulation-with-stringr.html#cb204-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace empty spaces with underscores in `countries`.</span></span>
-<span id="cb204-12"><a href="strings-manipulation-with-stringr.html#cb204-12" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace</span>(countries, <span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span>)</span>
-<span id="cb204-13"><a href="strings-manipulation-with-stringr.html#cb204-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb204-14"><a href="strings-manipulation-with-stringr.html#cb204-14" aria-hidden="true" tabindex="-1"></a><span class="co"># In which country name do you find more the letter &quot;a&quot;?</span></span>
-<span id="cb204-15"><a href="strings-manipulation-with-stringr.html#cb204-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># count how many &quot;a&quot; per country name</span></span>
-<span id="cb204-16"><a href="strings-manipulation-with-stringr.html#cb204-16" aria-hidden="true" tabindex="-1"></a><span class="fu">str_count</span>(countries, <span class="st">&quot;a&quot;</span>)</span>
-<span id="cb204-17"><a href="strings-manipulation-with-stringr.html#cb204-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># extract the country name where there are more &quot;a&quot;.</span></span>
-<span id="cb204-18"><a href="strings-manipulation-with-stringr.html#cb204-18" aria-hidden="true" tabindex="-1"></a>countries[<span class="fu">max</span>(<span class="fu">str_count</span>(countries, <span class="st">&quot;a&quot;</span>))]</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="strings-manipulation-with-stringr.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What is the average length of the country names?</span></span>
+<span id="cb210-2"><a href="strings-manipulation-with-stringr.html#cb210-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">str_length</span>(countries))</span>
+<span id="cb210-3"><a href="strings-manipulation-with-stringr.html#cb210-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb210-4"><a href="strings-manipulation-with-stringr.html#cb210-4" aria-hidden="true" tabindex="-1"></a><span class="co"># How many country names end with an &quot;a&quot;?</span></span>
+<span id="cb210-5"><a href="strings-manipulation-with-stringr.html#cb210-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get the logical vector</span></span>
+<span id="cb210-6"><a href="strings-manipulation-with-stringr.html#cb210-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(countries, <span class="st">&quot;a$&quot;</span>)</span>
+<span id="cb210-7"><a href="strings-manipulation-with-stringr.html#cb210-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Retrieve only the &quot;TRUE&quot; and count</span></span>
+<span id="cb210-8"><a href="strings-manipulation-with-stringr.html#cb210-8" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(<span class="fu">str_detect</span>(countries, <span class="st">&quot;a$&quot;</span>)))</span>
+<span id="cb210-9"><a href="strings-manipulation-with-stringr.html#cb210-9" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(countries[<span class="fu">str_detect</span>(countries, <span class="st">&quot;a$&quot;</span>)])</span>
+<span id="cb210-10"><a href="strings-manipulation-with-stringr.html#cb210-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb210-11"><a href="strings-manipulation-with-stringr.html#cb210-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace empty spaces with underscores in `countries`.</span></span>
+<span id="cb210-12"><a href="strings-manipulation-with-stringr.html#cb210-12" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace</span>(countries, <span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span>)</span>
+<span id="cb210-13"><a href="strings-manipulation-with-stringr.html#cb210-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb210-14"><a href="strings-manipulation-with-stringr.html#cb210-14" aria-hidden="true" tabindex="-1"></a><span class="co"># In which country name do you find more the letter &quot;a&quot;?</span></span>
+<span id="cb210-15"><a href="strings-manipulation-with-stringr.html#cb210-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># count how many &quot;a&quot; per country name</span></span>
+<span id="cb210-16"><a href="strings-manipulation-with-stringr.html#cb210-16" aria-hidden="true" tabindex="-1"></a><span class="fu">str_count</span>(countries, <span class="st">&quot;a&quot;</span>)</span>
+<span id="cb210-17"><a href="strings-manipulation-with-stringr.html#cb210-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># extract the country name where there are more &quot;a&quot;.</span></span>
+<span id="cb210-18"><a href="strings-manipulation-with-stringr.html#cb210-18" aria-hidden="true" tabindex="-1"></a>countries[<span class="fu">max</span>(<span class="fu">str_count</span>(countries, <span class="st">&quot;a&quot;</span>))]</span></code></pre></div>
 </details>
 
 </div>
@@ -360,7 +360,7 @@ Let’s take a simple <strong>character vector</strong> and a small <strong>tibb
         </div>
       </div>
 <a href="handling-missing-values.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="mini-project.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="mini-project-with-code.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

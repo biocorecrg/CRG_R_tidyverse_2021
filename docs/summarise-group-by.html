@@ -193,7 +193,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="chapter" data-level="9" data-path="strings-manipulation-with-stringr.html"><a href="strings-manipulation-with-stringr.html"><i class="fa fa-check"></i><b>9</b> Strings manipulation with <code>stringr</code></a></li>
-<li class="chapter" data-level="10" data-path="mini-project.html"><a href="mini-project.html"><i class="fa fa-check"></i><b>10</b> Mini project</a></li>
+<li class="chapter" data-level="10" data-path="mini-project-with-code.html"><a href="mini-project-with-code.html"><i class="fa fa-check"></i><b>10</b> Mini project with code</a></li>
 <li class="chapter" data-level="11" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>11</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
@@ -221,8 +221,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Get average length of terms:</li>
 </ul>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="summarise-group-by.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential2, </span>
-<span id="cb83-2"><a href="summarise-group-by.html#cb83-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mean</span>(duration_days))</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="summarise-group-by.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential2, </span>
+<span id="cb85-2"><a href="summarise-group-by.html#cb85-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mean</span>(duration_days))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   `mean(duration_days)`
 ##   &lt;drtn&gt;               
@@ -230,9 +230,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Get average length of terms + count of the total of entries:</li>
 </ul>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="summarise-group-by.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential2,</span>
-<span id="cb85-2"><a href="summarise-group-by.html#cb85-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mean</span>(duration_days), </span>
-<span id="cb85-3"><a href="summarise-group-by.html#cb85-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="summarise-group-by.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential2,</span>
+<span id="cb87-2"><a href="summarise-group-by.html#cb87-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mean</span>(duration_days), </span>
+<span id="cb87-3"><a href="summarise-group-by.html#cb87-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##   `mean(duration_days)` `n()`
 ##   &lt;drtn&gt;                &lt;int&gt;
@@ -240,11 +240,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>You can also give a name to each of the calculations you produce with <code>summarise</code> (and add more calculations!):</li>
 </ul>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="summarise-group-by.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential2,</span>
-<span id="cb87-2"><a href="summarise-group-by.html#cb87-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">mean_term=</span><span class="fu">mean</span>(duration_days), </span>
-<span id="cb87-3"><a href="summarise-group-by.html#cb87-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">min_term=</span><span class="fu">min</span>(duration_days),</span>
-<span id="cb87-4"><a href="summarise-group-by.html#cb87-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">max_term=</span><span class="fu">max</span>(duration_days),</span>
-<span id="cb87-5"><a href="summarise-group-by.html#cb87-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">count_presidents=</span><span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="summarise-group-by.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(presidential2,</span>
+<span id="cb89-2"><a href="summarise-group-by.html#cb89-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">mean_term=</span><span class="fu">mean</span>(duration_days), </span>
+<span id="cb89-3"><a href="summarise-group-by.html#cb89-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">min_term=</span><span class="fu">min</span>(duration_days),</span>
+<span id="cb89-4"><a href="summarise-group-by.html#cb89-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">max_term=</span><span class="fu">max</span>(duration_days),</span>
+<span id="cb89-5"><a href="summarise-group-by.html#cb89-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">count_presidents=</span><span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 4
 ##   mean_term     min_term max_term  count_presidents
 ##   &lt;drtn&gt;        &lt;drtn&gt;   &lt;drtn&gt;               &lt;int&gt;
@@ -256,22 +256,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>summarise</code> then processes the command based on the grouping</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="summarise-group-by.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># group based on the &quot;party&quot; column (that contains &quot;Democratic&quot; or &quot;Republican&quot;)</span></span>
-<span id="cb89-2"><a href="summarise-group-by.html#cb89-2" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">group_by</span>(presidential2,</span>
-<span id="cb89-3"><a href="summarise-group-by.html#cb89-3" aria-hidden="true" tabindex="-1"></a>                   party)</span>
-<span id="cb89-4"><a href="summarise-group-by.html#cb89-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-5"><a href="summarise-group-by.html#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="co"># count the number of presidents per party:</span></span>
-<span id="cb89-6"><a href="summarise-group-by.html#cb89-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(groups, </span>
-<span id="cb89-7"><a href="summarise-group-by.html#cb89-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="summarise-group-by.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># group based on the &quot;party&quot; column (that contains &quot;Democratic&quot; or &quot;Republican&quot;)</span></span>
+<span id="cb91-2"><a href="summarise-group-by.html#cb91-2" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">group_by</span>(presidential2,</span>
+<span id="cb91-3"><a href="summarise-group-by.html#cb91-3" aria-hidden="true" tabindex="-1"></a>                   party)</span>
+<span id="cb91-4"><a href="summarise-group-by.html#cb91-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-5"><a href="summarise-group-by.html#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="co"># count the number of presidents per party:</span></span>
+<span id="cb91-6"><a href="summarise-group-by.html#cb91-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(groups, </span>
+<span id="cb91-7"><a href="summarise-group-by.html#cb91-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   party      `n()`
 ## * &lt;chr&gt;      &lt;int&gt;
 ## 1 Democratic     5
 ## 2 Republican     6</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="summarise-group-by.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One line, using the %&gt;% operator:</span></span>
-<span id="cb91-2"><a href="summarise-group-by.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(presidential2, </span>
-<span id="cb91-3"><a href="summarise-group-by.html#cb91-3" aria-hidden="true" tabindex="-1"></a>         party) <span class="sc">%&gt;%</span> </span>
-<span id="cb91-4"><a href="summarise-group-by.html#cb91-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarise</span>(<span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="summarise-group-by.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One line, using the %&gt;% operator:</span></span>
+<span id="cb93-2"><a href="summarise-group-by.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(presidential2, </span>
+<span id="cb93-3"><a href="summarise-group-by.html#cb93-3" aria-hidden="true" tabindex="-1"></a>         party) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-4"><a href="summarise-group-by.html#cb93-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarise</span>(<span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   party      `n()`
 ## * &lt;chr&gt;      &lt;int&gt;
@@ -280,7 +280,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>Note: the row above is equivalent to using <code>count</code> (a wrapper): <code>count(presidential, party)</code></p>
 </blockquote>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="summarise-group-by.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(presidential2, party)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="summarise-group-by.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(presidential2, party)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   party          n
 ## * &lt;chr&gt;      &lt;int&gt;
@@ -289,9 +289,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Use the same structure to calculate <strong>the average length of terms per political party</strong>:</li>
 </ul>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="summarise-group-by.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(presidential2, </span>
-<span id="cb95-2"><a href="summarise-group-by.html#cb95-2" aria-hidden="true" tabindex="-1"></a>         party) <span class="sc">%&gt;%</span> </span>
-<span id="cb95-3"><a href="summarise-group-by.html#cb95-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(duration_days))</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="summarise-group-by.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(presidential2, </span>
+<span id="cb97-2"><a href="summarise-group-by.html#cb97-2" aria-hidden="true" tabindex="-1"></a>         party) <span class="sc">%&gt;%</span> </span>
+<span id="cb97-3"><a href="summarise-group-by.html#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(duration_days))</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   party      `mean(duration_days)`
 ## * &lt;chr&gt;      &lt;drtn&gt;               
@@ -300,20 +300,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Note that you can <strong>group using more than one variable</strong>:</li>
 </ul>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="summarise-group-by.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(starwars, </span>
-<span id="cb97-2"><a href="summarise-group-by.html#cb97-2" aria-hidden="true" tabindex="-1"></a>         species, hair_color, gender) <span class="sc">%&gt;%</span></span>
-<span id="cb97-3"><a href="summarise-group-by.html#cb97-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarise</span>(<span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="summarise-group-by.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(starwars, </span>
+<span id="cb99-2"><a href="summarise-group-by.html#cb99-2" aria-hidden="true" tabindex="-1"></a>         species, hair_color, gender) <span class="sc">%&gt;%</span></span>
+<span id="cb99-3"><a href="summarise-group-by.html#cb99-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarise</span>(<span class="fu">n</span>())</span></code></pre></div>
 <ul>
 <li>Grouping variables also <strong>influences how other <code>dplyr</code> functions work</strong>!
 <br></li>
 </ul>
 <p>For example, let’s group our <code>starwars</code> characters by both <strong>species and gender</strong> variables:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="summarise-group-by.html#cb98-1" aria-hidden="true" tabindex="-1"></a>sw_sg <span class="ot">&lt;-</span> <span class="fu">group_by</span>(starwars, </span>
-<span id="cb98-2"><a href="summarise-group-by.html#cb98-2" aria-hidden="true" tabindex="-1"></a>                  species, gender) </span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="summarise-group-by.html#cb100-1" aria-hidden="true" tabindex="-1"></a>sw_sg <span class="ot">&lt;-</span> <span class="fu">group_by</span>(starwars, </span>
+<span id="cb100-2"><a href="summarise-group-by.html#cb100-2" aria-hidden="true" tabindex="-1"></a>                  species, gender) </span></code></pre></div>
 <p>We can then use <code>slice_max</code> (function that retrieves the row that contains the <strong>maximum value</strong> in a selected variable) to retrieve the character with the <strong>maximum <code>height</code></strong>:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="summarise-group-by.html#cb99-1" aria-hidden="true" tabindex="-1"></a>sw_sg <span class="sc">%&gt;%</span> </span>
-<span id="cb99-2"><a href="summarise-group-by.html#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, gender, height) <span class="sc">%&gt;%</span> <span class="co"># columns selection just to make the output more readable</span></span>
-<span id="cb99-3"><a href="summarise-group-by.html#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(height)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="summarise-group-by.html#cb101-1" aria-hidden="true" tabindex="-1"></a>sw_sg <span class="sc">%&gt;%</span> </span>
+<span id="cb101-2"><a href="summarise-group-by.html#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, gender, height) <span class="sc">%&gt;%</span> <span class="co"># columns selection just to make the output more readable</span></span>
+<span id="cb101-3"><a href="summarise-group-by.html#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(height)</span></code></pre></div>
 <pre><code>## # A tibble: 43 x 4
 ## # Groups:   species, gender [42]
 ##    name                  species   gender    height
@@ -332,9 +332,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We get one entry for <strong>each unique combination of species and gender</strong>.
 <br>
 If you query the maximum height on an <strong>non-grouped tibble</strong>, you will get only one row (maximum height overall):</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="summarise-group-by.html#cb101-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
-<span id="cb101-2"><a href="summarise-group-by.html#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, gender, height) <span class="sc">%&gt;%</span></span>
-<span id="cb101-3"><a href="summarise-group-by.html#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(height)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="summarise-group-by.html#cb103-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb103-2"><a href="summarise-group-by.html#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, gender, height) <span class="sc">%&gt;%</span></span>
+<span id="cb103-3"><a href="summarise-group-by.html#cb103-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(height)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 4
 ##   name        species  gender    height
 ##   &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;      &lt;int&gt;
@@ -347,9 +347,9 @@ If you query the maximum height on an <strong>non-grouped tibble</strong>, you w
 <li>As the data is grouped by <code>species</code>, we will get the <strong>average height PER SPECIES</strong>:</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="summarise-group-by.html#cb103-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
-<span id="cb103-2"><a href="summarise-group-by.html#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, height, mass) <span class="sc">%&gt;%</span> </span>
-<span id="cb103-3"><a href="summarise-group-by.html#cb103-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">average_height_species=</span><span class="fu">mean</span>(height, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="summarise-group-by.html#cb105-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb105-2"><a href="summarise-group-by.html#cb105-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, height, mass) <span class="sc">%&gt;%</span> </span>
+<span id="cb105-3"><a href="summarise-group-by.html#cb105-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">average_height_species=</span><span class="fu">mean</span>(height, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 87 x 5
 ## # Groups:   species [38]
 ##    name               species height  mass average_height_species
@@ -381,20 +381,20 @@ If you query the maximum height on an <strong>non-grouped tibble</strong>, you w
 <em>Answer</em>
 </h5>
 </summary>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="summarise-group-by.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the number of occurrences of each `hair color` per `gender`</span></span>
-<span id="cb105-2"><a href="summarise-group-by.html#cb105-2" aria-hidden="true" tabindex="-1"></a>starwarsBMI <span class="sc">%&gt;%</span> </span>
-<span id="cb105-3"><a href="summarise-group-by.html#cb105-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender, hair_color) <span class="sc">%&gt;%</span> </span>
-<span id="cb105-4"><a href="summarise-group-by.html#cb105-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mycounts=</span><span class="fu">n</span>())</span>
-<span id="cb105-5"><a href="summarise-group-by.html#cb105-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-6"><a href="summarise-group-by.html#cb105-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the average **BMI** per `species`.  Add a count of the number of individuals per species.</span></span>
-<span id="cb105-7"><a href="summarise-group-by.html#cb105-7" aria-hidden="true" tabindex="-1"></a>starwarsBMI <span class="sc">%&gt;%</span> </span>
-<span id="cb105-8"><a href="summarise-group-by.html#cb105-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
-<span id="cb105-9"><a href="summarise-group-by.html#cb105-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_bmi=</span><span class="fu">mean</span>(BMI, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">count_individuals=</span><span class="fu">n</span>())</span>
-<span id="cb105-10"><a href="summarise-group-by.html#cb105-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-11"><a href="summarise-group-by.html#cb105-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Also report the number of individuals for which BMI is NOT NA (i.e. the actual number of individuals for which the average was computed)</span></span>
-<span id="cb105-12"><a href="summarise-group-by.html#cb105-12" aria-hidden="true" tabindex="-1"></a>starwarsBMI <span class="sc">%&gt;%</span></span>
-<span id="cb105-13"><a href="summarise-group-by.html#cb105-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
-<span id="cb105-14"><a href="summarise-group-by.html#cb105-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_bmi=</span><span class="fu">mean</span>(BMI, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">count_all_individuals=</span><span class="fu">n</span>(), <span class="at">count_individuals_non_NA=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(BMI)))</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="summarise-group-by.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the number of occurrences of each `hair color` per `gender`</span></span>
+<span id="cb107-2"><a href="summarise-group-by.html#cb107-2" aria-hidden="true" tabindex="-1"></a>starwarsBMI <span class="sc">%&gt;%</span> </span>
+<span id="cb107-3"><a href="summarise-group-by.html#cb107-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender, hair_color) <span class="sc">%&gt;%</span> </span>
+<span id="cb107-4"><a href="summarise-group-by.html#cb107-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mycounts=</span><span class="fu">n</span>())</span>
+<span id="cb107-5"><a href="summarise-group-by.html#cb107-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-6"><a href="summarise-group-by.html#cb107-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the average **BMI** per `species`.  Add a count of the number of individuals per species.</span></span>
+<span id="cb107-7"><a href="summarise-group-by.html#cb107-7" aria-hidden="true" tabindex="-1"></a>starwarsBMI <span class="sc">%&gt;%</span> </span>
+<span id="cb107-8"><a href="summarise-group-by.html#cb107-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb107-9"><a href="summarise-group-by.html#cb107-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_bmi=</span><span class="fu">mean</span>(BMI, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">count_individuals=</span><span class="fu">n</span>())</span>
+<span id="cb107-10"><a href="summarise-group-by.html#cb107-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-11"><a href="summarise-group-by.html#cb107-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Also report the number of individuals for which BMI is NOT NA (i.e. the actual number of individuals for which the average was computed)</span></span>
+<span id="cb107-12"><a href="summarise-group-by.html#cb107-12" aria-hidden="true" tabindex="-1"></a>starwarsBMI <span class="sc">%&gt;%</span></span>
+<span id="cb107-13"><a href="summarise-group-by.html#cb107-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb107-14"><a href="summarise-group-by.html#cb107-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_bmi=</span><span class="fu">mean</span>(BMI, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">count_all_individuals=</span><span class="fu">n</span>(), <span class="at">count_individuals_non_NA=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(BMI)))</span></code></pre></div>
 </details>
 <div id="ungroup" class="section level3" number="7.4.1">
 <h3><span class="header-section-number">7.4.1</span> <code>ungroup</code></h3>
@@ -403,9 +403,9 @@ If you query the maximum height on an <strong>non-grouped tibble</strong>, you w
 While this is not an issue when you are summarizing (you get a summary table), it can be useful in case you are using the grouping - for example - to <strong>create a new column</strong>.
 <br><br>
 In the example stated before, we created a new column <code>average_height_species</code> that contains the <strong>average height per species</strong>:</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="summarise-group-by.html#cb106-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
-<span id="cb106-2"><a href="summarise-group-by.html#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, height, mass) <span class="sc">%&gt;%</span> </span>
-<span id="cb106-3"><a href="summarise-group-by.html#cb106-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">average_height_species=</span><span class="fu">mean</span>(height, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="at">n=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="summarise-group-by.html#cb108-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb108-2"><a href="summarise-group-by.html#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, height, mass) <span class="sc">%&gt;%</span> </span>
+<span id="cb108-3"><a href="summarise-group-by.html#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">average_height_species=</span><span class="fu">mean</span>(height, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="at">n=</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 5
 ## # Groups:   species [2]
 ##   name           species height  mass average_height_species
@@ -414,11 +414,11 @@ In the example stated before, we created a new column <code>average_height_speci
 ## 2 C-3PO          Droid      167    75                   131.</code></pre>
 <p>What if we also want to add a column that describes the <strong>average mass of ALL individuals</strong> (<u>regardless of the species</u>)?
 <br></p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="summarise-group-by.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With the current grouping (species), you get the average mass calculated per species</span></span>
-<span id="cb108-2"><a href="summarise-group-by.html#cb108-2" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
-<span id="cb108-3"><a href="summarise-group-by.html#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, height, mass) <span class="sc">%&gt;%</span> </span>
-<span id="cb108-4"><a href="summarise-group-by.html#cb108-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">average_height_species=</span><span class="fu">mean</span>(height, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb108-5"><a href="summarise-group-by.html#cb108-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">average_mass=</span><span class="fu">mean</span>(mass, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="at">n=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="summarise-group-by.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With the current grouping (species), you get the average mass calculated per species</span></span>
+<span id="cb110-2"><a href="summarise-group-by.html#cb110-2" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb110-3"><a href="summarise-group-by.html#cb110-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, height, mass) <span class="sc">%&gt;%</span> </span>
+<span id="cb110-4"><a href="summarise-group-by.html#cb110-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">average_height_species=</span><span class="fu">mean</span>(height, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb110-5"><a href="summarise-group-by.html#cb110-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">average_mass=</span><span class="fu">mean</span>(mass, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="at">n=</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 6
 ## # Groups:   species [2]
 ##   name           species height  mass average_height_species average_mass
@@ -428,12 +428,12 @@ In the example stated before, we created a new column <code>average_height_speci
 <p>Column <code>average_mass</code> still contains the average per species!</p>
 <p><br>
 * We need to <strong>ungroup</strong> the tibble before creating this new column!!</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="summarise-group-by.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ungroup first, and you get the average mass calculated for the whole tibble</span></span>
-<span id="cb110-2"><a href="summarise-group-by.html#cb110-2" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
-<span id="cb110-3"><a href="summarise-group-by.html#cb110-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, height, mass) <span class="sc">%&gt;%</span> </span>
-<span id="cb110-4"><a href="summarise-group-by.html#cb110-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">average_height_species=</span><span class="fu">mean</span>(height, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb110-5"><a href="summarise-group-by.html#cb110-5" aria-hidden="true" tabindex="-1"></a>  ungroup <span class="sc">%&gt;%</span></span>
-<span id="cb110-6"><a href="summarise-group-by.html#cb110-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">average_mass=</span><span class="fu">mean</span>(mass, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="at">n=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="summarise-group-by.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ungroup first, and you get the average mass calculated for the whole tibble</span></span>
+<span id="cb112-2"><a href="summarise-group-by.html#cb112-2" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb112-3"><a href="summarise-group-by.html#cb112-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, height, mass) <span class="sc">%&gt;%</span> </span>
+<span id="cb112-4"><a href="summarise-group-by.html#cb112-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">average_height_species=</span><span class="fu">mean</span>(height, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb112-5"><a href="summarise-group-by.html#cb112-5" aria-hidden="true" tabindex="-1"></a>  ungroup <span class="sc">%&gt;%</span></span>
+<span id="cb112-6"><a href="summarise-group-by.html#cb112-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">average_mass=</span><span class="fu">mean</span>(mass, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="at">n=</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 6
 ##   name           species height  mass average_height_species average_mass
 ##   &lt;chr&gt;          &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;                  &lt;dbl&gt;        &lt;dbl&gt;

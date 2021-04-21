@@ -754,6 +754,19 @@ slice_sample(starwars,
              prop=0.03)
 ```
 
+Note that the `slice` functions can be combined with a `grouping`.
+
+* With `slice_max` you would get the maximum per group (with `slice_min`, the minimum per group):
+
+```{r}
+presidential2 %>% 
+  group_by(party) %>%
+  slice_max(order_by = duration_days)
+
+presidential2 %>% 
+  group_by(party) %>%
+  slice_min(order_by = duration_days)
+```
 
 ### Extract a single column as a vector with `pull`:
 
@@ -791,6 +804,10 @@ relocate(presidential,
 relocate(presidential, 
          President=name, 
          .after=last_col())
+
+# reorganize columns alphabetically
+relocate(presidential, 
+         sort(tidyselect::peek_vars()))
 ```
 
 ## Exercise
@@ -816,8 +833,7 @@ mystorms <- read_csv("https://public-docs.crg.es/biocore/projects/training/R_tid
 # 2. What storm has the highest median wind speed?
 mystorms %>% group_by(name) %>%
             summarise(median_wind = median(wind)) %>%
-            arrange(desc(median_wind)) %>%
-            slice(1) # slice() can be used to retrieve rows by their index
+            slice_max(order_by=median_wind)
       
 # 3. Calculate how many storms happen each year: 
 mystorms %>%  separate(date, into=c("year", "month", "day"), sep="-") %>%
@@ -829,8 +845,7 @@ mystorms %>%  separate(date, into=c("year", "month", "day"), sep="-") %>%
           distinct(name, year) %>%
           group_by(year) %>%
           summarise(storms_per_year=n()) %>%
-          arrange(desc(storms_per_year)) %>% 
-          slice(1:4)
+          slice_max(order_by=storms_per_year, n=5)
 ```
 
 </details>

@@ -193,7 +193,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="handling-missing-values.html"><a href="handling-missing-values.html"><i class="fa fa-check"></i><b>8</b> Handling missing values</a></li>
 <li class="chapter" data-level="9" data-path="strings-manipulation-with-stringr.html"><a href="strings-manipulation-with-stringr.html"><i class="fa fa-check"></i><b>9</b> Strings manipulation with <code>stringr</code></a></li>
-<li class="chapter" data-level="10" data-path="mini-project.html"><a href="mini-project.html"><i class="fa fa-check"></i><b>10</b> Mini project</a></li>
+<li class="chapter" data-level="10" data-path="mini-project-with-code.html"><a href="mini-project-with-code.html"><i class="fa fa-check"></i><b>10</b> Mini project with code</a></li>
 <li class="chapter" data-level="11" data-path="references-and-resources.html"><a href="references-and-resources.html"><i class="fa fa-check"></i><b>11</b> References and resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/biocorecrg/CRG_R_tidyverse_2021" target="blank">Published with bookdown</a></li>
@@ -221,9 +221,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Create a new column with the duration of each term:</li>
 </ul>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="mutate-transmute.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subtracting column start to column end</span></span>
-<span id="cb53-2"><a href="mutate-transmute.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(presidential, </span>
-<span id="cb53-3"><a href="mutate-transmute.html#cb53-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end<span class="sc">-</span>start)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="mutate-transmute.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subtracting column start to column end</span></span>
+<span id="cb55-2"><a href="mutate-transmute.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(presidential, </span>
+<span id="cb55-3"><a href="mutate-transmute.html#cb55-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end<span class="sc">-</span>start)</span></code></pre></div>
 <blockquote>
 <p><em>Notes:</em></p>
 </blockquote>
@@ -235,37 +235,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </blockquote>
 <p>You can change <strong>where the column is added</strong> (if you don’t want it to be added at the last position):</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="mutate-transmute.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add it before column &quot;start&quot;</span></span>
-<span id="cb54-2"><a href="mutate-transmute.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(presidential, </span>
-<span id="cb54-3"><a href="mutate-transmute.html#cb54-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end<span class="sc">-</span>start,</span>
-<span id="cb54-4"><a href="mutate-transmute.html#cb54-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.before=</span>start)</span>
-<span id="cb54-5"><a href="mutate-transmute.html#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-6"><a href="mutate-transmute.html#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="co"># add it after column &quot;end&quot;</span></span>
-<span id="cb54-7"><a href="mutate-transmute.html#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(presidential, </span>
-<span id="cb54-8"><a href="mutate-transmute.html#cb54-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end<span class="sc">-</span>start,</span>
-<span id="cb54-9"><a href="mutate-transmute.html#cb54-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">.after=</span>end)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="mutate-transmute.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add it before column &quot;start&quot;</span></span>
+<span id="cb56-2"><a href="mutate-transmute.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(presidential, </span>
+<span id="cb56-3"><a href="mutate-transmute.html#cb56-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end<span class="sc">-</span>start,</span>
+<span id="cb56-4"><a href="mutate-transmute.html#cb56-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.before=</span>start)</span>
+<span id="cb56-5"><a href="mutate-transmute.html#cb56-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-6"><a href="mutate-transmute.html#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="co"># add it after column &quot;end&quot;</span></span>
+<span id="cb56-7"><a href="mutate-transmute.html#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(presidential, </span>
+<span id="cb56-8"><a href="mutate-transmute.html#cb56-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end<span class="sc">-</span>start,</span>
+<span id="cb56-9"><a href="mutate-transmute.html#cb56-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">.after=</span>end)</span></code></pre></div>
 <p><br>
 If you want to keep <strong>only the newly created column(s)</strong> (drop the remaining ones): use <code>transmute()</code> instead of <code>mutate()</code>:</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="mutate-transmute.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">transmute</span>(presidential, </span>
-<span id="cb55-2"><a href="mutate-transmute.html#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="mutate-transmute.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">transmute</span>(presidential, </span>
+<span id="cb57-2"><a href="mutate-transmute.html#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
 <p>Re-assign to a new - or the same - data frame/tibble using the <strong>usual R assignment operator: &lt;-</strong></p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="mutate-transmute.html#cb56-1" aria-hidden="true" tabindex="-1"></a>presidential2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(presidential, </span>
-<span id="cb56-2"><a href="mutate-transmute.html#cb56-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="mutate-transmute.html#cb58-1" aria-hidden="true" tabindex="-1"></a>presidential2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(presidential, </span>
+<span id="cb58-2"><a href="mutate-transmute.html#cb58-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">duration_days=</span>end <span class="sc">-</span> start)</span></code></pre></div>
 <ul>
 <li>If you want to change the name of a column, you can use the function <code>rename</code>:</li>
 </ul>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="mutate-transmute.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using the column name:</span></span>
-<span id="cb57-2"><a href="mutate-transmute.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(presidential2, </span>
-<span id="cb57-3"><a href="mutate-transmute.html#cb57-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">President=</span>name)</span>
-<span id="cb57-4"><a href="mutate-transmute.html#cb57-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-5"><a href="mutate-transmute.html#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="co"># or the column index:</span></span>
-<span id="cb57-6"><a href="mutate-transmute.html#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(presidential2, </span>
-<span id="cb57-7"><a href="mutate-transmute.html#cb57-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">President=</span><span class="dv">1</span>)</span>
-<span id="cb57-8"><a href="mutate-transmute.html#cb57-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-9"><a href="mutate-transmute.html#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="co"># you can rename several columns using the same command:</span></span>
-<span id="cb57-10"><a href="mutate-transmute.html#cb57-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(presidential2, </span>
-<span id="cb57-11"><a href="mutate-transmute.html#cb57-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">President=</span>name, </span>
-<span id="cb57-12"><a href="mutate-transmute.html#cb57-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">Political_party=</span>party)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="mutate-transmute.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using the column name:</span></span>
+<span id="cb59-2"><a href="mutate-transmute.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(presidential2, </span>
+<span id="cb59-3"><a href="mutate-transmute.html#cb59-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">President=</span>name)</span>
+<span id="cb59-4"><a href="mutate-transmute.html#cb59-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-5"><a href="mutate-transmute.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># or the column index:</span></span>
+<span id="cb59-6"><a href="mutate-transmute.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(presidential2, </span>
+<span id="cb59-7"><a href="mutate-transmute.html#cb59-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">President=</span><span class="dv">1</span>)</span>
+<span id="cb59-8"><a href="mutate-transmute.html#cb59-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-9"><a href="mutate-transmute.html#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="co"># you can rename several columns using the same command:</span></span>
+<span id="cb59-10"><a href="mutate-transmute.html#cb59-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(presidential2, </span>
+<span id="cb59-11"><a href="mutate-transmute.html#cb59-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">President=</span>name, </span>
+<span id="cb59-12"><a href="mutate-transmute.html#cb59-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">Political_party=</span>party)</span></code></pre></div>
 </div>
             </section>
 

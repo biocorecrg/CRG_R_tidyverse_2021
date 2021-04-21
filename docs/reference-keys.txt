@@ -2,11 +2,11 @@ tab:unnamed-chunk-14
 tab:unnamed-chunk-18
 fig:unnamed-chunk-22
 tab:unnamed-chunk-23
-tab:unnamed-chunk-44
 tab:unnamed-chunk-45
-tab:unnamed-chunk-61
-tab:unnamed-chunk-91
-tab:unnamed-chunk-103
+tab:unnamed-chunk-46
+tab:unnamed-chunk-62
+tab:unnamed-chunk-92
+tab:unnamed-chunk-104
 welcome
 introduction
 what-is-the-tidyverse
@@ -46,5 +46,5 @@ change-column-order-with-relocate
 exercise
 handling-missing-values
 strings-manipulation-with-stringr
-mini-project
+mini-project-with-code
 references-and-resources
